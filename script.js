@@ -114,6 +114,7 @@ const whenTitleAnimationDone = (callback) => {
   whenTitleAnimationDone(() => {
     const section = document.querySelector(".we-deliver");
     const row = document.querySelector(".we-deliver__cards-row");
+    const cards = Array.from(document.querySelectorAll(".we-deliver__card"));
 
     if (!section || !row) return;
 
@@ -127,10 +128,41 @@ const whenTitleAnimationDone = (callback) => {
 
     const isMobile = window.matchMedia?.("(max-width: 767px)")?.matches;
     if (isMobile) {
-      // Desktop keeps its current reveal behavior. On mobile we rely on the
-      // generic reveal animation (reveal-base/reveal-visible) for staggered cards,
-      // so ensure the row is in its revealed state.
+      // Desktop keeps its current reveal behavior. On mobile we animate cards
+      // using the same reveal-base/reveal-visible pattern as section two.
       row.classList.add("is-revealed");
+
+      if (!cards.length) return;
+
+      cards.forEach((card) => card.classList.add("reveal-base"));
+
+      let cardIndex = 0;
+      const cardObserver = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+
+            if (el.classList.contains("reveal-visible")) {
+              obs.unobserve(el);
+              return;
+            }
+
+            const delay = cardIndex * 120;
+            el.style.transitionDelay = `${delay}ms`;
+            el.classList.add("reveal-visible");
+            cardIndex += 1;
+
+            obs.unobserve(el);
+          });
+        },
+        {
+          threshold: 0.15,
+          rootMargin: "0px 0px -10% 0px",
+        },
+      );
+
+      cards.forEach((card) => cardObserver.observe(card));
       return;
     }
 
@@ -184,10 +216,6 @@ const whenTitleAnimationDone = (callback) => {
       ".section-two__case-copy",
       ".section-two__case-visual",
     ];
-
-    if (isMobile) {
-      revealSelectors.push(".we-deliver__card");
-    }
 
     const targets = [];
 
