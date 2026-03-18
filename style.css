@@ -841,8 +841,8 @@ input[type="reset"] {
 
   .we-deliver {
     margin-top: 40px;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 0;
+    padding-right: 0;
     flex-direction: column;
     gap: 24px;
   }
@@ -868,7 +868,7 @@ input[type="reset"] {
 
   .we-deliver__card {
     --we-deliver-scale: 1;
-    width: min(442px, 100%);
+    width: min(442px, calc(100vw - 32px));
     height: 616px;
     flex: 0 0 auto;
     display: flex;
