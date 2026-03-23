@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!doctype html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,10 +10,10 @@
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75,200..800&family=Didact+Gothic&display=swap"
       rel="stylesheet"
     />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="./assets/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="./style.css?v=20260323-7" />
   </head>
-  <body class="min-h-screen bg-[#FFF6E9] text-slate-900" id="top">
+  <body class="intro-stage-1" id="top">
     <header class="site-header" aria-label="Site header">
       <div class="site-header__pill">
         <a class="site-header__brand" href="#top" aria-label="Go to top">
@@ -56,85 +56,168 @@
       <section class="section-one" aria-label="Section 1">
         <div class="hero-izybiz">
           <div class="hero-izybiz__text">
-            <h1 class="hero-izybiz__title">IZYBIZ</h1>
+            <h1 class="hero-izybiz__title">
+              <span
+                class="hero-izybiz__title-line hero-izybiz__title-line--first"
+                >Scale your team's ouput with AI,</span
+              >
+              <span
+                class="hero-izybiz__title-line hero-izybiz__title-line--second"
+                >not your team size.</span
+              >
+            </h1>
             <p class="hero-izybiz__subtitle">
-              <span>We turn business assets into customer-ready products.</span>
-              <span>AI-powered execution to ship faster</span>
+              <span>
+                Let them focus on what matters.
+                <span class="hero-izybiz__subtitle-finally">Finally !</span>
+              </span>
             </p>
           </div>
 
-          <button class="hero-izybiz__button" type="button" data-demo-modal-open>Book a demo</button>
+          <button
+            class="hero-izybiz__button"
+            type="button"
+            data-demo-modal-open
+          >
+            Book a call
+          </button>
         </div>
 
-        <section class="we-deliver" id="we-deliver" aria-labelledby="we-deliver-title">
+        <section
+          class="we-deliver"
+          id="we-deliver"
+          aria-labelledby="we-deliver-title"
+        >
           <div class="we-deliver__intro">
-            <h2 class="we-deliver__title" id="we-deliver-title">What do we deliver?</h2>
+            <h2 class="we-deliver__title" id="we-deliver-title">
+              What do we deliver?
+            </h2>
           </div>
 
           <div class="we-deliver__cards-row" aria-label="We deliver cards">
-            <article class="we-deliver__card we-deliver__card--dna" tabindex="0">
+            <article
+              class="we-deliver__card we-deliver__card--dna"
+              tabindex="0"
+            >
               <div class="we-deliver__card-inner">
-                  <div class="we-deliver__card-illustration we-deliver__card-illustration--dna" aria-hidden="true">
-                    <img
-                      class="we-deliver__illustration-image"
-                      src="./assets/illustration--dna.svg"
-                      alt=""
-                    />
+                <div
+                  class="we-deliver__card-illustration we-deliver__card-illustration--dna"
+                  aria-hidden="true"
+                >
+                  <img
+                    class="we-deliver__illustration-image"
+                    src="./assets/illustration--dna.svg"
+                    alt=""
+                  />
+                </div>
+                <div
+                  class="we-deliver__card-content we-deliver__card-content--dna"
+                >
+                  <h3
+                    class="we-deliver__card-title we-deliver__card-title--dna"
+                  >
+                    YOUR BUSINESS<br />ASSETS
+                  </h3>
+                  <div
+                    class="we-deliver__card-tabs we-deliver__card-tabs--dna"
+                    aria-label="Your DNA deliverables"
+                  >
+                    <span class="we-deliver__card-tab">Brand book</span>
+                    <span class="we-deliver__card-tab">Sales machine</span>
+                    <span class="we-deliver__card-tab"
+                      >Legal terms &amp; conditions</span
+                    >
+                    <span class="we-deliver__card-tab"
+                      >Legacy system &amp; data</span
+                    >
+                    <span class="we-deliver__card-tab">Process book</span>
+                    <span class="we-deliver__card-tab"
+                      >Market &amp; product</span
+                    >
                   </div>
-                  <div class="we-deliver__card-content we-deliver__card-content--dna">
-                    <h3 class="we-deliver__card-title we-deliver__card-title--dna">YOUR BUSINESS<br />ASSETS</h3>
-                    <div class="we-deliver__card-tabs we-deliver__card-tabs--dna" aria-label="Your DNA deliverables">
-                      <span class="we-deliver__card-tab">Brand book</span>
-                      <span class="we-deliver__card-tab">Sales machine</span>
-                      <span class="we-deliver__card-tab">Legal terms &amp; conditions</span>
-                      <span class="we-deliver__card-tab">Legacy system &amp; data</span>
-                      <span class="we-deliver__card-tab">Process book</span>
-                      <span class="we-deliver__card-tab">Market &amp; product</span>
-                    </div>
-                  </div>
+                </div>
               </div>
             </article>
 
-            <article class="we-deliver__card we-deliver__card--agent" tabindex="0">
+            <article
+              class="we-deliver__card we-deliver__card--agent"
+              tabindex="0"
+            >
               <div class="we-deliver__card-inner">
-                  <div class="we-deliver__card-content we-deliver__card-content--agent">
-                    <h3 class="we-deliver__card-title we-deliver__card-title--agent">AI-POWERED EXECUTION</h3>
-                    <div class="we-deliver__card-tabs we-deliver__card-tabs--agent" aria-label="Agent Factory deliverables">
-                      <span class="we-deliver__card-tab">Prompt</span>
-                      <span class="we-deliver__card-tab">Workflows</span>
-                      <span class="we-deliver__card-tab we-deliver__card-tab--agent-wide">MCP connectors</span>
-                      <span class="we-deliver__card-tab">Controls</span>
-                    </div>
+                <div
+                  class="we-deliver__card-content we-deliver__card-content--agent"
+                >
+                  <h3
+                    class="we-deliver__card-title we-deliver__card-title--agent"
+                  >
+                    AI-POWERED EXECUTION
+                  </h3>
+                  <div
+                    class="we-deliver__card-tabs we-deliver__card-tabs--agent"
+                    aria-label="Agent Factory deliverables"
+                  >
+                    <span class="we-deliver__card-tab">Prompt</span>
+                    <span class="we-deliver__card-tab">Workflows</span>
+                    <span
+                      class="we-deliver__card-tab we-deliver__card-tab--agent-wide"
+                      >MCP connectors</span
+                    >
+                    <span class="we-deliver__card-tab">Controls</span>
+                    <span class="we-deliver__card-tab">Human decisions</span>
                   </div>
-                  <div class="we-deliver__card-illustration we-deliver__card-illustration--agent" aria-hidden="true">
-                    <img
-                      class="we-deliver__illustration-image"
-                      src="./assets/illustration--agent.svg"
-                      alt=""
-                    />
-                  </div>
+                </div>
+                <div
+                  class="we-deliver__card-illustration we-deliver__card-illustration--agent"
+                  aria-hidden="true"
+                >
+                  <img
+                    class="we-deliver__illustration-image"
+                    src="./assets/illustration--agent.svg"
+                    alt=""
+                  />
+                </div>
               </div>
             </article>
 
-            <article class="we-deliver__card we-deliver__card--output" tabindex="0">
+            <article
+              class="we-deliver__card we-deliver__card--output"
+              tabindex="0"
+            >
               <div class="we-deliver__card-inner">
-                  <div class="we-deliver__card-content we-deliver__card-content--output">
-                    <h3 class="we-deliver__card-title we-deliver__card-title--output">WHAT YOU GET</h3>
-                    <div class="we-deliver__card-tabs we-deliver__card-tabs--output" aria-label="Customer ready output deliverables">
-                      <span class="we-deliver__card-tab">Launch-ready product</span>
-                      <span class="we-deliver__card-tab we-deliver__card-tab--output-workflow">Workflow</span>
-                      <span class="we-deliver__card-tab">Mobile application</span>
-                      <span class="we-deliver__card-tab">Integration</span>
-                      <span class="we-deliver__card-tab">Web product</span>
-                    </div>
+                <div
+                  class="we-deliver__card-content we-deliver__card-content--output"
+                >
+                  <h3
+                    class="we-deliver__card-title we-deliver__card-title--output"
+                  >
+                    WHAT YOU GET
+                  </h3>
+                  <div
+                    class="we-deliver__card-tabs we-deliver__card-tabs--output"
+                    aria-label="Customer ready output deliverables"
+                  >
+                    <span class="we-deliver__card-tab">Productive team</span>
+                    <span
+                      class="we-deliver__card-tab we-deliver__card-tab--output-workflow"
+                      >Launch-ready products</span
+                    >
+                    <span class="we-deliver__card-tab">AI process book</span>
+                    <span class="we-deliver__card-tab">Automated workflow</span>
+                    <span class="we-deliver__card-tab"
+                      >Legacy integrations</span
+                    >
                   </div>
-                  <div class="we-deliver__card-illustration we-deliver__card-illustration--output" aria-hidden="true">
-                    <img
-                      class="we-deliver__illustration-image"
-                      src="./assets/illustration--output.svg"
-                      alt=""
-                    />
-                  </div>
+                </div>
+                <div
+                  class="we-deliver__card-illustration we-deliver__card-illustration--output"
+                  aria-hidden="true"
+                >
+                  <img
+                    class="we-deliver__illustration-image"
+                    src="./assets/illustration--output.svg"
+                    alt=""
+                  />
+                </div>
               </div>
             </article>
           </div>
@@ -144,28 +227,40 @@
       <section class="section-two" id="we-do" aria-label="Case studies">
         <div class="section-two__inner">
           <header class="section-two__intro">
-            <h2 class="section-two__title">What did we create?</h2>
+            <h2 class="section-two__title">Our use cases</h2>
           </header>
 
           <div class="section-two__grid" aria-label="Case studies list">
-            <article class="section-two__case section-two__case--yellow" tabindex="0" aria-label="Case study 1">
+            <article
+              class="section-two__case section-two__case--yellow"
+              tabindex="0"
+              aria-label="Case study 1"
+            >
               <div class="section-two__case-copy">
                 <span class="section-two__case-label">Coming soon</span>
-                <h3 class="section-two__case-title">Product redesign in days</h3>
+                <h3 class="section-two__case-title">
+                  Product redesign in days
+                </h3>
                 <p class="section-two__case-description">
-                  A legacy SaaS needed a complete UX/UI overhaul to match a new positioning. We deployed our Agent Factory to redesign, systemize, and ship production-ready screens
+                  A legacy SaaS needed a complete UX/UI overhaul to match a new
+                  positioning. We deployed our Agent Factory to redesign,
+                  systemize, and ship production-ready screens
                 </p>
               </div>
 
               <div class="section-two__case-visual" aria-hidden="true">
-                <div class="section-two__visual-frame section-two__visual-frame--purple">
+                <div
+                  class="section-two__visual-frame section-two__visual-frame--purple"
+                >
                   <div class="section-two__phone" aria-hidden="true">
                     <div class="section-two__phone-frame">
                       <div class="section-two__phone-notch"></div>
                       <div class="section-two__phone-screen">
                         <div class="section-two__phone-content">
                           <div class="section-two__phone-card"></div>
-                          <div class="section-two__phone-card section-two__phone-card--ghost"></div>
+                          <div
+                            class="section-two__phone-card section-two__phone-card--ghost"
+                          ></div>
                           <div class="section-two__phone-cta"></div>
                         </div>
                       </div>
@@ -175,24 +270,42 @@
               </div>
             </article>
 
-            <article class="section-two__case section-two__case--blue" tabindex="0" aria-label="Case study 2">
+            <article
+              class="section-two__case section-two__case--blue"
+              tabindex="0"
+              aria-label="Case study 2"
+            >
               <div class="section-two__case-copy">
                 <span class="section-two__case-label">Coming soon</span>
-                <h3 class="section-two__case-title">From ideas to production</h3>
+                <h3 class="section-two__case-title">
+                  From ideas to production
+                </h3>
                 <p class="section-two__case-description">
-                  A company had multiple product ideas but no way to ship them fast.
-                  We turned each idea into a production-ready solution — fully integrated with their systems and ready for customers.
+                  A company had multiple product ideas but no way to ship them
+                  fast. We turned each idea into a production-ready solution —
+                  fully integrated with their systems and ready for customers.
                 </p>
               </div>
 
               <div class="section-two__case-visual" aria-hidden="true">
-                <div class="section-two__visual-frame section-two__visual-frame--dark">
+                <div
+                  class="section-two__visual-frame section-two__visual-frame--dark"
+                >
                   <div class="section-two__visual-badge" aria-hidden="true">
-                    <span class="section-two__badge-dot section-two__badge-dot--yellow"></span>
-                    <span class="section-two__badge-dot section-two__badge-dot--pink"></span>
-                    <span class="section-two__badge-dot section-two__badge-dot--blue"></span>
+                    <span
+                      class="section-two__badge-dot section-two__badge-dot--yellow"
+                    ></span>
+                    <span
+                      class="section-two__badge-dot section-two__badge-dot--pink"
+                    ></span>
+                    <span
+                      class="section-two__badge-dot section-two__badge-dot--blue"
+                    ></span>
                   </div>
-                  <div class="section-two__visual-card section-two__visual-card--wide" aria-hidden="true">
+                  <div
+                    class="section-two__visual-card section-two__visual-card--wide"
+                    aria-hidden="true"
+                  >
                     <div class="section-two__visual-card-header"></div>
                     <div class="section-two__visual-card-body"></div>
                   </div>
@@ -221,7 +334,7 @@
                   data-faq-trigger
                 >
                   <span class="faq-item__question-bg" aria-hidden="true"></span>
-                  <span class="faq-item__label">How does IZYBIZ work?</span>
+                  <span class="faq-item__label">What does this cost?</span>
                 </button>
               </h3>
               <div
@@ -235,8 +348,8 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      We turn your inputs — from a simple idea to full design assets — into production-ready digital products.
-                      Our team orchestrates a tailored network of AI agents, selecting the right workflows, prompts, and integrations based on your needs.
+                      We quote based on your scope. Schedule a call, we'll give
+                      you numbers upfront. Transparency first.
                     </p>
                   </div>
                 </div>
@@ -254,7 +367,9 @@
                   data-faq-trigger
                 >
                   <span class="faq-item__question-bg" aria-hidden="true"></span>
-                  <span class="faq-item__label">What do you deliver?</span>
+                  <span class="faq-item__label"
+                    >What's the timeline to first results?</span
+                  >
                 </button>
               </h3>
               <div
@@ -268,8 +383,9 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      We deliver fully custom, production-ready outputs, not just concepts.
-                      Depending on your needs, this can include apps, workflows, prototypes, or high-quality UI.
+                      You see automations working in 2-3 weeks. Full deployment
+                      depends on your systems. Most teams are productive within
+                      6-8 weeks.
                     </p>
                   </div>
                 </div>
@@ -287,7 +403,9 @@
                   data-faq-trigger
                 >
                   <span class="faq-item__question-bg" aria-hidden="true"></span>
-                  <span class="faq-item__label">How long does it take?</span>
+                  <span class="faq-item__label"
+                    >Do I need to change my team or my processes?</span
+                  >
                 </button>
               </h3>
               <div
@@ -301,8 +419,8 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      We compress weeks and months of traditional work into days.
-                      Our agent-driven workflows accelerate every step, from idea to deployment, without compromising quality or reliability.
+                      No. We adapt to how you work now. If your process is
+                      broken, we'll tell you. But we don't force reorganization.
                     </p>
                   </div>
                 </div>
@@ -320,7 +438,9 @@
                   data-faq-trigger
                 >
                   <span class="faq-item__question-bg" aria-hidden="true"></span>
-                  <span class="faq-item__label">What happens after I book a demo?</span>
+                  <span class="faq-item__label"
+                    >How do you measure success?</span
+                  >
                 </button>
               </h3>
               <div
@@ -334,7 +454,79 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      We’ll reach out to schedule a follow-up call and align on your needs.
+                      Hours saved per week. Deals closed. Features shipped.
+                      Errors reduced. We pick 2-3 metrics that matter to you, we
+                      track them.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq-item" data-faq-item>
+              <h3 class="faq-item__heading">
+                <button
+                  class="faq-item__question"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="faq-a-5"
+                  id="faq-q-5"
+                  data-faq-trigger
+                >
+                  <span class="faq-item__question-bg" aria-hidden="true"></span>
+                  <span class="faq-item__label"
+                    >What if we need to pivot mid-project?</span
+                  >
+                </button>
+              </h3>
+              <div
+                class="faq-item__answers"
+                id="faq-a-5"
+                role="region"
+                aria-labelledby="faq-q-5"
+                data-faq-panel
+                hidden
+              >
+                <div class="faq-item__pad">
+                  <div class="faq-item__bubble">
+                    <p class="faq-item__answer">
+                      We expect changes. Workflows are easy to modify. Pivoting
+                      costs time, not extra money.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq-item" data-faq-item>
+              <h3 class="faq-item__heading">
+                <button
+                  class="faq-item__question"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="faq-a-6"
+                  id="faq-q-6"
+                  data-faq-trigger
+                >
+                  <span class="faq-item__question-bg" aria-hidden="true"></span>
+                  <span class="faq-item__label"
+                    >Is this customized or template-based?</span
+                  >
+                </button>
+              </h3>
+              <div
+                class="faq-item__answers"
+                id="faq-a-6"
+                role="region"
+                aria-labelledby="faq-q-6"
+                data-faq-panel
+                hidden
+              >
+                <div class="faq-item__pad">
+                  <div class="faq-item__bubble">
+                    <p class="faq-item__answer">
+                      Both. We start with your specific processes, not
+                      templates. But we reuse patterns that work.
                     </p>
                   </div>
                 </div>
@@ -349,13 +541,18 @@
           <header class="section-contact__intro">
             <h2 class="section-contact__title">We chat?</h2>
             <p class="section-contact__subtitle">
-              Tell us what you’re building. We’ll reply fast with a concrete next step.
+              Tell us what you’re building. We’ll reply fast with a concrete
+              next step.
             </p>
           </header>
 
           <div class="section-contact__actions">
-            <a class="section-contact__cta" href="#contact" data-demo-modal-open>Email us</a>
-            <a class="section-contact__secondary" href="#we-do">See what we create</a>
+            <a class="section-contact__cta" href="#contact" data-demo-modal-open
+              >Email us</a
+            >
+            <a class="section-contact__secondary" href="#we-do"
+              >See our case studies</a
+            >
           </div>
         </div>
       </section>
@@ -382,7 +579,7 @@
         </button>
 
         <div class="demo-modal__header">
-          <h2 id="demo-modal-title" class="demo-modal__title">Book a demo</h2>
+          <h2 id="demo-modal-title" class="demo-modal__title">Book a call</h2>
           <p id="demo-modal-description" class="demo-modal__description">
             Leave your email and we’ll get back to you shortly.
           </p>
@@ -390,7 +587,9 @@
 
         <form class="demo-modal__form" novalidate>
           <div class="demo-modal__field">
-            <label for="demo-modal-phone" class="demo-modal__label">Phone number</label>
+            <label for="demo-modal-phone" class="demo-modal__label"
+              >Phone number</label
+            >
             <input
               id="demo-modal-phone"
               name="phone"
@@ -404,7 +603,9 @@
           </div>
 
           <div class="demo-modal__field">
-            <label for="demo-modal-email" class="demo-modal__label">Email</label>
+            <label for="demo-modal-email" class="demo-modal__label"
+              >Email</label
+            >
             <input
               id="demo-modal-email"
               name="email"
@@ -423,7 +624,7 @@
             type="submit"
             class="hero-izybiz__button demo-modal__submit-button"
           >
-            <span class="demo-modal__submit-label">Request a demo</span>
+            <span class="demo-modal__submit-label">Request a call</span>
             <span class="demo-modal__submit-loading" aria-hidden="true">
               Loading…
             </span>
@@ -433,15 +634,20 @@
         <div class="demo-modal__success" hidden>
           <h2 class="demo-modal__success-title">Email saved</h2>
           <p class="demo-modal__success-description">
-            Thanks! We’ve saved your email. You’ll receive a confirmation email shortly.
+            Thanks! We’ve saved your email. You’ll receive a confirmation email
+            shortly.
           </p>
-          <button type="button" class="hero-izybiz__button demo-modal__success-close" data-demo-modal-close>
+          <button
+            type="button"
+            class="hero-izybiz__button demo-modal__success-close"
+            data-demo-modal-close
+          >
             Close
           </button>
         </div>
       </div>
     </div>
 
-    <script src="./script.js"></script>
+    <script src="./script.js?v=20260323-10"></script>
   </body>
 </html>

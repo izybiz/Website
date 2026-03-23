@@ -64,70 +64,44 @@ const whenHeroIntroReady = (callback) => {
   window.__izybizHeroIntroReadyCallbacks.push(callback);
 };
 
+const isElementInViewport = (element) => {
+  if (!element) return false;
+  const rect = element.getBoundingClientRect();
+  const viewportHeight =
+    window.innerHeight || document.documentElement.clientHeight || 0;
+  return rect.top < viewportHeight && rect.bottom > 0;
+};
+
 (() => {
-  // Start the hero title animation with a tiny delay so the full title
-  // is first rendered statically, then the existing animation kicks in.
-  const startTitleAnimation = () => {
-    const titleEl = document.querySelector(".hero-izybiz__title");
+  const titleLines = Array.from(
+    document.querySelectorAll(".hero-izybiz__title-line"),
+  );
+  const prefersReducedMotion = window.matchMedia?.(
+    "(prefers-reduced-motion: reduce)",
+  )?.matches;
 
-    if (!titleEl) {
-      markTitleAnimationDone();
-      return;
-    }
+  if (!titleLines.length || prefersReducedMotion) {
+    titleLines.forEach((line) =>
+      line.classList.add("hero-izybiz__title-line--visible"),
+    );
+    markTitleAnimationDone();
+    return;
+  }
 
-    const prefersReducedMotion = window.matchMedia?.(
-      "(prefers-reduced-motion: reduce)",
-    )?.matches;
-
-    const originalText = titleEl.textContent || "";
-    const text = originalText.trim();
-
-    if (!text) {
-      markTitleAnimationDone();
-      return;
-    }
-    if (titleEl.dataset.animated === "true") {
-      markTitleAnimationDone();
-      return;
-    }
-    titleEl.dataset.animated = "true";
-
-    const letters = [];
-    titleEl.textContent = "";
-
-    for (const char of text) {
-      const span = document.createElement("span");
-      span.className = "hero-izybiz__title-letter";
-      span.textContent = char;
-      titleEl.appendChild(span);
-      letters.push(span);
-    }
-
-    if (prefersReducedMotion) {
-      letters.forEach((letter) => {
-        letter.classList.add("hero-izybiz__title-letter--visible");
-      });
-      markTitleAnimationDone();
-      return;
-    }
-
-    const delayPerLetter = 90;
-
-    letters.forEach((letter, index) => {
-      const delay = index * delayPerLetter;
-      window.setTimeout(() => {
-        letter.classList.add("hero-izybiz__title-letter--visible");
-      }, delay);
-    });
-
-    const totalDuration = (letters.length - 1) * delayPerLetter + 520;
+  const revealLine = (line, delay) => {
     window.setTimeout(() => {
-      markTitleAnimationDone();
-    }, totalDuration);
+      line.classList.add("hero-izybiz__title-line--visible");
+    }, delay);
   };
 
-  // 1s delay requested before starting the animation
-  window.setTimeout(startTitleAnimation, 1000);
+  revealLine(titleLines[0], 180);
+  if (titleLines[1]) {
+    revealLine(titleLines[1], 980);
+  }
+
+  // Allow second line animation to complete before unlocking next elements.
+  const totalDelay = titleLines[1] ? 2300 : 1450;
+  window.setTimeout(markTitleAnimationDone, totalDelay);
 })();
 
 // Reveal hero subtitle and primary CTA only after title animation is finished
@@ -135,6 +109,7 @@ const whenHeroIntroReady = (callback) => {
   whenTitleAnimationDone(() => {
     const subtitle = document.querySelector(".hero-izybiz__subtitle");
     const button = document.querySelector(".hero-izybiz__button");
+    const body = document.body;
     const prefersReducedMotion = window.matchMedia?.(
       "(prefers-reduced-motion: reduce)",
     )?.matches;
@@ -148,113 +123,88 @@ const whenHeroIntroReady = (callback) => {
     }
 
     if (prefersReducedMotion) {
+      body?.classList.remove("intro-stage-1");
       markHeroIntroReady();
       return;
     }
 
-    // Wait for subtitle/button reveal transitions before starting section-one reveals.
-    window.setTimeout(markHeroIntroReady, 560);
+    // Keep other sections hidden until subtitle/button animation is fully complete.
+    window.setTimeout(() => {
+      body?.classList.remove("intro-stage-1");
+      markHeroIntroReady();
+    }, 980);
   });
 })();
 
 (() => {
   whenHeroIntroReady(() => {
-    const section = document.querySelector(".we-deliver");
-    const row = document.querySelector(".we-deliver__cards-row");
+    const title = document.querySelector("#we-deliver-title.we-deliver__title");
     const cards = Array.from(document.querySelectorAll(".we-deliver__card"));
+    const weDeliverSection =
+      document.querySelector("#we-deliver") || document.querySelector(".we-deliver");
 
-    if (!section || !row) return;
+    if (!title || !cards.length) return;
 
     const prefersReducedMotion = window.matchMedia?.(
       "(prefers-reduced-motion: reduce)",
     )?.matches;
 
     if (prefersReducedMotion) {
-      row.classList.add("is-revealed");
+      title.classList.add("reveal-visible");
+      cards.forEach((card) => card.classList.add("reveal-visible"));
       return;
     }
 
-    const isMobile = window.matchMedia?.("(max-width: 767px)")?.matches;
-    if (isMobile) {
-      let started = false;
-
-      const startMobile = () => {
-        if (started) return;
-        started = true;
-
-        // Reveal the we-deliver cards only after the we-deliver title has been revealed.
-        row.classList.add("is-revealed");
-
-        if (!cards.length) return;
-
-        cards.forEach((card) => card.classList.add("reveal-base"));
-
-        let cardIndex = 0;
-        const cardObserver = new IntersectionObserver(
-          (entries, obs) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return;
-              const el = entry.target;
-
-              if (el.classList.contains("reveal-visible")) {
-                obs.unobserve(el);
-                return;
-              }
-
-              const delay = cardIndex * 120;
-              el.style.transitionDelay = `${delay}ms`;
-              el.classList.add("reveal-visible");
-              cardIndex += 1;
-
-              obs.unobserve(el);
-            });
-          },
-          {
-            threshold: 0,
-            rootMargin: "0px",
-          },
-        );
-
-        cards.forEach((card) => cardObserver.observe(card));
-      };
-
-      window.__onWeDeliverIntroRevealedCallbacks =
-        window.__onWeDeliverIntroRevealedCallbacks || [];
-      window.__onWeDeliverIntroRevealedCallbacks.push(startMobile);
-      if (window.__weDeliverIntroRevealed) startMobile();
-      return;
-    }
-
-    let pendingRowReveal = false;
-
-    window.__onWeDeliverIntroRevealedCallbacks =
-      window.__onWeDeliverIntroRevealedCallbacks || [];
-    window.__onWeDeliverIntroRevealedCallbacks.push(() => {
-      if (!pendingRowReveal) return;
-      row.classList.add("is-revealed");
-      pendingRowReveal = false;
+    const targets = [title, ...cards];
+    targets.forEach((el) => {
+      el.classList.remove("reveal-visible");
+      el.classList.add("reveal-base");
     });
+    const order = new Map(targets.map((el, i) => [el, i]));
+    const revealed = new Set();
 
-    if (window.__weDeliverIntroRevealed) {
-      row.classList.add("is-revealed");
+    // If the section is already visible on refresh/deep-link,
+    // reveal immediately instead of waiting for later observer flow.
+    if (isElementInViewport(weDeliverSection)) {
+      targets.forEach((el) => {
+        const idx = order.get(el) ?? 0;
+        el.style.transitionDelay = `${idx * 80}ms`;
+        el.classList.add("reveal-visible");
+      });
+      window.__weDeliverIntroRevealed = true;
+      return;
     }
 
-    let weDeliverSectionSeen = false;
     const revealObserver = new IntersectionObserver(
       (entries, obs) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            if (weDeliverSectionSeen) return;
-            weDeliverSectionSeen = true;
-            if (window.__weDeliverIntroRevealed) {
-              row.classList.add("is-revealed");
-            } else {
-              pendingRowReveal = true;
-            }
-            obs.disconnect();
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+
+          if (el.classList.contains("reveal-visible")) {
+            revealed.add(el);
+            obs.unobserve(el);
             return;
           }
-        }
+
+          const idx = order.get(el) ?? 0;
+          const staggerDelay = idx * 80;
+
+          // Apply stagger in JS timing (same pattern as section-two sequencing),
+          // then reveal on a painted frame to ensure opacity animation runs.
+          window.setTimeout(() => {
+            window.requestAnimationFrame(() => {
+              el.classList.add("reveal-visible");
+            });
+          }, staggerDelay);
+          revealed.add(el);
+          obs.unobserve(el);
+
+          if (revealed.size === targets.length) {
+            window.__weDeliverIntroRevealed = true;
+            obs.disconnect();
+          }
+        });
       },
       {
         threshold: 0,
@@ -262,7 +212,7 @@ const whenHeroIntroReady = (callback) => {
       },
     );
 
-    revealObserver.observe(section);
+    targets.forEach((el) => revealObserver.observe(el));
   });
 })();
 
@@ -279,8 +229,6 @@ const whenHeroIntroReady = (callback) => {
     const isMobile = window.matchMedia?.("(max-width: 767px)")?.matches;
 
     const revealSelectors = [
-      ".hero-izybiz",
-      ".we-deliver__intro",
       ".section-two__intro",
       ".section-two__grid",
       ".section-two__case-copy",
@@ -288,6 +236,8 @@ const whenHeroIntroReady = (callback) => {
     ];
 
     const targets = [];
+    const sectionTwoRoot =
+      document.querySelector("#we-do") || document.querySelector(".section-two");
 
     for (const selector of revealSelectors) {
       document.querySelectorAll(selector).forEach((el) => {
@@ -306,11 +256,7 @@ const whenHeroIntroReady = (callback) => {
     // Used to enforce the global order of reveal animations.
     const order = new Map(targets.map((el, i) => [el, i]));
 
-    window.__weDeliverIntroRevealed = false;
     window.__sectionTwoDivsRevealed = false;
-
-    window.__onWeDeliverIntroRevealedCallbacks =
-      window.__onWeDeliverIntroRevealedCallbacks || [];
     window.__onSectionTwoDivsRevealedCallbacks =
       window.__onSectionTwoDivsRevealedCallbacks || [];
 
@@ -327,6 +273,36 @@ const whenHeroIntroReady = (callback) => {
 
     const revealedSectionTwoDivs = new Set();
     const revealedTargets = new Set();
+
+    // Same refresh behavior: if section-two is already in viewport,
+    // reveal now and unlock dependent sections.
+    if (isElementInViewport(sectionTwoRoot)) {
+      targets.forEach((el) => {
+        const idx = order.get(el) ?? 0;
+        el.style.transitionDelay = `${idx * 80}ms`;
+        el.classList.add("reveal-visible");
+        revealedTargets.add(el);
+        if (sectionTwoDivElsSet.has(el)) {
+          revealedSectionTwoDivs.add(el);
+        }
+      });
+
+      if (
+        !window.__sectionTwoDivsRevealed &&
+        revealedSectionTwoDivs.size === sectionTwoDivElsSet.size
+      ) {
+        window.__sectionTwoDivsRevealed = true;
+        window.__onSectionTwoDivsRevealedCallbacks.forEach((cb) => {
+          try {
+            cb();
+          } catch {
+            // ignore
+          }
+        });
+      }
+
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries, obs) => {
@@ -345,20 +321,6 @@ const whenHeroIntroReady = (callback) => {
           el.style.transitionDelay = `${idx * 80}ms`;
           el.classList.add("reveal-visible");
           revealedTargets.add(el);
-
-          if (
-            !window.__weDeliverIntroRevealed &&
-            el.classList.contains("we-deliver__intro")
-          ) {
-            window.__weDeliverIntroRevealed = true;
-            window.__onWeDeliverIntroRevealedCallbacks.forEach((cb) => {
-              try {
-                cb();
-              } catch {
-                // ignore
-              }
-            });
-          }
 
           if (sectionTwoDivElsSet.has(el)) {
             revealedSectionTwoDivs.add(el);
@@ -419,11 +381,12 @@ const whenHeroIntroReady = (callback) => {
 
     let faqInView = false;
     let started = false;
+    const allowDirectRevealOnLoad = isElementInViewport(faqSection);
 
     const start = () => {
       if (started) return;
       if (!faqInView) return;
-      if (!window.__sectionTwoDivsRevealed) return;
+      if (!window.__sectionTwoDivsRevealed && !allowDirectRevealOnLoad) return;
 
       started = true;
 
@@ -454,7 +417,69 @@ const whenHeroIntroReady = (callback) => {
       window.__onSectionTwoDivsRevealedCallbacks || [];
     window.__onSectionTwoDivsRevealedCallbacks.push(start);
 
+    if (allowDirectRevealOnLoad) {
+      faqInView = true;
+      start();
+    }
+
     if (window.__sectionTwoDivsRevealed) start();
+  });
+})();
+
+// Contact reveal (title like FAQ reveal pattern)
+(() => {
+  whenTitleAnimationDone(() => {
+    const prefersReducedMotion = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)",
+    )?.matches;
+
+    if (prefersReducedMotion) return;
+
+    const contactSection =
+      document.querySelector("#contact") || document.querySelector(".section-contact");
+    const titleEl = document.querySelector(".section-contact__title");
+
+    if (!contactSection || !titleEl) return;
+
+    const sequence = [titleEl];
+    sequence.forEach((el) => el.classList.add("reveal-base"));
+
+    let sectionInView = false;
+    let started = false;
+    const allowDirectRevealOnLoad = isElementInViewport(contactSection);
+
+    const start = () => {
+      if (started) return;
+      if (!sectionInView) return;
+
+      started = true;
+      sequence.forEach((el, idx) => {
+        el.style.transitionDelay = `${idx * 80}ms`;
+        el.classList.add("reveal-visible");
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          sectionInView = true;
+          start();
+          obs.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0,
+        rootMargin: "0px",
+      },
+    );
+
+    observer.observe(contactSection);
+    if (allowDirectRevealOnLoad) {
+      sectionInView = true;
+      start();
+    }
+    start();
   });
 })();
 
@@ -515,8 +540,11 @@ const whenHeroIntroReady = (callback) => {
   document.addEventListener("click", onDocumentClick);
   document.addEventListener("keydown", onKeyDown);
 
+  // Start from a deterministic closed state.
+  setOpen(false);
+
   window.addEventListener("resize", () => {
-    if (window.matchMedia("(min-width: 768px)").matches) {
+    if (window.matchMedia("(min-width: 769px)").matches) {
       setOpen(false);
     }
   });
