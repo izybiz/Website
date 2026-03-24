@@ -9,7 +9,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: #fff6e9;
+  background: #fdfbf6;
   color: #0f172a;
 }
 
@@ -324,7 +324,7 @@ input[type="reset"] {
 
 .section-one {
   width: 100%;
-  background: #fff6e9;
+  background: #fdfbf6;
   border-radius: 36px;
   overflow: hidden;
   display: flex;
@@ -1102,7 +1102,7 @@ input[type="reset"] {
 .section-two {
   width: 100%;
   margin-top: 16px;
-  background: #fff6e9;
+  background: #fdfbf6;
   border-radius: 36px;
   overflow: hidden;
   color: #000000;
@@ -1525,7 +1525,7 @@ input[type="reset"] {
 .section-contact {
   width: 100%;
   margin-top: 16px;
-  background: #fff6e9;
+  background: #fdfbf6;
   border-radius: 36px;
   overflow: hidden;
   color: #000000;
@@ -1637,7 +1637,7 @@ input[type="reset"] {
 /* FAQ (chat bubbles) */
 .section-faq {
   width: 100%;
-  background: #fff6e9;
+  background: #fdfbf6;
   padding: 56px 0 16px 0;
 }
 
@@ -2136,7 +2136,7 @@ input[type="reset"] {
 
 @media (hover: hover) and (pointer: fine) {
   .demo-modal__close-button:hover {
-    background: #fff6e9;
+    background: #fdfbf6;
     transform: translateY(-1px);
   }
 }
