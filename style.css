@@ -1100,11 +1100,12 @@ input[type="reset"] {
 .section-two__case {
   --case-translate-y: 0px;
   --case-scale: 1;
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  align-items: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 32px;
   overflow: hidden;
+   min-height: 360px;
   transform: translateY(var(--case-translate-y)) scale(var(--case-scale));
   transition:
     transform 320ms ease-in-out,
@@ -1155,8 +1156,12 @@ input[type="reset"] {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
   gap: 18px;
-  padding: 44px 44px;
+  padding: 56px 64px;
+  max-width: 920px;
+  width: 100%;
   box-shadow: none;
 }
 
@@ -1186,7 +1191,7 @@ input[type="reset"] {
 
 .section-two__case-description {
   margin: 0;
-  max-width: 520px;
+  max-width: 680px;
   font-family: "Didact Gothic", sans-serif;
   font-size: 22px;
   line-height: 28px;
@@ -1220,205 +1225,6 @@ input[type="reset"] {
 
 .section-two__case--blue .section-two__case-tag {
   color: #1f4f7a;
-}
-
-.section-two__case-visual {
-  padding: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.section-two__visual-frame {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 320px;
-  border-radius: 28px;
-  border: 2px solid rgba(0, 0, 0, 0.85);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.section-two__visual-frame--purple {
-  background: #d9d8ff;
-}
-
-.section-two__visual-frame--dark {
-  background: #2d2d2d;
-}
-
-.section-two__visual-pills {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.section-two__pill {
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  border: 2px solid rgba(0, 0, 0, 0.85);
-  background: #ffffff;
-}
-
-.section-two__pill--blue {
-  background: #b9ddfd;
-}
-
-.section-two__pill--green {
-  background: #35d07f;
-}
-
-.section-two__pill--red {
-  background: #ff6a3d;
-}
-
-.section-two__visual-badge {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 999px;
-  background: rgba(255, 246, 233, 0.96);
-  border: 2px solid rgba(0, 0, 0, 0.85);
-}
-
-.section-two__badge-dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 999px;
-  border: 2px solid rgba(0, 0, 0, 0.85);
-  background: #ffffff;
-}
-
-.section-two__badge-dot--yellow {
-  background: #f5c21b;
-}
-
-.section-two__badge-dot--pink {
-  background: #ffa68b;
-}
-
-.section-two__badge-dot--blue {
-  background: #b9ddfd;
-}
-
-.section-two__visual-card {
-  width: min(280px, 86%);
-  height: 210px;
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid rgba(0, 0, 0, 0.85);
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.12),
-    0 12px 28px rgba(0, 0, 0, 0.14);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.section-two__visual-card--wide {
-  width: min(320px, 92%);
-  height: 200px;
-}
-
-.section-two__visual-card-header {
-  height: 44px;
-  background: rgba(0, 0, 0, 0.06);
-  border-bottom: 2px solid rgba(0, 0, 0, 0.08);
-}
-
-.section-two__visual-card-body {
-  flex: 1;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.04) 0%,
-    rgba(0, 0, 0, 0.02) 50%,
-    rgba(0, 0, 0, 0.06) 100%
-  );
-}
-
-.section-two__phone {
-  width: min(280px, 86%);
-  height: 260px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.section-two__phone-frame {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 34px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid rgba(0, 0, 0, 0.85);
-  overflow: hidden;
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.12),
-    0 12px 28px rgba(0, 0, 0, 0.14);
-}
-
-.section-two__phone-notch {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 26px;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.88);
-}
-
-.section-two__phone-screen {
-  position: absolute;
-  inset: 0;
-  padding: 48px 16px 16px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.04) 0%,
-    rgba(0, 0, 0, 0.02) 55%,
-    rgba(0, 0, 0, 0.06) 100%
-  );
-}
-
-.section-two__phone-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding-top: 8px;
-}
-
-.section-two__phone-card {
-  height: 54px;
-  border-radius: 18px;
-  border: 2px solid rgba(0, 0, 0, 0.85);
-  background: rgba(255, 255, 255, 0.92);
-}
-
-.section-two__phone-card--ghost {
-  background: rgba(255, 255, 255, 0.72);
-}
-
-.section-two__phone-cta {
-  margin-top: auto;
-  height: 56px;
-  border-radius: 20px;
-  border: 2px solid rgba(0, 0, 0, 0.85);
-  background: #ffffff;
 }
 
 /* Contact */
@@ -1706,18 +1512,6 @@ input[type="reset"] {
 }
 
 @media (max-width: 767px) {
-  .section-contact__inner {
-    padding: 56px 16px 72px 16px;
-    gap: 20px;
-  }
-
-  .section-contact__subtitle {
-    font-size: 20px;
-    line-height: 26px;
-  }
-}
-
-@media (max-width: 767px) {
   .section-two__inner {
     padding: 48px 16px 56px 16px;
   }
@@ -1741,11 +1535,11 @@ input[type="reset"] {
   }
 
   .section-two__case {
-    grid-template-columns: 1fr;
+    min-height: auto;
   }
 
   .section-two__case-copy {
-    padding: 28px 20px;
+    padding: 32px 20px;
   }
 
   .section-two__case-title {
@@ -1754,44 +1548,9 @@ input[type="reset"] {
 
   .section-two__case-description {
     font-size: 20px;
-    line-height: 26px;
+    line-height: 28px;
+    max-width: 100%;
   }
-
-  .section-two__case-visual {
-    padding: 18px 20px 22px 20px;
-  }
-
-  .section-two__visual-frame {
-    min-height: 240px;
-  }
-
-  .section-two__visual-card {
-    width: min(260px, 92%);
-    height: 180px;
-  }
-
-  .section-two__visual-card--wide {
-    width: min(290px, 94%);
-    height: 176px;
-  }
-
-  .section-two__phone {
-    width: min(260px, 92%);
-    height: 240px;
-  }
-
-  .section-two__phone-notch {
-    width: 108px;
-    height: 24px;
-  }
-
-  .section-two__phone-screen {
-    padding: 44px 14px 14px 14px;
-  }
-
-.section-two__phone-card {
-  height: 50px;
-}
 }
 
 /* Demo modal (Book a demo) */
