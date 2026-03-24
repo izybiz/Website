@@ -1091,11 +1091,10 @@ input[type="reset"] {
 }
 
 .section-two__grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 24px;
   margin-top: 12px;
-  align-items: stretch;
 }
 
 .section-two__case {
@@ -1106,7 +1105,7 @@ input[type="reset"] {
   justify-content: center;
   border-radius: 32px;
   overflow: hidden;
-   min-height: 420px;
+   min-height: 360px;
   transform: translateY(var(--case-translate-y)) scale(var(--case-scale));
   transition:
     transform 320ms ease-in-out,
@@ -1160,9 +1159,9 @@ input[type="reset"] {
   align-items: center;
   text-align: center;
   gap: 16px;
-  padding: 40px 28px;
+  padding: 56px 64px;
   width: 100%;
-  max-width: 100%;
+  max-width: 920px;
   box-shadow: none;
 }
 
@@ -1183,18 +1182,18 @@ input[type="reset"] {
   margin: 0;
   font-family: "Bricolage Grotesque", sans-serif;
   font-optical-sizing: auto;
-  font-size: clamp(36px, 3vw, 56px);
+  font-size: clamp(44px, 4.6vw, 72px);
   font-weight: 800;
-  line-height: 0.98;
+  line-height: 0.95;
   letter-spacing: -1px;
   text-transform: none;
 }
 
 .section-two__case-description {
   margin: 0;
-  max-width: 44ch; 
+  max-width: 680px; 
   font-family: "Didact Gothic", sans-serif;
-  font-size: 21px;
+  font-size: 22px;
   line-height: 30px;
   color: rgba(0, 0, 0, 0.78);
 }
