@@ -253,10 +253,63 @@
       <section class="section-two" id="we-do" aria-label="Case studies">
         <div class="section-two__inner">
           <header class="section-two__intro">
-            <h2 class="section-two__title">Our use cases</h2>
+            <h2 class="section-two__title" id="case-studies-heading">Our use cases</h2>
+            <div class="section-two__topbar" aria-label="Case studies navigation">
+              <div
+                class="section-two__tabs"
+                role="tablist"
+                aria-label="Case studies tabs"
+                data-case-tablist
+              >
+                <button class="section-two__tab is-active" type="button" role="tab" data-case-tab>
+                  Telecom &amp; Fintech · Africa
+                </button>
+                <button class="section-two__tab" type="button" role="tab" data-case-tab>
+                  Community Marketplace · Africa
+                </button>
+                <button class="section-two__tab" type="button" role="tab" data-case-tab>
+                  Community Cooking · Europe
+                </button>
+                <button class="section-two__tab" type="button" role="tab" data-case-tab>
+                  Agentic Delivery · France
+                </button>
+              </div>
+
+              <div class="section-two__mobile-nav">
+                <span
+                  class="section-two__counter"
+                  data-case-counter
+                  aria-live="polite"
+                  aria-atomic="true"
+                  >1/4</span
+                >
+                <div class="section-two__controls">
+                  <button
+                    class="section-two__arrow section-two__arrow--prev"
+                    type="button"
+                    data-case-prev
+                    aria-label="Previous case study"
+                  >
+                    <span aria-hidden="true">&#8592;</span>
+                  </button>
+                  <button
+                    class="section-two__arrow section-two__arrow--next"
+                    type="button"
+                    data-case-next
+                    aria-label="Next case study"
+                  >
+                    <span aria-hidden="true">&#8594;</span>
+                  </button>
+                </div>
+              </div>
+            </div>
           </header>
 
-          <div class="section-two__grid" aria-label="Case studies list">
+          <div
+            class="section-two__grid"
+            aria-label="Case studies carousel"
+            aria-labelledby="case-studies-heading"
+          >
             <article
               class="section-two__case section-two__case--yellow"
               tabindex="0"
@@ -265,10 +318,15 @@
               <div class="section-two__case-copy">
                 <span class="section-two__case-label">Delivered</span>
                 <h3 class="section-two__case-title">
-                  Telecom & Fintech · Africa
+                  Telecom &amp; Fintech · Africa
                 </h3>
                 <p class="section-two__case-description">
-                  A telecom operator needed to launch a super-app across two markets simultaneously — two distinct operating scenarios, multiple stakeholders, under acquisition pressure. We scoped and build the product, structured two distinct go-to-market scenarios — the client chose one and deployed it.</p>
+                  A telecom operator needed to launch a super-app across two
+                  markets simultaneously — two distinct operating scenarios,
+                  multiple stakeholders, under acquisition pressure. We scoped
+                  and build the product, structured two distinct go-to-market
+                  scenarios — the client chose one and deployed it.
+                </p>
               </div>
             </article>
 
@@ -283,7 +341,11 @@
                   Community Marketplace · Africa
                 </h3>
                 <p class="section-two__case-description">
-                  An e-commerce marketplace had to go from zero to a viable market in under two years — positioning, branding, organization, go-to-market, and building an engaged community of buyers and sellers. We structured and led end-to-end delivery to €1.25M GMV in 18 months.
+                  An e-commerce marketplace had to go from zero to a viable
+                  market in under two years — positioning, branding,
+                  organization, go-to-market, and building an engaged community
+                  of buyers and sellers. We structured and led end-to-end
+                  delivery to €1.25M GMV in 18 months.
                 </p>
               </div>
             </article>
@@ -299,7 +361,12 @@
                   Community Cooking · Europe
                 </h3>
                 <p class="section-two__case-description">
-                  A cooking enthusiast wanted to turn daily meal prep into a driver of social connection and savings. We structured a "collective cooking at home" operational model and designed the product experience through a mobile app orchestrating batch cooking sessions — built around a Triple Gain: 50% cost savings, time efficiency, and wellbeing.
+                  A cooking enthusiast wanted to turn daily meal prep into a
+                  driver of social connection and savings. We structured a
+                  "collective cooking at home" operational model and designed
+                  the product experience through a mobile app orchestrating
+                  batch cooking sessions — built around a Triple Gain: 50% cost
+                  savings, time efficiency, and wellbeing.
                 </p>
               </div>
             </article>
@@ -312,10 +379,14 @@
               <div class="section-two__case-copy">
                 <span class="section-two__case-label">Starting</span>
                 <h3 class="section-two__case-title">
-                  Agentic Delivery · France 
+                  Agentic Delivery · France
                 </h3>
                 <p class="section-two__case-description">
-                  A French software company needed to scale client deployments without scaling headcount. We are designing a system of autonomous AI agents under human supervision to orchestrate and deliver client projects — from onboarding to go-live.                </p>
+                  A French software company needed to scale client deployments
+                  without scaling headcount. We are designing a system of
+                  autonomous AI agents under human supervision to orchestrate
+                  and deliver client projects — from onboarding to go-live.
+                </p>
               </div>
             </article>
           </div>
