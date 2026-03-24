@@ -1121,6 +1121,10 @@ input[type="reset"] {
   background: #b9ddfd;
 }
 
+.section-two__case--purple {
+  background: #d9d8ff;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .section-two__case:hover {
     --case-translate-y: -6px;
