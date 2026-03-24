@@ -32,6 +32,12 @@ body.intro-stage-1 .hero-metrics {
   --we-deliver-h2-size: clamp(56px, 6vw, 112px);
   --hero-h1-size: clamp(62.4px, 6.9vw, 124.8px);
   --section-stack-gap: clamp(56px, 8vw, 96px);
+  /* Extra air only between hero-metrics and .we-deliver (inside section-one) */
+  --hero-metrics-we-deliver-extra-gap: clamp(72px, 12vw, 160px);
+  /* Space below section-style h2s (excludes .we-deliver__title via :not rule below) */
+  --h2-below-spacing: clamp(36px, 4.5vw, 56px);
+  /* Extra space below "Book a call" before hero-metrics (inside .hero-izybiz padding) */
+  --hero-cta-to-metrics-extra: clamp(40px, 6vw, 96px);
 }
 
 /* A11y helper */
@@ -342,7 +348,7 @@ input[type="reset"] {
   align-items: center;
   gap: var(--hero-text-button-gap);
   padding-top: 160px;
-  padding-bottom: 52px;
+  padding-bottom: calc(52px + var(--hero-cta-to-metrics-extra));
 }
 
 .hero-izybiz__text {
@@ -618,7 +624,9 @@ input[type="reset"] {
   align-items: center;
   justify-content: flex-start;
   gap: 48px;
-  margin-top: calc(var(--section-stack-gap) - 31px);
+  margin-top: calc(
+    var(--section-stack-gap) - 31px + var(--hero-metrics-we-deliver-extra-gap)
+  );
   padding-bottom: 63px;
   padding-left: 0;
   padding-right: 0;
@@ -659,6 +667,10 @@ input[type="reset"] {
 .we-deliver__title.reveal-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+h2:not(.we-deliver__title) {
+  margin-bottom: var(--h2-below-spacing);
 }
 
 .we-deliver__button {
@@ -1008,7 +1020,9 @@ input[type="reset"] {
   }
 
   .we-deliver {
-    margin-top: calc(var(--section-stack-gap) - 31px);
+    margin-top: calc(
+      var(--section-stack-gap) - 31px + var(--hero-metrics-we-deliver-extra-gap)
+    );
     padding-left: 0;
     padding-right: 0;
     flex-direction: column;
