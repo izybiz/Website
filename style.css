@@ -1389,19 +1389,23 @@ h2:not(.we-deliver__title) {
 }
 
 .section-two__case--yellow {
-  background: #f5c21b;
+  --case-accent: #f5c21b;
+  background: transparent;
 }
 
 .section-two__case--blue {
-  background: #b9ddfd;
+  --case-accent: #b9ddfd;
+  background: transparent;
 }
 
 .section-two__case--white {
-  background: #ffffff;
+  --case-accent: #ffffff;
+  background: transparent;
 }
 
 .section-two__case--violet {
-  background: #d9d8ff;
+  --case-accent: #d9d8ff;
+  background: transparent;
 }
 
 .section-two__case:focus-visible {
@@ -1460,6 +1464,12 @@ h2:not(.we-deliver__title) {
   color: rgba(0, 0, 0, 0.78);
   text-align: center;
   text-wrap: pretty;
+}
+
+@media (min-width: 768px) {
+  .section-two__case-description {
+    max-width: 900px;
+  }
 }
 
 .section-two__case-tags {
