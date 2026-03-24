@@ -396,11 +396,14 @@ const isElementInViewport = (element) => {
     const activeCase = cases[currentIndex];
 
     if (activeCase) {
-      const activeCaseBackgroundColor = window.getComputedStyle(activeCase).backgroundColor;
-      sectionTwo.style.setProperty(
-        "--section-two-active-line",
-        activeCaseBackgroundColor,
-      );
+      const accent = window
+        .getComputedStyle(activeCase)
+        .getPropertyValue("--case-accent")
+        .trim();
+      const activeCaseColor =
+        accent ||
+        window.getComputedStyle(activeCase).backgroundColor;
+      sectionTwo.style.setProperty("--section-two-active-line", activeCaseColor);
     }
 
     if (counter) {
