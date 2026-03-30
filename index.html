@@ -1,6 +1,20 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-1GX9Z469T1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-1GX9Z469T1");
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Izybiz</title>
@@ -83,10 +97,7 @@
           </button>
         </div>
 
-        <section
-          class="hero-metrics"
-          aria-label="Key performance highlights"
-        >
+        <section class="hero-metrics" aria-label="Key performance highlights">
           <article class="hero-metrics__item">
             <h2 class="hero-metrics__title">No Headcount bloat</h2>
             <p class="hero-metrics__description">
@@ -107,6 +118,13 @@
               Invest once.<br />AI multiplies what they know
             </p>
           </article>
+        </section>
+
+        <section class="hero-video" aria-label="Izybiz showcase video">
+          <video class="hero-video__media" controls preload="metadata">
+            <source src="./assets/Anim-Izybiz-V2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </section>
 
         <section
@@ -253,24 +271,49 @@
       <section class="section-two" id="we-do" aria-label="Case studies">
         <div class="section-two__inner">
           <header class="section-two__intro">
-            <h2 class="section-two__title" id="case-studies-heading">Our use cases</h2>
-            <div class="section-two__topbar" aria-label="Case studies navigation">
+            <h2 class="section-two__title" id="case-studies-heading">
+              Our use cases
+            </h2>
+            <div
+              class="section-two__topbar"
+              aria-label="Case studies navigation"
+            >
               <div
                 class="section-two__tabs"
                 role="tablist"
                 aria-label="Case studies tabs"
                 data-case-tablist
               >
-                <button class="section-two__tab is-active" type="button" role="tab" data-case-tab>
+                <button
+                  class="section-two__tab is-active"
+                  type="button"
+                  role="tab"
+                  data-case-tab
+                >
                   Telecom &amp; Fintech · Africa
                 </button>
-                <button class="section-two__tab" type="button" role="tab" data-case-tab>
+                <button
+                  class="section-two__tab"
+                  type="button"
+                  role="tab"
+                  data-case-tab
+                >
                   Community Marketplace · Africa
                 </button>
-                <button class="section-two__tab" type="button" role="tab" data-case-tab>
+                <button
+                  class="section-two__tab"
+                  type="button"
+                  role="tab"
+                  data-case-tab
+                >
                   Community Cooking · Europe
                 </button>
-                <button class="section-two__tab" type="button" role="tab" data-case-tab>
+                <button
+                  class="section-two__tab"
+                  type="button"
+                  role="tab"
+                  data-case-tab
+                >
                   Agentic Delivery · France
                 </button>
               </div>
@@ -609,6 +652,41 @@
                 </div>
               </div>
             </article>
+
+            <article class="faq-item" data-faq-item>
+              <h3 class="faq-item__heading">
+                <button
+                  class="faq-item__question"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="faq-a-7"
+                  id="faq-q-7"
+                  data-faq-trigger
+                >
+                  <span class="faq-item__question-bg" aria-hidden="true"></span>
+                  <span class="faq-item__label">Who are we?</span>
+                </button>
+              </h3>
+              <div
+                class="faq-item__answers"
+                id="faq-a-7"
+                role="region"
+                aria-labelledby="faq-q-7"
+                data-faq-panel
+                hidden
+              >
+                <div class="faq-item__pad">
+                  <div class="faq-item__bubble">
+                    <p class="faq-item__answer">
+                      IZYBIZ is a two-person team: a seasoned operator with 20+
+                      years across Telco, Banking, BPO, SaaS, and e-commerce,
+                      paired with a UX designer who brings fresh eyes and
+                      user-first thinking.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -627,12 +705,47 @@
             <a class="section-contact__cta" href="#contact" data-demo-modal-open
               >Email us</a
             >
-            <a class="section-contact__secondary" href="#we-do"
-              >See our case studies</a
-            >
           </div>
         </div>
       </section>
+
+      <footer class="site-footer" aria-label="Footer">
+        <div class="site-footer__inner">
+          <div class="site-footer__top">
+            <img
+              class="site-footer__logo"
+              src="./assets/Logo Izybiz.png"
+              alt="IZYBIZ"
+            />
+
+            <a
+              class="site-footer__linkedin"
+              href="https://www.linkedin.com/company/izybiz/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn Izybiz"
+            >
+              <img
+                class="site-footer__linkedin-icon"
+                src="./assets/linkedin-icon.png"
+                alt="LinkedIn"
+              />
+            </a>
+          </div>
+
+          <div class="site-footer__bottom">
+            <div class="site-footer__copyright">
+              © 2026 Izybiz All rights reserved
+            </div>
+
+            <nav class="site-footer__nav" aria-label="Footer navigation">
+              <a class="site-footer__nav-link" href="#we-deliver">We deliver</a>
+              <a class="site-footer__nav-link" href="#we-do">We create</a>
+              <a class="site-footer__nav-link" href="#faq">We answer</a>
+            </nav>
+          </div>
+        </div>
+      </footer>
     </main>
 
     <!-- Book a demo modal -->
