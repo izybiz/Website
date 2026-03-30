@@ -375,6 +375,8 @@ const isElementInViewport = (element) => {
   let currentIndex = 0;
   let isTransitioning = false;
   const TRANSITION_DURATION_MS = 320;
+  const DRAG_SWIPE_THRESHOLD_PX = 56;
+  let pointerDragState = null;
 
   const syncCarouselHeight = () => {
     const previousHeight = grid.style.height;
@@ -470,6 +472,76 @@ const isElementInViewport = (element) => {
     }, TRANSITION_DURATION_MS);
   };
 
+  const cleanupPointerDrag = () => {
+    pointerDragState = null;
+    grid.classList.remove("is-dragging");
+  };
+
+  const onPointerDown = (event) => {
+    if (isTransitioning) return;
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+
+    pointerDragState = {
+      id: event.pointerId,
+      startX: event.clientX,
+      deltaX: 0,
+    };
+    grid.classList.add("is-dragging");
+
+    if (typeof grid.setPointerCapture === "function") {
+      try {
+        grid.setPointerCapture(event.pointerId);
+      } catch {
+        // no-op
+      }
+    }
+  };
+
+  const onPointerMove = (event) => {
+    if (!pointerDragState) return;
+    if (event.pointerId !== pointerDragState.id) return;
+    pointerDragState.deltaX = event.clientX - pointerDragState.startX;
+  };
+
+  const onPointerUp = (event) => {
+    if (!pointerDragState) return;
+    if (event.pointerId !== pointerDragState.id) return;
+
+    const traveledX = pointerDragState.deltaX;
+    cleanupPointerDrag();
+
+    if (typeof grid.releasePointerCapture === "function") {
+      try {
+        grid.releasePointerCapture(event.pointerId);
+      } catch {
+        // no-op
+      }
+    }
+
+    if (Math.abs(traveledX) < DRAG_SWIPE_THRESHOLD_PX) return;
+
+    if (traveledX < 0) {
+      goTo(currentIndex + 1);
+      return;
+    }
+
+    goTo(currentIndex - 1);
+  };
+
+  const onPointerCancel = (event) => {
+    if (!pointerDragState) return;
+    if (event.pointerId !== pointerDragState.id) return;
+    cleanupPointerDrag();
+
+    if (typeof grid.releasePointerCapture === "function") {
+      try {
+        grid.releasePointerCapture(event.pointerId);
+      } catch {
+        // no-op
+      }
+    }
+  };
+
   prevButton?.addEventListener("click", () => {
     goTo(currentIndex - 1);
   });
@@ -485,6 +557,11 @@ const isElementInViewport = (element) => {
       });
     });
   }
+
+  grid.addEventListener("pointerdown", onPointerDown);
+  grid.addEventListener("pointermove", onPointerMove);
+  grid.addEventListener("pointerup", onPointerUp);
+  grid.addEventListener("pointercancel", onPointerCancel);
 
   sectionTwo.addEventListener("keydown", (event) => {
     if (event.key === "ArrowLeft") {
