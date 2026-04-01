@@ -1,6 +1,20 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-T6W62FCN");
+    </script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Izybiz</title>
@@ -10,7 +24,7 @@
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75,200..800&family=Didact+Gothic&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" href="./assets/favicon.png" type="image/png" />
+    <link rel="icon" href="./assets/fav-icon.png" type="image/png" />
     <link rel="stylesheet" href="./style.css?v=20260323-7" />
   </head>
   <body class="intro-stage-1" id="top">
@@ -27,10 +41,26 @@
             <a class="site-nav__link" href="#we-do">We create</a>
             <span class="site-nav__divider" aria-hidden="true"></span>
             <a class="site-nav__link" href="#faq">We answer</a>
-            <span class="site-nav__divider" aria-hidden="true"></span>
-            <a class="site-nav__link" href="#contact">We chat</a>
           </span>
         </nav>
+        <div class="site-nav__actions" aria-label="Primary actions">
+          <button
+            class="site-nav__button site-nav__button--book"
+            type="button"
+            data-demo-modal-open
+          >
+            Book a call
+          </button>
+          <a
+            class="site-nav__button site-nav__button--linkedin"
+            href="https://www.linkedin.com/company/izybiz/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open the IZYBIZ LinkedIn page in a new tab"
+          >
+            Send a Linkedin message
+          </a>
+        </div>
 
         <button
           class="site-nav__toggle"
@@ -48,7 +78,18 @@
         <a class="site-nav__menu-link" href="#we-deliver">We deliver</a>
         <a class="site-nav__menu-link" href="#we-do">We create</a>
         <a class="site-nav__menu-link" href="#faq">We answer</a>
-        <a class="site-nav__menu-link" href="#contact">We chat</a>
+        <button class="site-nav__menu-link" type="button" data-demo-modal-open>
+          Book a call
+        </button>
+        <a
+          class="site-nav__menu-link"
+          href="https://www.linkedin.com/company/izybiz/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open the IZYBIZ LinkedIn page in a new tab"
+        >
+          Send a Linkedin message
+        </a>
       </div>
     </header>
 
@@ -74,19 +115,27 @@
             </p>
           </div>
 
-          <button
-            class="hero-izybiz__button"
-            type="button"
-            data-demo-modal-open
-          >
-            Book a call
-          </button>
+          <div class="hero-izybiz__actions">
+            <button
+              class="hero-izybiz__button"
+              type="button"
+              data-demo-modal-open
+            >
+              Book a call
+            </button>
+            <a
+              class="hero-izybiz__button hero-izybiz__button--secondary"
+              href="https://www.linkedin.com/company/izybiz/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open the IZYBIZ LinkedIn page in a new tab"
+            >
+              Send a Linkedin message
+            </a>
+          </div>
         </div>
 
-        <section
-          class="hero-metrics"
-          aria-label="Key performance highlights"
-        >
+        <section class="hero-metrics" aria-label="Key performance highlights">
           <article class="hero-metrics__item">
             <h2 class="hero-metrics__title">No Headcount bloat</h2>
             <p class="hero-metrics__description">
@@ -107,6 +156,13 @@
               Invest once.<br />AI multiplies what they know
             </p>
           </article>
+        </section>
+
+        <section class="hero-video" aria-label="Izybiz showcase video">
+          <video class="hero-video__media" controls preload="metadata">
+            <source src="./assets/Anim-Izybiz-V2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </section>
 
         <section
@@ -253,24 +309,49 @@
       <section class="section-two" id="we-do" aria-label="Case studies">
         <div class="section-two__inner">
           <header class="section-two__intro">
-            <h2 class="section-two__title" id="case-studies-heading">Our use cases</h2>
-            <div class="section-two__topbar" aria-label="Case studies navigation">
+            <h2 class="section-two__title" id="case-studies-heading">
+              Our use cases
+            </h2>
+            <div
+              class="section-two__topbar"
+              aria-label="Case studies navigation"
+            >
               <div
                 class="section-two__tabs"
                 role="tablist"
                 aria-label="Case studies tabs"
                 data-case-tablist
               >
-                <button class="section-two__tab is-active" type="button" role="tab" data-case-tab>
+                <button
+                  class="section-two__tab is-active"
+                  type="button"
+                  role="tab"
+                  data-case-tab
+                >
                   Telecom &amp; Fintech · Africa
                 </button>
-                <button class="section-two__tab" type="button" role="tab" data-case-tab>
+                <button
+                  class="section-two__tab"
+                  type="button"
+                  role="tab"
+                  data-case-tab
+                >
                   Community Marketplace · Africa
                 </button>
-                <button class="section-two__tab" type="button" role="tab" data-case-tab>
+                <button
+                  class="section-two__tab"
+                  type="button"
+                  role="tab"
+                  data-case-tab
+                >
                   Community Cooking · Europe
                 </button>
-                <button class="section-two__tab" type="button" role="tab" data-case-tab>
+                <button
+                  class="section-two__tab"
+                  type="button"
+                  role="tab"
+                  data-case-tab
+                >
                   Agentic Delivery · France
                 </button>
               </div>
@@ -635,33 +716,15 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      IZYBIZ is a two-person team: a seasoned operator with
-                      20+ years across Telco, Banking, BPO, SaaS, and
-                      e-commerce, paired with a UX designer who brings fresh
-                      eyes and user-first thinking.
+                      IZYBIZ is a two-person team: a seasoned operator with 20+
+                      years across Telco, Banking, BPO, SaaS, and e-commerce,
+                      paired with a UX designer who brings fresh eyes and
+                      user-first thinking.
                     </p>
                   </div>
                 </div>
               </div>
             </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section-contact" id="contact" aria-label="We chat?">
-        <div class="section-contact__inner">
-          <header class="section-contact__intro">
-            <h2 class="section-contact__title">We chat?</h2>
-            <p class="section-contact__subtitle">
-              Tell us what you’re building. We’ll reply fast with a concrete
-              next step.
-            </p>
-          </header>
-
-          <div class="section-contact__actions">
-            <a class="section-contact__cta" href="#contact" data-demo-modal-open
-              >Email us</a
-            >
           </div>
         </div>
       </section>
@@ -696,15 +759,9 @@
             </div>
 
             <nav class="site-footer__nav" aria-label="Footer navigation">
-              <a class="site-footer__nav-link" href="#we-deliver"
-                >We deliver</a
-              >
-              <a class="site-footer__nav-link" href="#we-do"
-                >We create</a
-              >
-              <a class="site-footer__nav-link" href="#faq"
-                >We answer</a
-              >
+              <a class="site-footer__nav-link" href="#we-deliver">We deliver</a>
+              <a class="site-footer__nav-link" href="#we-do">We create</a>
+              <a class="site-footer__nav-link" href="#faq">We answer</a>
             </nav>
           </div>
         </div>

@@ -108,7 +108,9 @@ const isElementInViewport = (element) => {
 (() => {
   whenTitleAnimationDone(() => {
     const subtitle = document.querySelector(".hero-izybiz__subtitle");
-    const button = document.querySelector(".hero-izybiz__button");
+    const heroButtons = Array.from(
+      document.querySelectorAll(".hero-izybiz__actions .hero-izybiz__button"),
+    );
     const body = document.body;
     const prefersReducedMotion = window.matchMedia?.(
       "(prefers-reduced-motion: reduce)",
@@ -118,9 +120,9 @@ const isElementInViewport = (element) => {
       subtitle.classList.add("hero-izybiz__subtitle--visible");
     }
 
-    if (button) {
+    heroButtons.forEach((button) => {
       button.classList.add("hero-izybiz__button--visible");
-    }
+    });
 
     if (prefersReducedMotion) {
       body?.classList.remove("intro-stage-1");
