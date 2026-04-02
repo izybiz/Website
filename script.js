@@ -150,7 +150,8 @@ const isElementInViewport = (element) => {
       "(prefers-reduced-motion: reduce)",
     )?.matches;
 
-    const easeOutCubic = (t) => 1 - (1 - t) ** 3;
+    const easeInOutCubic = (t) =>
+      t < 0.5 ? 4 * t ** 3 : 1 - ((-2 * t + 2) ** 3) / 2;
 
     const setMetricValue = (el, value) => {
       el.textContent = `${value}%`;
@@ -158,6 +159,8 @@ const isElementInViewport = (element) => {
 
     const animateCountUp = (el, target, duration) => {
       let startTime = null;
+      const STEP = 10;
+      const lastTen = Math.floor(target / STEP) * STEP;
 
       const step = (timestamp) => {
         if (startTime === null) {
@@ -166,8 +169,14 @@ const isElementInViewport = (element) => {
 
         const elapsed = timestamp - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        const easedProgress = easeOutCubic(progress);
-        const nextValue = Math.round(target * easedProgress);
+        const easedProgress = easeInOutCubic(progress);
+        const rawValue = target * easedProgress;
+        const steppedValue = Math.floor(rawValue / STEP) * STEP;
+
+        let nextValue = Math.min(steppedValue, target);
+        if (lastTen < target && rawValue >= lastTen) {
+          nextValue = Math.min(Math.floor(rawValue), target);
+        }
 
         setMetricValue(el, nextValue);
 
@@ -202,12 +211,9 @@ const isElementInViewport = (element) => {
       if (hasAnimated) return;
       hasAnimated = true;
 
-      metricData.forEach(({ el, target }, idx) => {
-        const staggerDelay = idx * 120;
-        const duration = 1200 + idx * 180;
-        window.setTimeout(() => {
-          animateCountUp(el, target, duration);
-        }, staggerDelay);
+      const duration = 1900;
+      metricData.forEach(({ el, target }) => {
+        animateCountUp(el, target, duration);
       });
     };
 
