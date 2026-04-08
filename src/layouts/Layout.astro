@@ -70,9 +70,18 @@ const localizedAlt = {
   <body class="intro-stage-1" id="top">
     <header class="site-header" aria-label="Site header">
       <div class="site-header__pill">
-        <a class="site-header__brand" href={getLocalizedPath("home", lang)} aria-label="Go to top">
-          <img src="/assets/Logo Izybiz.png" alt="IZYBIZ" />
-        </a>
+        <div class="site-header__identity">
+          <a class="site-header__brand" href={getLocalizedPath("home", lang)} aria-label="Go to top">
+            <img src="/assets/Logo Izybiz.png" alt="IZYBIZ" />
+          </a>
+          <div class="site-nav__lang" aria-label="Language switcher">
+            <a href={mapPathToLang(Astro.url.pathname, "fr")} aria-current={lang === "fr" ? "true" : undefined}>FR</a>
+            <span class="site-nav__lang-separator" aria-hidden="true">/</span>
+            <a href={mapPathToLang(Astro.url.pathname, "en")} aria-current={lang === "en" ? "true" : undefined}>EN</a>
+            <span class="site-nav__lang-separator" aria-hidden="true">/</span>
+            <a href={mapPathToLang(Astro.url.pathname, "es")} aria-current={lang === "es" ? "true" : undefined}>ES</a>
+          </div>
+        </div>
 
         <nav class="site-nav" aria-label="Primary">
           <span class="site-nav__links-group">
@@ -97,13 +106,6 @@ const localizedAlt = {
           >
             {t("cta.linkedin")}
           </a>
-          <div class="site-nav__lang" aria-label="Language switcher">
-            <a href={mapPathToLang(Astro.url.pathname, "fr")} aria-current={lang === "fr" ? "true" : undefined}>FR</a>
-            |
-            <a href={mapPathToLang(Astro.url.pathname, "en")} aria-current={lang === "en" ? "true" : undefined}>EN</a>
-            |
-            <a href={mapPathToLang(Astro.url.pathname, "es")} aria-current={lang === "es" ? "true" : undefined}>ES</a>
-          </div>
         </div>
 
         <button
