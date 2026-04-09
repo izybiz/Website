@@ -1,7 +1,7 @@
 ---
 title: "Échec projet IA en entreprise: les 5 vraies causes"
 description: "95% des projets IA échouent. 84% à cause du management, pas de la technologie. Découvrez les causes réelles et une méthode pour atterrir dans les 5%."
-pubDate: 2026-01-01
+pubDate: 2026-04-08
 lang: "fr"
 translationKey: "2026-04-08"
 ---
