@@ -9,7 +9,7 @@ El 95% de los proyectos GenAI en empresa fracasan. El 84% por culpa del manageme
 
 No es un problema de herramienta. Es un problema de gobernanza, de encuadre de los casos de uso y de capacidad para sostener la ejecución hasta la producción. Es precisamente ahí donde interviene Izybiz.
 
-**[Hablar de su situación →](/es/contacto)**
+**[Hablar de su situación](/es/contacto)**
 
 ---
 
@@ -149,7 +149,7 @@ Un intercambio de 30 minutos es suficiente para clarificar si su situación requ
 
 Sin argumentario. Sin demo. Una conversación entre directivos.
 
-**[Reservar una llamada →](/es/contacto)**
+**[Reservar una llamada](/es/contacto)**
 
 ---
 

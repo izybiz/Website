@@ -9,7 +9,7 @@ Rapid growth creates operational disorder. It always does. The processes that wo
 
 Getting scale-up operations right means putting the fundamentals in place before they break — not after.
 
-**[Book a call →](/contact)**
+**[Book a call](/contact)**
 
 ---
 
@@ -107,7 +107,7 @@ If your processes cannot handle the increase in volume, the question is not whet
 
 A 30-minute call to assess whether your situation calls for scale-up operations work and whether Izybiz is the right profile to execute it.
 
-**[Book a call →](/contact)**
+**[Book a call](/contact)**
 
 ---
 

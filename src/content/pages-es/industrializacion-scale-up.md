@@ -9,7 +9,7 @@ El crecimiento rápido desorganiza. Es mecánico. Los procesos que funcionaban c
 
 La industrialización scale-up consiste en implementar los fundamentos antes de que se rompan — no después.
 
-**[Reservar una llamada →](/contacto)**
+**[Reservar una llamada →](/es/contacto)**
 
 ---
 
@@ -107,7 +107,7 @@ Si sus procesos no aguantan la presión del crecimiento, la pregunta no es si va
 
 Una llamada de 30 minutos para ver si su situación requiere una industrialización scale-up y si Izybiz es el perfil adecuado para ejecutarla.
 
-**[Reservar una llamada →](/contacto)**
+**[Reservar una llamada →](/es/contacto)**
 
 ---
 

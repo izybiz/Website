@@ -1,6 +1,6 @@
 ---
 title: "Stéphane — Interim Management Consultant | Izybiz"
-description: "30 years of operational leadership in tech. Interim management consultant for mid-market companies and scale-ups — Software, Retail, Telco. Get in touch."
+description: "30 years of operational leadership in tech. Interim management consultant for mid-market companies and scale-ups — Software, Retail, Telco."
 lang: "en"
 slug: "about"
 ---
@@ -81,7 +81,7 @@ A situation can't be summed up in a few lines. Book a 30-minute call — no pitc
 
 In 30 minutes, we'll clarify whether your situation calls for interim management and whether Izybiz is the right fit.
 
-**[Book a call →](/contact)**
+**[Book a call](/contact)**
 
 You can also find me on [LinkedIn](https://www.linkedin.com/in/sdine/) to check the track record before reaching out.
 

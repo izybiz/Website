@@ -9,7 +9,7 @@ Beaucoup de dirigeants ont des données. Peu ont de la visibilité. Le reporting
 
 Le pilotage de la performance, c'est mettre en place les indicateurs et les outils qui vous permettent de diriger avec des faits, pas des impressions.
 
-**[Prendre contact →](/contact)**
+**[Prendre contact](/contact)**
 
 ---
 
@@ -104,7 +104,7 @@ Oui. Si la situation l'exige, on peut commencer par un périmètre restreint —
 
 Un échange de 30 minutes pour voir si votre situation appelle un travail sur le pilotage de la performance et si Izybiz est le bon profil pour l'exécuter.
 
-**[Prendre contact →](/contact)**
+**[Prendre contact](/contact)**
 
 ---
 

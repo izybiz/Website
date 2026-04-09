@@ -9,7 +9,7 @@ La croissance rapide désorganise. C'est mécanique. Les process qui fonctionnai
 
 L'industrialisation scale-up, c'est mettre en place les fondamentaux avant qu'ils ne cassent — pas après.
 
-**[Réserver un échange →](/contact)**
+**[Réserver un échange](/contact)**
 
 ---
 
@@ -107,7 +107,7 @@ Si vos process ne tiennent pas la montée en charge, la question n'est pas si ç
 
 Un échange de 30 minutes pour voir si votre situation appelle une industrialisation scale-up et si Izybiz est le bon profil pour l'exécuter.
 
-**[Réserver un échange →](/contact)**
+**[Réserver un échange](/contact)**
 
 ---
 

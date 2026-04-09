@@ -9,7 +9,7 @@ const posts = (await getCollection("blog-es")).sort((a, b) => b.data.pubDate.val
 ---
 
 <Layout lang={lang} title="Blog — Izybiz" description={t("blog.subtitle")} includeGlobalScript={true}>
-  <main>
+  <main class="blog-page">
     <div class="blog-index">
       <header class="blog-index__header">
         <h1 class="blog-index__title">Experiencia de campo. No teoría.</h1>
@@ -23,9 +23,11 @@ const posts = (await getCollection("blog-es")).sort((a, b) => b.data.pubDate.val
             <li class="blog-card">
               <a class="blog-card__link" href={`/es/blog/${slug}`}>
                 <time class="blog-card__date" datetime={post.data.pubDate.toISOString()}>{date}</time>
-                <h2 class="blog-card__title">{post.data.title}</h2>
-                <p class="blog-card__description">{post.data.description}</p>
-                <span class="blog-card__cta">{t("blog.readmore")} →</span>
+                <div class="blog-card__content">
+                  <h2 class="blog-card__title">{post.data.title}</h2>
+                  <p class="blog-card__description">{post.data.description}</p>
+                </div>
+                <span class="blog-card__cta">{t("blog.readmore")}</span>
               </a>
             </li>
           );

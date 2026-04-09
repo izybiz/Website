@@ -8,21 +8,28 @@ export async function getStaticPaths() {
   const esPosts = await getCollection("blog-es");
   return posts.map((post) => ({
     params: { slug: post.id.replace(/\.md$/, "") },
-    props: { post, frPosts, esPosts },
+    props: { post, frPosts, esPosts, posts },
   }));
 }
 
-const { post, frPosts, esPosts } = Astro.props;
+const { post, frPosts, esPosts, posts } = Astro.props;
 const { Content } = await render(post);
 const lang = "en";
 const pubDate = post.data.pubDate.toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" });
+const currentSlug = post.id.replace(/\.md$/, "");
+const sortedPosts = [...posts].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const currentPostIndex = sortedPosts.findIndex((item) => item.id === post.id);
+const newerPost = currentPostIndex > 0 ? sortedPosts[currentPostIndex - 1] : null;
+const olderPost = currentPostIndex < sortedPosts.length - 1 ? sortedPosts[currentPostIndex + 1] : null;
+const newerPath = newerPost ? `/en/blog/${newerPost.id.replace(/\.md$/, "")}` : null;
+const olderPath = olderPost ? `/en/blog/${olderPost.id.replace(/\.md$/, "")}` : null;
 
 const tk = post.data.translationKey;
 const frPost = frPosts.find((p) => p.data.translationKey === tk);
 const esPost = esPosts.find((p) => p.data.translationKey === tk);
 const frPath = frPost ? `/blog/${frPost.id.replace(/\.md$/, "")}` : "/blog";
 const esPath = esPost ? `/es/blog/${esPost.id.replace(/\.md$/, "")}` : "/es/blog";
-const currentPath = `/en/blog/${post.id.replace(/\.md$/, "")}`;
+const currentPath = `/en/blog/${currentSlug}`;
 ---
 
 <Layout
@@ -35,6 +42,20 @@ const currentPath = `/en/blog/${post.id.replace(/\.md$/, "")}`;
   alternates={{ fr: frPath, en: currentPath, es: esPath }}
 >
   <main>
+    <div class="article-page-shell">
+      <nav class="article-page__arrow-nav" aria-label="Article navigation">
+        {newerPath ? (
+          <a class="article-page__arrow-button" href={newerPath} aria-label="Go to newer article">←</a>
+        ) : (
+          <span class="article-page__arrow-spacer" aria-hidden="true"></span>
+        )}
+        {olderPath ? (
+          <a class="article-page__arrow-button" href={olderPath} aria-label="Go to older article">→</a>
+        ) : (
+          <span class="article-page__arrow-spacer" aria-hidden="true"></span>
+        )}
+      </nav>
+    </div>
     <article class="article-page">
       <h1 class="article-page__title">{post.data.title}</h1>
       <p class="article-page__description">{post.data.description}</p>
@@ -45,3 +66,57 @@ const currentPath = `/en/blog/${post.id.replace(/\.md$/, "")}`;
     </article>
   </main>
 </Layout>
+
+<style>
+  .article-page-shell {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-inline: clamp(16px, 3vw, 28px);
+  }
+
+  .article-page__arrow-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 44px 0 14px;
+  }
+
+  .article-page__arrow-button,
+  .article-page__arrow-spacer {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+  }
+
+  .article-page__arrow-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    color: #000000;
+    border: 0;
+    text-decoration: none;
+    font-size: 22px;
+    line-height: 1;
+    transition:
+      transform 160ms ease,
+      background-color 160ms ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .article-page__arrow-button:hover {
+      background: #f5f5f5;
+      transform: translateY(-1px);
+    }
+  }
+
+  .article-page__arrow-button:focus-visible {
+    outline: 2px solid #000000;
+    outline-offset: 3px;
+  }
+
+  .article-page__arrow-button:active {
+    transform: translateY(0);
+  }
+</style>

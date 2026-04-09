@@ -1,6 +1,6 @@
 ---
 title: "Stéphane — Manager de Transición Tech & IA | Izybiz"
-description: "30 años de dirección operacional en tech. Manager de transición experto para empresas medianas y scale-ups — Software, Retail, Telco. Reserva una llamada."
+description: "30 años de dirección operacional en tech. Manager de transición experto para empresas medianas y scale-ups — Software, Retail, Telco."
 lang: "es"
 slug: "sobre-izybiz"
 ---
@@ -19,7 +19,7 @@ Cuando contratas a Izybiz, tienes delante a alguien que ya ha gestionado lo que 
 
 ---
 
-## Por qué Izybiz
+## ¿Por qué Izybiz?
 
 Empecé en la hostelería de lujo. A finales de los 90, intenté convencer a mi director general de que internet podía convertirse en un canal de comunicación para el hotel. Su respuesta, textualmente: no quería implantar el correo electrónico para que las secretarias se mandaran mensajes todo el día, y no creía ni por un momento que la tecnología pudiera ayudarle en su relación con los clientes.
 
@@ -51,7 +51,7 @@ Ambas competencias raramente se encuentran en la misma persona. Ese es el difere
 
 ---
 
-## Cómo trabajo
+## ¿Cómo trabajo?
 
 Cada misión comienza con un encuadre riguroso: objetivos, restricciones, KPIs de misión. Sin arrancar en vacío.
 
@@ -81,7 +81,7 @@ Una situación no se describe en unas pocas líneas. Reserva una llamada de 30 m
 
 En 30 minutos aclaramos si tu situación requiere un management de transición y si Izybiz es el perfil adecuado para responder a ello.
 
-**[Reservar una llamada →](/es/contacto)**
+**[Reservar una llamada](/es/contacto)**
 
 También puedes encontrarme en [LinkedIn](https://www.linkedin.com/in/sdine/) para revisar la trayectoria antes de contactar.
 

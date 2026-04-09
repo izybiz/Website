@@ -9,7 +9,7 @@ No un consultor que vuelve a final de mes con una presentación. Un directivo qu
 
 El management de transición es la respuesta a las situaciones donde necesita un nivel de seniority que no tiene internamente — y donde no puede permitirse esperar 6 meses para contratar.
 
-**[Hablar de su situación →](/es/contacto)**
+**[Hablar de su situación](/es/contacto)**
 
 ---
 
@@ -120,7 +120,7 @@ Una situación no se describe en pocas líneas. Reserve un intercambio de 30 min
 
 En 30 minutos, clarificamos si su situación requiere un management de transición y si Izybiz es el perfil adecuado para responder a ella.
 
-**[Reservar una llamada →](/es/contacto)**
+**[Reservar una llamada](/es/contacto)**
 
 *Disponibilidad en pocas semanas. Resultados medibles desde el día 30.*
 

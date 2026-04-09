@@ -157,7 +157,7 @@ const localizedAlt = {
         </nav>
 
         <div class="site-nav__actions" aria-label="Primary actions">
-          <button class="site-nav__button site-nav__button--book" type="button" data-demo-modal-open aria-label={t("cta.book")}>
+          <a class="site-nav__button site-nav__button--book" href={getLocalizedPath("contact", lang)} aria-label={t("cta.book")}>
             <!-- Calendar icon -->
             <svg class="site-nav__icon" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
               <rect x="2" y="3.5" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/>
@@ -168,7 +168,7 @@ const localizedAlt = {
               <circle cx="12" cy="11" r="1" fill="currentColor"/>
             </svg>
             <span class="site-nav__button-label">{t("cta.book")}</span>
-          </button>
+          </a>
           <a
             class="site-nav__button site-nav__button--linkedin"
             href="https://www.linkedin.com/company/izybiz/"
@@ -203,7 +203,7 @@ const localizedAlt = {
         <a class="site-nav__menu-link" href={getLocalizedPath("about", lang)}>{t("nav.about")}</a>
         <a class="site-nav__menu-link" href={getLocalizedPath("services", lang)}>{t("nav.services")}</a>
         <a class="site-nav__menu-link" href={getLocalizedPath("blog", lang)}>{t("nav.blog")}</a>
-        <button class="site-nav__menu-link" type="button" data-demo-modal-open>{t("cta.book")}</button>
+        <a class="site-nav__menu-link" href={getLocalizedPath("contact", lang)}>{t("cta.book")}</a>
         <a
           class="site-nav__menu-link"
           href="https://www.linkedin.com/company/izybiz/"

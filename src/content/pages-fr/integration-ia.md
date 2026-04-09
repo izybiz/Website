@@ -9,7 +9,7 @@ slug: "integration-ia"
 
 Ce n'est pas un problème d'outil. C'est un problème de gouvernance, de framing des use cases et de capacité à tenir l'exécution jusqu'à la production. C'est précisément là qu'Izybiz intervient.
 
-**[Discuter de votre situation →](/contact)**
+**[Discuter de votre situation](/contact)**
 
 ---
 
@@ -150,7 +150,7 @@ Un échange de 30 minutes suffit pour clarifier si votre situation appelle une i
 
 Pas de pitch. Pas de démo. Une conversation entre dirigeants.
 
-**[Réserver un échange →](/contact)**
+**[Réserver un échange](/contact)**
 
 ---
 

@@ -9,7 +9,7 @@ Muchos directivos tienen datos. Pocos tienen visibilidad. El reporting consume t
 
 La gestión del rendimiento empresarial consiste en implementar los indicadores y las herramientas que le permiten dirigir con hechos, no con intuiciones.
 
-**[Ponerse en contacto →](/contacto)**
+**[Ponerse en contacto →](/es/contacto)**
 
 ---
 
@@ -104,7 +104,7 @@ Sí. Si la situación lo exige, se puede empezar por un alcance reducido — la 
 
 Una llamada de 30 minutos para ver si su situación requiere un trabajo sobre la gestión del rendimiento empresarial y si Izybiz es el perfil adecuado para ejecutarlo.
 
-**[Ponerse en contacto →](/contacto)**
+**[Ponerse en contacto →](/es/contacto)**
 
 ---
 

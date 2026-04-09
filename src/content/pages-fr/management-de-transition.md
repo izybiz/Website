@@ -9,7 +9,7 @@ Pas un consultant qui revient en fin de mois avec un deck. Un dirigeant qui pren
 
 Le management de transition, c'est la réponse aux situations où vous avez besoin d'un niveau de séniorité que vous n'avez pas en interne — et où vous ne pouvez pas vous permettre d'attendre 6 mois pour recruter.
 
-**[Discuter de votre situation →](/contact)**
+**[Discuter de votre situation](/contact)**
 
 ---
 
@@ -120,7 +120,7 @@ Une situation ne se décrit pas en quelques lignes. Réservez un échange de 30 
 
 En 30 minutes, nous clarifions si votre situation appelle un management de transition et si Izybiz est le bon profil pour y répondre.
 
-**[Réserver un échange →](/contact)**
+**[Réserver un échange](/contact)**
 
 *Disponibilité sous quelques semaines. Résultats mesurables dès J30.*
 

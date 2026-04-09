@@ -506,7 +506,7 @@ input[type="reset"] {
 .hero-izybiz__text {
   width: 100%;
   --hero-title-size: var(--hero-h1-size);
-  --hero-subtitle-size: calc(var(--hero-title-size) * 0.38);
+  --hero-subtitle-size: calc(var(--hero-title-size) * 0.36);
   --hero-title-subtitle-gap: 24px;
   display: flex;
   flex-direction: column;
@@ -2912,11 +2912,14 @@ h2:not(.we-deliver__title):not(.hero-metrics__title) {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 28px;
 }
 
 .services-card {
-  background: #ffffff;
+  background: var(--services-card-bg, #ffffff);
+  --services-tag-bg: rgba(15, 23, 42, 0.05);
+  --services-tag-color: rgba(15, 23, 42, 0.5);
+  position: relative;
   border-radius: 16px;
   padding: clamp(24px, 3vw, 36px);
   display: flex;
@@ -2927,11 +2930,53 @@ h2:not(.we-deliver__title):not(.hero-metrics__title) {
 }
 
 .services-card:hover {
-  background: #f0e8dc;
+  transform: translateY(-1px);
+}
+
+.services-card__hitbox {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+}
+
+.services-card__hitbox:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 4px;
+}
+
+.services-list > .services-card:nth-child(1) {
+  --services-card-bg: rgb(245, 194, 27);
+  --services-tag-bg: #ffffff;
+  --services-tag-color: #000000;
+}
+
+.services-list > .services-card:nth-child(2) {
+  --services-card-bg: rgb(185, 221, 253);
+  --services-tag-bg: #ffffff;
+  --services-tag-color: #000000;
+}
+
+.services-list > .services-card:nth-child(3) {
+  --services-card-bg: rgb(255, 106, 61);
+  --services-tag-bg: #ffffff;
+  --services-tag-color: #000000;
+}
+
+.services-list > .services-card:nth-child(4) {
+  --services-card-bg: #ffffff;
+}
+
+.services-list > .services-card:nth-child(5) {
+  --services-card-bg: rgb(245, 194, 27);
+  --services-tag-bg: #ffffff;
+  --services-tag-color: #000000;
 }
 
 .services-card__content {
   flex: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .services-card__title {
@@ -2962,10 +3007,18 @@ h2:not(.we-deliver__title):not(.hero-metrics__title) {
 .services-card__tag {
   font-family: "Didact Gothic", sans-serif;
   font-size: 12px;
-  color: rgba(15, 23, 42, 0.5);
-  background: rgba(15, 23, 42, 0.05);
+  color: var(--services-tag-color);
+  background: var(--services-tag-bg);
   padding: 3px 10px;
   border-radius: 100px;
+}
+
+.services-list > .services-card:nth-child(1) .services-card__tag,
+.services-list > .services-card:nth-child(2) .services-card__tag,
+.services-list > .services-card:nth-child(3) .services-card__tag,
+.services-list > .services-card:nth-child(5) .services-card__tag {
+  background: #ffffff !important;
+  color: #000000 !important;
 }
 
 .services-card__link {
@@ -2986,6 +3039,10 @@ h2:not(.we-deliver__title):not(.hero-metrics__title) {
   gap: 10px;
 }
 
+.services-page .services-card {
+  justify-content: flex-start;
+}
+
 .services-page__cta {
   margin-top: clamp(48px, 6vw, 72px);
   padding-top: 32px;
@@ -3004,15 +3061,42 @@ h2:not(.we-deliver__title):not(.hero-metrics__title) {
 }
 
 .services-page__cta-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 400px;
+  padding: 16px 32px;
+  background: #d9d8ff;
   font-family: "Didact Gothic", sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
-  color: #ff6a3d;
+  line-height: 16px;
+  letter-spacing: 0;
+  color: #000000;
   text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.services-page__cta-link:hover {
-  text-decoration: underline;
+@media (hover: hover) and (pointer: fine) {
+  .services-page__cta-link:hover {
+    background: #cdcbff;
+    color: #000000;
+    transform: translateY(-2px) scale(1.04);
+  }
+}
+
+.services-page__cta-link:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 4px;
+}
+
+.services-page__cta-link:active {
+  transform: translateY(0) scale(1.01);
 }
 
 @media (max-width: 600px) {
@@ -3024,9 +3108,13 @@ h2:not(.we-deliver__title):not(.hero-metrics__title) {
 
 /* ─── Blog index ─────────────────────────────────────────────────────────── */
 
+.blog-page {
+  background: #ffffff;
+}
+
 .blog-index {
   width: 100%;
-  max-width: 760px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 40px) clamp(60px, 8vw, 120px);
 }
@@ -3055,27 +3143,44 @@ h2:not(.we-deliver__title):not(.hero-metrics__title) {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .blog-card {
-  border-top: 1px solid rgba(15, 23, 42, 0.1);
-}
-
-.blog-card:last-child {
-  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+  min-height: 420px;
 }
 
 .blog-card__link {
-  display: block;
-  padding: clamp(20px, 3vw, 32px) 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+  border: 1px solid #000000;
+  border-radius: 12px;
+  background: #ffffff;
   text-decoration: none;
-  transition: padding-left 160ms ease;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .blog-card__link:hover {
-  padding-left: 8px;
+  background: #fbf2e6;
+  border: none;
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+.blog-card__link:hover .blog-card__cta {
+  transform: translateY(-1px);
+  background: #fafafa;
+}
+
+.blog-card__content {
+  flex: 1;
 }
 
 .blog-card__date {
@@ -3084,13 +3189,13 @@ h2:not(.we-deliver__title):not(.hero-metrics__title) {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: rgba(15, 23, 42, 0.4);
+  color: rgb(255, 106, 61);
   margin-bottom: 8px;
 }
 
 .blog-card__title {
   font-family: "Bricolage Grotesque", sans-serif;
-  font-size: clamp(17px, 2vw, 21px);
+  font-size: clamp(22px, 2.6vw, 30px);
   font-weight: 700;
   color: #0f172a;
   margin: 0 0 8px;
@@ -3102,23 +3207,80 @@ h2:not(.we-deliver__title):not(.hero-metrics__title) {
   font-size: clamp(14px, 1.4vw, 15px);
   line-height: 1.6;
   color: rgba(15, 23, 42, 0.6);
-  margin: 0 0 12px;
+  margin: 0;
+  display: -webkit-box;
+  line-clamp: 4;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .blog-card__cta {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-top: 24px;
+  border: 1px solid #d9d8ff;
+  background: #ffffff;
+  color: #000000;
+  text-decoration: none;
   font-family: "Didact Gothic", sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
-  color: #ff6a3d;
+  line-height: 1;
+  padding: 12px 20px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease;
+}
+
+.blog-card__link:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 4px;
+}
+
+.blog-card__link:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 1024px) {
+  .blog-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .blog-list {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-card {
+    min-height: 360px;
+  }
 }
 
 /* ─── Blog article layout ─────────────────────────────────────────────────── */
 
 .article-page {
   width: 100%;
-  max-width: 720px;
+  max-width: 860px;
   margin: 0 auto;
   padding: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 40px) clamp(60px, 8vw, 120px);
+}
+
+@media (max-width: 1024px) {
+  .article-page {
+    max-width: 780px;
+    padding-inline: clamp(20px, 5vw, 32px);
+  }
+}
+
+@media (max-width: 768px) {
+  .article-page {
+    max-width: 100%;
+    padding-inline: clamp(16px, 6vw, 24px);
+  }
 }
 
 .article-page__title {
@@ -3196,6 +3358,82 @@ h2:not(.we-deliver__title):not(.hero-metrics__title) {
 
 .article-page__body a:hover {
   color: #e0522a;
+}
+
+.article-page__body a[href="/contact"],
+.article-page__body a[href="/contact/"],
+.article-page__body a[href="/contacto"],
+.article-page__body a[href="/contacto/"],
+.article-page__body a[href="/en/contact"],
+.article-page__body a[href="/en/contact/"],
+.article-page__body a[href="/es/contacto"],
+.article-page__body a[href="/es/contacto/"],
+.article-page__body a[href="https://izybiz.fr/contact"],
+.article-page__body a[href="https://izybiz.fr/contact/"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 400px;
+  padding: 16px 32px;
+  background: #d9d8ff;
+  color: #000000;
+  text-decoration: none;
+  font-family: "Didact Gothic", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0;
+  cursor: pointer;
+  transition:
+    background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .article-page__body a[href="/contact"]:hover,
+  .article-page__body a[href="/contact/"]:hover,
+  .article-page__body a[href="/contacto"]:hover,
+  .article-page__body a[href="/contacto/"]:hover,
+  .article-page__body a[href="/en/contact"]:hover,
+  .article-page__body a[href="/en/contact/"]:hover,
+  .article-page__body a[href="/es/contacto"]:hover,
+  .article-page__body a[href="/es/contacto/"]:hover,
+  .article-page__body a[href="https://izybiz.fr/contact"]:hover,
+  .article-page__body a[href="https://izybiz.fr/contact/"]:hover {
+    background: #cdcbff;
+    color: #000000;
+    transform: translateY(-2px) scale(1.04);
+  }
+}
+
+.article-page__body a[href="/contact"]:focus-visible,
+.article-page__body a[href="/contact/"]:focus-visible,
+.article-page__body a[href="/contacto"]:focus-visible,
+.article-page__body a[href="/contacto/"]:focus-visible,
+.article-page__body a[href="/en/contact"]:focus-visible,
+.article-page__body a[href="/en/contact/"]:focus-visible,
+.article-page__body a[href="/es/contacto"]:focus-visible,
+.article-page__body a[href="/es/contacto/"]:focus-visible,
+.article-page__body a[href="https://izybiz.fr/contact"]:focus-visible,
+.article-page__body a[href="https://izybiz.fr/contact/"]:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 4px;
+}
+
+.article-page__body a[href="/contact"]:active,
+.article-page__body a[href="/contact/"]:active,
+.article-page__body a[href="/contacto"]:active,
+.article-page__body a[href="/contacto/"]:active,
+.article-page__body a[href="/en/contact"]:active,
+.article-page__body a[href="/en/contact/"]:active,
+.article-page__body a[href="/es/contacto"]:active,
+.article-page__body a[href="/es/contacto/"]:active,
+.article-page__body a[href="https://izybiz.fr/contact"]:active,
+.article-page__body a[href="https://izybiz.fr/contact/"]:active {
+  transform: translateY(0) scale(1.01);
 }
 
 .article-page__body ul,

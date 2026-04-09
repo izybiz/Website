@@ -9,7 +9,7 @@ This is not the moment to learn on the job.
 
 When enterprise account churn is accelerating, margins have gone negative, cash runway is tightening, and the board is losing confidence — you need someone who has already turned around situations like this. Not someone who will be managing one for the first time.
 
-**[Discuss your situation →](/contact)**
+**[Discuss your situation](/contact)**
 
 ---
 
@@ -120,7 +120,7 @@ If you are in a deteriorating situation, every week that passes reduces the opti
 
 A 30-minute call to assess your situation and determine whether an operational turnaround is the right response.
 
-**[Discuss your situation →](/contact)**
+**[Discuss your situation](/contact)**
 
 ---
 

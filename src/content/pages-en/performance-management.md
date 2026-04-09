@@ -9,7 +9,7 @@ Most executives have data. Few have visibility. Reporting takes days, arrives la
 
 Performance management means putting in place the indicators and tools that allow you to lead with facts, not instinct.
 
-**[Get in touch →](/contact)**
+**[Get in touch](/contact)**
 
 ---
 
@@ -104,7 +104,7 @@ Yes. If the situation requires it, we can start with a limited scope — cash ma
 
 A 30-minute call to assess whether your situation calls for performance management work and whether Izybiz is the right profile to execute it.
 
-**[Get in touch →](/contact)**
+**[Get in touch](/contact)**
 
 ---
 

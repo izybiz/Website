@@ -9,7 +9,7 @@ Not a consultant who reappears at month-end with a slide deck. An executive who 
 
 Interim management is the answer when you need a level of seniority you don't have internally, and you cannot afford to wait six months to hire.
 
-**[Discuss your situation →](/contact)**
+**[Discuss your situation](/contact)**
 
 ---
 
@@ -120,7 +120,7 @@ A situation is not captured in a few lines. Book a 30-minute call — no sales p
 
 In 30 minutes, we clarify whether your situation calls for interim management and whether Izybiz is the right fit to address it.
 
-**[Book a call →](/contact)**
+**[Book a call](/contact)**
 
 *Available within a few weeks. Measurable results from day 30.*
 

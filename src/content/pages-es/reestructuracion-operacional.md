@@ -9,7 +9,7 @@ Este no es el momento de aprender sobre la marcha.
 
 Cuando el churn se acelera en las grandes cuentas, los márgenes pasan a territorio negativo, el cash se tensa y el board pierde confianza — necesita a alguien que ya haya dado la vuelta a situaciones similares. No a alguien que las va a gestionar por primera vez.
 
-**[Hablar de su situación →](/contacto)**
+**[Hablar de su situación →](/es/contacto)**
 
 ---
 
@@ -120,7 +120,7 @@ Si está en una situación de deterioro, cada semana que pasa reduce las opcione
 
 Una llamada de 30 minutos para evaluar su situación y ver si la reestructuración operacional es la respuesta adecuada.
 
-**[Hablar de su situación →](/contacto)**
+**[Hablar de su situación →](/es/contacto)**
 
 ---
 

@@ -9,7 +9,7 @@ Ce n'est pas le moment d'apprendre sur le tas.
 
 Quand le churn s'accélère sur les grands comptes, que les marges passent en territoire négatif, que le cash se tend et que le board perd confiance — vous avez besoin de quelqu'un qui a déjà retourné des situations similaires. Pas de quelqu'un qui va les gérer pour la première fois.
 
-**[Discuter de votre situation →](/contact)**
+**[Discuter de votre situation](/contact)**
 
 ---
 
@@ -121,7 +121,7 @@ Si vous êtes dans une situation de détérioration, chaque semaine qui passe r�
 
 Un échange de 30 minutes pour évaluer votre situation et voir si une restructuration opérationnelle est la réponse adaptée.
 
-**[Discuter de votre situation →](/contact)**
+**[Discuter de votre situation](/contact)**
 
 ---
 

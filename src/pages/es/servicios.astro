@@ -55,6 +55,11 @@ const services = [
       <ul class="services-list">
         {services.map((service) => (
           <li class="services-card">
+            <a
+              class="services-card__hitbox"
+              href={service.href}
+              aria-label={`Saber más sobre ${service.title}`}
+            ></a>
             <div class="services-card__content">
               <h2 class="services-card__title">{service.title}</h2>
               <p class="services-card__description">{service.description}</p>
@@ -64,19 +69,13 @@ const services = [
                 ))}
               </ul>
             </div>
-            <a class="services-card__link" href={service.href}>
-              Saber más
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
           </li>
         ))}
       </ul>
 
       <div class="services-page__cta">
         <p>¿Su situación no encaja exactamente en una categoría?</p>
-        <a href={getLocalizedPath("contact", lang)} class="services-page__cta-link">Hablemos — 30 minutos, sin compromiso →</a>
+        <a href={getLocalizedPath("contact", lang)} class="services-page__cta-link">Hablemos !</a>
       </div>
     </div>
   </main>

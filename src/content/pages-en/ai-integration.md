@@ -9,7 +9,7 @@ slug: "ai-integration"
 
 This is not a tooling problem. It is a governance problem, a use case scoping problem, and a failure to hold execution through to production. That is precisely where Izybiz comes in.
 
-**[Discuss your situation →](/contact)**
+**[Discuss your situation](/contact)**
 
 ---
 
@@ -147,7 +147,7 @@ A 30-minute call is enough to clarify whether your situation calls for structure
 
 No pitch. No demo. A conversation between executives.
 
-**[Book a call →](/contact)**
+**[Book a call](/contact)**
 
 ---
 

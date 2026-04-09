@@ -7,20 +7,12 @@ const page = await getEntry("pages-fr", "a-propos");
 const { Content } = await render(page);
 ---
 
-<Layout
-  lang={lang}
-  title={page.data.title}
-  description={page.data.description}
-  navType="page"
-  includeGlobalScript={true}
->
+<Layout lang={lang} title={page.data.title} description={page.data.description} includeGlobalScript={true}>
   <main>
-    <article class="article-page">
+    <article class="article-page article-page--about">
       <h1 class="article-page__title">{page.data.title}</h1>
       <p class="article-page__description">{page.data.description}</p>
-      <div class="article-page__body">
-        <Content />
-      </div>
+      <div class="article-page__body"><Content /></div>
     </article>
   </main>
 </Layout>
