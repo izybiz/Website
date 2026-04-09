@@ -6,6 +6,10 @@ export default defineConfig({
   site: "https://izybiz.fr",
   integrations: [
     sitemap({
+      filter: (page) =>
+        !page.includes("/contact/merci") &&
+        !page.includes("/contact/thank-you") &&
+        !page.includes("/contacto/gracias"),
       i18n: {
         defaultLocale: "fr",
         locales: { fr: "fr-FR", en: "en-US", es: "es-ES" },

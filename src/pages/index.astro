@@ -10,8 +10,8 @@ const lang = (Astro.currentLocale || getLangFromUrl(Astro.url)) as "fr" | "en" |
 
 <Layout
   lang={lang}
-  title="Izybiz | Accueil"
-  description="Izybiz accompagne la transformation et l'intégration IA."
+  title="Management de transition & intégration IA pour ETI | Izybiz"
+  description="Stéphane Dinepro — management de transition et intégration IA pour ETI et scale-ups français. 30 ans d'expérience. Clients Bouygues, SNCF, Canal+. Réponse sous 48h."
   includeGlobalScript={true}
 >
   {lang === "es" ? <HomeContentEs /> : lang === "fr" ? <HomeContentFr /> : <HomeContent />}
