@@ -28,7 +28,7 @@ Al día siguiente cambié de sector. Sin rencor — solo con la certeza de que n
 
 Me incorporé al lanzamiento de The Phone House en Francia y Bélgica. Una startup que surfeó la ola del móvil en un momento en que nadie sabía aún qué iba a cambiar un teléfono en la vida de las personas. Después encadenée proyectos — en sectores distintos, empresas distintas, contextos distintos. Siempre el mismo papel: llegar a algo complejo, estructurarlo, ponerlo en marcha y seguir adelante.
 
-Ese patrón no lo elegí. Lo reconocí. Soy un builder. Cuando algo está construido, paso a otra cosa. No es inestabilidad — es mi forma de funcionar.
+No elegí ese recorrido. Se fue imponiendo. Llegar a algo complejo, estructurarlo, ponerlo en marcha — y pasar a lo siguiente cuando ya se sostiene. Ese es el hilo conductor.
 
 La decisión de crear Izybiz nació de una misión en África Occidental. Un operador telco me contactó para sacar adelante una super app que llevaba dos años paralizada. El proyecto estaba ahí, los equipos estaban ahí — lo que faltaba era alguien que sostuviera la ejecución. Hice la misión. Pero justo antes de empezar, pensé que una vez más la dejaría por otro proyecto, otra aventura. Decidí que era mejor convertirlo en un modelo claro.
 

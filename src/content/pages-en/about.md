@@ -28,7 +28,7 @@ I changed industries the next day. No bitterness — just the certainty that I c
 
 I joined the launch of The Phone House in France and Belgium. A startup riding the mobile wave at a time when nobody quite knew what a mobile phone was going to change in people's lives. Then came a series of projects — different sectors, different companies, different contexts. Always the same role: walk into something complex, structure it, get it running, move on.
 
-I didn't choose that pattern. I recognised it. I'm a builder. Once something is built, I move on. That's not instability — it's how I work.
+I didn't choose that pattern. It imposed itself. Walk into something complex, structure it, get it running — then move on once it holds. That's the through-line.
 
 The decision to create Izybiz came out of a mission in West Africa. A telco operator had contacted me to revive a super app that had been gathering dust for two years. The project was there, the teams were there — what was missing was someone to hold the execution together. I took the mission. But right before it kicked off, I realised that once again I'd leave it for another project, another adventure. I figured I might as well make that a clear model.
 

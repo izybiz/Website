@@ -1,10 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getEntry, render } from "astro:content";
+import { getEntry } from "astro:content";
 
 const lang = "es";
 const page = await getEntry("pages-es", "sobre-izybiz");
-const { Content } = await render(page);
 ---
 
 <Layout lang={lang} title={page.data.title} description={page.data.description} includeGlobalScript={true}>
@@ -34,11 +33,76 @@ const { Content } = await render(page);
       ]
     })} />
   </Fragment>
-  <main>
-    <article class="article-page article-page--about">
-      <h1 class="article-page__title">{page.data.h1 ?? page.data.title}</h1>
-      <p class="article-page__description">{page.data.description}</p>
-      <div class="article-page__body"><Content /></div>
-    </article>
+  <main class="about-main">
+
+    <header class="about-header">
+      <div class="about-header__inner">
+        <h1 class="article-page__title">Stéphane — Manager de Transición Tech &amp; IA</h1>
+        <p class="article-page__description">{page.data.description}</p>
+        <p class="about-intro">Sin recomendaciones a distancia. Un directivo que toma las riendas — con sus equipos, sobre sus resultados, hasta el final.</p>
+        <p class="about-intro">Es lo único que ofrece Izybiz.</p>
+      </div>
+    </header>
+
+    <section class="about-section about-section--yellow">
+      <div class="about-section__inner">
+        <h2>Trayectoria</h2>
+        <p>Empecé en la hostelería de lujo. A finales de los 90, intenté convencer a mi director general de que internet podía convertirse en un canal de comunicación para el hotel. Su respuesta, textualmente: no quería implantar el correo electrónico para que las secretarias se mandaran mensajes todo el día, y no creía ni por un momento que la tecnología pudiera ayudarle en su relación con los clientes.</p>
+        <p>Al día siguiente cambié de sector. Sin rencor — solo con la certeza de que no podía trabajar en un lugar donde el futuro era motivo de desconfianza.</p>
+        <p>Me incorporé al lanzamiento de The Phone House en Francia y Bélgica. Una startup que surfeó la ola del móvil en un momento en que nadie sabía aún qué iba a cambiar un teléfono en la vida de las personas. Después, sectores distintos, empresas distintas, contextos distintos — siempre el mismo papel.</p>
+        <p>Responsable técnico primero, director de unidad de negocio después, director general al final. Software, Retail, E-commerce, logística de última milla, Telecomunicaciones. Desarrollo comercial, fusiones de equipos, proyectos de transformación — de forma interna o como socio externo para Crédit Agricole, Bouygues Telecom, SFR, Canal+, SNCF, PSA, Carrefour, OVH, Engie — y también en startups.</p>
+        <p>Ese recorrido, lo elegí. Llegar a algo complejo, estructurarlo, ponerlo en marcha — y pasar a lo siguiente cuando ya se sostiene.</p>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="about-section__inner">
+        <h2>¿Por qué Izybiz?</h2>
+        <p>La decisión de crear Izybiz nació de una misión en África Occidental. Un operador telco me contactó para sacar adelante una super app que llevaba dos años paralizada. El proyecto estaba ahí, los equipos estaban ahí — lo que faltaba era alguien que sostuviera la ejecución. Hice la misión. Pero justo antes de empezar, pensé que una vez más la dejaría por otro proyecto, otra aventura. Decidí que era mejor convertirlo en un modelo claro.</p>
+        <p>El nombre: un antiguo colega me dijo un día — <em>«La gente te llama espontáneamente cuando tiene un problema que resolver. Y para ti, ese problema rara vez es insuperable — parece sencillo.»</em> Izy. Biz. Así quedó.</p>
+        <p>Cuando contratas a Izybiz, tienes delante a alguien que ya ha gestionado lo que tú estás viviendo — no a alguien que va a aprenderlo a tu costa.</p>
+      </div>
+    </section>
+
+    <section class="about-section about-section--black">
+      <div class="about-section__inner">
+        <h2>Lo que hago — y lo que no hago</h2>
+        <p>Soy manager de transición tech, no consultor.</p>
+        <p>Un consultor entrega recomendaciones. Un manager de transición asume un rol — DG, COO, CDO — y lo ejerce de verdad, con tus equipos, sobre tus retos. Se responsabiliza de los resultados. Se va cuando la organización es autónoma.</p>
+        <p>Mi doble competencia cubre dos tipos de misiones que la mayoría de managers de transición no pueden llevar a cabo juntas:</p>
+        <p><strong>Transformación operacional</strong> — cuando una organización necesita cambiar de ritmo, de estructura o de rumbo. Scale-up antes de una Serie B, saneamiento de una unidad de negocio en dificultades, pilotaje de una transformación que se desvía, incorporación a una dirección vacante.</p>
+        <p><strong>Integración IA en la empresa</strong> — cuando los proyectos de IA fracasan en serie por falta de gobernanza y de un piloto operacional. Desde la definición de los casos de uso hasta la puesta en producción, con un equipo formado y flujos de trabajo que se sostienen en el tiempo.</p>
+        <p>Ambas competencias raramente se encuentran en la misma persona. Ese es el diferenciador de Izybiz.</p>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="about-section__inner">
+        <h2>¿Cómo trabajo?</h2>
+        <p>Cada misión comienza con un encuadre riguroso: objetivos, restricciones, KPIs. Sin arrancar en vacío.</p>
+        <p>Estoy con los equipos en el día a día — no por encima de ellos. Las decisiones se toman con los datos disponibles, sin esperar al informe perfecto. Los KPIs se revisan mensualmente y cada resultado queda documentado al cierre de la misión. El ROI es trazable — es una exigencia, no una promesa.</p>
+        <p>La organización sale de la misión con plena autonomía. Sin dependencia creada, sin continuidad de servicios vendida a la salida.</p>
+      </div>
+    </section>
+
+    <section class="about-section about-section--blue">
+      <div class="about-section__inner">
+        <h2>Sectores en los que intervengo</h2>
+        <p><strong>Software &amp; SaaS</strong> — escalado operacional, reducción del churn en grandes cuentas, estructuración del delivery, integración IA.</p>
+        <p><strong>Retail &amp; E-commerce</strong> — transformación de operaciones, digitalización, última milla, pilotaje del rendimiento comercial.</p>
+        <p><strong>Telecomunicaciones</strong> — gestión de grandes cuentas, transformación de unidades de negocio, rendimiento comercial, proyectos de ruptura.</p>
+        <p>También trabajo fuera de España — en particular en África Occidental, donde he llevado a cabo varias misiones sobre lanzamiento, estructuración e integración digital.</p>
+      </div>
+    </section>
+
+    <div class="about-cta">
+      <div class="about-cta__inner">
+        <p>Una situación no se describe en unas pocas líneas. Reserva una llamada de 30 minutos — sin pitch, sin compromiso — para aclarar si tu situación requiere un management de transición y si Izybiz es el perfil adecuado.</p>
+        <p><a href="/es/contacto" class="about-cta__btn">Reservar una llamada</a></p>
+        <p>También puedes encontrarme en <a href="https://www.linkedin.com/in/sdine/">LinkedIn</a> para revisar la trayectoria antes de contactar.</p>
+        <p class="about-cta__also"><em>Ver también: <a href="/es/servicios">Servicios</a> · <a href="/es/gestion-transicion">Management de Transición</a> · <a href="/es/integracion-ia">Integración IA en empresas</a></em></p>
+      </div>
+    </div>
+
   </main>
 </Layout>
