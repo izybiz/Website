@@ -42,7 +42,8 @@ const cleanPath = canonicalPath.endsWith("/") ? canonicalPath.slice(0, -1) || "/
 // Auto-detect nav type
 const homePathnames = new Set(["/", "/en", "/en/", "/es", "/es/"]);
 const navType = navTypeProp ?? (homePathnames.has(Astro.url.pathname) ? "home" : "page");
-const canonicalUrl = `https://izybiz.fr${canonicalPath || "/"}`;
+const rawPath = canonicalPath || "/";
+const canonicalUrl = `https://izybiz.fr${rawPath.endsWith("/") ? rawPath : rawPath + "/"}`;
 const localizedAlt = {
   fr: alternates?.fr ?? mapPathToLang(cleanPath, "fr"),
   en: alternates?.en ?? mapPathToLang(cleanPath, "en"),
@@ -73,16 +74,29 @@ const localizedAlt = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75,200..800&family=Didact+Gothic&display=swap"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75,200..800&family=Didact+Gothic&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75,200..800&family=Didact+Gothic&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <link rel="icon" href="/assets/fav-icon.png" type="image/png" />
 
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang="fr" href={`https://izybiz.fr${localizedAlt.fr}`} />
     <link rel="alternate" hreflang="en" href={`https://izybiz.fr${localizedAlt.en}`} />
     <link rel="alternate" hreflang="es" href={`https://izybiz.fr${localizedAlt.es}`} />
-    <link rel="alternate" hreflang="x-default" href={`https://izybiz.fr${localizedAlt.en}`} />
+    <link rel="alternate" hreflang="x-default" href={`https://izybiz.fr${localizedAlt.fr}`} />
 
     <!-- Structured data: Organization (all pages) -->
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -94,7 +108,7 @@ const localizedAlt = {
       "sameAs": ["https://www.linkedin.com/company/izybiz/"],
       "contactPoint": {
         "@type": "ContactPoint",
-        "contactType": "customer service",
+        "contactType": "sales",
         "url": "https://izybiz.fr/contact",
         "availableLanguage": ["French", "English", "Spanish"]
       }
@@ -127,6 +141,8 @@ const localizedAlt = {
 
     <!-- Open Graph -->
     <meta property="og:type" content={ogType} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -148,7 +164,7 @@ const localizedAlt = {
       <div class="site-header__pill">
         <div class="site-header__identity">
           <a class="site-header__brand" href={getLocalizedPath("home", lang)} aria-label="Go to top">
-            <img src="/assets/Logo Izybiz.png" alt="IZYBIZ" />
+            <img src="/assets/Logo Izybiz.png" alt="IZYBIZ" width="1479" height="413" />
           </a>
           <div class="site-nav__lang" aria-label="Language switcher">
             <a href={localizedAlt.fr} aria-current={lang === "fr" ? "true" : undefined}>FR</a>
@@ -233,7 +249,7 @@ const localizedAlt = {
       <div class="site-footer__inner">
         <div class="site-footer__top">
           <a href={getLocalizedPath("home", lang)} aria-label="Accueil Izybiz">
-            <img class="site-footer__logo" src="/assets/Logo Izybiz.png" alt="IZYBIZ" />
+            <img class="site-footer__logo" src="/assets/Logo Izybiz.png" alt="IZYBIZ" width="1479" height="413" />
           </a>
           <a
             class="site-footer__linkedin"
@@ -242,7 +258,7 @@ const localizedAlt = {
             rel="noopener noreferrer"
             aria-label="LinkedIn Izybiz"
           >
-            <img class="site-footer__linkedin-icon" src="/assets/linkedin-icon.png" alt="LinkedIn" />
+            <img class="site-footer__linkedin-icon" src="/assets/linkedin-icon.png" alt="LinkedIn" width="980" height="980" />
           </a>
         </div>
         <div class="site-footer__bottom">

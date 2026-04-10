@@ -1,7 +1,7 @@
 ---
 title: "Stéphane — manager de transition tech & IA | Izybiz"
 h1: "Stéphane — manager de transition tech & IA"
-description: "30 ans de direction opérationnelle dans la tech — Software, Retail, Telco. Manager de transition pour ETI et scale-ups qui ont besoin de résultats, pas de rapports."
+description: "30 ans de direction opérationnelle dans la tech — Software, Retail, Telco. Manager de transition pour ETI et scale-ups. Résultats mesurables, pas de rapports."
 lang: "fr"
 slug: "a-propos"
 ---

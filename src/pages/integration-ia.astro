@@ -5,15 +5,33 @@ import { getEntry, render } from "astro:content";
 const lang = "fr";
 const page = await getEntry("pages-fr", "integration-ia");
 const { Content } = await render(page);
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Intégration IA en entreprise",
+  "name": page.data.title,
+  "description": page.data.description,
+  "url": "https://izybiz.fr/integration-ia/",
+  "areaServed": "France",
+  "provider": {
+    "@type": "Organization",
+    "name": "Izybiz",
+    "url": "https://izybiz.fr"
+  }
+};
 ---
 
 <Layout
   lang={lang}
-  title={page.data.title}
+  title="Intégration IA en entreprise pour ETI | Izybiz"
   description={page.data.description}
   navType="page"
   includeGlobalScript={true}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  </Fragment>
   <main>
     <article class="article-page">
       <h1 class="article-page__title">{page.data.title}</h1>

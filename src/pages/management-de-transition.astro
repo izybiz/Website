@@ -5,6 +5,21 @@ import { getEntry, render } from "astro:content";
 const lang = "fr";
 const page = await getEntry("pages-fr", "management-de-transition");
 const { Content } = await render(page);
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Management de transition",
+  "name": page.data.title,
+  "description": page.data.description,
+  "url": "https://izybiz.fr/management-de-transition/",
+  "areaServed": "France",
+  "provider": {
+    "@type": "Organization",
+    "name": "Izybiz",
+    "url": "https://izybiz.fr"
+  }
+};
 ---
 
 <Layout
@@ -14,6 +29,9 @@ const { Content } = await render(page);
   navType="page"
   includeGlobalScript={true}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  </Fragment>
   <main>
     <article class="article-page">
       <h1 class="article-page__title">{page.data.title}</h1>

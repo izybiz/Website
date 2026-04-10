@@ -4,6 +4,7 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://izybiz.fr",
+  trailingSlash: "always",
   integrations: [
     sitemap({
       filter: (page) =>
@@ -13,6 +14,9 @@ export default defineConfig({
       i18n: {
         defaultLocale: "fr",
         locales: { fr: "fr-FR", en: "en-US", es: "es-ES" },
+      },
+      serialize(item) {
+        return { ...item, lastmod: new Date().toISOString() };
       },
     }),
   ],

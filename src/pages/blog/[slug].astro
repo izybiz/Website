@@ -66,6 +66,16 @@ const currentPath = `/blog/${currentSlug}`;
         <Content />
       </div>
     </article>
+    <aside class="article-services-cta" aria-label="Nos services">
+      <h2 class="article-services-cta__title">Nos missions</h2>
+      <ul class="article-services-cta__list">
+        <li><a href="/management-de-transition/">Management de transition</a> — Direction opérationnelle pour ETI et scale-ups en phase critique.</li>
+        <li><a href="/integration-ia/">Intégration IA en entreprise</a> — De POC à production réelle, avec gouvernance et équipes autonomes à la sortie.</li>
+        <li><a href="/pilotage-performance/">Pilotage de la performance</a> — KPIs structurants et tableau de bord dirigeant.</li>
+        <li><a href="/redressement-restructuration/">Restructuration opérationnelle</a> — Retournement de BU en situation critique.</li>
+        <li><a href="/scale-up-industrialisation/">Industrialisation scale-up</a> — Structurer delivery et process pour croître sans casser.</li>
+      </ul>
+    </aside>
   </main>
 </Layout>
 
@@ -120,5 +130,51 @@ const currentPath = `/blog/${currentSlug}`;
 
   .article-page__arrow-button:active {
     transform: translateY(0);
+  }
+
+  .article-services-cta {
+    width: 100%;
+    max-width: 760px;
+    margin: 48px auto 64px;
+    padding: 28px 32px;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+  }
+
+  .article-services-cta__title {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0 0 16px;
+    color: #555;
+  }
+
+  .article-services-cta__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .article-services-cta__list li {
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.5;
+  }
+
+  .article-services-cta__list a {
+    font-weight: 600;
+    color: #000;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .article-services-cta__list a:hover {
+      opacity: 0.7;
+    }
   }
 </style>
