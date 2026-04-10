@@ -1,0 +1,98 @@
+- generic [active] [ref=e1]:
+  - banner "Site header" [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - link "Go to top" [ref=e5] [cursor=pointer]:
+          - /url: /
+          - img "IZYBIZ" [ref=e6]
+        - generic "Language switcher" [ref=e7]:
+          - link "FR" [ref=e8] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e9]: /
+          - link "EN" [ref=e10] [cursor=pointer]:
+            - /url: /en/
+          - generic [ref=e11]: /
+          - link "ES" [ref=e12] [cursor=pointer]:
+            - /url: /es/
+      - navigation "Primary" [ref=e13]:
+        - generic [ref=e14]:
+          - link "À propos" [ref=e15] [cursor=pointer]:
+            - /url: /a-propos
+          - link "Services" [ref=e16] [cursor=pointer]:
+            - /url: /services
+          - link "Blog" [ref=e17] [cursor=pointer]:
+            - /url: /blog
+      - generic "Primary actions" [ref=e18]:
+        - link "Prendre contact" [ref=e19] [cursor=pointer]:
+          - /url: /contact
+          - img [ref=e20]
+          - generic [ref=e26]: Prendre contact
+        - link "LinkedIn Izybiz" [ref=e27] [cursor=pointer]:
+          - /url: https://www.linkedin.com/company/izybiz/
+          - img [ref=e28]
+  - main [ref=e32]:
+    - region "Section 1" [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - 'heading "Rendre l''IA efficace là où elle compte: dans vos opérations" [level=1] [ref=e36]':
+            - generic [ref=e37]:
+              - text: Rendre l'IA efficace là où
+              - text: "elle compte: dans vos opérations"
+          - paragraph [ref=e38]:
+            - generic [ref=e39]: Management de transition et intégration IA pour remettre les priorités sous contrôle, accélérer l’exécution et produire des résultats mesurables.
+        - generic [ref=e40]:
+          - link "Prendre contact" [ref=e41] [cursor=pointer]:
+            - /url: /contact
+          - link "Ouvrir la page LinkedIn d'IZYBIZ dans un nouvel onglet" [ref=e42] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/izybiz/
+            - text: Envoyer un message LinkedIn
+      - region "Key performance highlights":
+        - article:
+          - heading "0%" [level=2]
+          - paragraph: Taux d'échec des projets d'IA générative en entreprise.
+        - article:
+          - heading "0%" [level=2]
+          - paragraph: Seulement 23 % des dirigeants peuvent relier leurs investissements IA à un résultat financier mesurable.
+        - article:
+          - heading "0%" [level=2]
+          - paragraph: 84 % des échecs d'IA sont dus à une mauvaise gestion, pas à la technologie en elle-même.
+    - article "Case study 1" [ref=e43]:
+      - generic [ref=e44]:
+        - generic [ref=e45]: Livre
+        - heading "Telecom & Fintech · Afrique" [level=3] [ref=e46]
+        - paragraph [ref=e47]: "Un opérateur telecom devait lancer une super-app sur deux marchés en même temps : deux scénarios opérationnels distincts, de nombreuses parties prenantes et pression de cession. Nous avons défini et construit le produit, structuré deux scénarios de go-to-market distincts — le client en a choisi un et l'a déployé."
+  - contentinfo "Footer" [ref=e48]:
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - link "Accueil Izybiz" [ref=e51] [cursor=pointer]:
+          - /url: /
+          - img "IZYBIZ" [ref=e52]
+        - link "LinkedIn Izybiz" [ref=e53] [cursor=pointer]:
+          - /url: https://www.linkedin.com/company/izybiz/
+          - img "LinkedIn" [ref=e54]
+      - generic [ref=e55]:
+        - generic [ref=e56]: © 2026 Izybiz — Tous droits réservés
+        - navigation "Footer navigation" [ref=e57]:
+          - link "À propos" [ref=e58] [cursor=pointer]:
+            - /url: /a-propos
+          - link "Services" [ref=e59] [cursor=pointer]:
+            - /url: /services
+          - link "Blog" [ref=e60] [cursor=pointer]:
+            - /url: /blog
+          - link "Contact" [ref=e61] [cursor=pointer]:
+            - /url: /contact
+  - generic [ref=e64]:
+    - button "Menu" [ref=e65]:
+      - img [ref=e67]
+      - generic: Menu
+    - button "Inspect" [ref=e71]:
+      - img [ref=e73]
+      - generic: Inspect
+    - button "Audit" [ref=e75]:
+      - generic [ref=e76]:
+        - img [ref=e77]
+        - img [ref=e80]
+      - generic: Audit
+    - button "Settings" [ref=e83]:
+      - img [ref=e85]
+      - generic: Settings
