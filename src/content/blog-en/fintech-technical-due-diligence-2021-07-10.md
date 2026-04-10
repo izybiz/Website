@@ -1,10 +1,12 @@
 ---
-title: "Fintech technical due diligence: what the code reveals"
-description: "Fintech technical due diligence: what code maturity, missing integrations, and vendor lock-in reveal before an acquisition. Learn the 8-point TDD checklist."
+title: "Fintech Technical Due Diligence: What the Code Really Reveals"
+description: "Evaluating fintech technology before acquisition or partnership means reading what the code says about real product maturity. Field experience and checklist for TDD in constrained contexts."
 pubDate: 2021-07-10
 lang: "en"
 translationKey: "2021-07-10"
 ---
+
+*This field report comes from technical due diligence on a neobanking platform in West Africa. The checklist and pitfalls identified — gap between demo and real deployability, hidden technical debt, critical dependencies — apply to any fintech technology evaluation before acquisition or partnership.*
 
 The demo works. The interface is clean. The founders can walk you through their dashboard in two minutes flat. The backend runs. Transactions go through.
 

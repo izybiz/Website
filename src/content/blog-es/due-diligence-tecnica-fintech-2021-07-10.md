@@ -1,10 +1,12 @@
 ---
-title: "Due diligence técnica fintech: qué revela el código"
-description: "Due diligence técnica fintech: madurez del código, integraciones ausentes y lock-in de proveedor antes de una adquisición. Descubra la lista de 8 puntos."
+title: "Due diligence técnica fintech: lo que el código realmente revela"
+description: "Evaluar una tecnología fintech antes de una adquisición o asociación es saber leer lo que el código dice sobre la madurez real del producto. Experiencia de campo y checklist para una TDD en contexto limitado."
 pubDate: 2021-07-10
 lang: "es"
 translationKey: "2021-07-10"
 ---
+
+*Esta experiencia de campo proviene de una due diligence técnica sobre una plataforma de neobanca en África Occidental. La checklist y las trampas identificadas — brecha entre demo y desplegabilidad real, deuda técnica oculta, dependencias críticas — se aplican a cualquier evaluación de tecnología fintech antes de una adquisición o asociación.*
 
 La demo funciona. La interfaz es limpia. Los fundadores recorren su dashboard en dos minutos. El backend responde. Las transacciones se procesan.
 

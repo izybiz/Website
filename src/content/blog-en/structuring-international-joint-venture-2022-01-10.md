@@ -1,10 +1,12 @@
 ---
-title: "Structuring a Joint Venture: Two Entities, One CEO in Africa"
-description: "Learn how to structure an international joint venture for Africa: FinTech/OpCo split, governance, revenue sharing, and the key clauses that make it hold."
+title: "Structuring an International JV: Two Entities, One CEO"
+description: "Governance, revenue sharing, roles: how to structure an international joint venture between a technology entity and a local commercial entity for multi-country deployment."
 pubDate: 2022-01-10
 lang: "en"
 translationKey: "2022-01-10"
 ---
+
+*This field report comes from structuring a joint venture for a digital deployment in West Africa. The principles described — TechCo/OpCo separation, contractual governance, decision rules — apply to any international deployment requiring a local entity.*
 
 Most executives structuring an international joint venture think first about the product, the market, the commercial partners. Legal structure is often treated as an administrative formality, sorted out by lawyers at the end of the process.
 

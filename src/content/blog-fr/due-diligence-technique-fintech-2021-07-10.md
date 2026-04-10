@@ -1,10 +1,12 @@
 ---
-title: "Due diligence technique fintech: ce que le code révèle"
-description: "Évaluer une technologie fintech avant acquisition, c'est savoir lire ce que le code dit. Retour d'expérience sur une TDD néobanking en Afrique de l'Ouest."
+title: "Due diligence technique fintech : ce que le code révèle vraiment"
+description: "Évaluer une technologie fintech avant acquisition ou partenariat, c'est savoir lire ce que le code dit. Retour d'expérience et checklist sur une TDD en contexte contraint."
 pubDate: 2021-07-10
 lang: "fr"
 translationKey: "2021-07-10"
 ---
+
+*Ce retour d'expérience est issu d'une due diligence technique sur une plateforme néobanking en Afrique de l'Ouest. La checklist et les pièges identifiés — écart entre démo et déployabilité réelle, dette technique cachée, dépendances critiques — s'appliquent à toute évaluation de technologie fintech en vue d'une acquisition ou d'un partenariat.*
 
 La démo fonctionne. L'interface est propre. Les fondateurs savent présenter leur tableau de bord en deux minutes chrono. Le backend tourne. Les transactions passent.
 

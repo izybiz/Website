@@ -1,10 +1,12 @@
 ---
-title: "Alcance del MVP en mercados emergentes: lo que haríamos distinto"
-description: "Definir el alcance de un MVP en un mercado emergente es más difícil de lo que parece: trampas de alcance, dependencias externas y métricas que importan. Aprenda cómo hacerlo bien."
+title: "Definir el alcance de un MVP en un mercado complejo: errores a evitar"
+description: "Cómo definir el alcance de un MVP en un entorno incierto y limitado. Perímetro, priorización, socios, plazos: errores a no repetir y lo que haríamos diferente."
 pubDate: 2022-12-07
 lang: "es"
 translationKey: "2022-12-07"
 ---
+
+*Esta experiencia de campo proviene de definir el alcance de un MVP de super-app en África Occidental. Los errores descritos — socios no contratados antes del desarrollo, alcance demasiado amplio, dependencias técnicas subestimadas — se aplican a cualquier proyecto de lanzamiento digital en un mercado complejo e incierto.*
 
 Hay una frase que se escucha con frecuencia en proyectos de lanzamiento de producto: "Lo resolvemos en producción." Es casi siempre la frase que precede a seis meses de retrasos y un presupuesto duplicado.
 

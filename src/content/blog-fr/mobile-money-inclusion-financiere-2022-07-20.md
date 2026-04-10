@@ -1,10 +1,12 @@
 ---
-title: "Mobile money et inclusion financière: le vrai défi"
-description: "Le mobile money a transformé l'accès aux services financiers en Afrique subsaharienne. Mais le vrai obstacle à l'inclusion financière n'est pas la technologie, c'est la confiance."
+title: "Adoption des paiements digitaux : pourquoi la technologie ne suffit pas"
+description: "La technologie du paiement digital fonctionne. Les obstacles à son adoption massive sont ailleurs. Ce que le terrain révèle sur la confiance, les comportements et ce qui fait vraiment la différence."
 pubDate: 2022-07-20
 lang: "fr"
 translationKey: "2022-07-20"
 ---
+
+*Ce retour d'expérience est issu de l'opération d'un wallet et d'une plateforme de paiement mobile en Afrique de l'Ouest. Les dynamiques décrites — rapport à la confiance, obstacles comportementaux, rôle de la présence locale — sont caractéristiques de tout déploiement de paiement digital dans un nouveau contexte.*
 
 Le mobile money est souvent présenté comme la solution à l'exclusion financière en Afrique subsaharienne. Les chiffres donnent raison à cet enthousiasme: plus de 560 millions de comptes mobile money actifs sur le continent, des volumes de transactions qui dépassent le PIB de plusieurs pays de la région. [L'Afrique subsaharienne représente à elle seule plus de 70 % des transactions mobile money mondiales selon le GSMA](https://www.gsma.com/solutions-and-impact/connectivity-for-good/mobile-for-development/gsma_resources/state-of-the-industry-report-on-mobile-money/).
 

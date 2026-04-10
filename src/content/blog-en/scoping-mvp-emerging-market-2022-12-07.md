@@ -1,10 +1,12 @@
 ---
-title: "Scoping an MVP in emerging markets: what we'd do differently"
-description: "Scoping an MVP in an emerging market is harder than it looks: scope traps, external dependencies, and the metrics that matter. Learn how to get it right."
+title: "Scoping an MVP in a Complex Market: Mistakes to Avoid"
+description: "How to scope an MVP in an uncertain and constrained environment. Scope, prioritization, partners, timelines: mistakes to avoid and what we'd do differently."
 pubDate: 2022-12-07
 lang: "en"
 translationKey: "2022-12-07"
 ---
+
+*This field report comes from scoping an MVP for a super-app in West Africa. The mistakes described — unsigned partnerships before development, overly broad scope, underestimated technical dependencies — apply to any digital product launch in a complex, uncertain market.*
 
 There's a line you hear often in product launch projects: "We'll figure it out in production." It's usually the line that precedes six months of delays and a doubled budget.
 

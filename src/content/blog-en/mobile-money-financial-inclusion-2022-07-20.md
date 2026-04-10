@@ -1,10 +1,12 @@
 ---
-title: "Mobile money and financial inclusion: why trust matters"
-description: "Mobile money transformed financial access in Sub-Saharan Africa. But the real barrier to financial inclusion isn't technology — it's trust. Discover why."
+title: "Digital Payment Adoption: Why Technology Alone Isn't Enough"
+description: "Digital payment technology works. The barriers to mass adoption lie elsewhere. What the field reveals about trust, behavior, and what actually makes the difference."
 pubDate: 2022-07-20
 lang: "en"
 translationKey: "2022-07-20"
 ---
+
+*This field report comes from operating a wallet and mobile payment platform in West Africa. The dynamics described — relationship to trust, behavioral barriers, role of local presence — are characteristic of any digital payment deployment in a new context.*
 
 Mobile money is often presented as the primary lever for financial inclusion in Sub-Saharan Africa. The numbers justify that enthusiasm: over 560 million active mobile money accounts on the continent, transaction volumes that exceed the GDP of several countries in the region. [Sub-Saharan Africa alone accounts for more than 70% of global mobile money transactions, according to the GSMA](https://www.gsma.com/solutions-and-impact/connectivity-for-good/mobile-for-development/gsma_resources/state-of-the-industry-report-on-mobile-money/).
 

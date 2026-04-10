@@ -1,10 +1,12 @@
 ---
-title: "Estructurar un joint venture: dos entidades, un CEO"
-description: "Cómo estructurar un joint venture internacional para África: FinTech/OpCo, gobernanza, reparto de ingresos y cláusulas esenciales. Aprenda el enfoque."
+title: "Estructurar una JV internacional: dos entidades, un CEO"
+description: "Gobernanza, reparto de ingresos, roles: cómo estructurar una joint venture internacional entre una entidad tecnológica y una entidad comercial local para un despliegue multinacional."
 pubDate: 2022-01-10
 lang: "es"
 translationKey: "2022-01-10"
 ---
+
+*Esta experiencia de campo proviene de estructurar una joint venture para un despliegue digital en África Occidental. Los principios descritos — separación TechCo/OpCo, gobernanza contractual, reglas de decisión — se aplican a cualquier despliegue internacional que requiera una entidad local.*
 
 La mayoría de los directivos que se plantean estructurar un joint venture internacional piensan primero en el producto, el mercado y los socios comerciales. La estructura jurídica suele tratarse como un trámite administrativo que los abogados resuelven al final del proceso.
 

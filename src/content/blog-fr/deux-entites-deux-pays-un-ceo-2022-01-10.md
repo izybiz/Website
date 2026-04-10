@@ -1,10 +1,12 @@
 ---
-title: "Structurer une JV internationale: deux entités, un CEO"
-description: "Comment structurer une joint-venture FinTech et OpCo pour déployer un produit digital en Afrique. Gouvernance, revenue sharing, rôles: ce qui tient vraiment."
+title: "Structurer une JV internationale : deux entités, un CEO"
+description: "Gouvernance, revenue sharing, rôles : comment structurer une joint-venture internationale entre entité technologique et entité commerciale locale pour un déploiement multi-pays."
 pubDate: 2022-01-10
 lang: "fr"
 translationKey: "2022-01-10"
 ---
+
+*Ce retour d'expérience est issu de la structuration d'une joint-venture pour un déploiement digital en Afrique de l'Ouest. Les principes décrits — séparation TechCo/OpCo, gouvernance contractuelle, règles de décision — s'appliquent à tout déploiement international nécessitant une entité locale.*
 
 La plupart des dirigeants qui lancent une activité à l'international pensent d'abord au produit, au marché, aux partenaires commerciaux. La structure juridique est souvent traitée comme une formalité administrative, réglée par les avocats en fin de processus.
 

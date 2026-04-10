@@ -1,10 +1,12 @@
 ---
-title: "Mobile money e inclusión financiera: la confianza como clave"
-description: "El mobile money transformó el acceso financiero en África. Pero la barrera real de la inclusión financiera no es técnica: es la confianza. Descubra por qué."
+title: "Adopción de pagos digitales: por qué la tecnología no es suficiente"
+description: "La tecnología de pagos digitales funciona. Las barreras a su adopción masiva están en otro lugar. Lo que el terreno revela sobre la confianza, los comportamientos y lo que realmente marca la diferencia."
 pubDate: 2022-07-20
 lang: "es"
 translationKey: "2022-07-20"
 ---
+
+*Esta experiencia de campo proviene de operar un wallet y plataforma de pago móvil en África Occidental. Las dinámicas descritas — relación con la confianza, barreras conductuales, papel de la presencia local — son características de cualquier despliegue de pagos digitales en un nuevo contexto.*
 
 El mobile money se presenta habitualmente como el principal palanca de la inclusión financiera en África Subsahariana. Las cifras justifican ese entusiasmo: más de 560 millones de cuentas activas de mobile money en el continente, volúmenes de transacciones que superan el PIB de varios países de la región. [África Subsahariana concentra más del 70% de las transacciones globales de mobile money, según la GSMA](https://www.gsma.com/solutions-and-impact/connectivity-for-good/mobile-for-development/gsma_resources/state-of-the-industry-report-on-mobile-money/).
 

@@ -1,10 +1,12 @@
 ---
-title: "Lanzar una super app en África Occidental: lo que nadie le dice"
-description: "Lanzar una super app en África Occidental exige los socios correctos, aprobación regulatoria y arquitectura legal. Descubra las decisiones clave antes de empezar."
+title: "Lanzar una super-app en mercado emergente: lo que nadie te dice"
+description: "Socios críticos, regulación financiera móvil, estructura jurídica: experiencia de campo en el lanzamiento de un producto digital complejo en un mercado emergente."
 pubDate: 2022-03-15
 lang: "es"
 translationKey: "2022-03-15"
 ---
+
+*Esta experiencia de campo proviene de la gestión de un lanzamiento de super-app en África Occidental. Las restricciones descritas — socios condicionando el alcance del producto, regulación financiera móvil, coordinación en múltiples mercados — se encuentran en cualquier despliegue digital ambicioso en un mercado emergente.*
 
 Me dijeron que el África Subsahariana era un mercado atrasado en la curva digital. Estaban equivocados. Es un mercado que se saltó varias etapas por completo.
 
