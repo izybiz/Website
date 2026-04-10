@@ -1,10 +1,12 @@
 ---
-title: "Cadrer un MVP en marché émergent: les erreurs à éviter"
-description: "Retour d'expérience sur le cadrage d'un MVP de super-app en Afrique de l'Ouest. Périmètre, priorisation, partenaires, délais: les erreurs à ne pas reproduire."
+title: "Cadrer un MVP en marché complexe : les erreurs à éviter"
+description: "Comment cadrer un MVP dans un environnement incertain et contraint. Périmètre, priorisation, partenaires, délais : erreurs à ne pas reproduire et ce qu'on ferait différemment."
 pubDate: 2022-12-07
 lang: "fr"
 translationKey: "2022-12-07"
 ---
+
+*Ce retour d'expérience est issu du cadrage d'un MVP de super-app en Afrique de l'Ouest. Les erreurs décrites — partenariats non contractualisés avant le développement, périmètre trop large, dépendances techniques sous-estimées — s'appliquent à tout projet de lancement digital sur un marché complexe et incertain.*
 
 Il y a une phrase qu'on entend souvent dans les projets de lancement produit: "On verra en prod." C'est souvent la phrase qui précède six mois de retard et un budget doublé.
 
