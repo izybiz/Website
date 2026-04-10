@@ -8,9 +8,35 @@ const { Content } = await render(page);
 ---
 
 <Layout lang={lang} title={page.data.title} description={page.data.description} includeGlobalScript={true}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Stéphane Dinepro",
+      "jobTitle": "Interim Management Consultant — Tech & AI",
+      "description": page.data.description,
+      "url": "https://izybiz.fr/en/about/",
+      "sameAs": [
+        "https://www.linkedin.com/in/sdine/",
+        "https://izybiz.fr"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Izybiz",
+        "url": "https://izybiz.fr"
+      },
+      "knowsAbout": [
+        "Interim Management",
+        "Operational Transformation",
+        "AI Integration",
+        "Business Unit Leadership",
+        "Scale-up Operations"
+      ]
+    })} />
+  </Fragment>
   <main>
     <article class="article-page article-page--about">
-      <h1 class="article-page__title">{page.data.title}</h1>
+      <h1 class="article-page__title">{page.data.h1 ?? page.data.title}</h1>
       <p class="article-page__description">{page.data.description}</p>
       <div class="article-page__body"><Content /></div>
     </article>

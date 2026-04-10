@@ -15,6 +15,7 @@ interface Props {
   canonicalPath?: string;
   includeGlobalScript?: boolean;
   ogType?: string;
+  ogImage?: string;
   navType?: "home" | "page";
   alternates?: { fr?: string; en?: string; es?: string };
   noindex?: boolean;
@@ -27,6 +28,7 @@ const {
   canonicalPath = Astro.url.pathname,
   includeGlobalScript = false,
   ogType = "website",
+  ogImage = "https://izybiz.fr/assets/og-default.jpg",
   navType: navTypeProp,
   alternates,
   noindex = false,
@@ -38,7 +40,7 @@ const cleanPath = canonicalPath.endsWith("/") ? canonicalPath.slice(0, -1) || "/
 // Auto-detect nav type
 const homePathnames = new Set(["/", "/en", "/en/", "/es", "/es/"]);
 const navType = navTypeProp ?? (homePathnames.has(Astro.url.pathname) ? "home" : "page");
-const canonicalUrl = `https://izybiz.fr${cleanPath}`;
+const canonicalUrl = `https://izybiz.fr${canonicalPath || "/"}`;
 const localizedAlt = {
   fr: alternates?.fr ?? mapPathToLang(cleanPath, "fr"),
   en: alternates?.en ?? mapPathToLang(cleanPath, "en"),
@@ -121,13 +123,17 @@ const localizedAlt = {
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content={lang === "fr" ? "fr_FR" : lang === "es" ? "es_ES" : "en_US"} />
     <meta property="og:site_name" content="Izybiz" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <slot name="head" />
   </head>
   <body class="intro-stage-1" id="top">
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T6W62FCN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

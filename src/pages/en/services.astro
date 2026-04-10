@@ -40,16 +40,39 @@ const services = [
 
 <Layout
   lang={lang}
-  title="Services — Izybiz"
-  description="Interim management, AI integration, performance management, operational turnaround, scale-up. Operational interventions for mid-market companies and scale-ups."
+  title="Interim Management & Operational Transformation — Izybiz"
+  description="An operational executive available within weeks, not months. Interim management, AI integration and operational transformation for mid-market companies and scale-ups."
   navType="page"
   includeGlobalScript={true}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Interim management and operational transformation services — Izybiz",
+      "url": "https://izybiz.fr/en/services/",
+      "itemListElement": services.map((s, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": "Service",
+          "name": s.title,
+          "description": s.description,
+          "url": `https://izybiz.fr${s.href}`,
+          "provider": {
+            "@type": "Organization",
+            "name": "Izybiz",
+            "url": "https://izybiz.fr"
+          }
+        }
+      }))
+    })} />
+  </Fragment>
   <main>
     <div class="services-page">
       <header class="services-page__header">
-        <h1 class="services-page__title">What Izybiz does</h1>
-        <p class="services-page__intro">Five types of intervention. All operational. All with one objective: your organisation exits the engagement fully autonomous.</p>
+        <h1 class="services-page__title">Interim management and operational transformation</h1>
+        <p class="services-page__intro">Five types of engagement. All operational. All with one objective: your organisation exits fully autonomous — no consultant dependency. <a href={getLocalizedPath("about", lang)}>About the approach</a>.</p>
       </header>
 
       <ul class="services-list">

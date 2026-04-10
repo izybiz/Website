@@ -1,5 +1,6 @@
 ---
 title: "Stéphane — Manager de Transición Tech & IA | Izybiz"
+h1: "Stéphane — Manager de Transición Tech & IA"
 description: "30 años de dirección operacional en tech. Manager de transición experto para empresas medianas y scale-ups — Software, Retail, Telco."
 lang: "es"
 slug: "sobre-izybiz"
@@ -75,8 +76,6 @@ También trabajo fuera de España — en particular en África Occidental, donde
 
 ---
 
-## Contactar
-
 Una situación no se describe en unas pocas líneas. Reserva una llamada de 30 minutos — sin pitch, sin compromiso.
 
 En 30 minutos aclaramos si tu situación requiere un management de transición y si Izybiz es el perfil adecuado para responder a ello.
@@ -87,4 +86,4 @@ También puedes encontrarme en [LinkedIn](https://www.linkedin.com/in/sdine/) pa
 
 ---
 
-*Ver también: [Management de Transición](/es/gestion-transicion) · [Integración IA en empresas](/es/integracion-ia)*
+*Ver también: [Servicios](/es/servicios) · [Management de Transición](/es/gestion-transicion) · [Integración IA en empresas](/es/integracion-ia)*

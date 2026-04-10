@@ -40,16 +40,39 @@ const services = [
 
 <Layout
   lang={lang}
-  title="Servicios — Izybiz"
-  description="Management de transición, integración IA, gestión del rendimiento, reestructuración, scale-up. Intervenciones operacionales para ETI y scale-ups."
+  title="Management de Transición & Transformación Operacional — Izybiz"
+  description="Un directivo operacional disponible en semanas, no en meses. Management de transición, integración IA y transformación operacional para empresas medianas y scale-ups."
   navType="page"
   includeGlobalScript={true}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Servicios de management de transición y transformación operacional — Izybiz",
+      "url": "https://izybiz.fr/es/servicios/",
+      "itemListElement": services.map((s, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": "Service",
+          "name": s.title,
+          "description": s.description,
+          "url": `https://izybiz.fr${s.href}`,
+          "provider": {
+            "@type": "Organization",
+            "name": "Izybiz",
+            "url": "https://izybiz.fr"
+          }
+        }
+      }))
+    })} />
+  </Fragment>
   <main>
     <div class="services-page">
       <header class="services-page__header">
-        <h1 class="services-page__title">Lo que hace Izybiz</h1>
-        <p class="services-page__intro">Cinco tipos de intervención. Todas operacionales. Todas con un objetivo único: que su organización salga autónoma al final de la misión.</p>
+        <h1 class="services-page__title">Management de transición y transformación operacional</h1>
+        <p class="services-page__intro">Cinco tipos de misión. Todas operacionales. Todas con un objetivo único: que su organización salga autónoma al final — sin dependencia de consultores. <a href={getLocalizedPath("about", lang)}>Sobre el enfoque</a>.</p>
       </header>
 
       <ul class="services-list">

@@ -40,16 +40,39 @@ const services = [
 
 <Layout
   lang={lang}
-  title="Services — Izybiz"
-  description="Management de transition, intégration IA, pilotage de la performance, redressement, scale-up. Interventions opérationnelles pour ETI et scale-ups."
+  title="Management de Transition & Transformation Opérationnelle — Izybiz"
+  description="Un dirigeant opérationnel disponible en semaines, pas en mois. Management de transition, intégration IA et transformation opérationnelle pour ETI et scale-ups."
   navType="page"
   includeGlobalScript={true}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Services de management de transition et consulting opérationnel — Izybiz",
+      "url": "https://izybiz.fr/services/",
+      "itemListElement": services.map((s, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": "Service",
+          "name": s.title,
+          "description": s.description,
+          "url": `https://izybiz.fr${s.href}`,
+          "provider": {
+            "@type": "Organization",
+            "name": "Izybiz",
+            "url": "https://izybiz.fr"
+          }
+        }
+      }))
+    })} />
+  </Fragment>
   <main>
     <div class="services-page">
       <header class="services-page__header">
-        <h1 class="services-page__title">Ce qu'Izybiz fait</h1>
-        <p class="services-page__intro">Cinq types d'intervention. Toutes opérationnelles. Toutes avec un objectif unique : que votre organisation sorte autonome à la fin de la mission.</p>
+        <h1 class="services-page__title">Management de transition et transformation opérationnelle</h1>
+        <p class="services-page__intro">Cinq types de mission. Toutes opérationnelles. Toutes avec un objectif unique : que votre organisation sorte autonome à la fin — pas dépendante d'un cabinet. <a href={getLocalizedPath("about", lang)}>En savoir plus sur l'approche</a>.</p>
       </header>
 
       <ul class="services-list">

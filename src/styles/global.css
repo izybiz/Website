@@ -2915,6 +2915,12 @@ h2:not(.we-deliver__title):not(.hero-metrics__title) {
   margin: 0 0 16px;
 }
 
+.services-page__intro a {
+  color: #ff6a3d;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .services-page__intro {
   font-family: "Didact Gothic", sans-serif;
   font-size: clamp(15px, 1.6vw, 18px);
@@ -3059,6 +3065,10 @@ h2:not(.we-deliver__title):not(.hero-metrics__title) {
 
 .services-page .services-card {
   justify-content: flex-start;
+}
+
+.services-page__section {
+  margin-top: clamp(48px, 6vw, 72px);
 }
 
 .services-page__cta {
