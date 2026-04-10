@@ -8,7 +8,7 @@ const t = useTranslations(lang);
 const posts = (await getCollection("blog-fr")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<Layout lang={lang} title="Blog — Izybiz" description={t("blog.subtitle")} includeGlobalScript={true}>
+<Layout lang={lang} title="Blog IA & transformation opérationnelle pour dirigeants | Izybiz" description={t("blog.subtitle")} includeGlobalScript={true}>
   <main class="blog-page">
     <div class="blog-index">
       <header class="blog-index__header">

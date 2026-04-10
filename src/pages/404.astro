@@ -1,19 +1,61 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import type { Lang } from "../i18n/translations";
+
+const path = Astro.url.pathname;
+const lang: Lang = path.startsWith("/en") ? "en" : path.startsWith("/es") ? "es" : "fr";
+
+const content = {
+  fr: {
+    title: "Page introuvable — Izybiz",
+    description: "Cette page n'existe pas ou a été déplacée.",
+    home: "/", blog: "/blog", services: "/services",
+    linkHome: "accueil", linkBlog: "blog", linkServices: "services",
+    bodyPrefix: "Vous pouvez retourner à l'",
+    bodyMid1: ", consulter le ",
+    bodyMid2: " ou explorer nos ",
+    bodySuffix: ".",
+  },
+  en: {
+    title: "Page not found — Izybiz",
+    description: "This page doesn't exist or has been moved.",
+    home: "/en", blog: "/en/blog", services: "/en/services",
+    linkHome: "home page", linkBlog: "blog", linkServices: "services",
+    bodyPrefix: "You can go back to the ",
+    bodyMid1: ", read the ",
+    bodyMid2: " or explore our ",
+    bodySuffix: ".",
+  },
+  es: {
+    title: "Página no encontrada — Izybiz",
+    description: "Esta página no existe o ha sido movida.",
+    home: "/es", blog: "/es/blog", services: "/es/servicios",
+    linkHome: "inicio", linkBlog: "blog", linkServices: "servicios",
+    bodyPrefix: "Puedes volver al ",
+    bodyMid1: ", consultar el ",
+    bodyMid2: " o explorar nuestros ",
+    bodySuffix: ".",
+  },
+};
+
+const c = content[lang];
 ---
 
 <Layout
-  lang="fr"
-  title="Page introuvable — Izybiz"
-  description="Cette page n'existe pas ou a été déplacée."
+  lang={lang}
+  title={c.title}
+  description={c.description}
   includeGlobalScript={true}
+  noindex={true}
 >
   <main>
     <article class="article-page error-page">
       <h1 class="article-page__title">404</h1>
-      <p class="article-page__description">Cette page n'existe pas ou a été déplacée.</p>
+      <p class="article-page__description">{c.description}</p>
       <div class="article-page__body">
-        <p>Vous pouvez retourner à l'<a href="/">accueil</a>, consulter le <a href="/blog">blog</a> ou explorer nos <a href="/services">services</a>.</p>
+        <p>
+          {c.bodyPrefix}<a href={c.home}>{c.linkHome}</a>{c.bodyMid1}<a href={c.blog}>{c.linkBlog}</a>{c.bodyMid2}<a href={c.services}>{c.linkServices}</a>{c.bodySuffix}
+        </p>
       </div>
     </article>
   </main>

@@ -3,6 +3,69 @@ import Layout from "../../layouts/Layout.astro";
 import HomeContent from "../../components/HomeContentEs.astro";
 
 const lang = "es";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cómo se convierte la IA en resultados de negocio?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Los proyectos de IA no fracasan por la tecnología — fracasan porque nadie asume a la vez la intención de negocio y la entrega. Izybiz toma el rol operacional: definimos los casos de uso, ejecutamos el despliegue y garantizamos que los resultados sean trazables."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Presupuestamos según tu alcance. Reserva una llamada y te damos cifras desde el primer momento. La transparencia primero."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuál es el plazo para los primeros resultados?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Verás automatizaciones funcionando en 2–3 semanas. El despliegue completo depende de tus sistemas. La mayoría de equipos son productivos en 6–8 semanas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Tengo que cambiar mi equipo o mis procesos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Nos adaptamos a cómo trabajas hoy. Si un proceso está roto, te lo diremos — pero no imponemos ninguna reorganización."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo medís el éxito?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Horas ahorradas por semana. Acuerdos cerrados. Funcionalidades lanzadas. Errores reducidos. Elegimos 2–3 métricas que te importan y las seguimos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Y si necesitamos pivotar durante el proyecto?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Esperamos cambios. Los flujos se modifican fácilmente. Pivotar cuesta tiempo, no dinero extra."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Es personalizado o basado en plantillas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ambos. Partimos de tus procesos específicos, no de plantillas genéricas. Pero reutilizamos patrones que han demostrado funcionar."
+      }
+    }
+  ]
+};
 ---
 
 <Layout
@@ -11,5 +74,8 @@ const lang = "es";
   description="Stéphane Dinepro — dirección interina e integración IA para empresas medianas. 30 años de experiencia operacional. Clientes Bouygues, SNCF, Canal+. Respuesta en 48h."
   includeGlobalScript={true}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
   <HomeContent />
 </Layout>

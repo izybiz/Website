@@ -6,6 +6,69 @@ import HomeContentFr from "../components/HomeContentFr.astro";
 import { getLangFromUrl } from "../i18n/translations";
 
 const lang = (Astro.currentLocale || getLangFromUrl(Astro.url)) as "fr" | "en" | "es";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Comment on transforme l'IA en résultats business ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les projets d'IA n'échouent pas à cause de la technologie, mais parce que personne ne porte à la fois l'intention business et la livraison. Izybiz prend le rôle opérationnel : nous cadrons les cas d'usage, pilotons le déploiement et garantissons que les résultats sont traçables."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien ça coûte ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nous estimons en fonction de votre périmètre. Prenez rendez-vous : nous vous donnerons des chiffres dès le départ. La transparence avant tout."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quel délai pour les premiers résultats ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vous voyez des automatisations en marche en 2 à 3 semaines. Le déploiement complet dépend de vos systèmes. La plupart des équipes sont productives en 6 à 8 semaines."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Dois-je changer mon équipe ou mes processus ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non. Nous nous adaptons à votre façon de travailler aujourd'hui. Si votre process est cassé, nous vous le dirons. Mais nous n'imposons pas de réorganisation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment mesurez-vous le succès ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Heures gagnées par semaine. Affaires conclues. Fonctionnalités livrées. Erreurs réduites. Nous choisissons 2 à 3 métriques qui comptent pour vous et nous les suivons."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Que faire si nous devons pivoter en cours de projet ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nous anticipons les changements. Les workflows sont faciles à modifier. Pivoter coûte du temps, pas d'argent supplémentaire."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Est-ce personnalisé ou basé sur des templates ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les deux. Nous partons de vos processus concrets, pas de gabarits génériques. Mais nous réutilisons des patterns qui ont fait leurs preuves."
+      }
+    }
+  ]
+};
 ---
 
 <Layout
@@ -14,5 +77,8 @@ const lang = (Astro.currentLocale || getLangFromUrl(Astro.url)) as "fr" | "en" |
   description="Stéphane Dinepro — management de transition et intégration IA pour ETI et scale-ups français. 30 ans d'expérience. Clients Bouygues, SNCF, Canal+. Réponse sous 48h."
   includeGlobalScript={true}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
   {lang === "es" ? <HomeContentEs /> : lang === "fr" ? <HomeContentFr /> : <HomeContent />}
 </Layout>

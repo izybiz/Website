@@ -37,6 +37,7 @@ const currentPath = `/es/blog/${currentSlug}`;
   title={post.data.title}
   description={post.data.description}
   ogType="article"
+  pubDate={post.data.pubDate.toISOString()}
   includeGlobalScript={true}
   canonicalPath={currentPath}
   alternates={{ fr: frPath, en: enPath, es: currentPath }}

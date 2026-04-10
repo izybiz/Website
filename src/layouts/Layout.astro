@@ -16,6 +16,7 @@ interface Props {
   includeGlobalScript?: boolean;
   ogType?: string;
   ogImage?: string;
+  pubDate?: string;
   navType?: "home" | "page";
   alternates?: { fr?: string; en?: string; es?: string };
   noindex?: boolean;
@@ -29,6 +30,7 @@ const {
   includeGlobalScript = false,
   ogType = "website",
   ogImage = "https://izybiz.fr/assets/og-default.jpg",
+  pubDate,
   navType: navTypeProp,
   alternates,
   noindex = false,
@@ -88,7 +90,7 @@ const localizedAlt = {
       "@type": "Organization",
       "name": "Izybiz",
       "url": "https://izybiz.fr",
-      "logo": "https://izybiz.fr/assets/Logo Izybiz.png",
+      "logo": "https://izybiz.fr/assets/Logo%20Izybiz.png",
       "sameAs": ["https://www.linkedin.com/company/izybiz/"],
       "contactPoint": {
         "@type": "ContactPoint",
@@ -105,6 +107,8 @@ const localizedAlt = {
         "headline": title,
         "description": description,
         "url": canonicalUrl,
+        ...(pubDate && { "datePublished": pubDate, "dateModified": pubDate }),
+        "image": ogImage,
         "author": {
           "@type": "Person",
           "name": "Stéphane Dinepro",
@@ -113,7 +117,10 @@ const localizedAlt = {
         "publisher": {
           "@type": "Organization",
           "name": "Izybiz",
-          "url": "https://izybiz.fr"
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://izybiz.fr/assets/Logo%20Izybiz.png"
+          }
         }
       })} />
     )}

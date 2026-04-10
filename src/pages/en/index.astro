@@ -3,6 +3,69 @@ import Layout from "../../layouts/Layout.astro";
 import HomeContent from "../../components/HomeContent.astro";
 
 const lang = "en";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do you turn AI into business outcomes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AI projects don't fail because of the technology — they fail because no one owns both the business intent and the delivery. Izybiz takes the operational role: we frame the use cases, run the deployment, and make sure results are traceable."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does this cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We quote based on your scope. Book a call and we'll give you numbers upfront. Transparency first."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the timeline to first results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You see automations working in 2–3 weeks. Full deployment depends on your systems. Most teams are productive within 6–8 weeks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to change my team or my processes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. We adapt to how you work today. If a process is broken, we'll tell you — but we don't impose reorganisation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you measure success?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hours saved per week. Deals closed. Features shipped. Errors reduced. We pick 2–3 metrics that matter to you and track them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if we need to pivot mid-project?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We expect changes. Workflows are easy to modify. Pivoting costs time, not extra money."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this customised or template-based?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both. We start with your specific processes, not generic templates. But we reuse patterns that have proven themselves."
+      }
+    }
+  ]
+};
 ---
 
 <Layout
@@ -11,5 +74,8 @@ const lang = "en";
   description="Stéphane Dinepro — interim management and AI integration for mid-market companies. 30 years operational leadership. Clients include Bouygues, SNCF, Canal+. Response within 48h."
   includeGlobalScript={true}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
   <HomeContent />
 </Layout>
