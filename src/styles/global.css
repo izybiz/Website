@@ -719,7 +719,7 @@ input[type="reset"] {
   width: min(1096px, calc(100% - 48px));
   margin: 32px auto 32px;
   padding-bottom: 42px;
-  background: #000000;
+  background: #fbf2e6;
   border-radius: 0;
   position: relative;
   z-index: 0;
@@ -733,7 +733,7 @@ input[type="reset"] {
   left: 50%;
   width: 100vw;
   transform: translateX(-50%);
-  background: #000000;
+  background: #fbf2e6;
   border-radius: 0;
   z-index: -1;
 }
@@ -960,7 +960,7 @@ input[type="reset"] {
 .we-deliver__intro-copy {
   max-width: 1080px;
   text-align: center;
-  color: #000000;
+  color: #fbf2e6;
 }
 
 .home-transition__posts {
@@ -969,7 +969,7 @@ input[type="reset"] {
 
 .home-ai {
   max-width: 100%;
-  background: #000000;
+  background: #fbf2e6;
   padding-top: 80px;
   padding-bottom: clamp(28px, 4vw, 44px);
 }
@@ -980,14 +980,14 @@ input[type="reset"] {
 
 .home-ai__title,
 .home-ai__description {
-  color: #fbf2e6;
+  color: #000000;
 }
 
 .home-ai__description {
   display: block;
   opacity: 1 !important;
   visibility: visible !important;
-  color: #fbf2e6 !important;
+  color: #000000 !important;
   position: relative;
   z-index: 2;
 }
@@ -1018,7 +1018,7 @@ input[type="reset"] {
   align-items: center;
   justify-content: flex-start;
   gap: 48px;
-  background: #fbf2e6;
+  background: #000000;
   padding-top: 68px;
   padding-bottom: 68px;
   padding-left: 0;
@@ -1034,7 +1034,7 @@ input[type="reset"] {
 
 .we-deliver__title {
   margin: 0;
-  color: #000000;
+  color: #fbf2e6;
   text-align: center;
   font-family: "Bricolage Grotesque", sans-serif;
   font-optical-sizing: auto;

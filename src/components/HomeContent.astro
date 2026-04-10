@@ -1,3 +1,11 @@
+---
+import { getCollection } from "astro:content";
+
+const latestPosts = (await getCollection("blog-en"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
 <main class="page-shell">
       <section class="section-one" aria-label="Section 1">
         <div class="hero-izybiz">
@@ -33,14 +41,14 @@
 
         <section class="hero-metrics" aria-label="Key performance highlights">
           <article class="hero-metrics__item">
-            <h2 class="hero-metrics__title" data-count-to="95">0%</h2>
+            <p class="hero-metrics__title" data-count-to="95">0%</p>
             <p class="hero-metrics__description">
               Of failure rate for generative AI projects in businesses.
             </p>
           </article>
 
           <article class="hero-metrics__item">
-            <h2 class="hero-metrics__title" data-count-to="23">0%</h2>
+            <p class="hero-metrics__title" data-count-to="23">0%</p>
             <p class="hero-metrics__description">
               Of leaders can link their AI investments to a measurable financial
               outcome.
@@ -48,12 +56,60 @@
           </article>
 
           <article class="hero-metrics__item">
-            <h2 class="hero-metrics__title" data-count-to="84">0%</h2>
+            <p class="hero-metrics__title" data-count-to="84">0%</p>
             <p class="hero-metrics__description">
               Of AI failures are due to poor management, not the technology
               itself.
             </p>
           </article>
+        </section>
+
+        <section class="home-transition" aria-labelledby="home-transition-title">
+          <div class="home-transition__intro">
+            <h2 class="home-transition__title" id="home-transition-title">
+              Interim management<br class="home-transition__title-break" />for critical phases
+            </h2>
+            <p class="home-transition__description">
+              When an activity drifts, a strategic project stalls, or a transformation needs to deliver fast, a framework isn't enough. You need operational leadership that can take the reins, set priorities, and hold execution.
+            </p>
+          </div>
+
+          <ul class="blog-list home-transition__posts" aria-label="Latest articles">
+            {latestPosts.map((post) => {
+              const slug = post.id.replace(/\.md$/, "");
+              const date = post.data.pubDate.toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" });
+
+              return (
+                <li class="blog-card">
+                  <a class="blog-card__link" href={`/en/blog/${slug}`}>
+                    <time class="blog-card__date" datetime={post.data.pubDate.toISOString()}>{date}</time>
+                    <div class="blog-card__content">
+                      <h3 class="blog-card__title">{post.data.title}</h3>
+                      <p class="blog-card__description">{post.data.description}</p>
+                    </div>
+                    <span class="blog-card__cta">Read article</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+
+        <section class="home-ai" aria-labelledby="home-ai-title">
+          <div class="home-ai__inner">
+            <h2 class="home-ai__title" id="home-ai-title">
+              Integrating AI without losing operational control
+            </h2>
+            <p class="home-ai__description">
+              AI creates value when it fits within clear priorities, controlled processes, and explicit accountability.
+            </p>
+          </div>
+          <section class="hero-video" aria-label="Izybiz showcase video">
+            <video class="hero-video__media" controls preload="metadata">
+              <source src="/assets/Anim-Izybiz-V2.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </section>
         </section>
 
         <section
@@ -63,8 +119,11 @@
         >
           <div class="we-deliver__intro">
             <h2 class="we-deliver__title" id="we-deliver-title">
-              What do we deliver?
+              Measurable results, not advisory recommendations
             </h2>
+            <p class="we-deliver__intro-copy">
+              A useful mission is judged on what it changes in operations, not on the quality of the slides. From day one, we clarify objectives, the indicators to track, and the initiatives to prioritise. The goal is simple: produce visible, readable, and measurable effects.
+            </p>
           </div>
 
           <div class="we-deliver__cards-row" aria-label="We deliver cards">
@@ -186,20 +245,13 @@
             </article>
           </div>
         </section>
-
-        <section class="hero-video" aria-label="Izybiz showcase video">
-          <video class="hero-video__media" controls preload="metadata">
-            <source src="/assets/Anim-Izybiz-V2.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </section>
       </section>
 
       <section class="section-two" id="we-do" aria-label="Case studies">
         <div class="section-two__inner">
           <header class="section-two__intro">
             <h2 class="section-two__title" id="case-studies-heading">
-              Our use cases
+              Our latest missions
             </h2>
             <div
               class="section-two__topbar"
@@ -294,7 +346,7 @@
                   A telecom operator needed to launch a super-app across two
                   markets simultaneously — two distinct operating scenarios,
                   multiple stakeholders, under acquisition pressure. We scoped
-                  and build the product, structured two distinct go-to-market
+                  and built the product, structured two distinct go-to-market
                   scenarios — the client chose one and deployed it.
                 </p>
               </div>
@@ -313,7 +365,7 @@
                 <p class="section-two__case-description">
                   An e-commerce marketplace had to go from zero to a viable
                   market in under two years — positioning, branding,
-                  organization, go-to-market, and building an engaged community
+                  organisation, go-to-market, and building an engaged community
                   of buyers and sellers. We structured and led end-to-end
                   delivery to €1.25M GMV in 18 months.
                 </p>
@@ -335,7 +387,7 @@
                   driver of social connection and savings. We structured a
                   "collective cooking at home" operational model and designed
                   the product experience through a mobile app orchestrating
-                  batch cooking sessions — built around a Triple Gain: 50% cost
+                  batch cooking sessions — built around a triple gain: 50% cost
                   savings, time efficiency, and wellbeing.
                 </p>
               </div>
@@ -366,7 +418,7 @@
       <section class="section-faq" id="faq" aria-label="FAQ">
         <div class="section-faq__inner">
           <header class="section-faq__intro">
-            <h2 class="section-faq__title">Most common questions</h2>
+            <h2 class="section-faq__title">Frequently asked questions</h2>
           </header>
 
           <div class="section-faq__chat" aria-label="FAQ list">
@@ -382,7 +434,7 @@
                 >
                   <span class="faq-item__question-bg" aria-hidden="true"></span>
                   <span class="faq-item__label"
-                    >How we turn AI into business outcomes?</span
+                    >How do you turn AI into business outcomes?</span
                   >
                 </button>
               </h3>
@@ -397,11 +449,11 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      Izybiz is built on a simple belief: AI projects don't fail
-                      because of the technology, but because no one owns both
-                      the business intent and delivery. With 20 years in
-                      business management, we ensure AI solutions are delivered,
-                      adopted, and drive real business outcomes.
+                      AI projects don't fail because of the technology — they
+                      fail because no one owns both the business intent and the
+                      delivery. Izybiz takes the operational role: we frame the
+                      use cases, run the deployment, and make sure results are
+                      traceable.
                     </p>
                   </div>
                 </div>
@@ -433,7 +485,7 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      We quote based on your scope. Schedule a call, we'll give
+                      We quote based on your scope. Book a call and we'll give
                       you numbers upfront. Transparency first.
                     </p>
                   </div>
@@ -468,9 +520,9 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      You see automations working in 2-3 weeks. Full deployment
+                      You see automations working in 2–3 weeks. Full deployment
                       depends on your systems. Most teams are productive within
-                      6-8 weeks.
+                      6–8 weeks.
                     </p>
                   </div>
                 </div>
@@ -504,8 +556,9 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      No. We adapt to how you work now. If your process is
-                      broken, we'll tell you. But we don't force reorganization.
+                      No. We adapt to how you work today. If a process is
+                      broken, we'll tell you — but we don't impose
+                      reorganisation.
                     </p>
                   </div>
                 </div>
@@ -540,8 +593,8 @@
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
                       Hours saved per week. Deals closed. Features shipped.
-                      Errors reduced. We pick 2-3 metrics that matter to you, we
-                      track them.
+                      Errors reduced. We pick 2–3 metrics that matter to you
+                      and track them.
                     </p>
                   </div>
                 </div>
@@ -595,7 +648,7 @@
                 >
                   <span class="faq-item__question-bg" aria-hidden="true"></span>
                   <span class="faq-item__label"
-                    >Is this customized or template-based?</span
+                    >Is this customised or template-based?</span
                   >
                 </button>
               </h3>
@@ -610,8 +663,9 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      Both. We start with your specific processes, not
-                      templates. But we reuse patterns that work.
+                      Both. We start with your specific processes, not generic
+                      templates. But we reuse patterns that have proven
+                      themselves.
                     </p>
                   </div>
                 </div>
@@ -646,7 +700,7 @@
         <div class="demo-modal__header">
           <h2 id="demo-modal-title" class="demo-modal__title">Book a call</h2>
           <p id="demo-modal-description" class="demo-modal__description">
-            Leave your email and we’ll get back to you shortly.
+            Leave your email and we'll get back to you shortly.
           </p>
         </div>
 
@@ -699,7 +753,7 @@
         <div class="demo-modal__success" hidden>
           <h2 class="demo-modal__success-title">Email saved</h2>
           <p class="demo-modal__success-description">
-            Thanks! We’ve saved your email. You’ll receive a confirmation email
+            Thanks! We've saved your email. You'll receive a confirmation email
             shortly.
           </p>
           <button

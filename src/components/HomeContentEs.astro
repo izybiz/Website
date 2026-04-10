@@ -1,10 +1,18 @@
+---
+import { getCollection } from "astro:content";
+
+const latestPosts = (await getCollection("blog-es"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
 <main class="page-shell">
       <section class="section-one" aria-label="Section 1">
         <div class="hero-izybiz">
           <div class="hero-izybiz__text">
             <h1 class="hero-izybiz__title">
               <span class="hero-izybiz__title-line"
-                >Haciendo la IA eficaz donde <br />
+                >Hacer la IA eficaz donde <br />
                 importa: en tus operaciones</span
               >
             </h1>
@@ -17,7 +25,7 @@
 
           <div class="hero-izybiz__actions">
             <a class="hero-izybiz__button" href="/es/contacto">
-              Reservar llamada
+              Reservar una llamada
             </a>
             <a
               class="hero-izybiz__button hero-izybiz__button--secondary"
@@ -33,14 +41,14 @@
 
         <section class="hero-metrics" aria-label="Key performance highlights">
           <article class="hero-metrics__item">
-            <h2 class="hero-metrics__title" data-count-to="95">0%</h2>
+            <p class="hero-metrics__title" data-count-to="95">0%</p>
             <p class="hero-metrics__description">
               Tasa de fracaso de proyectos de IA generativa en empresas.
             </p>
           </article>
 
           <article class="hero-metrics__item">
-            <h2 class="hero-metrics__title" data-count-to="23">0%</h2>
+            <p class="hero-metrics__title" data-count-to="23">0%</p>
             <p class="hero-metrics__description">
               Solo el 23 % de los directivos puede vincular sus inversiones en IA
               con un resultado financiero medible.
@@ -48,12 +56,60 @@
           </article>
 
           <article class="hero-metrics__item">
-            <h2 class="hero-metrics__title" data-count-to="84">0%</h2>
+            <p class="hero-metrics__title" data-count-to="84">0%</p>
             <p class="hero-metrics__description">
               El 84 % de los fracasos en IA se debe a una mala gestión, no a la
               tecnología en sí.
             </p>
           </article>
+        </section>
+
+        <section class="home-transition" aria-labelledby="home-transition-title">
+          <div class="home-transition__intro">
+            <h2 class="home-transition__title" id="home-transition-title">
+              Management de transición<br class="home-transition__title-break" />para las fases críticas
+            </h2>
+            <p class="home-transition__description">
+              Cuando una actividad se desvía, un proyecto estratégico se ralentiza o una transformación tiene que producir resultados rápido, un marco de trabajo no basta. Hace falta una dirección operacional capaz de tomar las riendas, fijar las prioridades y mantener la ejecución.
+            </p>
+          </div>
+
+          <ul class="blog-list home-transition__posts" aria-label="Últimos artículos">
+            {latestPosts.map((post) => {
+              const slug = post.id.replace(/\.md$/, "");
+              const date = post.data.pubDate.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
+
+              return (
+                <li class="blog-card">
+                  <a class="blog-card__link" href={`/es/blog/${slug}`}>
+                    <time class="blog-card__date" datetime={post.data.pubDate.toISOString()}>{date}</time>
+                    <div class="blog-card__content">
+                      <h3 class="blog-card__title">{post.data.title}</h3>
+                      <p class="blog-card__description">{post.data.description}</p>
+                    </div>
+                    <span class="blog-card__cta">Leer el artículo</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+
+        <section class="home-ai" aria-labelledby="home-ai-title">
+          <div class="home-ai__inner">
+            <h2 class="home-ai__title" id="home-ai-title">
+              Integrar la IA sin perder el control operacional
+            </h2>
+            <p class="home-ai__description">
+              La IA crea valor cuando se inscribe en prioridades claras, procesos controlados y responsabilidades explícitas.
+            </p>
+          </div>
+          <section class="hero-video" aria-label="Izybiz showcase video">
+            <video class="hero-video__media" controls preload="metadata">
+              <source src="/assets/Anim-Izybiz-V2.mp4" type="video/mp4" />
+              Tu navegador no soporta la etiqueta de video.
+            </video>
+          </section>
         </section>
 
         <section
@@ -63,8 +119,11 @@
         >
           <div class="we-deliver__intro">
             <h2 class="we-deliver__title" id="we-deliver-title">
-              ¿Qué entregamos?
+              Resultados medibles, no recomendaciones de principio
             </h2>
+            <p class="we-deliver__intro-copy">
+              Una misión útil se juzga por lo que cambia en las operaciones, no por la calidad de las presentaciones. Desde el inicio, clarificamos los objetivos, los indicadores a seguir y los proyectos a priorizar. El objetivo es simple: producir efectos visibles, legibles y medibles.
+            </p>
           </div>
 
           <div class="we-deliver__cards-row" aria-label="Qué entregamos cards">
@@ -186,20 +245,13 @@
             </article>
           </div>
         </section>
-
-        <section class="hero-video" aria-label="Izybiz showcase video">
-          <video class="hero-video__media" controls preload="metadata">
-            <source src="/assets/Anim-Izybiz-V2.mp4" type="video/mp4" />
-            Tu navegador no soporta la etiqueta de video.
-          </video>
-        </section>
       </section>
 
       <section class="section-two" id="we-do" aria-label="Case studies">
         <div class="section-two__inner">
           <header class="section-two__intro">
             <h2 class="section-two__title" id="case-studies-heading">
-              Nuestros casos de uso
+              Nuestras últimas misiones
             </h2>
             <div
               class="section-two__topbar"
@@ -291,11 +343,12 @@
                   Telecom y Fintech · África
                 </h3>
                 <p class="section-two__case-description">
-                  Un operador de telecom necesitaba lanzar una superapp en dos mercados
-                  al mismo tiempo: dos escenarios operativos distintos,
-                  múltiples stakeholders y presión de adquisición. Definimos
-                  y construimos el producto, estructuramos dos estrategias de
-                  salida al mercado y el cliente eligio una para desplegarla.
+                  Un operador de telecom necesitaba lanzar una superapp en dos
+                  mercados al mismo tiempo: dos escenarios operativos distintos,
+                  múltiples partes interesadas y presión de adquisición.
+                  Definimos y construimos el producto, estructuramos dos
+                  estrategias de salida al mercado — el cliente eligió una y la
+                  desplegó.
                 </p>
               </div>
             </article>
@@ -311,11 +364,12 @@
                   Marketplace comunitario · África
                 </h3>
                 <p class="section-two__case-description">
-                  Un marketplace de e-commerce debía pasar de cero a un mercado viable
-                  en menos de dos años: posicionamiento, marca,
+                  Un marketplace de e-commerce debía pasar de cero a un mercado
+                  viable en menos de dos años: posicionamiento, marca,
                   organización, go-to-market y construcción de una comunidad
                   activa de compradores y vendedores. Estructuramos y lideramos
-                  la ejecucion end-to-end hasta 1,25 M€ de GMV en 18 meses.
+                  la ejecución de extremo a extremo hasta 1,25 M€ de GMV en 18
+                  meses.
                 </p>
               </div>
             </article>
@@ -331,12 +385,12 @@
                   Cocina comunitaria · Europa
                 </h3>
                 <p class="section-two__case-description">
-                  Una entusiasta de la cocina quería convertir la preparación diaria de
-                  comidas en una fuente de conexion social y ahorro.
-                  Estructuramos un modelo operativo de "cocina colectiva en casa"
-                  y diseñamos la experiencia de producto mediante una app móvil
-                  que orquesta sesiones de batch cooking, con un Triple
-                  Beneficio: 50% de ahorro, eficiencia de tiempo y bienestar.
+                  Una apasionada de la cocina quería convertir la preparación
+                  diaria de comidas en una fuente de conexión social y ahorro.
+                  Estructuramos un modelo operativo de «cocina colectiva en
+                  casa» y diseñamos la experiencia de producto mediante una app
+                  móvil que orquesta sesiones de batch cooking, con un triple
+                  beneficio: 50 % de ahorro, eficiencia de tiempo y bienestar.
                 </p>
               </div>
             </article>
@@ -352,11 +406,11 @@
                   Entrega agéntica · Francia
                 </h3>
                 <p class="section-two__case-description">
-                  Una empresa francesa de software necesitaba escalar despliegues de
-                  clientes sin aumentar plantilla. Estamos diseñando un sistema
-                  de agentes de IA autónomos bajo supervisión humana para
-                  orquestar y entregar proyectos de clientes, desde onboarding
-                  hasta salida a producción.
+                  Una empresa francesa de software necesitaba escalar los
+                  despliegues de clientes sin aumentar la plantilla. Estamos
+                  diseñando un sistema de agentes de IA autónomos bajo
+                  supervisión humana para orquestar y entregar proyectos de
+                  clientes, desde el onboarding hasta la puesta en producción.
                 </p>
               </div>
             </article>
@@ -367,7 +421,7 @@
       <section class="section-faq" id="faq" aria-label="FAQ">
         <div class="section-faq__inner">
           <header class="section-faq__intro">
-            <h2 class="section-faq__title">Preguntas más frecuentes</h2>
+            <h2 class="section-faq__title">Preguntas frecuentes</h2>
           </header>
 
           <div class="section-faq__chat" aria-label="FAQ list">
@@ -383,7 +437,7 @@
                 >
                   <span class="faq-item__question-bg" aria-hidden="true"></span>
                   <span class="faq-item__label"
-                    >¿Cómo convertimos la IA en resultados de negocio?</span
+                    >¿Cómo se convierte la IA en resultados de negocio?</span
                   >
                 </button>
               </h3>
@@ -398,11 +452,11 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      Izybiz se basa en una idea simple: los proyectos de IA no fallan
-                      por la tecnología, sino porque nadie asume a la vez
-                      la intención de negocio y la entrega. Con 20 años en
-                      direccion empresarial, garantizamos que las soluciones de
-                      IA se implementen, se adopten y generen resultados reales.
+                      Los proyectos de IA no fracasan por la tecnología — fracasan
+                      porque nadie asume a la vez la intención de negocio y la
+                      entrega. Izybiz toma el rol operacional: definimos los casos
+                      de uso, ejecutamos el despliegue y garantizamos que los
+                      resultados sean trazables.
                     </p>
                   </div>
                 </div>
@@ -420,7 +474,7 @@
                   data-faq-trigger
                 >
                   <span class="faq-item__question-bg" aria-hidden="true"></span>
-                  <span class="faq-item__label">¿Cuánto cuesta esto?</span>
+                  <span class="faq-item__label">¿Cuánto cuesta?</span>
                 </button>
               </h3>
               <div
@@ -434,8 +488,9 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      Cotizamos segun tu alcance. Agenda una llamada y te daremos
-                      cifras desde el inicio. Transparencia primero.
+                      Presupuestamos según tu alcance. Reserva una llamada y te
+                      damos cifras desde el primer momento. La transparencia
+                      primero.
                     </p>
                   </div>
                 </div>
@@ -469,9 +524,9 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      Verás automatizaciones funcionando en 2-3 semanas. El despliegue
-                      completo depende de tus sistemas. La mayoría de equipos
-                      son productivos en 6-8 semanas.
+                      Verás automatizaciones funcionando en 2–3 semanas. El
+                      despliegue completo depende de tus sistemas. La mayoría
+                      de equipos son productivos en 6–8 semanas.
                     </p>
                   </div>
                 </div>
@@ -490,7 +545,7 @@
                 >
                   <span class="faq-item__question-bg" aria-hidden="true"></span>
                   <span class="faq-item__label"
-                    >Necesito cambiar mi equipo o mis procesos?</span
+                    >¿Tengo que cambiar mi equipo o mis procesos?</span
                   >
                 </button>
               </h3>
@@ -505,8 +560,9 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      No. Nos adaptamos a cómo trabajas hoy. Si tu proceso está
-                      roto, te lo diremos. Pero no imponemos una reorganización.
+                      No. Nos adaptamos a cómo trabajas hoy. Si un proceso está
+                      roto, te lo diremos — pero no imponemos ninguna
+                      reorganización.
                     </p>
                   </div>
                 </div>
@@ -525,7 +581,7 @@
                 >
                   <span class="faq-item__question-bg" aria-hidden="true"></span>
                   <span class="faq-item__label"
-                    >¿Cómo miden el éxito?</span
+                    >¿Cómo medís el éxito?</span
                   >
                 </button>
               </h3>
@@ -540,9 +596,9 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      Horas ahorradas por semana. Acuerdos cerrados. Funcionalidades
-                      lanzadas. Errores reducidos. Elegimos 2-3 métricas que te
-                      importan y les hacemos seguimiento.
+                      Horas ahorradas por semana. Acuerdos cerrados.
+                      Funcionalidades lanzadas. Errores reducidos. Elegimos
+                      2–3 métricas que te importan y las seguimos.
                     </p>
                   </div>
                 </div>
@@ -561,7 +617,7 @@
                 >
                   <span class="faq-item__question-bg" aria-hidden="true"></span>
                   <span class="faq-item__label"
-                    >Y si necesitamos pivotar durante el proyecto?</span
+                    >¿Y si necesitamos pivotar durante el proyecto?</span
                   >
                 </button>
               </h3>
@@ -576,8 +632,8 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      Esperamos cambios. Los flujos se modifican fácilmente. Pivotar
-                      cuesta tiempo, no dinero extra.
+                      Esperamos cambios. Los flujos se modifican fácilmente.
+                      Pivotar cuesta tiempo, no dinero extra.
                     </p>
                   </div>
                 </div>
@@ -596,7 +652,7 @@
                 >
                   <span class="faq-item__question-bg" aria-hidden="true"></span>
                   <span class="faq-item__label"
-                    >Es personalizado o basado en plantillas?</span
+                    >¿Es personalizado o basado en plantillas?</span
                   >
                 </button>
               </h3>
@@ -611,8 +667,9 @@
                 <div class="faq-item__pad">
                   <div class="faq-item__bubble">
                     <p class="faq-item__answer">
-                      Ambos. Empezamos por tus procesos específicos, no por
-                      plantillas. Pero reutilizamos patrones que funcionan.
+                      Ambos. Partimos de tus procesos específicos, no de
+                      plantillas genéricas. Pero reutilizamos patrones que han
+                      demostrado funcionar.
                     </p>
                   </div>
                 </div>
@@ -645,7 +702,7 @@
         </button>
 
         <div class="demo-modal__header">
-          <h2 id="demo-modal-title" class="demo-modal__title">Reservar llamada</h2>
+          <h2 id="demo-modal-title" class="demo-modal__title">Reservar una llamada</h2>
           <p id="demo-modal-description" class="demo-modal__description">
             Déjanos tu correo y te contactaremos en breve.
           </p>
@@ -692,16 +749,16 @@
           >
             <span class="demo-modal__submit-label">Solicitar llamada</span>
             <span class="demo-modal__submit-loading" aria-hidden="true">
-              Cargando...
+              Cargando…
             </span>
           </button>
         </form>
 
         <div class="demo-modal__success" hidden>
-          <h2 class="demo-modal__success-title">Correo electrónico guardado</h2>
+          <h2 class="demo-modal__success-title">Correo guardado</h2>
           <p class="demo-modal__success-description">
-            Gracias. Hemos guardado tu correo. Recibirás un email de confirmación
-            en breve.
+            Gracias. Hemos guardado tu correo. Recibirás un email de
+            confirmación en breve.
           </p>
           <button
             type="button"
