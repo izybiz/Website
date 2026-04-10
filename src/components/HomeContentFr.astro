@@ -1,3 +1,11 @@
+---
+import { getCollection } from "astro:content";
+
+const latestPosts = (await getCollection("blog-fr"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
 <main class="page-shell">
       <section class="section-one" aria-label="Section 1">
         <div class="hero-izybiz">
@@ -56,6 +64,54 @@
           </article>
         </section>
 
+        <section class="home-transition" aria-labelledby="home-transition-title">
+          <div class="home-transition__intro">
+            <h2 class="home-transition__title" id="home-transition-title">
+              Management de transition<br class="home-transition__title-break" />pour les phases critiques
+            </h2>
+            <p class="home-transition__description">
+              Quand une activité dérive, qu’un projet stratégique ralentit ou qu’une transformation doit produire vite, il faut plus qu’un cadrage. Il faut une direction opérationnelle capable de reprendre la main, fixer les priorités et tenir l’exécution.
+            </p>
+          </div>
+
+          <ul class="blog-list home-transition__posts" aria-label="Derniers articles">
+            {latestPosts.map((post) => {
+              const slug = post.id.replace(/\.md$/, "");
+              const date = post.data.pubDate.toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" });
+
+              return (
+                <li class="blog-card">
+                  <a class="blog-card__link" href={`/blog/${slug}`}>
+                    <time class="blog-card__date" datetime={post.data.pubDate.toISOString()}>{date}</time>
+                    <div class="blog-card__content">
+                      <h3 class="blog-card__title">{post.data.title}</h3>
+                      <p class="blog-card__description">{post.data.description}</p>
+                    </div>
+                    <span class="blog-card__cta">Lire l'article</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+
+        <section class="home-ai" aria-labelledby="home-ai-title">
+          <div class="home-ai__inner">
+            <h2 class="home-ai__title" id="home-ai-title">
+              Intégrer l’IA sans perdre le contrôle opérationnel
+            </h2>
+            <p class="home-ai__description">
+              L’IA crée de la valeur lorsqu’elle s’inscrit dans des priorités claires, des processus tenus et des responsabilités explicites.
+            </p>
+          </div>
+          <section class="hero-video" aria-label="Izybiz showcase video">
+            <video class="hero-video__media" controls preload="metadata">
+              <source src="/assets/Anim-Izybiz-V2.mp4" type="video/mp4" />
+              Votre navigateur ne prend pas en charge la balise vidéo.
+            </video>
+          </section>
+        </section>
+
         <section
           class="we-deliver"
           id="we-deliver"
@@ -63,8 +119,11 @@
         >
           <div class="we-deliver__intro">
             <h2 class="we-deliver__title" id="we-deliver-title">
-              Ce qu'on délivre
+              Des résultats mesurables, pas des recommandations de principe
             </h2>
+            <p class="we-deliver__intro-copy">
+              Une mission utile se juge sur ce qu’elle change dans les opérations, pas sur la qualité des slides. Dès le démarrage, nous clarifions les objectifs, les indicateurs à suivre et les chantiers à prioriser. L’enjeu est simple : produire des effets visibles, lisibles et mesurables.
+            </p>
           </div>
 
           <div class="we-deliver__cards-row" aria-label="Ce qu'on délivre cards">
@@ -186,20 +245,13 @@
             </article>
           </div>
         </section>
-
-        <section class="hero-video" aria-label="Izybiz showcase video">
-          <video class="hero-video__media" controls preload="metadata">
-            <source src="/assets/Anim-Izybiz-V2.mp4" type="video/mp4" />
-            Votre navigateur ne prend pas en charge la balise vidéo.
-          </video>
-        </section>
       </section>
 
       <section class="section-two" id="we-do" aria-label="Case studies">
         <div class="section-two__inner">
           <header class="section-two__intro">
             <h2 class="section-two__title" id="case-studies-heading">
-              Nos cas d'usage
+              Nos dernières missions
             </h2>
             <div
               class="section-two__topbar"
