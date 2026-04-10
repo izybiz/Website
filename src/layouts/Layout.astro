@@ -158,13 +158,14 @@ const localizedAlt = {
 
     <slot name="head" />
   </head>
-  <body class="intro-stage-1" id="top">
+  <body id="top">
+    <script>document.body.classList.add('intro-stage-1')</script>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T6W62FCN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <header class="site-header" aria-label="Site header">
       <div class="site-header__pill">
         <div class="site-header__identity">
           <a class="site-header__brand" href={getLocalizedPath("home", lang)} aria-label="Go to top">
-            <img src="/assets/Logo Izybiz.png" alt="IZYBIZ" width="1479" height="413" />
+            <img src="/assets/Logo Izybiz.png" alt="IZYBIZ" width="1479" height="413" fetchpriority="high" />
           </a>
           <div class="site-nav__lang" aria-label="Language switcher">
             <a href={localizedAlt.fr} aria-current={lang === "fr" ? "true" : undefined}>FR</a>

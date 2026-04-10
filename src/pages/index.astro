@@ -79,6 +79,9 @@ const faqSchema = {
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <link rel="preload" as="image" href="/assets/illustration--dna.svg" />
+    <link rel="preload" as="image" href="/assets/illustration--agent.svg" />
+    <link rel="preload" as="image" href="/assets/illustration--output.svg" />
   </Fragment>
   {lang === "es" ? <HomeContentEs /> : lang === "fr" ? <HomeContentFr /> : <HomeContent />}
 </Layout>
