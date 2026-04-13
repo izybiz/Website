@@ -1,9 +1,9 @@
 ---
 title: "IA et langues minoritaires : quand les modèles ne parlent pas vos clients"
 description: "Des milliers de langues absentes des corpus d'entraînement, biais culturels invisibles — ce que ça change concrètement pour les projets digitaux dans des contextes multilingues."
-pubDate: 2025-04-10
+pubDate: 2024-11-15
 lang: "fr"
-translationKey: "2025-04-10"
+translationKey: "2024-11-15"
 ---
 
 *Ce retour d'expérience est issu du déploiement de produits digitaux en Afrique de l'Ouest, où les langues locales sont quasi absentes des corpus d'entraînement des grands modèles. La problématique — biais linguistiques, absence culturelle, recontextualisation nécessaire — concerne tout projet digital déployé dans un contexte multilingue ou sur des marchés hors-WEIRD.*

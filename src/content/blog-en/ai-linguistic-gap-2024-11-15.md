@@ -1,9 +1,9 @@
 ---
 title: "AI and Minority Languages: When Models Don't Speak to Your Customers"
 description: "Thousands of languages absent from training corpora, invisible cultural biases — what this concretely changes for digital projects in multilingual contexts."
-pubDate: 2025-04-10
+pubDate: 2024-11-15)
 lang: "en"
-translationKey: "2025-04-10"
+translationKey: "2024-11-15"
 ---
 
 *This field report comes from deploying digital products in West Africa, where local languages are nearly absent from major model training corpora. The issue — linguistic biases, cultural absence, necessary recontextualization — affects any digital project deployed in a multilingual context or in markets outside the WEIRD world.*
