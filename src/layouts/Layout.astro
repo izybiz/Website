@@ -7,6 +7,7 @@ import {
   type Lang,
   useTranslations,
 } from "../i18n/translations";
+import CookieConsent from "../components/CookieConsent.astro";
 
 interface Props {
   title: string;
@@ -55,16 +56,29 @@ const localizedAlt = {
 <html lang={lang}>
   <head>
     <script is:inline>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-T6W62FCN");
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      // Consent Mode v2: deny by default before GTM loads
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        wait_for_update: 500
+      });
+      // Restore previous consent if user already chose
+      try {
+        if (localStorage.getItem('cookie_consent') === 'granted') {
+          gtag('consent', 'update', { analytics_storage: 'granted' });
+        }
+      } catch(e) {}
+      // Load GTM
+      (function(w,d,s,l,i){
+        w[l]=w[l]||[];
+        w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+        j.async=true;
+        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+        f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-T6W62FCN');
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -269,6 +283,8 @@ const localizedAlt = {
             <a class="site-footer__nav-link" href={getLocalizedPath("services", lang)}>{t("nav.services")}</a>
             <a class="site-footer__nav-link" href={getLocalizedPath("blog", lang)}>{t("nav.blog")}</a>
             <a class="site-footer__nav-link" href={getLocalizedPath("contact", lang)}>{t("nav.contact")}</a>
+            <a class="site-footer__nav-link" href="/mentions-legales">Mentions légales</a>
+            <a class="site-footer__nav-link" href="/donnees-personnelles">Données personnelles</a>
           </nav>
         </div>
       </div>
@@ -278,5 +294,6 @@ const localizedAlt = {
       window.__IZYBIZ_DEFAULT_LANG = "{defaultLang}";
     </script>
     {includeGlobalScript ? <script is:inline src="/script.js"></script> : null}
+    <CookieConsent lang={lang} />
   </body>
 </html>

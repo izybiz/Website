@@ -1,12 +1,10 @@
 ---
-title: "Social commerce B2B en marché informel : le modèle qui tient"
-description: "Achat groupé, microcrédit transactionnel, fidélité cashback : concevoir un modèle commercial B2B adapté à un marché informel où le crédit est le vrai verrou d'adoption."
+title: "JIPS : le modèle social commerce B2B inspiré de Twiga"
+description: "Achat groupé, microcrédit, fidélité cashback : le modèle B2B de JIPS pour formaliser le commerce informel en Afrique de l'Ouest."
 pubDate: 2023-09-10
 lang: "fr"
 translationKey: "2023-09-10"
 ---
-
-*Ce retour d'expérience est issu de la conception du modèle commercial de JIPS, une plateforme B2B lancée en Afrique de l'Ouest. Les trois composantes décrites — achat groupé, microcrédit transactionnel, programme de fidélité — répondent à des contraintes communes à tout marché informel ou sous-bancarisé.*
 
 Dans un [article précédent](/blog/commerce-informel-afrique-distribution-digitale), j'expliquais pourquoi les approches classiques de digitalisation du commerce en Afrique échouent : elles s'adressent au consommateur final alors que le problème structurel est en amont, dans la chaîne d'approvisionnement entre grossistes et petits commerçants informels.
 
