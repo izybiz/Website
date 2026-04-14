@@ -1,7 +1,7 @@
 ---
 title: "AI and Minority Languages: When Models Don't Speak to Your Customers"
 description: "Thousands of languages absent from training corpora, invisible cultural biases — what this concretely changes for digital projects in multilingual contexts."
-pubDate: 2024-11-15)
+pubDate: 2024-11-15
 lang: "en"
 translationKey: "2024-11-15"
 ---
