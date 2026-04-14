@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getEntry, render } from "astro:content";
+
+const lang = "fr";
+const page = await getEntry("pages-fr", "mentions-legales");
+const { Content } = await render(page);
+---
+
+<Layout lang={lang} title={page.data.title} description={page.data.description} includeGlobalScript={true}>
+  <main class="legal-main">
+    <div class="legal-inner">
+      <Content />
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .legal-main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+  .legal-inner :global(h1),
+  .legal-inner :global(h2) {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .legal-inner :global(p) {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+  .legal-inner :global(hr) {
+    margin: 2rem 0;
+    border: none;
+    border-top: 1px solid #e5e7eb;
+  }
+</style>
