@@ -21,20 +21,12 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.CLEVER_SSH_KEY }}
-
-      - name: Add Clever Cloud to known hosts
-        run: ssh-keyscan push.clever-cloud.com >> ~/.ssh/known_hosts
-
-      - name: Push dist to Clever Cloud
+      - name: Push dist to deploy branch
         run: |
-          git config --global user.email "deploy@github-actions"
-          git config --global user.name "GitHub Actions"
           cd dist
           git init
+          git config user.email "deploy@github-actions"
+          git config user.name "GitHub Actions"
           git add -A
           git commit -m "Deploy $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          git push --force git+ssh://git@push.clever-cloud.com/app_ae47ccdf-ff2b-48cd-994c-137e9693ebc8.git HEAD:master
+          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/izybiz/Website.git HEAD:deploy
