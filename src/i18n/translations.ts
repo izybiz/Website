@@ -22,6 +22,8 @@ export const ui = {
     "blog.title": "Blog",
     "blog.subtitle": "Insights dirigeants sur la transformation et l'IA",
     "footer.copyright": "© 2026 Izybiz — Tous droits réservés",
+    "footer.legalNotice": "Mentions légales",
+    "footer.privacyPolicy": "Données personnelles",
   },
   en: {
     "nav.deliver": "What we deliver",
@@ -37,6 +39,8 @@ export const ui = {
     "blog.title": "Blog",
     "blog.subtitle": "Executive insights on transformation and AI",
     "footer.copyright": "© 2026 Izybiz — All rights reserved",
+    "footer.legalNotice": "Legal notice",
+    "footer.privacyPolicy": "Privacy policy",
   },
   es: {
     "nav.deliver": "Qué entregamos",
@@ -52,6 +56,8 @@ export const ui = {
     "blog.title": "Blog",
     "blog.subtitle": "Perspectivas directivas sobre transformación e IA",
     "footer.copyright": "© 2026 Izybiz — Todos los derechos reservados",
+    "footer.legalNotice": "Aviso legal",
+    "footer.privacyPolicy": "Política de privacidad",
   },
 } as const;
 
@@ -69,52 +75,65 @@ export function useTranslations(lang: Lang) {
   };
 }
 
+const normalizePath = (path: string) => (path.endsWith("/") ? path.slice(0, -1) || "/" : path);
+const withTrailingSlash = (path: string) => (path === "/" ? "/" : path.endsWith("/") ? path : `${path}/`);
+
 const localizedRoutes = {
   home: { fr: "/", en: "/en/", es: "/es/" },
   services: {
-    fr: "/services",
-    en: "/en/services",
-    es: "/es/servicios",
+    fr: "/services/",
+    en: "/en/services/",
+    es: "/es/servicios/",
   },
   transition: {
-    fr: "/management-de-transition",
-    en: "/en/management-transition",
-    es: "/es/gestion-transicion",
+    fr: "/management-de-transition/",
+    en: "/en/management-transition/",
+    es: "/es/gestion-transicion/",
   },
   ai: {
-    fr: "/integration-ia",
-    en: "/en/ai-integration",
-    es: "/es/integracion-ia",
+    fr: "/integration-ia/",
+    en: "/en/ai-integration/",
+    es: "/es/integracion-ia/",
   },
   performance: {
-    fr: "/pilotage-performance",
-    en: "/en/performance-management",
-    es: "/es/gestion-rendimiento",
+    fr: "/pilotage-performance/",
+    en: "/en/performance-management/",
+    es: "/es/gestion-rendimiento/",
   },
   turnaround: {
-    fr: "/redressement-restructuration",
-    en: "/en/operational-turnaround",
-    es: "/es/reestructuracion-operacional",
+    fr: "/redressement-restructuration/",
+    en: "/en/operational-turnaround/",
+    es: "/es/reestructuracion-operacional/",
   },
   scaleup: {
-    fr: "/scale-up-industrialisation",
-    en: "/en/scale-up-operations",
-    es: "/es/industrializacion-scale-up",
+    fr: "/scale-up-industrialisation/",
+    en: "/en/scale-up-operations/",
+    es: "/es/industrializacion-scale-up/",
   },
   about: {
-    fr: "/a-propos",
-    en: "/en/about",
-    es: "/es/sobre-mi",
+    fr: "/a-propos/",
+    en: "/en/about/",
+    es: "/es/sobre-mi/",
   },
   contact: {
-    fr: "/contact",
-    en: "/en/contact",
-    es: "/es/contacto",
+    fr: "/contact/",
+    en: "/en/contact/",
+    es: "/es/contacto/",
   },
   blog: {
-    fr: "/blog",
-    en: "/en/blog",
-    es: "/es/blog",
+    fr: "/blog/",
+    en: "/en/blog/",
+    es: "/es/blog/",
+  },
+  legalNotice: {
+    fr: "/mentions-legales/",
+    en: "/en/legal-notice/",
+    es: "/es/aviso-legal/",
+  },
+  privacyPolicy: {
+    fr: "/donnees-personnelles/",
+    en: "/en/privacy-policy/",
+    es: "/es/politica-privacidad/",
   },
 } as const;
 
@@ -123,19 +142,20 @@ export function getLocalizedPath(routeKey: keyof typeof localizedRoutes, lang: L
 }
 
 export function mapPathToLang(pathname: string, targetLang: Lang): string {
-  const normalized = pathname.endsWith("/") ? pathname.slice(0, -1) || "/" : pathname;
+  const normalized = normalizePath(pathname);
   const entries = Object.values(localizedRoutes);
   for (const route of entries) {
-    if (Object.values(route).includes(normalized as never)) {
+    const normalizedRouteValues = Object.values(route).map((path) => normalizePath(path));
+    if (normalizedRouteValues.includes(normalized as never)) {
       return route[targetLang];
     }
   }
   if (normalized.startsWith("/en/") || normalized === "/en") {
-    return normalized.replace(/^\/en(?=\/|$)/, targetLang === "fr" ? "" : `/${targetLang}`) || "/";
+    return withTrailingSlash(normalized.replace(/^\/en(?=\/|$)/, targetLang === "fr" ? "" : `/${targetLang}`) || "/");
   }
   if (normalized.startsWith("/es/") || normalized === "/es") {
-    return normalized.replace(/^\/es(?=\/|$)/, targetLang === "fr" ? "" : `/${targetLang}`) || "/";
+    return withTrailingSlash(normalized.replace(/^\/es(?=\/|$)/, targetLang === "fr" ? "" : `/${targetLang}`) || "/");
   }
-  if (targetLang === "fr") return normalized;
-  return `/${targetLang}${normalized === "/" ? "/" : normalized}`;
+  if (targetLang === "fr") return withTrailingSlash(normalized);
+  return withTrailingSlash(`/${targetLang}${normalized === "/" ? "/" : normalized}`);
 }

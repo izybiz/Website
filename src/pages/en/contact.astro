@@ -9,13 +9,16 @@ const lang = "en";
   title="Contact an Interim Management Consultant — Izybiz"
   description="30-minute call to assess whether your situation calls for interim management or AI integration. No pitch. Response within 48 hours."
   includeGlobalScript={true}
-  canonicalPath="/en/contact"
-  alternates={{ fr: "/contact", en: "/en/contact", es: "/es/contacto" }}
+  canonicalPath="/en/contact/"
+  alternates={{ fr: "/contact/", en: "/en/contact/", es: "/es/contacto/" }}
 >
-  <main>
-    <article class="article-page">
-      <h1 class="article-page__title">Get in touch</h1>
-      <p class="article-page__description">No sales pitch. A 30-minute call to assess whether your situation calls for interim management or AI integration — and whether Izybiz is the right profile.</p>
+  <main class="contact-main contact-main--fr">
+    <article class="article-page article-page--contact article-page--contact-fr">
+      <h1 class="sr-only">Get in touch</h1>
+      <div class="site-footer__top">
+        <h2 class="section-contact__title">Get in touch</h2>
+      </div>
+      <p class="blog-index__subtitle">No sales pitch. A 30-minute call to assess whether your situation calls for interim management or AI integration — and whether Izybiz is the right profile.</p>
 
       <div class="article-page__body">
         <h2>What happens after you reach out</h2>
@@ -36,27 +39,27 @@ const lang = "en";
           <input type="hidden" name="redirect" value="https://izybiz.fr/en/contact/thank-you/" />
           <input type="checkbox" name="botcheck" style="display: none;" />
 
-          <div class="contact-form__field">
+          <div class="contact-form__field contact-form__field--nom">
             <label class="contact-form__label" for="name">Name *</label>
             <input class="contact-form__input" type="text" id="name" name="name" placeholder="First Last" required />
           </div>
 
-          <div class="contact-form__field">
+          <div class="contact-form__field contact-form__field--societe">
             <label class="contact-form__label" for="company">Company</label>
             <input class="contact-form__input" type="text" id="company" name="company" placeholder="Company name" />
           </div>
 
-          <div class="contact-form__field">
+          <div class="contact-form__field contact-form__field--poste">
             <label class="contact-form__label" for="role">Role</label>
             <input class="contact-form__input" type="text" id="role" name="role" placeholder="Your title" />
           </div>
 
-          <div class="contact-form__field">
+          <div class="contact-form__field contact-form__field--email">
             <label class="contact-form__label" for="email">Email *</label>
             <input class="contact-form__input" type="email" id="email" name="email" placeholder="your@email.com" required />
           </div>
 
-          <div class="contact-form__field">
+          <div class="contact-form__field contact-form__field--situation">
             <label class="contact-form__label" for="situation">Your situation *</label>
             <textarea class="contact-form__textarea" id="situation" name="situation" rows="5" placeholder="What is the challenge, what is the urgency, what has already been tried." required></textarea>
           </div>
@@ -64,8 +67,6 @@ const lang = "en";
           <button class="contact-form__submit" type="submit">Send</button>
         </form>
 
-        <hr />
-        <p><em>You can also find Stéphane on <a href="https://www.linkedin.com/company/izybiz/" target="_blank" rel="noopener noreferrer">LinkedIn</a> before reaching out.</em></p>
       </div>
     </article>
   </main>

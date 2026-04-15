@@ -72,12 +72,16 @@ const services = [
     <div class="services-page">
       <header class="services-page__header">
         <h1 class="services-page__title">Interim management and operational transformation</h1>
-        <p class="services-page__intro">Five types of engagement. All operational. All with one objective: your organisation exits fully autonomous — no consultant dependency. <a href={getLocalizedPath("about", lang)}>About the approach</a>.</p>
+        <p class="services-page__intro">Five types of engagement. All operational. All with one objective: your organisation exits fully autonomous — no consultant dependency.</p>
+        <a href={getLocalizedPath("about", lang)} class="services-page__intro-link">About the approach</a>
       </header>
 
       <ul class="services-list">
-        {services.map((service) => (
-          <li class="services-card">
+        {services.map((service, index) => (
+          <li
+            class="services-card"
+            style={index === 0 ? "--services-card-bg: #d9d8ff; --services-tag-bg: #ffffff; --services-tag-color: #000000;" : undefined}
+          >
             <a
               class="services-card__hitbox"
               href={service.href}

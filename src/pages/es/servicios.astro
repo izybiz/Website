@@ -72,12 +72,16 @@ const services = [
     <div class="services-page">
       <header class="services-page__header">
         <h1 class="services-page__title">Management de transición y transformación operacional</h1>
-        <p class="services-page__intro">Cinco tipos de misión. Todas operacionales. Todas con un objetivo único: que su organización salga autónoma al final — sin dependencia de consultores. <a href={getLocalizedPath("about", lang)}>Sobre el enfoque</a>.</p>
+        <p class="services-page__intro">Cinco tipos de misión. Todas operacionales. Todas con un objetivo único: que su organización salga autónoma al final — sin dependencia de consultores.</p>
+        <a href={getLocalizedPath("about", lang)} class="services-page__intro-link">Sobre el enfoque</a>
       </header>
 
       <ul class="services-list">
-        {services.map((service) => (
-          <li class="services-card">
+        {services.map((service, index) => (
+          <li
+            class="services-card"
+            style={index === 0 ? "--services-card-bg: #d9d8ff; --services-tag-bg: #ffffff; --services-tag-color: #000000;" : undefined}
+          >
             <a
               class="services-card__hitbox"
               href={service.href}

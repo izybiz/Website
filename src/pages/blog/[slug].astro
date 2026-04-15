@@ -21,16 +21,16 @@ const sortedPosts = [...posts].sort((a, b) => b.data.pubDate.valueOf() - a.data.
 const currentPostIndex = sortedPosts.findIndex((item) => item.id === post.id);
 const newerPost = currentPostIndex > 0 ? sortedPosts[currentPostIndex - 1] : null;
 const olderPost = currentPostIndex < sortedPosts.length - 1 ? sortedPosts[currentPostIndex + 1] : null;
-const newerPath = newerPost ? `/blog/${newerPost.id.replace(/\.md$/, "")}` : null;
-const olderPath = olderPost ? `/blog/${olderPost.id.replace(/\.md$/, "")}` : null;
+const newerPath = newerPost ? `/blog/${newerPost.id.replace(/\.md$/, "")}/` : null;
+const olderPath = olderPost ? `/blog/${olderPost.id.replace(/\.md$/, "")}/` : null;
 
 // Find translated slugs via translationKey
 const tk = post.data.translationKey;
 const enPost = enPosts.find((p) => p.data.translationKey === tk);
 const esPost = esPosts.find((p) => p.data.translationKey === tk);
-const enPath = enPost ? `/en/blog/${enPost.id.replace(/\.md$/, "")}` : "/en/blog";
-const esPath = esPost ? `/es/blog/${esPost.id.replace(/\.md$/, "")}` : "/es/blog";
-const currentPath = `/blog/${currentSlug}`;
+const enPath = enPost ? `/en/blog/${enPost.id.replace(/\.md$/, "")}/` : "/en/blog/";
+const esPath = esPost ? `/es/blog/${esPost.id.replace(/\.md$/, "")}/` : "/es/blog/";
+const currentPath = `/blog/${currentSlug}/`;
 ---
 
 <Layout
@@ -132,49 +132,4 @@ const currentPath = `/blog/${currentSlug}`;
     transform: translateY(0);
   }
 
-  .article-services-cta {
-    width: 100%;
-    max-width: 760px;
-    margin: 48px auto 64px;
-    padding: 28px 32px;
-    border: 1px solid #e5e5e5;
-    border-radius: 12px;
-  }
-
-  .article-services-cta__title {
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin: 0 0 16px;
-    color: #555;
-  }
-
-  .article-services-cta__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .article-services-cta__list li {
-    font-size: 0.95rem;
-    color: #444;
-    line-height: 1.5;
-  }
-
-  .article-services-cta__list a {
-    font-weight: 600;
-    color: #000;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .article-services-cta__list a:hover {
-      opacity: 0.7;
-    }
-  }
 </style>

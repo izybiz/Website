@@ -21,7 +21,7 @@ const posts = (await getCollection("blog-en")).sort((a, b) => b.data.pubDate.val
           const date = post.data.pubDate.toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" });
           return (
             <li class="blog-card">
-              <a class="blog-card__link" href={`/en/blog/${slug}`}>
+              <a class="blog-card__link" href={`/en/blog/${slug}/`}>
                 <time class="blog-card__date" datetime={post.data.pubDate.toISOString()}>{date}</time>
                 <div class="blog-card__content">
                   <h2 class="blog-card__title">{post.data.title}</h2>

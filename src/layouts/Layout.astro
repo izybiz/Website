@@ -123,7 +123,7 @@ const localizedAlt = {
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "sales",
-        "url": "https://izybiz.fr/contact",
+        "url": "https://izybiz.fr/contact/",
         "availableLanguage": ["French", "English", "Spanish"]
       }
     })} />
@@ -140,7 +140,7 @@ const localizedAlt = {
         "author": {
           "@type": "Person",
           "name": "Stéphane Dinepro",
-          "url": "https://izybiz.fr/a-propos"
+          "url": "https://izybiz.fr/a-propos/"
         },
         "publisher": {
           "@type": "Organization",
@@ -283,8 +283,8 @@ const localizedAlt = {
             <a class="site-footer__nav-link" href={getLocalizedPath("services", lang)}>{t("nav.services")}</a>
             <a class="site-footer__nav-link" href={getLocalizedPath("blog", lang)}>{t("nav.blog")}</a>
             <a class="site-footer__nav-link" href={getLocalizedPath("contact", lang)}>{t("nav.contact")}</a>
-            <a class="site-footer__nav-link" href="/mentions-legales">Mentions légales</a>
-            <a class="site-footer__nav-link" href="/donnees-personnelles">Données personnelles</a>
+            <a class="site-footer__nav-link" href={getLocalizedPath("legalNotice", lang)}>{t("footer.legalNotice")}</a>
+            <a class="site-footer__nav-link" href={getLocalizedPath("privacyPolicy", lang)}>{t("footer.privacyPolicy")}</a>
           </nav>
         </div>
       </div>

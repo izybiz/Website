@@ -21,15 +21,15 @@ const sortedPosts = [...posts].sort((a, b) => b.data.pubDate.valueOf() - a.data.
 const currentPostIndex = sortedPosts.findIndex((item) => item.id === post.id);
 const newerPost = currentPostIndex > 0 ? sortedPosts[currentPostIndex - 1] : null;
 const olderPost = currentPostIndex < sortedPosts.length - 1 ? sortedPosts[currentPostIndex + 1] : null;
-const newerPath = newerPost ? `/es/blog/${newerPost.id.replace(/\.md$/, "")}` : null;
-const olderPath = olderPost ? `/es/blog/${olderPost.id.replace(/\.md$/, "")}` : null;
+const newerPath = newerPost ? `/es/blog/${newerPost.id.replace(/\.md$/, "")}/` : null;
+const olderPath = olderPost ? `/es/blog/${olderPost.id.replace(/\.md$/, "")}/` : null;
 
 const tk = post.data.translationKey;
 const frPost = frPosts.find((p) => p.data.translationKey === tk);
 const enPost = enPosts.find((p) => p.data.translationKey === tk);
-const frPath = frPost ? `/blog/${frPost.id.replace(/\.md$/, "")}` : "/blog";
-const enPath = enPost ? `/en/blog/${enPost.id.replace(/\.md$/, "")}` : "/en/blog";
-const currentPath = `/es/blog/${currentSlug}`;
+const frPath = frPost ? `/blog/${frPost.id.replace(/\.md$/, "")}/` : "/blog/";
+const enPath = enPost ? `/en/blog/${enPost.id.replace(/\.md$/, "")}/` : "/en/blog/";
+const currentPath = `/es/blog/${currentSlug}/`;
 ---
 
 <Layout
@@ -65,6 +65,16 @@ const currentPath = `/es/blog/${currentSlug}`;
         <Content />
       </div>
     </article>
+    <aside class="article-services-cta" aria-label="Nuestros servicios">
+      <h2 class="article-services-cta__title">Nuestras misiones</h2>
+      <ul class="article-services-cta__list">
+        <li><a href="/es/gestion-transicion/">Gestión de transición</a> — Dirección operativa para empresas medianas y scale-ups en fases críticas.</li>
+        <li><a href="/es/integracion-ia/">Integración de IA en empresas</a> — De POC a producción, con gobernanza y equipos autónomos al final de la misión.</li>
+        <li><a href="/es/gestion-rendimiento/">Gestión del rendimiento</a> — KPIs de dirección y paneles para decisiones ejecutivas.</li>
+        <li><a href="/es/reestructuracion-operacional/">Reestructuración operativa</a> — Recuperación de unidades de negocio en contextos críticos.</li>
+        <li><a href="/es/industrializacion-scale-up/">Industrialización scale-up</a> — Estructurar delivery y procesos para crecer sin romper operaciones.</li>
+      </ul>
+    </aside>
   </main>
 </Layout>
 

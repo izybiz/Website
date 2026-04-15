@@ -5,7 +5,7 @@ lang: "es"
 slug: "politica-privacidad"
 ---
 
-izybiz se preocupa por la protección de la privacidad y los datos personales de sus clientes, prospectos, socios y visitantes. En este sentido, izybiz cumple con la normativa europea aplicable en materia de protección de datos personales, y en particular con el Reglamento General de Protección de Datos n.° 2016/679 de 27 de abril de 2016 (RGPD), así como con la Ley francesa de Informática y Libertades en su versión vigente.
+Izybiz se preocupa por la protección de la privacidad y los datos personales de sus clientes, prospectos, socios y visitantes. En este sentido, izybiz cumple con la normativa europea aplicable en materia de protección de datos personales, y en particular con el Reglamento General de Protección de Datos n.° 2016/679 de 27 de abril de 2016 (RGPD), así como con la Ley francesa de Informática y Libertades en su versión vigente.
 
 ---
 

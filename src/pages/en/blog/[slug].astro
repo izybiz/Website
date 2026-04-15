@@ -21,15 +21,15 @@ const sortedPosts = [...posts].sort((a, b) => b.data.pubDate.valueOf() - a.data.
 const currentPostIndex = sortedPosts.findIndex((item) => item.id === post.id);
 const newerPost = currentPostIndex > 0 ? sortedPosts[currentPostIndex - 1] : null;
 const olderPost = currentPostIndex < sortedPosts.length - 1 ? sortedPosts[currentPostIndex + 1] : null;
-const newerPath = newerPost ? `/en/blog/${newerPost.id.replace(/\.md$/, "")}` : null;
-const olderPath = olderPost ? `/en/blog/${olderPost.id.replace(/\.md$/, "")}` : null;
+const newerPath = newerPost ? `/en/blog/${newerPost.id.replace(/\.md$/, "")}/` : null;
+const olderPath = olderPost ? `/en/blog/${olderPost.id.replace(/\.md$/, "")}/` : null;
 
 const tk = post.data.translationKey;
 const frPost = frPosts.find((p) => p.data.translationKey === tk);
 const esPost = esPosts.find((p) => p.data.translationKey === tk);
-const frPath = frPost ? `/blog/${frPost.id.replace(/\.md$/, "")}` : "/blog";
-const esPath = esPost ? `/es/blog/${esPost.id.replace(/\.md$/, "")}` : "/es/blog";
-const currentPath = `/en/blog/${currentSlug}`;
+const frPath = frPost ? `/blog/${frPost.id.replace(/\.md$/, "")}/` : "/blog/";
+const esPath = esPost ? `/es/blog/${esPost.id.replace(/\.md$/, "")}/` : "/es/blog/";
+const currentPath = `/en/blog/${currentSlug}/`;
 ---
 
 <Layout
@@ -65,6 +65,16 @@ const currentPath = `/en/blog/${currentSlug}`;
         <Content />
       </div>
     </article>
+    <aside class="article-services-cta" aria-label="Our services">
+      <h2 class="article-services-cta__title">Our missions</h2>
+      <ul class="article-services-cta__list">
+        <li><a href="/en/management-transition/">Interim management</a> — Operational leadership for mid-sized companies and scale-ups during critical phases.</li>
+        <li><a href="/en/ai-integration/">AI integration in business</a> — From POC to production, with governance and autonomous teams at handover.</li>
+        <li><a href="/en/performance-management/">Performance management</a> — Executive dashboards and operating KPIs that drive decisions.</li>
+        <li><a href="/en/operational-turnaround/">Operational turnaround</a> — Business unit recovery in high-pressure situations.</li>
+        <li><a href="/en/scale-up-operations/">Scale-up industrialization</a> — Structure delivery and processes to grow without breaking operations.</li>
+      </ul>
+    </aside>
   </main>
 </Layout>
 

@@ -5,7 +5,7 @@ lang: "fr"
 slug: "donnees-personnelles"
 ---
 
-izybiz est soucieux de la protection de la vie privée et des données de ses clients, prospects, partenaires et visiteurs. À ce titre, izybiz respecte le droit européen applicable en matière de protection des données personnelles, et en particulier le Règlement Général sur la Protection des Données n°2016/679 du 27 avril 2016 (RGPD), ainsi que la loi Informatique et Libertés dans sa version en vigueur.
+Izybiz est soucieux de la protection de la vie privée et des données de ses clients, prospects, partenaires et visiteurs. À ce titre, izybiz respecte le droit européen applicable en matière de protection des données personnelles, et en particulier le Règlement Général sur la Protection des Données n°2016/679 du 27 avril 2016 (RGPD), ainsi que la loi Informatique et Libertés dans sa version en vigueur.
 
 ---
 

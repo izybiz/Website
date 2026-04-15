@@ -12,21 +12,21 @@ const texts: Record<string, { message: string; accept: string; decline: string; 
     accept: "Accepter",
     decline: "Refuser",
     manage: "Paramètres cookies",
-    link: "/donnees-personnelles",
+    link: "/donnees-personnelles/",
   },
   en: {
     message: "This site uses Google Analytics to measure traffic. Cookies are only set with your consent.",
     accept: "Accept",
     decline: "Decline",
     manage: "Cookie settings",
-    link: "/donnees-personnelles",
+    link: "/donnees-personnelles/",
   },
   es: {
     message: "Este sitio usa Google Analytics para medir el tráfico. Las cookies solo se instalan con su consentimiento.",
     accept: "Aceptar",
     decline: "Rechazar",
     manage: "Configuración de cookies",
-    link: "/donnees-personnelles",
+    link: "/donnees-personnelles/",
   },
 };
 
@@ -86,6 +86,7 @@ const t = texts[lang] ?? texts.fr;
     gap: 0.75rem;
     font-size: 0.8125rem;
     line-height: 1.55;
+    font-family: "Didact Gothic", sans-serif;
   }
 
   .cookie-banner__text {
@@ -105,11 +106,12 @@ const t = texts[lang] ?? texts.fr;
 
   .cookie-banner__btn {
     padding: 0.4rem 1.1rem;
-    border-radius: 0.375rem;
+    border-radius: 9999px;
     border: none;
     cursor: pointer;
     font-size: 0.8125rem;
     font-weight: 500;
+    font-family: inherit;
     transition: opacity 0.15s;
     white-space: nowrap;
   }

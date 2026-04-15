@@ -5,7 +5,7 @@ lang: "en"
 slug: "privacy-policy"
 ---
 
-izybiz is committed to protecting the privacy and personal data of its clients, prospects, partners, and visitors. In accordance with this commitment, izybiz complies with applicable European data protection law, including the General Data Protection Regulation (GDPR) No. 2016/679 of 27 April 2016, as well as the French Data Protection Act (Loi Informatique et Libertés) in its current version.
+Izybiz is committed to protecting the privacy and personal data of its clients, prospects, partners, and visitors. In accordance with this commitment, izybiz complies with applicable European data protection law, including the General Data Protection Regulation (GDPR) No. 2016/679 of 27 April 2016, as well as the French Data Protection Act (Loi Informatique et Libertés) in its current version.
 
 ---
 
