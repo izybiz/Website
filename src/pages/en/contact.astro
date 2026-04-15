@@ -28,14 +28,13 @@ const lang = "en";
 
         <form
           class="contact-form"
-          name="contact-en"
           method="POST"
-          netlify
-          netlify-honeypot="bot-field"
-          action="/en/contact/thank-you"
+          action="https://api.web3forms.com/submit"
         >
-          <input type="hidden" name="form-name" value="contact-en" />
-          <p hidden><label>Do not fill: <input name="bot-field" /></label></p>
+          <input type="hidden" name="access_key" value="ae024e50-5c9a-418c-9a35-0572c0dea506" />
+          <input type="hidden" name="subject" value="[izybiz.fr] New contact" />
+          <input type="hidden" name="redirect" value="https://izybiz.fr/en/contact/thank-you/" />
+          <input type="checkbox" name="botcheck" style="display: none;" />
 
           <div class="contact-form__field">
             <label class="contact-form__label" for="name">Name *</label>
