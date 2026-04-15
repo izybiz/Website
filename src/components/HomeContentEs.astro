@@ -24,7 +24,7 @@ const latestPosts = (await getCollection("blog-es"))
           </div>
 
           <div class="hero-izybiz__actions">
-            <a class="hero-izybiz__button" href="/es/contacto">
+            <a class="hero-izybiz__button" href="/es/contacto/">
               Reservar una llamada
             </a>
             <a
@@ -72,6 +72,7 @@ const latestPosts = (await getCollection("blog-es"))
             <p class="home-transition__description">
               Cuando una actividad se desvía, un proyecto estratégico se ralentiza o una transformación tiene que producir resultados rápido, un marco de trabajo no basta. Hace falta una dirección operacional capaz de tomar las riendas, fijar las prioridades y mantener la ejecución.
             </p>
+            <a class="home-transition__more" href="/es/gestion-transicion/">Nuestro enfoque de management de transición</a>
           </div>
 
           <ul class="blog-list home-transition__posts" aria-label="Últimos artículos">
@@ -81,7 +82,7 @@ const latestPosts = (await getCollection("blog-es"))
 
               return (
                 <li class="blog-card">
-                  <a class="blog-card__link" href={`/es/blog/${slug}`}>
+                  <a class="blog-card__link" href={`/es/blog/${slug}/`}>
                     <time class="blog-card__date" datetime={post.data.pubDate.toISOString()}>{date}</time>
                     <div class="blog-card__content">
                       <h3 class="blog-card__title">{post.data.title}</h3>
@@ -103,6 +104,7 @@ const latestPosts = (await getCollection("blog-es"))
             <p class="home-ai__description">
               La IA crea valor cuando se inscribe en prioridades claras, procesos controlados y responsabilidades explícitas.
             </p>
+            <a class="home-ai__more" href="/es/integracion-ia/">Nuestro enfoque de integración de IA en empresas</a>
           </div>
           <section class="hero-video" aria-label="Izybiz showcase video">
             <video class="hero-video__media" controls preload="metadata">
@@ -243,6 +245,9 @@ const latestPosts = (await getCollection("blog-es"))
                 </div>
               </div>
             </article>
+          </div>
+          <div class="we-deliver__services-link">
+            <a href="/es/servicios/">Ver todas nuestras misiones</a>
           </div>
         </section>
       </section>

@@ -24,7 +24,7 @@ const latestPosts = (await getCollection("blog-en"))
           </div>
 
           <div class="hero-izybiz__actions">
-            <a class="hero-izybiz__button" href="/en/contact">
+            <a class="hero-izybiz__button" href="/en/contact/">
               Book a call
             </a>
             <a
@@ -72,6 +72,7 @@ const latestPosts = (await getCollection("blog-en"))
             <p class="home-transition__description">
               When an activity drifts, a strategic project stalls, or a transformation needs to deliver fast, a framework isn't enough. You need operational leadership that can take the reins, set priorities, and hold execution.
             </p>
+            <a class="home-transition__more" href="/en/management-transition/">Our interim management approach</a>
           </div>
 
           <ul class="blog-list home-transition__posts" aria-label="Latest articles">
@@ -81,7 +82,7 @@ const latestPosts = (await getCollection("blog-en"))
 
               return (
                 <li class="blog-card">
-                  <a class="blog-card__link" href={`/en/blog/${slug}`}>
+                  <a class="blog-card__link" href={`/en/blog/${slug}/`}>
                     <time class="blog-card__date" datetime={post.data.pubDate.toISOString()}>{date}</time>
                     <div class="blog-card__content">
                       <h3 class="blog-card__title">{post.data.title}</h3>
@@ -103,6 +104,7 @@ const latestPosts = (await getCollection("blog-en"))
             <p class="home-ai__description">
               AI creates value when it fits within clear priorities, controlled processes, and explicit accountability.
             </p>
+            <a class="home-ai__more" href="/en/ai-integration/">Our enterprise AI integration approach</a>
           </div>
           <section class="hero-video" aria-label="Izybiz showcase video">
             <video class="hero-video__media" controls preload="metadata">
@@ -243,6 +245,9 @@ const latestPosts = (await getCollection("blog-en"))
                 </div>
               </div>
             </article>
+          </div>
+          <div class="we-deliver__services-link">
+            <a href="/en/services/">See all our missions</a>
           </div>
         </section>
       </section>

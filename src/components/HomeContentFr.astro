@@ -24,7 +24,7 @@ const latestPosts = (await getCollection("blog-fr"))
           </div>
 
           <div class="hero-izybiz__actions">
-            <a class="hero-izybiz__button" href="/contact">
+            <a class="hero-izybiz__button" href="/contact/">
               Prendre contact
             </a>
             <a
@@ -73,7 +73,7 @@ const latestPosts = (await getCollection("blog-fr"))
             <p class="home-transition__description">
               Quand une activité dérive, qu’un projet stratégique ralentit ou qu’une transformation doit produire vite, il faut plus qu’un cadrage. Il faut une direction opérationnelle capable de reprendre la main, fixer les priorités et tenir l’exécution.
             </p>
-            <a class="home-transition__more" href="/management-de-transition/">Notre approche management de transition →</a>
+            <a class="home-transition__more" href="/management-de-transition/">Notre approche management de transition</a>
           </div>
 
           <ul class="blog-list home-transition__posts" aria-label="Derniers articles">
@@ -83,7 +83,7 @@ const latestPosts = (await getCollection("blog-fr"))
 
               return (
                 <li class="blog-card">
-                  <a class="blog-card__link" href={`/blog/${slug}`}>
+                  <a class="blog-card__link" href={`/blog/${slug}/`}>
                     <time class="blog-card__date" datetime={post.data.pubDate.toISOString()}>{date}</time>
                     <div class="blog-card__content">
                       <h3 class="blog-card__title">{post.data.title}</h3>
@@ -105,7 +105,7 @@ const latestPosts = (await getCollection("blog-fr"))
             <p class="home-ai__description">
               L’IA crée de la valeur lorsqu’elle s’inscrit dans des priorités claires, des processus tenus et des responsabilités explicites.
             </p>
-            <a class="home-ai__more" href="/integration-ia/">Notre approche intégration IA en entreprise →</a>
+            <a class="home-ai__more" href="/integration-ia/">Notre approche intégration IA en entreprise</a>
           </div>
           <section class="hero-video" aria-label="Izybiz showcase video">
             <video class="hero-video__media" controls preload="metadata">
@@ -248,7 +248,7 @@ const latestPosts = (await getCollection("blog-fr"))
             </article>
           </div>
           <div class="we-deliver__services-link">
-            <a href="/services/">Voir toutes nos missions →</a>
+            <a href="/services/">Voir toutes nos missions</a>
           </div>
         </section>
       </section>
