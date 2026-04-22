@@ -9,55 +9,28 @@ export const fallbackLang = "en";
 
 export const ui = {
   fr: {
-    "nav.deliver": "Ce qu'on délivre",
-    "nav.cases": "Cas d'usage",
-    "nav.faq": "Questions",
     "nav.blog": "Blog",
-    "nav.about": "À propos",
-    "nav.services": "Services",
-    "nav.contact": "Contact",
-    "cta.book": "Prendre contact",
     "cta.linkedin": "Message LinkedIn",
     "blog.readmore": "Lire l'article",
     "blog.title": "Blog",
     "blog.subtitle": "Insights dirigeants sur la transformation et l'IA",
     "footer.copyright": "© 2026 Izybiz — Tous droits réservés",
-    "footer.legalNotice": "Mentions légales",
-    "footer.privacyPolicy": "Données personnelles",
   },
   en: {
-    "nav.deliver": "What we deliver",
-    "nav.cases": "Use cases",
-    "nav.faq": "FAQ",
     "nav.blog": "Blog",
-    "nav.about": "About",
-    "nav.services": "Services",
-    "nav.contact": "Contact",
-    "cta.book": "Book a call",
     "cta.linkedin": "LinkedIn message",
     "blog.readmore": "Read article",
     "blog.title": "Blog",
     "blog.subtitle": "Executive insights on transformation and AI",
     "footer.copyright": "© 2026 Izybiz — All rights reserved",
-    "footer.legalNotice": "Legal notice",
-    "footer.privacyPolicy": "Privacy policy",
   },
   es: {
-    "nav.deliver": "Qué entregamos",
-    "nav.cases": "Casos de uso",
-    "nav.faq": "Preguntas",
     "nav.blog": "Blog",
-    "nav.about": "Sobre mí",
-    "nav.services": "Servicios",
-    "nav.contact": "Contacto",
-    "cta.book": "Reservar llamada",
     "cta.linkedin": "Mensaje LinkedIn",
     "blog.readmore": "Leer artículo",
     "blog.title": "Blog",
     "blog.subtitle": "Perspectivas directivas sobre transformación e IA",
     "footer.copyright": "© 2026 Izybiz — Todos los derechos reservados",
-    "footer.legalNotice": "Aviso legal",
-    "footer.privacyPolicy": "Política de privacidad",
   },
 } as const;
 
@@ -80,60 +53,10 @@ const withTrailingSlash = (path: string) => (path === "/" ? "/" : path.endsWith(
 
 const localizedRoutes = {
   home: { fr: "/", en: "/en/", es: "/es/" },
-  services: {
-    fr: "/services/",
-    en: "/en/services/",
-    es: "/es/servicios/",
-  },
-  transition: {
-    fr: "/management-de-transition/",
-    en: "/en/management-transition/",
-    es: "/es/gestion-transicion/",
-  },
-  ai: {
-    fr: "/integration-ia/",
-    en: "/en/ai-integration/",
-    es: "/es/integracion-ia/",
-  },
-  performance: {
-    fr: "/pilotage-performance/",
-    en: "/en/performance-management/",
-    es: "/es/gestion-rendimiento/",
-  },
-  turnaround: {
-    fr: "/redressement-restructuration/",
-    en: "/en/operational-turnaround/",
-    es: "/es/reestructuracion-operacional/",
-  },
-  scaleup: {
-    fr: "/scale-up-industrialisation/",
-    en: "/en/scale-up-operations/",
-    es: "/es/industrializacion-scale-up/",
-  },
-  about: {
-    fr: "/a-propos/",
-    en: "/en/about/",
-    es: "/es/sobre-mi/",
-  },
-  contact: {
-    fr: "/contact/",
-    en: "/en/contact/",
-    es: "/es/contacto/",
-  },
   blog: {
     fr: "/blog/",
     en: "/en/blog/",
     es: "/es/blog/",
-  },
-  legalNotice: {
-    fr: "/mentions-legales/",
-    en: "/en/legal-notice/",
-    es: "/es/aviso-legal/",
-  },
-  privacyPolicy: {
-    fr: "/donnees-personnelles/",
-    en: "/en/privacy-policy/",
-    es: "/es/politica-privacidad/",
   },
 } as const;
 
