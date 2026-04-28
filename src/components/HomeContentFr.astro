@@ -12,124 +12,43 @@ const latestPosts = (await getCollection("blog-fr"))
           <div class="hero-izybiz__text">
             <h1 class="hero-izybiz__title">
               <span class="hero-izybiz__title-line"
-                >Management de transition et IA <br />
-                pour vos opérations</span
+                >Izybiz est une plateforme d'agents IA pour dirigeants.</span
               >
             </h1>
             <p class="hero-izybiz__subtitle">
               <span>
-                Management de transition et intégration IA pour remettre les priorités sous contrôle, accélérer l’exécution et produire des résultats mesurables.
+                Vous restez le patron, votre équipe d'agents fait le travail.
               </span>
             </p>
           </div>
 
           <div class="hero-izybiz__actions">
-            <a class="hero-izybiz__button" href="/contact/">
-              Prendre contact
+            <a class="hero-izybiz__button" href="#prendre-contact">
+              Rejoindre la bêta privée
             </a>
             <a
               class="hero-izybiz__button hero-izybiz__button--secondary"
-              href="https://www.linkedin.com/company/izybiz/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Ouvrir la page LinkedIn d'IZYBIZ dans un nouvel onglet"
+              href="#comment-ca-marche"
             >
-              Envoyer un message LinkedIn
+              Comment ça marche ?
             </a>
           </div>
+
+          <p class="hero-izybiz__beta-badge hero-izybiz__beta-badge--intro" hidden>
+            <span class="hero-izybiz__beta-text">
+              <span class="hero-izybiz__beta-text-line">Bêta privée en préparation.</span>
+              <span class="hero-izybiz__beta-text-line">Accès sur invitation.</span>
+            </span>
+          </p>
         </div>
 
-        <section class="hero-metrics" aria-label="Key performance highlights">
-          <article class="hero-metrics__item">
-            <p class="hero-metrics__title" data-count-to="95">0%</p>
-            <p class="hero-metrics__description">
-              Taux d'échec des projets d'IA générative en entreprise.
-            </p>
-          </article>
-
-          <article class="hero-metrics__item">
-            <p class="hero-metrics__title" data-count-to="23">0%</p>
-            <p class="hero-metrics__description">
-              Seulement 23 % des dirigeants peuvent relier leurs investissements IA
-              à un résultat financier mesurable.
-            </p>
-          </article>
-
-          <article class="hero-metrics__item">
-            <p class="hero-metrics__title" data-count-to="84">0%</p>
-            <p class="hero-metrics__description">
-              84 % des échecs d'IA sont dus à une mauvaise gestion, pas à la
-              technologie en elle-même.
-            </p>
-          </article>
-        </section>
-
-        <section class="home-transition" aria-labelledby="home-transition-title">
-          <div class="home-transition__intro">
-            <h2 class="home-transition__title" id="home-transition-title">
-              <span class="home-transition__title-line">Management de transition</span>
-              <span class="home-transition__title-line">pour les phases critiques</span>
-            </h2>
-            <p class="home-transition__description">
-              Quand une activité dérive, qu’un projet stratégique ralentit ou qu’une transformation doit produire vite, il faut plus qu’un cadrage. Il faut une direction opérationnelle capable de reprendre la main, fixer les priorités et tenir l’exécution.
-            </p>
-            <a class="home-transition__more" href="/management-de-transition/">Notre approche management de transition</a>
-          </div>
-
-          <ul class="blog-list home-transition__posts" aria-label="Derniers articles">
-            {latestPosts.map((post) => {
-              const slug = post.id.replace(/\.md$/, "");
-              const date = post.data.pubDate.toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" });
-
-              return (
-                <li class="blog-card">
-                  <a class="blog-card__link" href={`/blog/${slug}/`}>
-                    <time class="blog-card__date" datetime={post.data.pubDate.toISOString()}>{date}</time>
-                    <div class="blog-card__content">
-                      <h3 class="blog-card__title">{post.data.title}</h3>
-                      <p class="blog-card__description">{post.data.description}</p>
-                    </div>
-                    <span class="blog-card__cta">Lire l'article</span>
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-
-        <section class="home-ai" aria-labelledby="home-ai-title">
+        <section class="home-ai" id="comment-ca-marche" aria-labelledby="home-ai-title">
           <div class="home-ai__inner">
             <h2 class="home-ai__title" id="home-ai-title">
-              Intégrer l’IA sans perdre le contrôle opérationnel
+              Trois étapes.<br> Pas de configuration.
             </h2>
-            <p class="home-ai__description">
-              L’IA crée de la valeur lorsqu’elle s’inscrit dans des priorités claires, des processus tenus et des responsabilités explicites.
-            </p>
-            <a class="home-ai__more" href="/integration-ia/">Notre approche intégration IA en entreprise</a>
-          </div>
-          <section class="hero-video" aria-label="Izybiz showcase video">
-            <video class="hero-video__media" controls preload="metadata">
-              <source src="/assets/Anim-Izybiz-V2.mp4" type="video/mp4" />
-              Votre navigateur ne prend pas en charge la balise vidéo.
-            </video>
-          </section>
-        </section>
 
-        <section
-          class="we-deliver"
-          id="we-deliver"
-          aria-labelledby="we-deliver-title"
-        >
-          <div class="we-deliver__intro">
-            <h2 class="we-deliver__title" id="we-deliver-title">
-              Des résultats mesurables, pas des recommandations de principe
-            </h2>
-            <p class="we-deliver__intro-copy">
-              Une mission utile se juge sur ce qu’elle change dans les opérations, pas sur la qualité des slides. Dès le démarrage, nous clarifions les objectifs, les indicateurs à suivre et les chantiers à prioriser. L’enjeu est simple : produire des effets visibles, lisibles et mesurables.
-            </p>
-          </div>
-
-          <div class="we-deliver__cards-row" aria-label="Ce qu'on délivre cards">
+          <div class="we-deliver__cards-row" aria-label="Ce qu’on délivre cards">
             <article
               class="we-deliver__card we-deliver__card--dna"
               tabindex="0"
@@ -151,18 +70,17 @@ const latestPosts = (await getCollection("blog-fr"))
                   <h3
                     class="we-deliver__card-title we-deliver__card-title--dna"
                   >
-                    CE QUE VOUS APPORTEZ
+                    1. VOUS BRIEFEZ
                   </h3>
                   <div
                     class="we-deliver__card-tabs we-deliver__card-tabs--dna"
                     aria-label="Your DNA deliverables"
                   >
-                    <span class="we-deliver__card-tab">Objectifs business</span>
-                    <span class="we-deliver__card-tab">Processus clés</span>
-                    <span class="we-deliver__card-tab">Contraintes</span>
-                    <span class="we-deliver__card-tab">Exigences</span>
-                    <span class="we-deliver__card-tab">Équipes internes</span>
-                    <span class="we-deliver__card-tab">Outils existants</span>
+                    <span class="we-deliver__card-tab">Langage naturel</span>
+                    <span class="we-deliver__card-tab">Cadrage en 1 question</span>
+                    <span class="we-deliver__card-tab">Délégation immédiate</span>
+                    <span class="we-deliver__card-tab">Workflow généré</span>
+                    <span class="we-deliver__card-tab">Gain de temps immédiat</span>
                   </div>
                 </div>
               </div>
@@ -179,17 +97,17 @@ const latestPosts = (await getCollection("blog-fr"))
                   <h3
                     class="we-deliver__card-title we-deliver__card-title--agent"
                   >
-                    CE QUE NOUS STRUCTURONS
+                    2. L'ÉQUIPE SE CRÉE
                   </h3>
                   <div
                     class="we-deliver__card-tabs we-deliver__card-tabs--agent"
                     aria-label="Agent Factory deliverables"
                   >
-                    <span class="we-deliver__card-tab">Cadrage des cas d'usage</span>
-                    <span class="we-deliver__card-tab">Sélection des fournisseurs</span>
-                    <span class="we-deliver__card-tab">Choix technologique</span>
-                    <span class="we-deliver__card-tab">Workflow IA</span>
-                    <span class="we-deliver__card-tab">Points de contrôle humains</span>
+                    <span class="we-deliver__card-tab">Décomposition automatique</span>
+                    <span class="we-deliver__card-tab">Sélection des agents</span>
+                    <span class="we-deliver__card-tab">Orchestration en temps réel</span>
+                    <span class="we-deliver__card-tab">Organigramme visible</span>
+                    <span class="we-deliver__card-tab">Coordination autonome</span>
                   </div>
                 </div>
                 <div
@@ -216,22 +134,17 @@ const latestPosts = (await getCollection("blog-fr"))
                   <h3
                     class="we-deliver__card-title we-deliver__card-title--output"
                   >
-                    CE QUE VOUS POSSÉDEZ
+                    3. VOUS PILOTEZ
                   </h3>
                   <div
                     class="we-deliver__card-tabs we-deliver__card-tabs--output"
                     aria-label="Customer ready output deliverables"
                   >
-                    <span class="we-deliver__card-tab">Système IA opérationnel</span>
-                    <span
-                      class="we-deliver__card-tab we-deliver__card-tab--output-workflow"
-                      >Workflows documentés</span
-                    >
-                    <span class="we-deliver__card-tab">Équipe formée</span>
-                    <span class="we-deliver__card-tab"
-                      >Responsabilités claires</span
-                    >
-                    <span class="we-deliver__card-tab">Autonomie complète</span>
+                    <span class="we-deliver__card-tab">Livrable structuré</span>
+                    <span class="we-deliver__card-tab">Validation immédiate</span>
+                    <span class="we-deliver__card-tab">Correction ou relance</span>
+                    <span class="we-deliver__card-tab">Apprentissage continu</span>
+                    <span class="we-deliver__card-tab">Contrôle total conservé</span>
                   </div>
                 </div>
                 <div
@@ -247,444 +160,154 @@ const latestPosts = (await getCollection("blog-fr"))
               </div>
             </article>
           </div>
-          <div class="we-deliver__services-link">
-            <a href="/services/">Voir toutes nos missions</a>
+
           </div>
         </section>
-      </section>
 
-      <section class="section-two" id="we-do" aria-label="Case studies">
-        <div class="section-two__inner">
-          <header class="section-two__intro">
-            <h2 class="section-two__title" id="case-studies-heading">
-              Nos dernières missions
-            </h2>
-            <div
-              class="section-two__topbar"
-              aria-label="Case studies navigation"
-            >
-              <div
-                class="section-two__tabs"
-                role="tablist"
-                aria-label="Case studies tabs"
-                data-case-tablist
-              >
-                <button
-                  class="section-two__tab is-active"
-                  type="button"
-                  role="tab"
-                  data-case-tab
-                >
-                  Telecom &amp; Fintech · Afrique
-                </button>
-                <button
-                  class="section-two__tab"
-                  type="button"
-                  role="tab"
-                  data-case-tab
-                >
-                  Marketplace communautaire · Afrique
-                </button>
-                <button
-                  class="section-two__tab"
-                  type="button"
-                  role="tab"
-                  data-case-tab
-                >
-                  Cuisine communautaire · Europe
-                </button>
-                <button
-                  class="section-two__tab"
-                  type="button"
-                  role="tab"
-                  data-case-tab
-                >
-                  Delivery agentique · France
-                </button>
+        <section class="home-why" aria-labelledby="home-why-title" data-home-why>
+          <div class="home-why__inner">
+            <div class="home-why__layout">
+              <div class="home-why__content" data-home-why-content>
+                <h2 class="home-why__title" id="home-why-title">Pourquoi Izybiz ?</h2>
+
+                <div class="home-why__grid" aria-label="Points clés Izybiz" data-home-why-grid>
+                  <div class="home-why__progress" aria-hidden="true">
+                    <span class="home-why__progress-track"></span>
+                    <span class="home-why__progress-fill"></span>
+                  </div>
+                  <article class="home-why__card" data-home-why-card data-home-why-index="0">
+                    <div class="home-why__card-copy">
+                      <h3 class="home-why__card-title">Une équipe, <span class="home-why__card-highlight home-why__card-highlight--orange">pas un assistant</span></h3>
+                      <p class="home-why__card-text">
+                        Un agent solo plafonne vite. Izybiz orchestre des agents spécialisés qui se répartissent la mission.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article class="home-why__card" data-home-why-card data-home-why-index="1">
+                    <div class="home-why__card-copy">
+                      <h3 class="home-why__card-title">Un brief, <span class="home-why__card-highlight home-why__card-highlight--yellow">pas un workflow</span></h3>
+                      <p class="home-why__card-text">
+                        Vous décrivez la mission en langage naturel. Pas de connecteurs à câbler, pas de logique à dessiner.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article class="home-why__card" data-home-why-card data-home-why-index="2">
+                    <div class="home-why__card-copy">
+                      <h3 class="home-why__card-title">Multi-providers, <span class="home-why__card-highlight home-why__card-highlight--blue">zéro lock-in</span></h3>
+                      <p class="home-why__card-text">
+                        Requêtes anonymisées et réparties entre plusieurs modèles. Vos données métier restent les vôtres.
+                      </p>
+                    </div>
+                  </article>
+                </div>
               </div>
 
-              <div class="section-two__mobile-nav">
-                <span
-                  class="section-two__counter"
-                  data-case-counter
-                  aria-live="polite"
-                  aria-atomic="true"
-                  >1/4</span
-                >
-                <div class="section-two__controls">
-                  <button
-                    class="section-two__arrow section-two__arrow--prev"
-                    type="button"
-                    data-case-prev
-                    aria-label="Cas précédent"
-                  >
-                    <span aria-hidden="true">&#8592;</span>
-                  </button>
-                  <button
-                    class="section-two__arrow section-two__arrow--next"
-                    type="button"
-                    data-case-next
-                    aria-label="Cas suivant"
-                  >
-                    <span aria-hidden="true">&#8594;</span>
-                  </button>
-                </div>
+              <div class="home-why__video">
+                <video class="home-why__video-media" controls preload="metadata" muted playsinline loop>
+                  <source src="/assets/Anim-Izybiz-V2.mp4" type="video/mp4" />
+                  Votre navigateur ne supporte pas la balise vidéo.
+                </video>
               </div>
             </div>
-          </header>
+          </div>
+        </section>
 
+        <section class="home-contact-block" id="prendre-contact" aria-label="Prendre contact">
+          <p class="hero-izybiz__beta-badge">BÊTA PRIVÉE • ACCÈS SUR INVITATION</p>
+          <h2 class="section-contact__title">Soyez parmi les premiers</h2>
+          <div class="article-page__body home-contact-block__body">
+            <form
+              class="contact-form"
+              method="POST"
+              action="https://api.web3forms.com/submit"
+            >
+              <input type="hidden" name="access_key" value="ae024e50-5c9a-418c-9a35-0572c0dea506" />
+              <input type="hidden" name="subject" value="[izybiz.fr] Nouveau contact" />
+              <input type="hidden" name="redirect" value="https://izybiz.fr/contact/merci/" />
+              <input type="checkbox" name="botcheck" style="display: none;" />
+
+              <div class="contact-form__field contact-form__field--nom">
+                <label class="contact-form__label" for="nom-home">Nom *</label>
+                <input class="contact-form__input" type="text" id="nom-home" name="nom" placeholder="Prénom Nom" required />
+              </div>
+
+              <div class="contact-form__field contact-form__field--email">
+                <label class="contact-form__label" for="email-home">Email *</label>
+                <input class="contact-form__input" type="email" id="email-home" name="email" placeholder="votre@email.com" required />
+              </div>
+
+              <button class="contact-form__submit" type="submit">Envoyer</button>
+            </form>
+          </div>
           <div
-            class="section-two__grid"
-            aria-label="Case studies carousel"
-            aria-labelledby="case-studies-heading"
+            class="contact-feedback-modal"
+            data-contact-feedback-modal
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="contact-feedback-title"
+            aria-describedby="contact-feedback-message"
+            hidden
           >
-            <article
-              class="section-two__case section-two__case--yellow"
-              tabindex="0"
-              aria-label="Case study 1"
-            >
-              <div class="section-two__case-copy">
-                <span class="section-two__case-label">Livré</span>
-                <h3 class="section-two__case-title">
-                  Telecom &amp; Fintech · Afrique
-                </h3>
-                <p class="section-two__case-description">
-                  Un opérateur telecom devait lancer une super-app sur deux marchés
-                  en même temps : deux scénarios opérationnels distincts, de
-                  nombreuses parties prenantes et pression de cession. Nous avons
-                  défini et construit le produit, structuré deux scénarios de
-                  go-to-market distincts — le client en a choisi un et l'a déployé.
-                </p>
-              </div>
-            </article>
-
-            <article
-              class="section-two__case section-two__case--blue"
-              tabindex="0"
-              aria-label="Case study 2"
-            >
-              <div class="section-two__case-copy">
-                <span class="section-two__case-label">Livré</span>
-                <h3 class="section-two__case-title">
-                  Marketplace communautaire · Afrique
-                </h3>
-                <p class="section-two__case-description">
-                  Une marketplace e-commerce devait passer de zéro à un marché
-                  viable en moins de deux ans : positionnement, marque,
-                  organisation, go-to-market et construction d'une communauté
-                  active d'acheteurs et de vendeurs. Nous avons structuré et
-                  piloté la livraison de bout en bout jusqu'à 1,25 M€ de GMV en
-                  18 mois.
-                </p>
-              </div>
-            </article>
-
-            <article
-              class="section-two__case section-two__case--white"
-              tabindex="0"
-              aria-label="Case study 3"
-            >
-              <div class="section-two__case-copy">
-                <span class="section-two__case-label">En cours</span>
-                <h3 class="section-two__case-title">
-                  Cuisine communautaire · Europe
-                </h3>
-                <p class="section-two__case-description">
-                  Une passionnée de cuisine voulait faire de la préparation
-                  quotidienne des repas un levier de lien social et d'économies.
-                  Nous avons structuré un modèle opérationnel de « cuisine
-                  collective à domicile » et conçu l'expérience produit via une
-                  application mobile qui orchestre des sessions de batch cooking
-                  autour d'un triple gain : 50 % d'économies, gain de temps et
-                  bien-être.
-                </p>
-              </div>
-            </article>
-
-            <article
-              class="section-two__case section-two__case--violet"
-              tabindex="0"
-              aria-label="Case study 4"
-            >
-              <div class="section-two__case-copy">
-                <span class="section-two__case-label">Démarrage</span>
-                <h3 class="section-two__case-title">
-                  Delivery agentique · France
-                </h3>
-                <p class="section-two__case-description">
-                  Un éditeur logiciel français devait fiabiliser les
-                  déploiements clients sans augmenter les effectifs. Nous
-                  concevons un système d'agents IA autonomes supervisés par
-                  l'humain pour orchestrer et livrer les projets clients — de
-                  l'onboarding à la mise en production.
-                </p>
-              </div>
-            </article>
+            <div class="contact-feedback-modal__backdrop" data-contact-feedback-close></div>
+            <div class="contact-feedback-modal__panel">
+              <h3 class="contact-feedback-modal__title" id="contact-feedback-title"></h3>
+              <p class="contact-feedback-modal__message" id="contact-feedback-message"></p>
+              <button
+                type="button"
+                class="contact-form__submit contact-feedback-modal__button"
+                data-contact-feedback-close
+              >
+                Fermer
+              </button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="section-faq" id="faq" aria-label="FAQ">
-        <div class="section-faq__inner">
-          <header class="section-faq__intro">
-            <h2 class="section-faq__title">Questions fréquentes</h2>
-          </header>
-
-          <div class="section-faq__chat" aria-label="FAQ list">
-            <article class="faq-item" data-faq-item>
-              <h3 class="faq-item__heading">
-                <button
-                  class="faq-item__question"
-                  type="button"
-                  aria-expanded="false"
-                  aria-controls="faq-a-0"
-                  id="faq-q-0"
-                  data-faq-trigger
-                >
-                  <span class="faq-item__question-bg" aria-hidden="true"></span>
-                  <span class="faq-item__label"
-                    >Comment on transforme l'IA en résultats business ?</span
-                  >
-                </button>
-              </h3>
-              <div
-                class="faq-item__answers"
-                id="faq-a-0"
-                role="region"
-                aria-labelledby="faq-q-0"
-                data-faq-panel
-                hidden
-              >
-                <div class="faq-item__pad">
-                  <div class="faq-item__bubble">
-                    <p class="faq-item__answer">
-                      Izybiz repose sur une idée simple : les projets d'IA ne
-                      échouent pas à cause de la technologie, mais parce que
-                      personne ne porte à la fois l'intention business et la
-                      livraison. Forts de 20 ans de management, nous faisons en
-                      sorte que les solutions IA soient déployées, adoptées et
-                      produisent des résultats business concrets.
-                    </p>
-                  </div>
-                </div>
+        <section class="home-insights" aria-label="Insights">
+          <div class="home-insights__inner">
+            <div class="home-insights__header">
+              <div class="home-insights__header-left">
+                <p class="home-insights__eyebrow">Insight</p>
+                <h2 class="home-insights__title">Ce qu'on apprend<br>en conditions réelles.</h2>
               </div>
-            </article>
-
-            <article class="faq-item" data-faq-item>
-              <h3 class="faq-item__heading">
-                <button
-                  class="faq-item__question"
-                  type="button"
-                  aria-expanded="false"
-                  aria-controls="faq-a-1"
-                  id="faq-q-1"
-                  data-faq-trigger
-                >
-                  <span class="faq-item__question-bg" aria-hidden="true"></span>
-                  <span class="faq-item__label">Combien ça coûte ?</span>
-                </button>
-              </h3>
-              <div
-                class="faq-item__answers"
-                id="faq-a-1"
-                role="region"
-                aria-labelledby="faq-q-1"
-                data-faq-panel
-                hidden
-              >
-                <div class="faq-item__pad">
-                  <div class="faq-item__bubble">
-                    <p class="faq-item__answer">
-                      Nous estimons en fonction de votre périmètre. Prenez
-                      rendez-vous : nous vous donnerons des chiffres dès le
-                      départ. La transparence avant tout.
-                    </p>
+            </div>
+            <ul class="home-insights__grid">
+              <li class="home-insights__card">
+                <a class="home-insights__card-link" href="/blog/pipeline-editorial-automatise-ia-2026-04-13/">
+                  <time class="home-insights__card-date">13 avril 2026</time>
+                  <div class="home-insights__card-content">
+                    <h3 class="home-insights__card-title">Pipeline éditorial automatisé : ce que ça produit vraiment</h3>
+                    <p class="home-insights__card-desc">4 couches, agents spécialisés, quality gate, publication trilingue. Retour d'une mise en place en mission.</p>
                   </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="faq-item" data-faq-item>
-              <h3 class="faq-item__heading">
-                <button
-                  class="faq-item__question"
-                  type="button"
-                  aria-expanded="false"
-                  aria-controls="faq-a-2"
-                  id="faq-q-2"
-                  data-faq-trigger
-                >
-                  <span class="faq-item__question-bg" aria-hidden="true"></span>
-                  <span class="faq-item__label"
-                    >Quel délai pour les premiers résultats ?</span
-                  >
-                </button>
-              </h3>
-              <div
-                class="faq-item__answers"
-                id="faq-a-2"
-                role="region"
-                aria-labelledby="faq-q-2"
-                data-faq-panel
-                hidden
-              >
-                <div class="faq-item__pad">
-                  <div class="faq-item__bubble">
-                    <p class="faq-item__answer">
-                      Vous voyez des automatisations en marche en 2 à 3 semaines.
-                      Le déploiement complet dépend de vos systèmes. La plupart
-                      des équipes sont productives en 6 à 8 semaines.
-                    </p>
+                  <span class="home-insights__card-tag">Lire l'article</span>
+                </a>
+              </li>
+              <li class="home-insights__card">
+                <a class="home-insights__card-link" href="/blog/github-spec-kit-specification-agent-ia-2025-11-15/">
+                  <time class="home-insights__card-date">15 novembre 2025</time>
+                  <div class="home-insights__card-content">
+                    <h3 class="home-insights__card-title">GitHub Spec-Kit : /specify, /plan, /tasks pour votre agent IA</h3>
+                    <p class="home-insights__card-desc">Vos agents IA dévient de votre intention ? Le spec-kit transforme votre besoin en spécification exécutable en 3 commandes.</p>
                   </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="faq-item" data-faq-item>
-              <h3 class="faq-item__heading">
-                <button
-                  class="faq-item__question"
-                  type="button"
-                  aria-expanded="false"
-                  aria-controls="faq-a-3"
-                  id="faq-q-3"
-                  data-faq-trigger
-                >
-                  <span class="faq-item__question-bg" aria-hidden="true"></span>
-                  <span class="faq-item__label"
-                    >Dois-je changer mon équipe ou mes processus ?</span
-                  >
-                </button>
-              </h3>
-              <div
-                class="faq-item__answers"
-                id="faq-a-3"
-                role="region"
-                aria-labelledby="faq-q-3"
-                data-faq-panel
-                hidden
-              >
-                <div class="faq-item__pad">
-                  <div class="faq-item__bubble">
-                    <p class="faq-item__answer">
-                      Non. Nous nous adaptons à votre façon de travailler
-                      aujourd'hui. Si votre process est cassé, nous vous le
-                      dirons. Mais nous n'imposons pas de réorganisation.
-                    </p>
+                  <span class="home-insights__card-tag">Lire l'article</span>
+                </a>
+              </li>
+              <li class="home-insights__card">
+                <a class="home-insights__card-link" href="/blog/bmad-method-agents-specialises-vibe-coding-2025-07-08/">
+                  <time class="home-insights__card-date">8 juillet 2025</time>
+                  <div class="home-insights__card-content">
+                    <h3 class="home-insights__card-title">BMAD Method : agents spécialisés pour livrer ce que vous avez spécifié</h3>
+                    <p class="home-insights__card-desc">Le vibe coding produit du code vite, rarement ce que vous vouliez. La BMAD method impose des agents spécialisés avec artefacts structurés.</p>
                   </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="faq-item" data-faq-item>
-              <h3 class="faq-item__heading">
-                <button
-                  class="faq-item__question"
-                  type="button"
-                  aria-expanded="false"
-                  aria-controls="faq-a-4"
-                  id="faq-q-4"
-                  data-faq-trigger
-                >
-                  <span class="faq-item__question-bg" aria-hidden="true"></span>
-                  <span class="faq-item__label"
-                    >Comment mesurez-vous le succès ?</span
-                  >
-                </button>
-              </h3>
-              <div
-                class="faq-item__answers"
-                id="faq-a-4"
-                role="region"
-                aria-labelledby="faq-q-4"
-                data-faq-panel
-                hidden
-              >
-                <div class="faq-item__pad">
-                  <div class="faq-item__bubble">
-                    <p class="faq-item__answer">
-                      Heures gagnées par semaine. Affaires conclues. Fonctionnalités
-                      livrées. Erreurs réduites. Nous choisissons 2 à 3 métriques
-                      qui comptent pour vous et nous les suivons.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="faq-item" data-faq-item>
-              <h3 class="faq-item__heading">
-                <button
-                  class="faq-item__question"
-                  type="button"
-                  aria-expanded="false"
-                  aria-controls="faq-a-5"
-                  id="faq-q-5"
-                  data-faq-trigger
-                >
-                  <span class="faq-item__question-bg" aria-hidden="true"></span>
-                  <span class="faq-item__label"
-                    >Que faire si nous devons pivoter en cours de projet ?</span
-                  >
-                </button>
-              </h3>
-              <div
-                class="faq-item__answers"
-                id="faq-a-5"
-                role="region"
-                aria-labelledby="faq-q-5"
-                data-faq-panel
-                hidden
-              >
-                <div class="faq-item__pad">
-                  <div class="faq-item__bubble">
-                    <p class="faq-item__answer">
-                      Nous anticipons les changements. Les workflows sont faciles
-                      à modifier. Pivoter coûte du temps, pas d'argent
-                      supplémentaire.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="faq-item" data-faq-item>
-              <h3 class="faq-item__heading">
-                <button
-                  class="faq-item__question"
-                  type="button"
-                  aria-expanded="false"
-                  aria-controls="faq-a-6"
-                  id="faq-q-6"
-                  data-faq-trigger
-                >
-                  <span class="faq-item__question-bg" aria-hidden="true"></span>
-                  <span class="faq-item__label"
-                    >Est-ce personnalisé ou basé sur des templates ?</span
-                  >
-                </button>
-              </h3>
-              <div
-                class="faq-item__answers"
-                id="faq-a-6"
-                role="region"
-                aria-labelledby="faq-q-6"
-                data-faq-panel
-                hidden
-              >
-                <div class="faq-item__pad">
-                  <div class="faq-item__bubble">
-                    <p class="faq-item__answer">
-                      Les deux. Nous partons de vos processus concrets, pas de
-                      gabarits génériques. Mais nous réutilisons des patterns qui
-                      ont fait leurs preuves.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </article>
+                  <span class="home-insights__card-tag">Lire l'article</span>
+                </a>
+              </li>
+            </ul>
           </div>
-        </div>
+        </section>
+
       </section>
 
     </main>

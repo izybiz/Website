@@ -9,7 +9,9 @@ export const fallbackLang = "en";
 
 export const ui = {
   fr: {
-    "nav.blog": "Blog",
+    "nav.blog": "Insight",
+    "nav.beta": "Rejoindre la bêta privée",
+    "nav.how": "Comment ça marche ?",
     "cta.linkedin": "Message LinkedIn",
     "blog.readmore": "Lire l'article",
     "blog.title": "Blog",
@@ -18,6 +20,8 @@ export const ui = {
   },
   en: {
     "nav.blog": "Blog",
+    "nav.beta": "Join the private beta",
+    "nav.how": "How does it work?",
     "cta.linkedin": "LinkedIn message",
     "blog.readmore": "Read article",
     "blog.title": "Blog",
@@ -26,6 +30,8 @@ export const ui = {
   },
   es: {
     "nav.blog": "Blog",
+    "nav.beta": "Unirse a la beta privada",
+    "nav.how": "¿Cómo funciona?",
     "cta.linkedin": "Mensaje LinkedIn",
     "blog.readmore": "Leer artículo",
     "blog.title": "Blog",

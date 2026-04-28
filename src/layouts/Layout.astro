@@ -181,7 +181,7 @@ const localizedAlt = {
           <a class="site-header__brand" href={getLocalizedPath("home", lang)} aria-label="Go to top">
             <img src="/assets/Logo Izybiz.png" alt="IZYBIZ" width="1479" height="413" fetchpriority="high" />
           </a>
-          <div class="site-nav__lang" aria-label="Language switcher">
+          <div class="site-nav__lang" aria-label="Language switcher" hidden>
             <a href={localizedAlt.fr} aria-current={lang === "fr" ? "true" : undefined}>FR</a>
             <span class="site-nav__lang-separator" aria-hidden="true">/</span>
             <a href={localizedAlt.en} aria-current={lang === "en" ? "true" : undefined}>EN</a>
@@ -197,6 +197,9 @@ const localizedAlt = {
         </nav>
 
         <div class="site-nav__actions" aria-label="Primary actions">
+          <a class="site-nav__cta hero-izybiz__button" href="#prendre-contact">
+            {t("nav.beta")}
+          </a>
           <a
             class="site-nav__button site-nav__button--linkedin"
             href="https://www.linkedin.com/company/izybiz/"
@@ -227,6 +230,9 @@ const localizedAlt = {
       </div>
 
       <div class="site-nav__menu" id="site-nav-menu" hidden data-nav-menu>
+        <a class="site-nav__menu-link site-nav__menu-link--cta" href="#prendre-contact">
+          {t("nav.beta")}
+        </a>
         <a class="site-nav__menu-link" href={getLocalizedPath("blog", lang)}>{t("nav.blog")}</a>
         <a
           class="site-nav__menu-link"

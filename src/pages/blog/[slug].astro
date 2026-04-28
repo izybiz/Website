@@ -18,9 +18,13 @@ const lang = "fr";
 const pubDate = post.data.pubDate.toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" });
 const currentSlug = post.id.replace(/\.md$/, "");
 const sortedPosts = [...posts].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-const currentPostIndex = sortedPosts.findIndex((item) => item.id === post.id);
-const newerPost = currentPostIndex > 0 ? sortedPosts[currentPostIndex - 1] : null;
-const olderPost = currentPostIndex < sortedPosts.length - 1 ? sortedPosts[currentPostIndex + 1] : null;
+const visiblePosts = sortedPosts.slice(0, 3);
+const currentPostIndex = visiblePosts.findIndex((item) => item.id === post.id);
+const newerPost = currentPostIndex > 0 ? visiblePosts[currentPostIndex - 1] : null;
+const olderPost =
+  currentPostIndex >= 0 && currentPostIndex < visiblePosts.length - 1
+    ? visiblePosts[currentPostIndex + 1]
+    : null;
 const newerPath = newerPost ? `/blog/${newerPost.id.replace(/\.md$/, "")}/` : null;
 const olderPath = olderPost ? `/blog/${olderPost.id.replace(/\.md$/, "")}/` : null;
 
@@ -66,16 +70,6 @@ const currentPath = `/blog/${currentSlug}/`;
         <Content />
       </div>
     </article>
-    <aside class="article-services-cta" aria-label="Nos services">
-      <h2 class="article-services-cta__title">Nos missions</h2>
-      <ul class="article-services-cta__list">
-        <li><a href="/management-de-transition/">Management de transition</a> — Direction opérationnelle pour ETI et scale-ups en phase critique.</li>
-        <li><a href="/integration-ia/">Intégration IA en entreprise</a> — De POC à production réelle, avec gouvernance et équipes autonomes à la sortie.</li>
-        <li><a href="/pilotage-performance/">Pilotage de la performance</a> — KPIs structurants et tableau de bord dirigeant.</li>
-        <li><a href="/redressement-restructuration/">Restructuration opérationnelle</a> — Retournement de BU en situation critique.</li>
-        <li><a href="/scale-up-industrialisation/">Industrialisation scale-up</a> — Structurer delivery et process pour croître sans casser.</li>
-      </ul>
-    </aside>
   </main>
 </Layout>
 

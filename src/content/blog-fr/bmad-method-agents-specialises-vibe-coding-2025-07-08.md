@@ -64,8 +64,6 @@ Un directeur des opérations d'une PME industrielle de 200 personnes a mis en pl
 
 "Avant, on passait trois réunions de cadrage avant de démarrer. Et à la fin, on obtenait quand même quelque chose qui ne correspondait qu'à 70 % à ce qu'on avait décrit. Là, j'ai écrit ce que je voulais une fois. Et c'est ce qu'on a livré."
 
-> **Vous structurez vos projets de développement IA?** Une [intégration IA structurée](https://izybiz.fr/integration-ia) couvre use cases, gouvernance et workflows, avec des résultats mesurables dès J30. [Discutons-en.](https://izybiz.fr/contact)
-
 ---
 
 ## Ce que la BMAD method n'est pas
@@ -98,4 +96,4 @@ Le résultat: du code qui correspond à ce que vous avez spécifié. Du code mai
 
 Ce n'est pas une promesse de l'IA. C'est une méthode. Et les méthodes, ça se pilote.
 
-Vous avez un projet de développement IA à structurer? Une [mission de management de transition DSI](https://izybiz.fr/management-de-transition) peut poser les fondamentaux en 90 jours: use cases cadrés, BMAD method configurée, équipes formées, premiers livrables mesurés. [Discutez de votre situation.](https://izybiz.fr/contact)
+Vous avez un projet de développement IA à structurer? Une mission de management de transition DSI peut poser les fondamentaux en 90 jours: use cases cadrés, BMAD method configurée, équipes formées, premiers livrables mesurés.

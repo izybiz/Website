@@ -5,7 +5,9 @@ import { useTranslations } from "../../i18n/translations";
 
 const lang = "fr";
 const t = useTranslations(lang);
-const posts = (await getCollection("blog-fr")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = (await getCollection("blog-fr"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 ---
 
 <Layout lang={lang} title="Blog transformation & IA pour dirigeants | Izybiz" description="Articles terrain sur le management de transition, l'intégration IA et la transformation opérationnelle pour dirigeants d'ETI et scale-ups." includeGlobalScript={true}>

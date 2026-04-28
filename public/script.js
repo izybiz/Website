@@ -111,6 +111,9 @@ const isElementInViewport = (element) => {
     const heroButtons = Array.from(
       document.querySelectorAll(".hero-izybiz__actions .hero-izybiz__button"),
     );
+    const betaBadge = document.querySelector(
+      ".hero-izybiz .hero-izybiz__beta-badge--intro",
+    );
     const body = document.body;
     const prefersReducedMotion = window.matchMedia?.(
       "(prefers-reduced-motion: reduce)",
@@ -123,6 +126,15 @@ const isElementInViewport = (element) => {
     heroButtons.forEach((button) => {
       button.classList.add("hero-izybiz__button--visible");
     });
+
+    // Reveal beta badge after buttons to keep intro sequence progression.
+    window.setTimeout(() => {
+      if (!betaBadge) return;
+      betaBadge.hidden = false;
+      window.requestAnimationFrame(() => {
+        betaBadge.classList.add("hero-izybiz__beta-badge--visible");
+      });
+    }, prefersReducedMotion ? 0 : 140);
 
     if (prefersReducedMotion) {
       body?.classList.remove("intro-stage-1");
@@ -241,25 +253,67 @@ const isElementInViewport = (element) => {
 })();
 
 (() => {
-  whenHeroIntroReady(() => {
-    const title = document.querySelector("#we-deliver-title.we-deliver__title");
-    const cards = Array.from(document.querySelectorAll(".we-deliver__card"));
-    const weDeliverSection =
-      document.querySelector("#we-deliver") || document.querySelector(".we-deliver");
+  const section = document.querySelector("[data-home-why]");
+  const video = section?.querySelector(".home-why__video-media");
 
-    if (!title || !cards.length) return;
+  if (!section || !video) return;
+
+  const tryPlayVideo = () => {
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => {
+        // Autoplay can be blocked by browser policy.
+      });
+    }
+  };
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        tryPlayVideo();
+        obs.disconnect();
+      });
+    },
+    {
+      threshold: 0.25,
+      rootMargin: "0px 0px -10% 0px",
+    },
+  );
+
+  observer.observe(section);
+})();
+
+(() => {
+  whenHeroIntroReady(() => {
+    const commentSection = document.querySelector("#comment-ca-marche.home-ai");
+    const title =
+      document.querySelector("#we-deliver-title.we-deliver__title") ||
+      document.querySelector("#comment-ca-marche #home-ai-title.home-ai__title");
+    const cards = Array.from(
+      document.querySelectorAll(
+        "#we-deliver .we-deliver__card, #comment-ca-marche .we-deliver__card",
+      ),
+    );
+    const weDeliverSection =
+      document.querySelector("#we-deliver") ||
+      document.querySelector(".we-deliver") ||
+      commentSection;
+
+    if (!commentSection || !title || !cards.length) return;
 
     const prefersReducedMotion = window.matchMedia?.(
       "(prefers-reduced-motion: reduce)",
     )?.matches;
 
     if (prefersReducedMotion) {
+      commentSection.classList.add("reveal-visible");
       title.classList.add("reveal-visible");
       cards.forEach((card) => card.classList.add("reveal-visible"));
       return;
     }
 
-    const targets = [title, ...cards];
+    const targets = [commentSection, title, ...cards];
     targets.forEach((el) => {
       el.classList.remove("reveal-visible");
       el.classList.add("reveal-base");
@@ -317,6 +371,195 @@ const isElementInViewport = (element) => {
     );
 
     targets.forEach((el) => revealObserver.observe(el));
+  });
+})();
+
+(() => {
+  whenHeroIntroReady(() => {
+    const section = document.querySelector("[data-home-why]");
+    if (!section) return;
+
+    const cards = Array.from(section.querySelectorAll("[data-home-why-card]"));
+    if (!cards.length) return;
+
+    const desktopMq = window.matchMedia("(min-width: 901px)");
+    const prefersReducedMotion = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)",
+    )?.matches;
+    const totalCards = cards.length;
+    const desktopStepDurationMs = 980;
+
+    let activeIndex = -1;
+    let desktopCycleHasRun = false;
+    let desktopObserver = null;
+    let mobileRaf = null;
+    let desktopTimers = [];
+
+    const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+    const isInViewport = () => {
+      const rect = section.getBoundingClientRect();
+      const viewportHeight =
+        window.innerHeight || document.documentElement.clientHeight || 0;
+      return rect.top < viewportHeight && rect.bottom > 0;
+    };
+
+    const setProgress = (value) => {
+      const nextValue = clamp(value, 0, 1);
+      section.style.setProperty("--home-why-progress", String(nextValue));
+    };
+
+    const setActiveCard = (nextIndex) => {
+      const clampedIndex = clamp(nextIndex, 0, totalCards - 1);
+      if (clampedIndex === activeIndex) return;
+      activeIndex = clampedIndex;
+
+      cards.forEach((card, index) => {
+        const isActive = index === activeIndex;
+        card.classList.toggle("is-active", isActive);
+      });
+    };
+
+    const setRevealedCards = (maxIndex) => {
+      cards.forEach((card, index) => {
+        card.classList.toggle("is-revealed", index <= maxIndex);
+      });
+    };
+
+    const clearDesktopCycleTimers = () => {
+      desktopTimers.forEach((timerId) => window.clearTimeout(timerId));
+      desktopTimers = [];
+    };
+
+    const resetInteractiveState = () => {
+      clearDesktopCycleTimers();
+      setRevealedCards(0);
+      setActiveCard(0);
+      setProgress(1 / totalCards);
+    };
+
+    const runDesktopCycleOnce = () => {
+      if (desktopCycleHasRun) return;
+      desktopCycleHasRun = true;
+
+      if (prefersReducedMotion) {
+        setActiveCard(totalCards - 1);
+        setRevealedCards(totalCards - 1);
+        setProgress(1);
+        return;
+      }
+
+      const steps = [
+        { index: 0, progress: 1 / totalCards, delay: 0 },
+        { index: 1, progress: 2 / totalCards, delay: desktopStepDurationMs },
+        { index: 2, progress: 1, delay: desktopStepDurationMs * 2 },
+      ];
+
+      steps.forEach(({ index, progress, delay }) => {
+        const timerId = window.setTimeout(() => {
+          setActiveCard(index);
+          setRevealedCards(index);
+          setProgress(progress);
+        }, delay);
+        desktopTimers.push(timerId);
+      });
+    };
+
+    const updateMobileScrollProgress = () => {
+      if (desktopMq.matches) return;
+
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+      const rect = section.getBoundingClientRect();
+
+      if (rect.top >= viewportHeight) {
+        setRevealedCards(0);
+        setActiveCard(0);
+        setProgress(1 / totalCards);
+        return;
+      }
+
+      if (rect.bottom <= 0) {
+        setActiveCard(totalCards - 1);
+        setProgress(1);
+        return;
+      }
+
+      const start = viewportHeight * 0.86;
+      const end = -Math.max(rect.height * 0.22, 120);
+      const rawProgress = (start - rect.top) / (start - end);
+      const progress = clamp(rawProgress, 0, 1);
+      const nextIndex = clamp(Math.floor(progress * totalCards), 0, totalCards - 1);
+
+      setProgress(progress);
+      setActiveCard(nextIndex);
+      setRevealedCards(nextIndex);
+    };
+
+    const requestMobileUpdate = () => {
+      if (mobileRaf !== null) return;
+      mobileRaf = window.requestAnimationFrame(() => {
+        mobileRaf = null;
+        updateMobileScrollProgress();
+      });
+    };
+
+    const observeDesktopEntry = () => {
+      if (desktopObserver || !desktopMq.matches || desktopCycleHasRun) return;
+
+      desktopObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            runDesktopCycleOnce();
+            desktopObserver?.disconnect();
+            desktopObserver = null;
+          });
+        },
+        {
+          threshold: 0,
+          rootMargin: "0px 0px -5% 0px",
+        },
+      );
+
+      desktopObserver.observe(section);
+
+      if (isInViewport()) {
+        runDesktopCycleOnce();
+        desktopObserver?.disconnect();
+        desktopObserver = null;
+      }
+    };
+
+    const syncMode = () => {
+      section.classList.add("home-why--interactive");
+
+      if (desktopMq.matches) {
+        window.removeEventListener("scroll", requestMobileUpdate);
+        if (mobileRaf !== null) {
+          window.cancelAnimationFrame(mobileRaf);
+          mobileRaf = null;
+        }
+
+        if (!desktopCycleHasRun) {
+          resetInteractiveState();
+          observeDesktopEntry();
+        }
+        return;
+      }
+
+      desktopObserver?.disconnect();
+      desktopObserver = null;
+      clearDesktopCycleTimers();
+      window.addEventListener("scroll", requestMobileUpdate, { passive: true });
+      requestMobileUpdate();
+    };
+
+    setRevealedCards(0);
+    setActiveCard(0);
+    setProgress(1 / totalCards);
+
+    syncMode();
+    desktopMq.addEventListener("change", syncMode);
+    window.addEventListener("resize", requestMobileUpdate);
   });
 })();
 
@@ -1253,5 +1496,112 @@ const isElementInViewport = (element) => {
         );
         emailInput.focus();
       });
+  });
+})();
+
+// Home contact form feedback modal (blur backdrop)
+(() => {
+  const section = document.querySelector("#prendre-contact.home-contact-block");
+  const form = section?.querySelector(".contact-form");
+  const submitButton = form?.querySelector(".contact-form__submit");
+  const modal = section?.querySelector("[data-contact-feedback-modal]");
+  const titleEl = modal?.querySelector("#contact-feedback-title");
+  const messageEl = modal?.querySelector("#contact-feedback-message");
+  const closeButtons = modal?.querySelectorAll("[data-contact-feedback-close]");
+
+  if (
+    !section ||
+    !form ||
+    !submitButton ||
+    !modal ||
+    !titleEl ||
+    !messageEl ||
+    !closeButtons?.length
+  ) {
+    return;
+  }
+
+  let lastFocusedElement = null;
+  const idleLabel = submitButton.textContent?.trim() || "Envoyer";
+  const loadingLabel = "Envoi...";
+
+  const setLoading = (isLoading) => {
+    submitButton.disabled = isLoading;
+    submitButton.textContent = isLoading ? loadingLabel : idleLabel;
+  };
+
+  const openModal = (title, message) => {
+    lastFocusedElement = document.activeElement;
+    titleEl.textContent = title;
+    messageEl.textContent = message;
+    modal.removeAttribute("hidden");
+    document.body.style.overflow = "hidden";
+    const firstClose = closeButtons[0];
+    if (firstClose && typeof firstClose.focus === "function") {
+      firstClose.focus();
+    }
+  };
+
+  const closeModal = () => {
+    if (modal.hasAttribute("hidden")) return;
+    modal.setAttribute("hidden", "");
+    document.body.style.overflow = "";
+    if (
+      lastFocusedElement &&
+      lastFocusedElement instanceof HTMLElement &&
+      typeof lastFocusedElement.focus === "function"
+    ) {
+      lastFocusedElement.focus();
+    }
+  };
+
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", closeModal);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    if (modal.hasAttribute("hidden")) return;
+    closeModal();
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    setLoading(true);
+
+    try {
+      const formData = new FormData(form);
+      const response = await window.fetch(form.action, {
+        method: form.method || "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      const payload = await response.json().catch(() => null);
+      if (response.ok && payload?.success === true) {
+        form.reset();
+        openModal(
+          "Message envoyé",
+          "Merci. Votre demande est bien reçue. Nous revenons vers vous rapidement.",
+        );
+        return;
+      }
+
+      openModal(
+        "Envoi impossible",
+        "Une erreur est survenue. Merci de réessayer dans quelques instants.",
+      );
+    } catch {
+      openModal(
+        "Envoi impossible",
+        "Impossible de contacter le service pour le moment. Merci de réessayer.",
+      );
+    } finally {
+      setLoading(false);
+    }
   });
 })();

@@ -72,8 +72,6 @@ Un chef de projet d'une agence digitale l'a utilisé sur un projet client en nov
 
 "On a divisé par trois le temps passé en réunion de cadrage. La spec fait ce travail à notre place."
 
-> **Vous passez à un développement IA structuré?** Une [intégration IA structurée](https://izybiz.fr/integration-ia) couvre use cases, gouvernance, workflows, et outillage, avec des résultats mesurables dès J30. [Discutons-en.](https://izybiz.fr/contact)
-
 ---
 
 ## Spec-kit GitHub ou BMAD: lequel choisir
@@ -115,4 +113,4 @@ Le spec-kit GitHub crée ce contrat. En trente minutes à deux jours selon la co
 
 Ce n'est pas une contrainte de plus dans votre processus. C'est la contrainte qui rend les autres utiles. C'est ce que les équipes qui pilotent vraiment leur workflow IA ont compris: la spécification structurée précède l'exécution.
 
-Vous avez des projets de développement IA à structurer? On peut vous accompagner sur la mise en place de spec-kit ou BMAD selon votre contexte -- du premier document de spec au [pilotage de la performance](https://izybiz.fr/pilotage-performance) des livrables. Une [mission de management de transition DSI](https://izybiz.fr/management-de-transition) pose les fondamentaux en 90 jours. [Discutez de votre situation.](https://izybiz.fr/contact)
+Vous avez des projets de développement IA à structurer? On peut vous accompagner sur la mise en place de spec-kit ou BMAD selon votre contexte -- du premier document de spec au pilotage de la performance des livrables. Une mission de management de transition DSI pose les fondamentaux en 90 jours.

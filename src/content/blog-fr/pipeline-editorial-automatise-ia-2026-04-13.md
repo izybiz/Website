@@ -46,8 +46,6 @@ La brand voice izybiz. Les fichiers de contexte portent les guidelines de ton, l
 
 Ce que ça produit: un article passe de la recherche initiale à la publication trilingue en deux à quatre heures, selon la complexité du sujet. En novembre 2025, les articles BMAD et spec-kit ont été publiés simultanément en français, anglais, et espagnol. Sans pipeline, c'était une semaine de coordination. Avec seomachine adapté, c'était une après-midi.
 
-> **Vous avez un projet de structuration de votre production de contenu?** Une [intégration IA structurée](https://izybiz.fr/integration-ia) couvre l'audit du workflow actuel, le choix et l'adaptation des outils, et la mise en production. [Discutons-en.](https://izybiz.fr/contact)
-
 ---
 
 ## Les 4 couches du workflow éditorial IA, de la recherche à la publication
@@ -100,8 +98,6 @@ Ce qui distingue linkedin-writer d'une simple demande à Claude, après test, ce
 
 Le workflow cible: `/write` produit l'article FR, il est publié sur le blog, linkedin-writer reprend le contenu source et génère 2 à 3 variantes de posts LinkedIn avec des angles différents (insight, question, retour terrain). Même expertise, format natif LinkedIn, voix cohérente.
 
-> **Votre contenu blog et vos posts LinkedIn sonnent comme deux marques différentes?** Ce n'est pas un problème de cohérence personnelle. C'est un problème d'architecture. Une [mission de management de transition DSI](https://izybiz.fr/management-de-transition) peut poser le système complet en 90 jours, blog et social inclus. [Discutez de votre situation.](https://izybiz.fr/contact)
-
 ---
 
 ## Ce que ça demande pour tenir dans la durée
@@ -138,11 +134,11 @@ Seomachine m'a appris quelque chose que je n'avais pas anticipé: la discipline 
 
 On sait pourquoi il ranke ou ne ranke pas. On peut l'améliorer de façon systématique, pas au feeling.
 
-Le pipeline blog tourne. La couche LinkedIn est le prochain chantier. Pas parce que c'est complexe techniquement, mais parce que c'est le moment où la cohérence de marque devient un actif mesurable. Le [pilotage de la performance](https://izybiz.fr/pilotage-performance) d'un pipeline éditorial commence par les bons KPIs posés dès la mise en place: volume publié, taux de passage du quality gate, performance SEO par cluster, engagement LinkedIn par format.
+Le pipeline blog tourne. La couche LinkedIn est le prochain chantier. Pas parce que c'est complexe techniquement, mais parce que c'est le moment où la cohérence de marque devient un actif mesurable. Le pilotage de la performance d'un pipeline éditorial commence par les bons KPIs posés dès la mise en place: volume publié, taux de passage du quality gate, performance SEO par cluster, engagement LinkedIn par format.
 
 Ce n'est pas une solution clé en main. C'est un actif construit progressivement, à partir d'un socle open source sérieux, en ajoutant ce qui manquait pour le contexte réel.
 
-Si vous êtes dans la même situation, deux options: le faire vous-même (les repos sont publics, la documentation existe) ou le faire avec quelqu'un qui l'a déjà fait. [Discutez de votre contexte.](https://izybiz.fr/contact)
+Si vous êtes dans la même situation, deux options: le faire vous-même (les repos sont publics, la documentation existe) ou le faire avec quelqu'un qui l'a déjà fait.
 
 ---
 
