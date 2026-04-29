@@ -23,28 +23,35 @@ interface Props {
   noindex?: boolean;
 }
 
+const frontmatter = (Astro.props as { frontmatter?: Partial<Props> }).frontmatter ?? {};
+
 const {
-  title,
-  description,
-  lang,
-  canonicalPath = Astro.url.pathname,
-  includeGlobalScript = false,
-  ogType = "website",
-  ogImage = "https://izybiz.fr/assets/og-default.jpg",
-  pubDate,
-  navType: navTypeProp,
-  alternates,
-  noindex = false,
-} = Astro.props;
+  title = frontmatter.title ?? "Izybiz",
+  description = frontmatter.description ?? "",
+  lang: langProp = frontmatter.lang ?? defaultLang,
+  canonicalPath = frontmatter.canonicalPath ?? Astro.url.pathname,
+  includeGlobalScript = frontmatter.includeGlobalScript ?? false,
+  ogType = frontmatter.ogType ?? "website",
+  ogImage = frontmatter.ogImage ?? "https://izybiz.fr/assets/og-default.jpg",
+  pubDate = frontmatter.pubDate,
+  navType: navTypeProp = frontmatter.navType,
+  alternates = frontmatter.alternates,
+  noindex = frontmatter.noindex ?? false,
+} = Astro.props as Partial<Props>;
+
+const lang = langProp as Lang;
 
 const t = useTranslations(lang);
 const cleanPath = canonicalPath.endsWith("/") ? canonicalPath.slice(0, -1) || "/" : canonicalPath;
+const legalPages = new Set(["/politique-de-confidentialite", "/mentions-legales"]);
+const isLegalPage = legalPages.has(cleanPath);
 
 // Auto-detect nav type
 const homePathnames = new Set(["/", "/en", "/en/", "/es", "/es/"]);
 const navType = navTypeProp ?? (homePathnames.has(Astro.url.pathname) ? "home" : "page");
 const rawPath = canonicalPath || "/";
 const canonicalUrl = `https://izybiz.fr${rawPath.endsWith("/") ? rawPath : rawPath + "/"}`;
+const contactSectionHref = `${getLocalizedPath("home", lang)}#prendre-contact`;
 const localizedAlt = {
   fr: alternates?.fr ?? mapPathToLang(cleanPath, "fr"),
   en: alternates?.en ?? mapPathToLang(cleanPath, "en"),
@@ -197,7 +204,7 @@ const localizedAlt = {
         </nav>
 
         <div class="site-nav__actions" aria-label="Primary actions">
-          <a class="site-nav__cta hero-izybiz__button" href="#prendre-contact">
+          <a class="site-nav__cta hero-izybiz__button" href={contactSectionHref}>
             {t("nav.beta")}
           </a>
           <a
@@ -230,7 +237,7 @@ const localizedAlt = {
       </div>
 
       <div class="site-nav__menu" id="site-nav-menu" hidden data-nav-menu>
-        <a class="site-nav__menu-link site-nav__menu-link--cta" href="#prendre-contact">
+        <a class="site-nav__menu-link site-nav__menu-link--cta" href={contactSectionHref}>
           {t("nav.beta")}
         </a>
         <a class="site-nav__menu-link" href={getLocalizedPath("blog", lang)}>{t("nav.blog")}</a>
@@ -245,7 +252,9 @@ const localizedAlt = {
         </a>
       </div>
     </header>
-    <slot />
+    <div class:list={["layout-content-slot", isLegalPage && "layout-content-slot--privacy"]}>
+      <slot />
+    </div>
     <footer class="site-footer" aria-label="Footer">
       <div class="site-footer__inner">
         <div class="site-footer__top">
@@ -266,6 +275,12 @@ const localizedAlt = {
           <div class="site-footer__copyright">{t("footer.copyright")}</div>
           <nav class="site-footer__nav" aria-label="Footer navigation">
             <a class="site-footer__nav-link" href={getLocalizedPath("blog", lang)}>{t("nav.blog")}</a>
+            {lang === "fr" && (
+              <a class="site-footer__nav-link" href="/politique-de-confidentialite/">{t("footer.privacy")}</a>
+            )}
+            {lang === "fr" && (
+              <a class="site-footer__nav-link" href="/mentions-legales/">{t("footer.legal")}</a>
+            )}
           </nav>
         </div>
       </div>

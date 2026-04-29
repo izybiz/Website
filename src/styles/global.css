@@ -5222,3 +5222,80 @@ h2:not(.we-deliver__title):not(.hero-metrics__title):not(.section-contact__title
 .contact-feedback-modal__button {
   justify-self: center;
 }
+
+/* Privacy policy page (Markdown) */
+.layout-content-slot--privacy {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 40px) clamp(60px, 8vw, 120px);
+  font-family: "Didact Gothic", sans-serif;
+  color: #0f172a;
+}
+
+.layout-content-slot--privacy h1 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #0f172a;
+  margin: 0 0 16px;
+}
+
+.layout-content-slot--privacy h2,
+.layout-content-slot--privacy h3 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  color: #0f172a;
+}
+
+.layout-content-slot--privacy p,
+.layout-content-slot--privacy li,
+.layout-content-slot--privacy strong {
+  font-family: "Didact Gothic", sans-serif;
+  color: #0f172a;
+}
+
+.layout-content-slot--privacy p {
+  margin: 0 0 1.4em;
+  line-height: 1.75;
+}
+
+.layout-content-slot--privacy ul,
+.layout-content-slot--privacy ol {
+  padding-left: 1.5em;
+  margin: 0 0 1.4em;
+}
+
+.layout-content-slot--privacy table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+}
+
+.layout-content-slot--privacy th {
+  background: rgba(15, 23, 42, 0.05);
+  font-weight: 700;
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 2px solid rgba(15, 23, 42, 0.15);
+}
+
+.layout-content-slot--privacy td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  vertical-align: top;
+}
+
+@media (max-width: 1024px) {
+  .layout-content-slot--privacy {
+    max-width: 780px;
+    padding-inline: clamp(20px, 5vw, 32px);
+  }
+}
+
+@media (max-width: 768px) {
+  .layout-content-slot--privacy {
+    max-width: 100%;
+    padding-inline: clamp(16px, 6vw, 24px);
+  }
+}
