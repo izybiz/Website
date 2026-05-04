@@ -47,15 +47,14 @@ const legalPages = new Set(["/politique-de-confidentialite", "/mentions-legales"
 const isLegalPage = legalPages.has(cleanPath);
 
 // Auto-detect nav type
-const homePathnames = new Set(["/", "/en", "/en/", "/es", "/es/"]);
+const homePathnames = new Set(["/"]);
 const navType = navTypeProp ?? (homePathnames.has(Astro.url.pathname) ? "home" : "page");
+const isBlogArticlePage = /^\/blog\/[^/]+\/?$/.test(Astro.url.pathname);
 const rawPath = canonicalPath || "/";
 const canonicalUrl = `https://izybiz.fr${rawPath.endsWith("/") ? rawPath : rawPath + "/"}`;
 const contactSectionHref = `${getLocalizedPath("home", lang)}#prendre-contact`;
 const localizedAlt = {
   fr: alternates?.fr ?? mapPathToLang(cleanPath, "fr"),
-  en: alternates?.en ?? mapPathToLang(cleanPath, "en"),
-  es: alternates?.es ?? mapPathToLang(cleanPath, "es"),
 };
 ---
 
@@ -110,8 +109,6 @@ const localizedAlt = {
 
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang="fr" href={`https://izybiz.fr${localizedAlt.fr}`} />
-    <link rel="alternate" hreflang="en" href={`https://izybiz.fr${localizedAlt.en}`} />
-    <link rel="alternate" hreflang="es" href={`https://izybiz.fr${localizedAlt.es}`} />
     <link rel="alternate" hreflang="x-default" href={`https://izybiz.fr${localizedAlt.fr}`} />
 
     <!-- Structured data: Organization (all pages) -->
@@ -174,7 +171,7 @@ const localizedAlt = {
 
     <slot name="head" />
   </head>
-  <body id="top">
+  <body id="top" class:list={[isBlogArticlePage && "page-blog-article"]}>
     <script>document.body.classList.add('intro-stage-1')</script>
     <header class="site-header" aria-label="Site header">
       <div class="site-header__pill">
@@ -198,12 +195,13 @@ const localizedAlt = {
         </nav>
 
         <div class="site-nav__actions" aria-label="Primary actions">
-          <a class="site-nav__cta hero-izybiz__button" href={contactSectionHref}>
+          <a class="site-nav__cta hero-izybiz__button" href={contactSectionHref} data-cta="hero">
             {t("nav.beta")}
           </a>
           <a
             class="site-nav__button site-nav__button--linkedin"
             href="https://www.linkedin.com/company/izybiz/"
+            data-linkedin
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn Izybiz"
@@ -231,13 +229,14 @@ const localizedAlt = {
       </div>
 
       <div class="site-nav__menu" id="site-nav-menu" hidden data-nav-menu>
-        <a class="site-nav__menu-link site-nav__menu-link--cta" href={contactSectionHref}>
+        <a class="site-nav__menu-link site-nav__menu-link--cta" href={contactSectionHref} data-cta="hero">
           {t("nav.beta")}
         </a>
         <a class="site-nav__menu-link" href={getLocalizedPath("blog", lang)}>{t("nav.blog")}</a>
         <a
           class="site-nav__menu-link"
           href="https://www.linkedin.com/company/izybiz/"
+          data-linkedin
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Open the IZYBIZ LinkedIn page in a new tab"
@@ -249,7 +248,7 @@ const localizedAlt = {
     <div class:list={["layout-content-slot", isLegalPage && "layout-content-slot--privacy"]}>
       <slot />
     </div>
-    <footer class="site-footer" aria-label="Footer">
+    <footer class="site-footer" aria-label="Footer" data-section="footer">
       <div class="site-footer__inner">
         <div class="site-footer__top">
           <a href={getLocalizedPath("home", lang)} aria-label="Accueil Izybiz">
@@ -258,6 +257,7 @@ const localizedAlt = {
           <a
             class="site-footer__linkedin"
             href="https://www.linkedin.com/company/izybiz/"
+            data-linkedin
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn Izybiz"
@@ -284,6 +284,7 @@ const localizedAlt = {
       window.__IZYBIZ_DEFAULT_LANG = "{defaultLang}";
     </script>
     {includeGlobalScript ? <script is:inline src="/script.js"></script> : null}
+    <script is:inline src="/analytics.js"></script>
     <CookieConsent lang={lang} />
   </body>
 </html>

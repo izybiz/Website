@@ -7,7 +7,7 @@ const latestPosts = (await getCollection("blog-fr"))
 ---
 
 <main class="page-shell">
-      <section class="section-one" aria-label="Section 1">
+      <section class="section-one" aria-label="Section 1" data-section="hero">
         <div class="hero-izybiz">
           <div class="hero-izybiz__text">
             <h1 class="hero-izybiz__title">
@@ -23,7 +23,7 @@ const latestPosts = (await getCollection("blog-fr"))
           </div>
 
           <div class="hero-izybiz__actions">
-            <a class="hero-izybiz__button" href="#prendre-contact">
+            <a class="hero-izybiz__button" href="#prendre-contact" data-cta="hero">
               Rejoindre la bêta privée
             </a>
             <a
@@ -164,7 +164,7 @@ const latestPosts = (await getCollection("blog-fr"))
           </div>
         </section>
 
-        <section class="home-why" aria-labelledby="home-why-title" data-home-why>
+        <section class="home-why" aria-labelledby="home-why-title" data-home-why data-section="features">
           <div class="home-why__inner">
             <div class="home-why__layout">
               <div class="home-why__content" data-home-why-content>

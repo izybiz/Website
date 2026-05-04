@@ -4,15 +4,13 @@ import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog-fr");
-  const enPosts = await getCollection("blog-en");
-  const esPosts = await getCollection("blog-es");
   return posts.map((post) => ({
     params: { slug: post.id.replace(/\.md$/, "") },
-    props: { post, enPosts, esPosts, posts },
+    props: { post, posts },
   }));
 }
 
-const { post, enPosts, esPosts, posts } = Astro.props;
+const { post, posts } = Astro.props;
 const { Content } = await render(post);
 const lang = "fr";
 const pubDate = post.data.pubDate.toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" });
@@ -28,12 +26,6 @@ const olderPost =
 const newerPath = newerPost ? `/blog/${newerPost.id.replace(/\.md$/, "")}/` : null;
 const olderPath = olderPost ? `/blog/${olderPost.id.replace(/\.md$/, "")}/` : null;
 
-// Find translated slugs via translationKey
-const tk = post.data.translationKey;
-const enPost = enPosts.find((p) => p.data.translationKey === tk);
-const esPost = esPosts.find((p) => p.data.translationKey === tk);
-const enPath = enPost ? `/en/blog/${enPost.id.replace(/\.md$/, "")}/` : "/en/blog/";
-const esPath = esPost ? `/es/blog/${esPost.id.replace(/\.md$/, "")}/` : "/es/blog/";
 const currentPath = `/blog/${currentSlug}/`;
 ---
 
@@ -45,7 +37,7 @@ const currentPath = `/blog/${currentSlug}/`;
   pubDate={post.data.pubDate.toISOString()}
   includeGlobalScript={true}
   canonicalPath={currentPath}
-  alternates={{ fr: currentPath, en: enPath, es: esPath }}
+  alternates={{ fr: currentPath }}
 >
   <main>
     <div class="article-page-shell">

@@ -7,7 +7,7 @@ const latestPosts = (await getCollection("blog-es"))
 ---
 
 <main class="page-shell">
-      <section class="section-one" aria-label="Section 1">
+      <section class="section-one" aria-label="Section 1" data-section="hero">
         <div class="hero-izybiz">
           <div class="hero-izybiz__text">
             <h1 class="hero-izybiz__title">
@@ -24,12 +24,13 @@ const latestPosts = (await getCollection("blog-es"))
           </div>
 
           <div class="hero-izybiz__actions">
-            <a class="hero-izybiz__button" href="/es/contacto/">
+            <a class="hero-izybiz__button" href="/es/contacto/" data-cta="hero">
               Reservar una llamada
             </a>
             <a
               class="hero-izybiz__button hero-izybiz__button--secondary"
               href="https://www.linkedin.com/company/izybiz/"
+              data-linkedin
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Abrir la página de LinkedIn de IZYBIZ en una nueva pestaña"
@@ -252,7 +253,7 @@ const latestPosts = (await getCollection("blog-es"))
         </section>
       </section>
 
-      <section class="section-two" id="we-do" aria-label="Case studies">
+      <section class="section-two" id="we-do" aria-label="Case studies" data-section="features">
         <div class="section-two__inner">
           <header class="section-two__intro">
             <h2 class="section-two__title" id="case-studies-heading">

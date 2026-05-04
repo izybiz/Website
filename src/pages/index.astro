@@ -1,11 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import HomeContent from "../components/HomeContent.astro";
-import HomeContentEs from "../components/HomeContentEs.astro";
 import HomeContentFr from "../components/HomeContentFr.astro";
-import { getLangFromUrl } from "../i18n/translations";
-
-const lang = (Astro.currentLocale || getLangFromUrl(Astro.url)) as "fr" | "en" | "es";
+const lang = "fr";
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -13,58 +9,58 @@ const faqSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Comment on transforme l'IA en résultats business ?",
+      "name": "Qu'est-ce qu'une mission Izybiz ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Les projets d'IA n'échouent pas à cause de la technologie, mais parce que personne ne porte à la fois l'intention business et la livraison. Izybiz prend le rôle opérationnel : nous cadrons les cas d'usage, pilotons le déploiement et garantissons que les résultats sont traçables."
+        "text": "Une mission Izybiz est une demande formulée en langage naturel par un dirigeant. La plateforme compose une équipe d'agents IA spécialisés pour exécuter la mission sous votre pilotage et vous restituer un livrable structuré."
       }
     },
     {
       "@type": "Question",
-      "name": "Combien ça coûte ?",
+      "name": "Comment fonctionne la bêta privée ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Nous estimons en fonction de votre périmètre. Prenez rendez-vous : nous vous donnerons des chiffres dès le départ. La transparence avant tout."
+        "text": "L'accès se fait sur invitation. Vous laissez vos coordonnées via le formulaire de la page, puis l'équipe Izybiz vous recontacte pour valider votre éligibilité et vous ouvrir l'accès."
       }
     },
     {
       "@type": "Question",
-      "name": "Quel délai pour les premiers résultats ?",
+      "name": "Quelle différence avec un assistant IA classique ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Vous voyez des automatisations en marche en 2 à 3 semaines. Le déploiement complet dépend de vos systèmes. La plupart des équipes sont productives en 6 à 8 semaines."
+        "text": "Un assistant IA répond à une question à la fois. Izybiz orchestre plusieurs agents spécialisés qui se répartissent les sous-tâches d'une mission et produisent un résultat opérationnel cohérent."
       }
     },
     {
       "@type": "Question",
-      "name": "Dois-je changer mon équipe ou mes processus ?",
+      "name": "Dois-je construire des workflows techniques ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Non. Nous nous adaptons à votre façon de travailler aujourd'hui. Si votre process est cassé, nous vous le dirons. Mais nous n'imposons pas de réorganisation."
+        "text": "Non. Izybiz est conçu pour des dirigeants qui veulent déléguer une mission sans créer de workflow complexe. Vous décrivez l'objectif et la plateforme gère l'orchestration des agents."
       }
     },
     {
       "@type": "Question",
-      "name": "Comment mesurez-vous le succès ?",
+      "name": "Est-ce que je garde le contrôle humain ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Heures gagnées par semaine. Affaires conclues. Fonctionnalités livrées. Erreurs réduites. Nous choisissons 2 à 3 métriques qui comptent pour vous et nous les suivons."
+        "text": "Oui. Izybiz est une plateforme de pilotage assisté, pas d'autonomie opaque. Vous validez les points clés et gardez la décision finale sur les actions et les livrables."
       }
     },
     {
       "@type": "Question",
-      "name": "Que faire si nous devons pivoter en cours de projet ?",
+      "name": "Pour quels profils d'entreprise Izybiz est conçu ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Nous anticipons les changements. Les workflows sont faciles à modifier. Pivoter coûte du temps, pas d'argent supplémentaire."
+        "text": "Izybiz cible les dirigeants d'ETI, de PME et de scale-ups qui veulent accélérer l'exécution de missions opérationnelles avec l'IA tout en conservant un cadre de gouvernance clair."
       }
     },
     {
       "@type": "Question",
-      "name": "Est-ce personnalisé ou basé sur des templates ?",
+      "name": "Quels types de missions peut-on confier à Izybiz ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Les deux. Nous partons de vos processus concrets, pas de gabarits génériques. Mais nous réutilisons des patterns qui ont fait leurs preuves."
+        "text": "La plateforme couvre des missions de cadrage, production de livrables, recherche structurée et préparation de décision. L'objectif est de passer d'une intention métier à une exécution pilotable."
       }
     }
   ]
@@ -74,7 +70,7 @@ const faqSchema = {
 <Layout
   lang={lang}
   title="Izybiz - Plateforme d'agents IA pour dirigeants."
-  description="Stéphane Dine — Management de transition & IA pour ETI et scale-ups. 30 ans d'expérience. Bouygues, FNAC, PSA. Réponse sous 48h."
+  description="Izybiz est une plateforme d'agents IA pour dirigeants. Vous confiez une mission en langage naturel, une équipe d'agents spécialisés l'exécute sous votre pilotage. Bêta privée sur invitation."
   includeGlobalScript={true}
 >
   <Fragment slot="head">
@@ -83,5 +79,5 @@ const faqSchema = {
     <link rel="preload" as="image" href="/assets/illustration--agent.svg" />
     <link rel="preload" as="image" href="/assets/illustration--output.svg" />
   </Fragment>
-  {lang === "es" ? <HomeContentEs /> : lang === "fr" ? <HomeContentFr /> : <HomeContent />}
+  <HomeContentFr />
 </Layout>
