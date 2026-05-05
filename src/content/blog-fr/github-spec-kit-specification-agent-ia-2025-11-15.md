@@ -113,4 +113,4 @@ Le spec-kit GitHub crée ce contrat. En trente minutes à deux jours selon la co
 
 Ce n'est pas une contrainte de plus dans votre processus. C'est la contrainte qui rend les autres utiles. C'est ce que les équipes qui pilotent vraiment leur workflow IA ont compris: la spécification structurée précède l'exécution.
 
-Vous avez des projets de développement IA à structurer? On peut vous accompagner sur la mise en place de spec-kit ou BMAD selon votre contexte -- du premier document de spec au pilotage de la performance des livrables. Une mission de management de transition DSI pose les fondamentaux en 90 jours.
+Vous avez des projets de développement IA à structurer? On peut vous accompagner sur la mise en place de spec-kit ou BMAD selon votre contexte -- du premier document de spec au pilotage de la performance des livrables. Un accompagnement de structuration IA côté DSI peut poser les fondamentaux en 90 jours.

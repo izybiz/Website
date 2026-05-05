@@ -96,4 +96,4 @@ Le résultat: du code qui correspond à ce que vous avez spécifié. Du code mai
 
 Ce n'est pas une promesse de l'IA. C'est une méthode. Et les méthodes, ça se pilote.
 
-Vous avez un projet de développement IA à structurer? Une mission de management de transition DSI peut poser les fondamentaux en 90 jours: use cases cadrés, BMAD method configurée, équipes formées, premiers livrables mesurés.
+Vous avez un projet de développement IA à structurer? Un accompagnement d'industrialisation IA côté DSI peut poser les fondamentaux en 90 jours: use cases cadrés, BMAD method configurée, équipes formées, premiers livrables mesurés.

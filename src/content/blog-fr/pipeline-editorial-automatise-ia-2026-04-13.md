@@ -6,7 +6,7 @@ lang: "fr"
 translationKey: "2026-04-13"
 ---
 
-Lors d'une mission en management de transition, on m'a confié, entre autres sujets, la structuration de la production de contenu. Pas d'équipe rédaction. Pas de budget agence. Besoin de publier sérieusement, régulièrement, sur des sujets techniques à destination de décideurs.
+Lors d'une mission de structuration opérationnelle par l'IA, on m'a confié, entre autres sujets, la structuration de la production de contenu. Pas d'équipe rédaction. Pas de budget agence. Besoin de publier sérieusement, régulièrement, sur des sujets techniques à destination de décideurs.
 
 J'ai cherché un pipeline éditorial automatisé. Pas un outil pour "écrire avec l'IA". Un système structuré, avec des agents spécialisés, un quality gate, et une logique de publication reproductible. J'ai trouvé seomachine.
 
@@ -153,12 +153,12 @@ Si vous êtes dans la même situation, deux options: le faire vous-même (les re
 - [x] Hiérarchie H1/H2/H3 respectée
 
 ## Engagement Checklist
-- [x] Hook: scénario concret mission management de transition (première personne)
+- [x] Hook: scénario concret mission de structuration IA (première personne)
 - [x] Mini-story 1: la mission comme point de départ
 - [x] Mini-story 2: BMAD/spec-kit 3 langues, une après-midi (novembre 2025)
 - [x] Mini-story 3: le gap LinkedIn / dirigeant qui lit blog et suit LinkedIn (deux marques)
 - [x] CTA contextuel 1: après fork/adaptation (intégration IA)
-- [x] CTA contextuel 2: après section LinkedIn (management de transition DSI)
+- [x] CTA contextuel 2: après section LinkedIn (pilotage opérationnel IA côté DSI)
 - [x] CTA final: pilotage performance + contact
 - [x] Paragraphes courts (2-3 phrases max)
 - [x] Première personne tout au long, voix praticien
