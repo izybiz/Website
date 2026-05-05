@@ -9,3 +9,13 @@
   from = "/sitemap.xml"
   to = "/sitemap-index.xml"
   status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/#prendre-contact"
+  status = 301
+
+[[redirects]]
+  from = "/contact/"
+  to = "/#prendre-contact"
+  status = 301
