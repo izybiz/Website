@@ -72,6 +72,12 @@ const isElementInViewport = (element) => {
   return rect.top < viewportHeight && rect.bottom > 0;
 };
 
+const trackAnalyticsEvent = (eventName, params) => {
+  if (typeof window.izybizTrackEvent === "function") {
+    window.izybizTrackEvent(eventName, params);
+  }
+};
+
 (() => {
   const titleLines = Array.from(
     document.querySelectorAll(".hero-izybiz__title-line"),
@@ -1475,6 +1481,10 @@ const isElementInViewport = (element) => {
 
         if (res.ok && data?.ok === true) {
           setLoading(false);
+          trackAnalyticsEvent("beta_access_requested", {
+            form_location: "popup",
+            source_page: window.location.pathname,
+          });
           showSuccessScreen();
           return;
         }
@@ -1584,6 +1594,10 @@ const isElementInViewport = (element) => {
       const payload = await response.json().catch(() => null);
       if (response.ok && payload?.success === true) {
         form.reset();
+        trackAnalyticsEvent("beta_access_requested", {
+          form_location: "hero",
+          source_page: window.location.pathname,
+        });
         openModal(
           "Message envoyé",
           "Merci. Votre demande est bien reçue. Nous revenons vers vous rapidement.",
