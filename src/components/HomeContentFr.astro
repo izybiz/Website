@@ -277,36 +277,22 @@ const latestPosts = (await getCollection("blog-fr"))
               </div>
             </div>
             <ul class="home-insights__grid">
-              <li class="home-insights__card">
-                <a class="home-insights__card-link" href="/blog/pipeline-editorial-automatise-ia-2026-04-13/">
-                  <time class="home-insights__card-date">13 avril 2026</time>
-                  <div class="home-insights__card-content">
-                    <h3 class="home-insights__card-title">Pipeline éditorial automatisé : ce que ça produit vraiment</h3>
-                    <p class="home-insights__card-desc">4 couches, agents spécialisés, quality gate, publication trilingue. Retour d'une mise en place en mission.</p>
-                  </div>
-                  <span class="home-insights__card-tag">Lire l'article</span>
-                </a>
-              </li>
-              <li class="home-insights__card">
-                <a class="home-insights__card-link" href="/blog/github-spec-kit-specification-agent-ia-2025-11-15/">
-                  <time class="home-insights__card-date">15 novembre 2025</time>
-                  <div class="home-insights__card-content">
-                    <h3 class="home-insights__card-title">GitHub Spec-Kit : /specify, /plan, /tasks pour votre agent IA</h3>
-                    <p class="home-insights__card-desc">Vos agents IA dévient de votre intention ? Le spec-kit transforme votre besoin en spécification exécutable en 3 commandes.</p>
-                  </div>
-                  <span class="home-insights__card-tag">Lire l'article</span>
-                </a>
-              </li>
-              <li class="home-insights__card">
-                <a class="home-insights__card-link" href="/blog/bmad-method-agents-specialises-vibe-coding-2025-07-08/">
-                  <time class="home-insights__card-date">8 juillet 2025</time>
-                  <div class="home-insights__card-content">
-                    <h3 class="home-insights__card-title">BMAD Method : agents spécialisés pour livrer ce que vous avez spécifié</h3>
-                    <p class="home-insights__card-desc">Le vibe coding produit du code vite, rarement ce que vous vouliez. La BMAD method impose des agents spécialisés avec artefacts structurés.</p>
-                  </div>
-                  <span class="home-insights__card-tag">Lire l'article</span>
-                </a>
-              </li>
+              {latestPosts.map((post) => {
+                const slug = post.id.replace(/\.md$/, "");
+                const date = post.data.pubDate.toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" });
+                return (
+                  <li class="home-insights__card">
+                    <a class="home-insights__card-link" href={`/blog/${slug}/`}>
+                      <time class="home-insights__card-date" datetime={post.data.pubDate.toISOString()}>{date}</time>
+                      <div class="home-insights__card-content">
+                        <h3 class="home-insights__card-title">{post.data.title}</h3>
+                        <p class="home-insights__card-desc">{post.data.description}</p>
+                      </div>
+                      <span class="home-insights__card-tag">Lire l'article</span>
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </section>
