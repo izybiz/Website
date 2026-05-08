@@ -16,7 +16,6 @@ const posts = (await getCollection("blog-fr"))
       <header class="blog-index__header">
         <h1 class="blog-index__title">IA pour dirigeants. Terrain. Pas théorie.</h1>
         <p class="blog-index__subtitle">{t("blog.subtitle")}</p>
-        <p class="blog-index__intro">95 % des projets IA en entreprise échouent. Pas par manque de technologie — par manque de méthode de pilotage. Ce blog documente ce qui fonctionne, pour les dirigeants d'ETI et PME en France.</p>
       </header>
       <ul class="blog-list">
         {posts.map((post) => {

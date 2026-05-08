@@ -17,7 +17,7 @@ export const ui = {
     "footer.legal": "Mentions légales",
     "blog.readmore": "Lire l'article",
     "blog.title": "Blog",
-    "blog.subtitle": "Retours terrain sur les agents IA, la délégation et l'exécution — ETI et PME.",
+    "blog.subtitle": "95 % des projets IA en entreprise échouent. Pas par manque de technologie — par manque de méthode de pilotage. Ce blog documente ce qui fonctionne, pour les dirigeants d'ETI et PME en France.",
     "footer.copyright": "© 2026 Izybiz — Tous droits réservés",
   },
   en: {
