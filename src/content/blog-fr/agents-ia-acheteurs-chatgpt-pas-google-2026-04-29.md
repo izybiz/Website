@@ -1,5 +1,5 @@
 ---
-title: "Agents IA : vos acheteurs cherchent dans ChatGPT, pas Google"
+title: "ChatGPT avant Google : le nouveau réflexe des dirigeants pour évaluer une plateforme IA"
 description: "50 % des dirigeants débutent maintenant leur recherche d'outils dans ChatGPT, pas sur Google. Voici ce que ça change pour évaluer une plateforme agents IA."
 pubDate: 2026-04-29
 lang: "fr"
