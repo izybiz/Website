@@ -17,7 +17,7 @@ export const ui = {
     "footer.legal": "Mentions légales",
     "blog.readmore": "Lire l'article",
     "blog.title": "Blog",
-    "blog.subtitle": "Insights dirigeants sur la transformation et l'IA",
+    "blog.subtitle": "Retours terrain sur les agents IA, la délégation et l'exécution — ETI et PME.",
     "footer.copyright": "© 2026 Izybiz — Tous droits réservés",
   },
   en: {
