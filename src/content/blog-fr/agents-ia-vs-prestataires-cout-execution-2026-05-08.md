@@ -14,7 +14,7 @@ Ce n'est pas la bonne question à poser. La vraie comparaison n'est pas sur le t
 
 Les articles sur le "coût des agents IA" parlent d'autre chose : déployer un projet IA sur mesure représente entre 5 000 et 80 000 € selon les analyses sectorielles (Gartner, McKinsey, 2024). C'est un budget de transformation. Pas le coût d'une mission exécutée.
 
-La question qui intéresse un dirigeant est différente. Vous avez des missions récurrentes que vous confiez déjà à des prestataires — veille marché, reporting, production de contenu, coordination. Pour ces missions-là, qu'est-ce qui change si des agents IA les exécutent à leur place ?
+La question qui intéresse un manager est différente. Vous avez des missions récurrentes que vous confiez déjà à des prestataires — veille marché, reporting, production de contenu, coordination. Pour ces missions-là, qu'est-ce qui change si des agents IA les exécutent à leur place ?
 
 ## Combien coûte vraiment un prestataire d'exécution récurrente ?
 
@@ -60,7 +60,7 @@ Ce type de mission — récurrente, structurable, sans valeur ajoutée humaine d
 
 ---
 
-*Izybiz est en beta privée — accès sur invitation. Vous décrivez une mission, les agents l'exécutent, vous évaluez. Pensé par un dirigeant qui a piloté l'exécution chez Bouygues, SFR, Canal+ et SNCF. [Rejoindre la bêta →](/#prendre-contact)*
+*Izybiz est en beta privée — accès sur invitation. Vous décrivez une mission, les agents l'exécutent, vous évaluez. Pensé par un manager qui a piloté l'exécution chez Bouygues, SFR, Canal+ et SNCF. [Rejoindre la bêta →](/#prendre-contact)*
 
 ---
 
