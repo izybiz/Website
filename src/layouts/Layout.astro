@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import "../styles/site-chrome.css";
 import {
   defaultLang,
   getLocalizedPath,
@@ -53,6 +54,10 @@ const isBlogArticlePage = /^\/blog\/[^/]+\/?$/.test(Astro.url.pathname);
 const rawPath = canonicalPath || "/";
 const canonicalUrl = `https://izybiz.fr${rawPath.endsWith("/") ? rawPath : rawPath + "/"}`;
 const contactSectionHref = `${getLocalizedPath("home", lang)}#prendre-contact`;
+// La home v2 remplace la section #prendre-contact par le formulaire de
+// diagnostic : le CTA du header et le lien Contact du footer pointent dessus,
+// depuis n'importe quelle page.
+const diagnosticHref = `${getLocalizedPath("home", lang)}#diagnostic`;
 const localizedAlt = {
   fr: alternates?.fr ?? mapPathToLang(cleanPath, "fr"),
 };
@@ -91,17 +96,17 @@ const localizedAlt = {
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75,200..800&family=Didact+Gothic&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Didact+Gothic&display=swap"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75,200..800&family=Didact+Gothic&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Didact+Gothic&display=swap"
       rel="stylesheet"
       media="print"
       onload="this.media='all'"
     />
     <noscript>
       <link
-        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75,200..800&family=Didact+Gothic&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Didact+Gothic&display=swap"
         rel="stylesheet"
       />
     </noscript>
@@ -207,112 +212,116 @@ const localizedAlt = {
   </head>
   <body id="top" class:list={[isBlogArticlePage && "page-blog-article"]}>
     <script>document.body.classList.add('intro-stage-1')</script>
-    <header class="site-header" aria-label="Site header">
-      <div class="site-header__pill">
-        <div class="site-header__identity">
-          <a class="site-header__brand" href={getLocalizedPath("home", lang)} aria-label="Go to top">
-            <img src="/assets/Logo Izybiz.png" alt="IZYBIZ" width="1479" height="413" fetchpriority="high" />
-          </a>
-          <div class="site-nav__lang" aria-label="Language switcher" hidden>
-            <a href={localizedAlt.fr} aria-current={lang === "fr" ? "true" : undefined}>FR</a>
-            <span class="site-nav__lang-separator" aria-hidden="true">/</span>
-            <a href={localizedAlt.en} aria-current={lang === "en" ? "true" : undefined}>EN</a>
-            <span class="site-nav__lang-separator" aria-hidden="true">/</span>
-            <a href={localizedAlt.es} aria-current={lang === "es" ? "true" : undefined}>ES</a>
-          </div>
-        </div>
+    <header class="site-chrome" aria-label="Site header">
+      <div class="site-chrome__inner">
+        <a class="site-chrome__brand" href={getLocalizedPath("home", lang)} aria-label="Accueil Izybiz">
+          <img
+            class="site-chrome__logo"
+            src="/assets/logo-izybiz.svg"
+            alt="IZYBIZ"
+            width="710"
+            height="198"
+            fetchpriority="high"
+          />
+        </a>
+        <div class="site-chrome__spacer"></div>
 
-        <nav class="site-nav" aria-label="Primary">
-          <span class="site-nav__links-group">
-            <a class="site-nav__link" href={getLocalizedPath("blog", lang)}>{t("nav.blog")}</a>
-          </span>
+        <nav class="site-chrome__nav" aria-label="Primary">
+          <a class="site-chrome__link" href={getLocalizedPath("blog", lang)}>{t("nav.blog")}</a>
+          {/* Sans destination tant que l'app n'a pas d'URL publique — rendu en
+              <span> pour éviter un lien mort qui renverrait en haut de page. */}
+          <span class="site-chrome__link site-chrome__link--inactive">Connexion</span>
+          <a class="site-chrome__cta" href={diagnosticHref} data-cta="hero">Analyser mon site</a>
         </nav>
 
-        <div class="site-nav__actions" aria-label="Primary actions">
-          <a class="site-nav__cta hero-izybiz__button" href={contactSectionHref} data-cta="hero">
-            {t("nav.beta")}
-          </a>
-          <a
-            class="site-nav__button site-nav__button--linkedin"
-            href="https://www.linkedin.com/company/izybiz/"
-            data-linkedin
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn Izybiz"
-          >
-            <svg class="site-nav__icon" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <rect x="1.5" y="1.5" width="15" height="15" rx="3" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M5 7.5V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="5" cy="5.5" r="1" fill="currentColor"/>
-              <path d="M8.5 13V10c0-1.38 1-2.5 2-2.5s2 .84 2 2.5V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M8.5 7.5V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </a>
-        </div>
-
         <button
-          class="site-nav__toggle"
+          class="site-chrome__toggle"
           type="button"
-          aria-label="Open menu"
-          aria-controls="site-nav-menu"
+          aria-label="Ouvrir le menu"
+          aria-controls="site-chrome-menu"
           aria-expanded="false"
-          data-nav-toggle
+          data-chrome-toggle
         >
-          <span class="site-nav__toggle-icon" aria-hidden="true"></span>
+          <span class="site-chrome__toggle-bar" aria-hidden="true"></span>
         </button>
       </div>
 
-      <div class="site-nav__menu" id="site-nav-menu" hidden data-nav-menu>
-        <a class="site-nav__menu-link site-nav__menu-link--cta" href={contactSectionHref} data-cta="hero">
-          {t("nav.beta")}
-        </a>
-        <a class="site-nav__menu-link" href={getLocalizedPath("blog", lang)}>{t("nav.blog")}</a>
-        <a
-          class="site-nav__menu-link"
-          href="https://www.linkedin.com/company/izybiz/"
-          data-linkedin
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Open the IZYBIZ LinkedIn page in a new tab"
-        >
-          {t("cta.linkedin")}
-        </a>
+      <div class="site-chrome__menu" id="site-chrome-menu" hidden data-chrome-menu>
+        <a class="site-chrome__menu-link" href={getLocalizedPath("blog", lang)}>{t("nav.blog")}</a>
+        <span class="site-chrome__menu-link site-chrome__link--inactive">Connexion</span>
       </div>
     </header>
     <div class:list={["layout-content-slot", isLegalPage && "layout-content-slot--privacy"]}>
       <slot />
     </div>
-    <footer class="site-footer" aria-label="Footer" data-section="footer">
-      <div class="site-footer__inner">
-        <div class="site-footer__top">
-          <a href={getLocalizedPath("home", lang)} aria-label="Accueil Izybiz">
-            <img class="site-footer__logo" src="/assets/Logo Izybiz.png" alt="IZYBIZ" width="1479" height="413" />
+    <footer class="site-chrome-footer" aria-label="Footer" data-section="footer">
+      <div class="site-chrome-footer__inner">
+        <a href={getLocalizedPath("home", lang)} aria-label="Accueil Izybiz">
+          <img
+            class="site-chrome-footer__logo"
+            src="/assets/logo-izybiz.svg"
+            alt="IZYBIZ"
+            width="710"
+            height="198"
+          />
+        </a>
+        {lang === "fr" && (
+          <a class="site-chrome-footer__link" href="/mentions-legales/">{t("footer.legal")}</a>
+        )}
+        {lang === "fr" && (
+          <a class="site-chrome-footer__link" href="/politique-de-confidentialite/">
+            {t("footer.privacy")}
           </a>
-          <a
-            class="site-footer__linkedin"
-            href="https://www.linkedin.com/company/izybiz/"
-            data-linkedin
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn Izybiz"
-          >
-            <img class="site-footer__linkedin-icon" src="/assets/linkedin-icon.png" alt="LinkedIn" width="980" height="980" />
-          </a>
-        </div>
-        <div class="site-footer__bottom">
-          <div class="site-footer__copyright">{t("footer.copyright")}</div>
-          <nav class="site-footer__nav" aria-label="Footer navigation">
-            <a class="site-footer__nav-link" href={getLocalizedPath("blog", lang)}>{t("nav.blog")}</a>
-            {lang === "fr" && (
-              <a class="site-footer__nav-link" href="/politique-de-confidentialite/">{t("footer.privacy")}</a>
-            )}
-            {lang === "fr" && (
-              <a class="site-footer__nav-link" href="/mentions-legales/">{t("footer.legal")}</a>
-            )}
-          </nav>
-        </div>
+        )}
+        <a
+          class="site-chrome-footer__link"
+          href="https://www.linkedin.com/company/izybiz/"
+          data-linkedin
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LinkedIn
+        </a>
+        <a class="site-chrome-footer__link" href={diagnosticHref}>Contact</a>
+        <div class="site-chrome-footer__copyright">{t("footer.copyright")}</div>
       </div>
     </footer>
+    <script is:inline>
+      // Menu mobile du header. Volontairement autonome (et non dans script.js,
+      // qui n'est chargé que sur certaines pages) pour fonctionner partout.
+      (function () {
+        var toggle = document.querySelector("[data-chrome-toggle]");
+        var menu = document.querySelector("[data-chrome-menu]");
+        if (!toggle || !menu) return;
+
+        function setOpen(open) {
+          toggle.setAttribute("aria-expanded", open ? "true" : "false");
+          toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+          menu.hidden = !open;
+        }
+
+        toggle.addEventListener("click", function () {
+          setOpen(menu.hidden);
+        });
+
+        menu.addEventListener("click", function (event) {
+          if (event.target.closest("a")) setOpen(false);
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape" && !menu.hidden) {
+            setOpen(false);
+            toggle.focus();
+          }
+        });
+
+        // Repasser en desktop doit refermer le panneau, sinon il reste ouvert
+        // au retour en mobile.
+        window.matchMedia("(min-width: 861px)").addEventListener("change", function (e) {
+          if (e.matches) setOpen(false);
+        });
+      })();
+    </script>
     <script is:inline>
       window.__IZYBIZ_LANG = "{lang}";
       window.__IZYBIZ_DEFAULT_LANG = "{defaultLang}";

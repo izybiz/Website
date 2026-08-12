@@ -1,0 +1,957 @@
+---
+// Home FR v2 — portage de la maquette Claude Design (août 2026).
+// Les données de la maquette (listes, FAQ, roster…) sont rendues côté serveur :
+// pas de framework client, seul home-v2.js gère onglets + frise animée.
+import "../styles/home-v2.css";
+import { homeFaq as faq } from "../data/home-faq";
+
+const heroSteps = [
+  "Lire votre site pour comprendre votre métier",
+  "Chercher qui les IA citent sur vos sujets",
+  "Chercher une entreprise comparable à la vôtre",
+  "Mesurer si les IA vous citent",
+  "Examiner votre référencement",
+  "Examiner le site le plus cité",
+  "Examiner le site comparable",
+  "Rassembler le tout dans votre rapport",
+].map((label, i) => ({
+  label,
+  mark: i < 6 ? "✓" : "",
+  delay: `${(2.4 + i * 0.55).toFixed(2)}s`,
+}));
+
+const pathSteps = [
+  { n: "1", title: "Passez d'invisible à trouvé" },
+  { n: "2", title: "Prouvez votre expertise" },
+  { n: "3", title: "Restez présent jusqu'à la signature" },
+];
+
+const stats = [
+  { value: "+ 52 %", label: "Progression moyenne du score de visibilité en 6 mois*" },
+  { value: "+ 85 %", label: "Augmentation de votre taux de citation par les IA génératives**" },
+  { value: "98 %", label: "Taux de pertinence des contenus validés par nos experts" },
+];
+
+const tabs = [
+  { id: "attirer", label: "Attirer" },
+  { id: "convertir", label: "Convertir" },
+  { id: "vendre", label: "Vendre" },
+];
+
+const missions = {
+  attirer: [
+    { mark: "✓", label: "Audite votre site" },
+    { mark: "✓", label: "Corrige votre site" },
+    { mark: "✓", label: "Fait une veille de marché" },
+    { mark: "✓", label: "Construit une stratégie éditoriale" },
+    { mark: "✓", label: "Créé un calendrier éditorial" },
+    { mark: "", label: "Surveille vos concurrents et votre secteur" },
+    { mark: "", label: "Rédige vos supports" },
+    { mark: "", label: "Remesure votre visibilité" },
+  ],
+  convertir: [
+    { mark: "✓", label: "Met en avant vos références sur le site" },
+    { mark: "✓", label: "Installe la demande de devis en un clic" },
+    { mark: "", label: "Reçoit chaque demande entrante" },
+    { mark: "", label: "Transmet le contexte du visiteur" },
+  ],
+  vendre: [
+    { mark: "✓", label: "Tient le registre de vos devis" },
+    { mark: "✓", label: "Repère quand le prospect revient" },
+    { mark: "", label: "Prépare la relance avec du neuf" },
+    { mark: "", label: "Réveille les devis dormants" },
+    { mark: "", label: "Suit vos signatures chaque mois" },
+  ],
+};
+
+// Onglet « Attirer » — conversation pilotée par les données
+const chatAttirer = {
+  izy: "Le bilan du mois est prêt. Deux textes attendent votre validation.",
+  you: "Montre-moi l'article.",
+  tag: "À VALIDER",
+  meta: "article · 1 240 mots",
+  title:
+    "Remplacer une chaudière en 2026 : ce qui change pour les locaux professionnels",
+  sub: "Recherche visée : remplacement chaudière local professionnel",
+  cta: "Valider",
+  alt: "Demander une correction",
+};
+
+const quotes = [
+  {
+    name: "Olivier",
+    role: "Président, Kirei SA",
+    src: "/assets/temoin-olivier.jpg",
+    text: "Izy a transformé notre visibilité digitale. On signe enfin des devis via le web.",
+  },
+  {
+    name: "Pascal",
+    role: "DG, Clean Power",
+    src: "/assets/temoin-pascal.jpg",
+    text: "Le vrai plus ? Ne pas recruter. Izy livre, je valide, et les résultats tombent.",
+  },
+  {
+    name: "Ophélie",
+    role: "Freelance SEO, Mood.be",
+    src: "/assets/temoin-ophelie.jpg",
+    text: "En tant qu'experte SEO, j'ai été bluffée par la pertinence des contenus générés par Izy",
+  },
+];
+
+const compare = [
+  { criteria: "Disponibilité", them: "Heures de bureau (9h-18h)", izy: "24h/24, 7j/7" },
+  { criteria: "Visibilité", them: "Rapports mensuels complexes", izy: "Temps réel, dans la messagerie" },
+  { criteria: "Production", them: "Délai de rédaction : 1 semaine", izy: "Instantané + validation" },
+  { criteria: "Coût", them: "Frais fixes élevés", izy: "Abonnement flexible" },
+];
+
+const roster = [
+  {
+    name: "Brenda",
+    role: "Garante de votre image de marque : ton, message, cohérence visuelle sur tous vos contenus",
+    d: "M12 3l2.4 5.6L20 11l-5.6 2.4L12 19l-2.4-5.6L4 11l5.6-2.4z",
+    d2: "",
+  },
+  {
+    name: "Sophie",
+    role: "Vous fait remonter dans Google : elle audite votre site et optimise votre référencement",
+    d: "M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14",
+    d2: "M16.2 16.2L21 21",
+  },
+  {
+    name: "Marc",
+    role: "Votre veille marché : elle surveille vos concurrents et repère les tendances à saisir",
+    d: "M12 21a9 9 0 1 1 9-9",
+    d2: "M12 16.5a4.5 4.5 0 1 1 4.5-4.5M12 12l8-8",
+  },
+  {
+    name: "Victor",
+    role: "Votre plume : il rédige vos articles, vos posts LinkedIn et prépare vos visuels",
+    d: "M4 20c1.5-9 7-14.5 16-16-1.5 9-7 14.5-16 16z",
+    d2: "M9.5 15.5L15 10",
+  },
+  {
+    name: "Greg",
+    role: "Votre moteur d'acquisition : il améliore votre taux de conversion et gère vos campagnes payantes",
+    d: "M4 18l5.5-5.5 3.5 3.5L20 8",
+    d2: "M15 8h5v5",
+  },
+  {
+    name: "Emma",
+    role: "Votre relation client : elle synchronise vos contacts et gère vos emails et newsletters",
+    d: "M3.5 6h17v12h-17z",
+    d2: "M3.5 7.2l8.5 6 8.5-6",
+  },
+].map((a, i) => ({
+  ...a,
+  tint: ["#f5c21b", "#b9ddfd", "#d9d8ff"][i % 3],
+  deep: ["#7a5c02", "#2f5570", "#3a3770"][i % 3],
+}));
+
+// Frise S9 — `chip` est la valeur comptée à l'arrivée de la carte
+const timeline = [
+  {
+    stamp: "SEMAINE 3",
+    text: "Nouvelle page en ligne · ≈ 210 recherches/mois",
+    angle: "-1.5deg",
+    shift: 24,
+    avatar: true,
+    chip: null,
+  },
+  {
+    stamp: "MOIS 1",
+    text: "5 pages optimisées, 4 articles publiés · score 34",
+    angle: "-1.2deg",
+    shift: 28,
+    chip: 3,
+  },
+  {
+    stamp: "MOIS 3",
+    text: "Cité par les IA sur 2 requêtes · score 41",
+    angle: "1.5deg",
+    shift: -20,
+    chip: 7,
+  },
+  {
+    stamp: "MOIS 5",
+    text: "Demande de devis reçue · transférée dans votre boîte",
+    angle: "2deg",
+    shift: 14,
+    key: true,
+    chip: null,
+  },
+  {
+    stamp: "MOIS 6",
+    text: "2 nouvelles demandes de devis · score 52",
+    angle: "0deg",
+    shift: 0,
+    flat: true,
+    chip: 21,
+    big: true,
+  },
+];
+
+---
+
+<div class="home-v2">
+  {/* ================= S2 — Hero ================= */}
+  <section aria-labelledby="hv2-hero-title" data-section="hero">
+    <div class="hv2-hero__head hv2-wrap--narrow" style="margin:0 auto">
+      <h1 class="hv2-hero__title" id="hv2-hero-title">
+        Attirez vos nouveaux prospects grâce à l'IA
+      </h1>
+      <p class="hv2-hero__sub">
+        Google et les IA décident qui vos clients voient en premier. Découvrez où vous
+        êtes placé, qui vous devance, et ce qu'il faut faire pour remonter.
+      </p>
+      <div class="hv2-hero__eyebrow">DIAGNOSTIC DE VISIBILITÉ GRATUIT</div>
+      <form class="hv2-form hv2-hero__form" id="diagnostic" data-diagnostic-form novalidate>
+        <label class="sr-only" for="hv2-hero-email">Votre email</label>
+        <input
+          class="hv2-field"
+          id="hv2-hero-email"
+          type="email"
+          name="email"
+          placeholder="votre@email.fr"
+          autocomplete="email"
+          required
+        />
+        <label class="sr-only" for="hv2-hero-site">L'adresse de votre site</label>
+        <input
+          class="hv2-field"
+          id="hv2-hero-site"
+          type="url"
+          name="website"
+          placeholder="https://votre-site.fr"
+          autocomplete="url"
+          required
+        />
+        <button class="hv2-btn hv2-hero__submit" type="submit">Analyser mon site</button>
+      </form>
+      <p class="hv2-note hv2-hero__note">
+        Diagnostic en 2 min · Gratuit · Sans engagement
+      </p>
+    </div>
+
+    <div class="hv2-hero__demo">
+      <div class="hv2-window">
+        <div class="hv2-window__bar">
+          <span class="hv2-window__dot"></span>
+          <span class="hv2-window__dot"></span>
+          <span class="hv2-window__spacer"></span>
+          <span class="hv2-window__label">DIAGNOSTIC EN COURS</span>
+        </div>
+        <div class="hv2-window__body">
+          <div class="hv2-scan">
+            <div class="hv2-scan__line" style="animation-delay:.2s">
+              <span class="hv2-scan__check">✓</span> votre site répond
+            </div>
+            <div class="hv2-scan__line" style="animation-delay:1s">
+              <span class="hv2-scan__check">✓</span> vous avez un blog
+            </div>
+            <div class="hv2-scan__line hv2-scan__line--muted" style="animation-delay:1.8s">
+              dernier article le 8 mai
+            </div>
+          </div>
+          <div class="hv2-steps">
+            {
+              heroSteps.map((step) => (
+                <div class="hv2-steps__item" style={`animation-delay:${step.delay}`}>
+                  <span class="hv2-steps__box">{step.mark}</span>
+                  <span class="hv2-steps__label">{step.label}</span>
+                </div>
+              ))
+            }
+          </div>
+          <div class="hv2-pending">
+            <span class="hv2-pending__spinner"></span>
+            rapport en préparation
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S3 — Trajectoire ================= */}
+  <section class="hv2-path" aria-labelledby="hv2-path-title">
+    <div class="hv2-wrap hv2-path__inner">
+      <div class="hv2-path__head">
+        <h2 class="hv2-path__title" id="hv2-path-title">
+          Développez votre entreprise, étape par étape
+        </h2>
+        <p class="hv2-path__sub">
+          Un client vous trouve, vous croit, puis signe : toujours dans cet ordre. On
+          commence donc par la visibilité, et Izy fait le travail du début à la fin.
+        </p>
+      </div>
+      <div class="hv2-path__grid">
+        {
+          pathSteps.map((step) => (
+            <div class={`hv2-step hv2-step--${step.n}`}>
+              <div class="hv2-step__head">
+                <span class="hv2-step__num">{step.n}</span>
+                <h3 class="hv2-step__title">{step.title}</h3>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S4b — Chiffres ================= */}
+  <section class="hv2-stats" aria-labelledby="hv2-stats-title">
+    <div class="hv2-wrap hv2-stats__inner">
+      <h2 class="hv2-stats__title" id="hv2-stats-title">
+        Une croissance mesurée, une visibilité pilotée par la donnée
+      </h2>
+      <div class="hv2-stats__grid">
+        {
+          stats.map((stat) => (
+            <div class="hv2-stat">
+              <div class="hv2-stat__value">{stat.value}</div>
+              <p class="hv2-stat__label">{stat.label}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="hv2-stats__footnotes">
+        <span>*Basé sur l'évolution type de notre diagnostic</span>
+        <span>**Mesure de l'autorité IA</span>
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S5 — L'app (onglets) ================= */}
+  <section class="hv2-app" aria-labelledby="hv2-app-title" data-app>
+    <div class="hv2-wrap hv2-wrap--wide hv2-app__inner">
+      <div class="hv2-app__box">
+        <h2 class="hv2-app__title" id="hv2-app-title">
+          Personne à recruter : Izy fait le travail, sous vos yeux.
+        </h2>
+        <p class="hv2-app__sub">
+          Tout commence par le diagnostic gratuit, en cinq minutes. Un rendez-vous cadre
+          ensuite votre mission et son plan d'action. Puis Izy exécute, mois après mois :
+          vous n'avez plus qu'à valider.
+        </p>
+
+        <div class="hv2-tabs" role="tablist" aria-label="Étapes du parcours">
+          {
+            tabs.map((tab, i) => (
+              <button
+                class={`hv2-tab hv2-tab--${tab.id}`}
+                type="button"
+                role="tab"
+                id={`hv2-tab-${tab.id}`}
+                aria-controls={`hv2-panel-${tab.id}`}
+                aria-selected={i === 0 ? "true" : "false"}
+                tabindex={i === 0 ? 0 : -1}
+              >
+                {tab.label}
+              </button>
+            ))
+          }
+        </div>
+
+        <div class="hv2-app__screen">
+          {/* --- Panneau Attirer --- */}
+          <div
+            class="hv2-panel"
+            id="hv2-panel-attirer"
+            role="tabpanel"
+            aria-labelledby="hv2-tab-attirer"
+            tabindex="0"
+          >
+            <div class="hv2-panel__layout">
+              <div class="hv2-plan">
+                <img
+                  class="hv2-plan__logo"
+                  src="/assets/logo-izybiz.svg"
+                  alt="IZYBIZ"
+                  width="710"
+                  height="198"
+                />
+                <div class="hv2-plan__label">PLAN DE MISSION</div>
+                <div class="hv2-plan__list">
+                  {
+                    missions.attirer.map((m) => (
+                      <div class="hv2-plan__item">
+                        <span class="hv2-plan__box">{m.mark}</span>
+                        <span>{m.label}</span>
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+              <div class="hv2-conv">
+                <div class="hv2-conv__thread">
+                  <div class="hv2-msg">
+                    <span class="hv2-msg__avatar">Izy</span>
+                    <div class="hv2-msg__bubble">{chatAttirer.izy}</div>
+                  </div>
+                  <div class="hv2-reply">{chatAttirer.you}</div>
+                  <div class="hv2-card">
+                    <div class="hv2-card__head">
+                      <span class="hv2-card__tag">{chatAttirer.tag}</span>
+                      <span class="hv2-card__meta">{chatAttirer.meta}</span>
+                    </div>
+                    <div class="hv2-card__body">
+                      <h3 class="hv2-card__title">{chatAttirer.title}</h3>
+                      <p class="hv2-card__sub">{chatAttirer.sub}</p>
+                      <div class="hv2-card__actions">
+                        <button class="hv2-btn hv2-btn--sm" type="button">
+                          {chatAttirer.cta}
+                        </button>
+                        <button class="hv2-btn hv2-btn--ghost" type="button">
+                          {chatAttirer.alt}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="hv2-conv__composer">
+                  <div class="hv2-conv__input">Écrire à Izy…</div>
+                  <span class="hv2-conv__caret"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* --- Panneau Convertir --- */}
+          <div
+            class="hv2-panel"
+            id="hv2-panel-convertir"
+            role="tabpanel"
+            aria-labelledby="hv2-tab-convertir"
+            tabindex="0"
+            hidden
+          >
+            <div class="hv2-panel__layout">
+              <div class="hv2-plan">
+                <img
+                  class="hv2-plan__logo"
+                  src="/assets/logo-izybiz.svg"
+                  alt="IZYBIZ"
+                  width="710"
+                  height="198"
+                />
+                <div class="hv2-plan__label">PLAN DE MISSION</div>
+                <div class="hv2-plan__list">
+                  {
+                    missions.convertir.map((m) => (
+                      <div class="hv2-plan__item">
+                        <span class="hv2-plan__box">{m.mark}</span>
+                        <span>{m.label}</span>
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+              <div class="hv2-conv">
+                <div class="hv2-conv__thread">
+                  <div class="hv2-conv__stamp">il y a 2 min</div>
+                  <div class="hv2-msg">
+                    <span class="hv2-msg__avatar hv2-msg__avatar--yellow">Izy</span>
+                    <div class="hv2-msg__bubble hv2-msg__bubble--plain">
+                      Demande de devis reçue.<br />Elle vient de votre page entretien.
+                    </div>
+                  </div>
+                  <div class="hv2-card hv2-card--indent">
+                    <div class="hv2-card__head">
+                      <span class="hv2-card__tag">NOUVELLE DEMANDE</span>
+                      <span class="hv2-card__flag">● À TRAITER</span>
+                    </div>
+                    <div class="hv2-card__facts">
+                      <span>Groupe Rivalet · 3 sites</span>
+                      <span>Entretien annuel, 3 chaufferies</span>
+                      <span>Votre secteur, 20 km</span>
+                    </div>
+                    <div class="hv2-card__read">
+                      <div class="hv2-card__read-label">AVANT D'ÉCRIRE, IL A LU</div>
+                      <div class="hv2-card__read-row">
+                        <span>Votre page entretien</span>
+                        <span class="hv2-card__read-time">4 min</span>
+                      </div>
+                      <div class="hv2-card__read-row">
+                        <span>Votre article sur le décret CVC</span>
+                        <span class="hv2-card__read-time">6 min</span>
+                      </div>
+                      <div class="hv2-card__read-row">
+                        <span>Vos références</span>
+                        <span class="hv2-card__read-time">2 min</span>
+                      </div>
+                    </div>
+                    <div class="hv2-card__source">
+                      Arrivé par Google<br />« entretien chaufferie + votre région »
+                    </div>
+                  </div>
+                  <div class="hv2-reply">Super ! Prépare une réponse</div>
+                  <div class="hv2-msg">
+                    <span class="hv2-msg__avatar hv2-msg__avatar--yellow">Izy</span>
+                    <div class="hv2-msg__bubble hv2-msg__bubble--plain">
+                      C'est prêt. J'ai repris les trois sites et votre référence Beaulieu,
+                      qui leur ressemble.
+                    </div>
+                  </div>
+                  <div class="hv2-card hv2-card--indent">
+                    <div class="hv2-card__head">
+                      <span class="hv2-card__tag">RÉPONSE AU GROUPE RIVALET</span>
+                      <span class="hv2-card__flag">● À VALIDER</span>
+                    </div>
+                    <div class="hv2-card__draft">
+                      Bonjour,<br />Vous cherchez à couvrir l'entretien de trois
+                      chaufferies. Nous suivons déjà un site comparable depuis 2023
+                      (Beaulieu, 3 chaufferies, contrat 3 ans).<br />Je vous propose une
+                      visite…
+                    </div>
+                    <div class="hv2-card__foot">
+                      <button class="hv2-btn hv2-btn--sm" type="button">Envoyer</button>
+                      <button class="hv2-btn hv2-btn--ghost" type="button">
+                        Demander une correction
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="hv2-conv__composer">
+                  <div class="hv2-conv__input">Écrire à Izy…</div>
+                  <span class="hv2-conv__caret"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* --- Panneau Vendre --- */}
+          <div
+            class="hv2-panel"
+            id="hv2-panel-vendre"
+            role="tabpanel"
+            aria-labelledby="hv2-tab-vendre"
+            tabindex="0"
+            hidden
+          >
+            <div class="hv2-panel__layout">
+              <div class="hv2-plan">
+                <img
+                  class="hv2-plan__logo"
+                  src="/assets/logo-izybiz.svg"
+                  alt="IZYBIZ"
+                  width="710"
+                  height="198"
+                />
+                <div class="hv2-plan__label">PLAN DE MISSION</div>
+                <div class="hv2-plan__list">
+                  {
+                    missions.vendre.map((m) => (
+                      <div class="hv2-plan__item">
+                        <span class="hv2-plan__box">{m.mark}</span>
+                        <span>{m.label}</span>
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+              <div class="hv2-conv">
+                <div class="hv2-conv__thread">
+                  <div class="hv2-conv__stamp">lundi</div>
+                  <div class="hv2-msg">
+                    <span class="hv2-msg__avatar hv2-msg__avatar--yellow">Izy</span>
+                    <div class="hv2-msg__bubble hv2-msg__bubble--plain">
+                      J'ai repris vos devis de l'hiver. Six sont restés sans réponse :
+                      84 300 € au total.<br />Trois valent la peine d'être réveillés.
+                    </div>
+                  </div>
+                  <div class="hv2-reply">Réveille les trois.</div>
+                  <div class="hv2-msg">
+                    <span class="hv2-msg__avatar hv2-msg__avatar--yellow">Izy</span>
+                    <div class="hv2-msg__bubble hv2-msg__bubble--plain">
+                      Trois messages différents, un par situation. Pas d'envoi groupé :
+                      ils se connaissent, dans le coin.
+                    </div>
+                  </div>
+                  <div class="hv2-card hv2-card--indent">
+                    <div class="hv2-card__head">
+                      <span class="hv2-card__tag">3 MESSAGES</span>
+                      <span class="hv2-card__flag">● À VALIDER</span>
+                    </div>
+                    <div class="hv2-card__row">
+                      <div class="hv2-card__mono">Résidence Aube</div>
+                      <div class="hv2-card__mono hv2-card__mono--dim">
+                        « Votre rénovation d'octobre change le périmètre. Je remets la
+                        proposition à jour ? »
+                      </div>
+                    </div>
+                    <div class="hv2-card__row">
+                      <div class="hv2-card__mono">Clinique Nord</div>
+                      <div class="hv2-card__mono hv2-card__mono--dim">
+                        « Le décret du 15 septembre concerne vos locaux. Voici ce qu'il
+                        change. »
+                      </div>
+                    </div>
+                    <div class="hv2-card__row">
+                      <div class="hv2-card__mono">Sté Marbaix</div>
+                      <div class="hv2-card__mono hv2-card__mono--dim">
+                        « Notre proposition tient jusqu'au 30. Un point de 15 minutes ? »
+                      </div>
+                    </div>
+                    <div class="hv2-card__foot">
+                      <button class="hv2-btn hv2-btn--sm" type="button">
+                        Tout envoyer
+                      </button>
+                      <button class="hv2-btn hv2-btn--ghost" type="button">
+                        Relire un par un
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="hv2-conv__composer">
+                  <div class="hv2-conv__input">Écrire à Izy…</div>
+                  <span class="hv2-conv__caret"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S4b2 — Témoignages ================= */}
+  <section class="hv2-quotes" aria-labelledby="hv2-quotes-title">
+    <div class="hv2-wrap hv2-quotes__inner">
+      <h2 class="hv2-quotes__title" id="hv2-quotes-title">
+        Ce que nos clients disent de l'expérience Izy
+      </h2>
+      <div class="hv2-quotes__grid">
+        {
+          quotes.map((q) => (
+            <figure class="hv2-quote">
+              <img
+                class="hv2-quote__photo"
+                src={q.src}
+                alt={q.name}
+                width="192"
+                height="192"
+                loading="lazy"
+                decoding="async"
+              />
+              <blockquote class="hv2-quote__text">« {q.text} »</blockquote>
+              <figcaption class="hv2-quote__caption">
+                <span class="hv2-quote__name">{q.name}</span>
+                <span class="hv2-quote__role">{q.role}</span>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S4c — Comparaison ================= */}
+  <section class="hv2-compare" aria-labelledby="hv2-compare-title">
+    <div class="hv2-wrap hv2-compare__inner">
+      <div class="hv2-split">
+        <div class="hv2-split__text">
+          <h2 class="hv2-split__title" id="hv2-compare-title">
+            Pourquoi Izy<br />change la donne.
+          </h2>
+          <p class="hv2-split__body">
+            Face à une agence ou à un freelance, la différence ne tient pas au talent :
+            elle tient au rythme, à la visibilité du travail et au coût.
+          </p>
+          <a class="hv2-btn hv2-split__cta" href="#diagnostic">Analyser mon site</a>
+        </div>
+        <div class="hv2-table">
+          <div class="hv2-table__grid">
+            <span></span>
+            <span class="hv2-table__head-them">AGENCE</span>
+            <span class="hv2-table__head-izy">L'APP Izy</span>
+            {
+              compare.map((c, i) => (
+                <>
+                  <span class="hv2-table__criteria">{c.criteria}</span>
+                  <span class="hv2-table__them">{c.them}</span>
+                  <span
+                    class={`hv2-table__izy${i === compare.length - 1 ? " hv2-table__izy--last" : ""}`}
+                  >
+                    <span class="hv2-table__check">✓</span>
+                    <span class="hv2-table__value">{c.izy}</span>
+                  </span>
+                </>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S6 — Équipe d'agents ================= */}
+  <section class="hv2-roster" aria-labelledby="hv2-roster-title">
+    <div class="hv2-wrap hv2-roster__inner">
+      <div class="hv2-roster__head">
+        <h2 class="hv2-roster__title" id="hv2-roster-title">
+          Izy a son équipe, vous avez la vôtre. Laissez-les travailler ensemble
+        </h2>
+        <p class="hv2-roster__sub">
+          On ne remplace personne. Vous connaissez votre métier, vos clients et vos
+          chantiers. L'équipe d'Izy fait le travail que votre équipe n'a pas le temps de
+          faire, vous vous concentrez ce que vous êtes le seul à savoir faire.
+        </p>
+      </div>
+
+      <div class="hv2-roster__window">
+        <div class="hv2-roster__bar">
+          <svg
+            viewBox="0 0 24 24"
+            width="17"
+            height="17"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M6 3h8l4 4v14H6z"></path>
+            <path d="M14 3v4h4"></path>
+          </svg>
+          <span style="flex:1"></span>
+          <svg
+            viewBox="0 0 24 24"
+            width="15"
+            height="15"
+            fill="none"
+            stroke="rgba(255,255,255,.8)"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path d="M20 4l-6 6M14 4h6v6M4 20l6-6M10 20H4v-6"></path>
+          </svg>
+          <svg
+            viewBox="0 0 24 24"
+            width="15"
+            height="15"
+            fill="none"
+            stroke="rgba(255,255,255,.8)"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path d="M5 5l14 14M19 5L5 19"></path>
+          </svg>
+        </div>
+
+        <div class="hv2-roster__body">
+          <p class="hv2-roster__lead">
+            <strong>Izy</strong> est votre interlocutrice principale. Elle pilote l'équipe
+            pour vous, comprend votre demande et orchestre le travail des autres. Rien ne
+            part sans votre accord.
+          </p>
+
+          <div class="hv2-roster__grid">
+            {
+              roster.map((a) => (
+                <div class="hv2-agent">
+                  <div class="hv2-agent__head" style={`background:${a.tint}`}>
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke={a.deep}
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d={a.d}></path>
+                      {a.d2 && <path d={a.d2}></path>}
+                    </svg>
+                    <span class="hv2-agent__name" style={`color:${a.deep}`}>
+                      {a.name}
+                    </span>
+                    <span class="hv2-agent__spacer"></span>
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="14"
+                      height="14"
+                      fill="none"
+                      stroke={a.deep}
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M20 4l-6 6M14 4h6v6M4 20l6-6M10 20H4v-6"></path>
+                    </svg>
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="14"
+                      height="14"
+                      fill="none"
+                      stroke={a.deep}
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 5l14 14M19 5L5 19"></path>
+                    </svg>
+                  </div>
+                  <div class="hv2-agent__body">
+                    <p class="hv2-agent__role">{a.role}</p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S9 — Diagnostic / frise ================= */}
+  <section aria-labelledby="hv2-timeline-title">
+    <div class="hv2-wrap hv2-timeline__inner" id="izy-s9" data-timeline>
+      <div class="hv2-split">
+        <div class="hv2-timeline__text">
+          <h2 class="hv2-split__title" id="hv2-timeline-title">
+            Du diagnostic<br /><span>au premier devis.</span>
+          </h2>
+          <p class="hv2-split__body">
+            Six mois d'une mission type : le score qui monte, mesuré et jamais promis, le
+            travail livré chaque semaine, et des demandes qui finissent par venir à vous.
+            Ça commence par voir où vous en êtes : le diagnostic gratuit, en cinq minutes.
+          </p>
+          <form class="hv2-form hv2-timeline__form" data-diagnostic-form novalidate>
+            <label class="sr-only" for="hv2-s9-email">Votre email</label>
+            <input
+              class="hv2-field"
+              id="hv2-s9-email"
+              type="email"
+              name="email"
+              placeholder="votre@email.fr"
+              autocomplete="email"
+              required
+            />
+            <label class="sr-only" for="hv2-s9-site">L'adresse de votre site</label>
+            <input
+              class="hv2-field"
+              id="hv2-s9-site"
+              type="url"
+              name="website"
+              placeholder="https://votre-site.fr"
+              autocomplete="url"
+              required
+            />
+            <button class="hv2-btn" type="submit">Analyser mon site</button>
+          </form>
+          <p class="hv2-note hv2-timeline__note">
+            Exemple de mission. Vos chiffres à vous sont mesurés chaque mois, dès le
+            diagnostic.
+          </p>
+        </div>
+
+        <div class="hv2-timeline__stage">
+          <div class="hv2-timeline__list">
+            {
+              timeline.map((t, i) => (
+                <div
+                  class={`hv2-tl${t.avatar ? " hv2-tl--avatar" : ""}${t.key ? " hv2-tl--key" : ""}`}
+                  style={`--tl-angle:${t.angle};width:${t.flat ? "100%" : "85%"};margin-left:${t.shift > 0 ? t.shift + "px" : "0"};margin-right:${t.shift < 0 ? -t.shift + "px" : "0"}`}
+                  data-tl-index={i}
+                >
+                  <span class="hv2-tl__avatar">Izy</span>
+                  <div class="hv2-tl__card">
+                    <div class="hv2-tl__stamps">
+                      <span class="hv2-tl__stamp">{t.stamp}</span>
+                      {t.key && <span class="hv2-tl__badge">PREMIER DEVIS</span>}
+                    </div>
+                    <p class="hv2-tl__text">
+                      {t.text}
+                      {t.chip && (
+                        <span
+                          class={`hv2-tl__chip${t.big ? " hv2-tl__chip--big" : ""}`}
+                          data-chip={t.chip}
+                          data-chip-big={t.big ? "true" : "false"}
+                          aria-label={`plus ${t.chip} points`}
+                        >
+                          <span class="hv2-tl__arrow" aria-hidden="true">
+                            ↗
+                          </span>
+                          +<span data-chip-value>0</span>
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S10 — FAQ ================= */}
+  <section class="hv2-faq" aria-labelledby="hv2-faq-title">
+    <div class="hv2-wrap hv2-faq__inner">
+      <span class="hv2-faq__badge">FAQ</span>
+      <h2 class="hv2-faq__title" id="hv2-faq-title">Les questions qu'on nous pose</h2>
+      <div class="hv2-faq__list">
+        {
+          faq.map((f) => (
+            <details class="hv2-faq__item">
+              <summary class="hv2-faq__q">
+                <span class="hv2-faq__q-text">{f.q}</span>
+                <span class="hv2-faq__chevron" aria-hidden="true">
+                  ▾
+                </span>
+              </summary>
+              <p class="hv2-faq__a">{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S11 — CTA final ================= */}
+  <section aria-labelledby="hv2-final-title">
+    <div class="hv2-wrap hv2-final__inner">
+      <div class="hv2-final__grid">
+        <h2 class="hv2-final__title" id="hv2-final-title">
+          Voyez où vous en êtes, puis laissez Izy travailler.
+        </h2>
+        <div>
+          <form class="hv2-form hv2-final__form" data-diagnostic-form novalidate>
+            <label class="sr-only" for="hv2-final-email">Votre email</label>
+            <input
+              class="hv2-field"
+              id="hv2-final-email"
+              type="email"
+              name="email"
+              placeholder="votre@email.fr"
+              autocomplete="email"
+              required
+            />
+            <label class="sr-only" for="hv2-final-site">L'adresse de votre site</label>
+            <input
+              class="hv2-field"
+              id="hv2-final-site"
+              type="url"
+              name="website"
+              placeholder="https://votre-site.fr"
+              autocomplete="url"
+              required
+            />
+            <button class="hv2-btn" type="submit">Lancer le diagnostic</button>
+          </form>
+          <p class="hv2-note hv2-final__note">Sans engagement · Sans carte bancaire</p>
+          <a class="hv2-final__link" href="#diagnostic">Ou prenez rendez-vous</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script is:inline src="/home-v2.js" defer></script>

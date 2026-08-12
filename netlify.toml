@@ -12,10 +12,10 @@
 
 [[redirects]]
   from = "/contact"
-  to = "/#prendre-contact"
+  to = "/#diagnostic"
   status = 301
 
 [[redirects]]
   from = "/contact/"
-  to = "/#prendre-contact"
+  to = "/#diagnostic"
   status = 301

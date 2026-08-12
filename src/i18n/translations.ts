@@ -9,7 +9,7 @@ export const fallbackLang = "en";
 
 export const ui = {
   fr: {
-    "nav.blog": "Insight",
+    "nav.blog": "Blog",
     "nav.beta": "Rejoindre la bêta privée",
     "nav.how": "Comment ça marche ?",
     "cta.linkedin": "Message LinkedIn",
