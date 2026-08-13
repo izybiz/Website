@@ -184,17 +184,84 @@
    * 3. Formulaires de diagnostic
    * ------------------------------------------------------------------ */
 
-  // Les formulaires de diagnostic n'ont pas encore de destination : on se
-  // contente d'empêcher le rechargement de la page, comme dans la maquette.
-  // Pour les brancher plus tard, c'est le seul endroit à modifier.
+  // Les trois formulaires de diagnostic partagent le même comportement :
+  // on valide les deux champs, puis on affiche la modale de confirmation.
+  //
+  // ATTENTION : rien n'est encore envoyé nulle part. La modale annonce un mail
+  // que personne n'envoie. Quand une destination existera, c'est sendDiagnostic()
+  // ci-dessous — et elle seule — qu'il faudra remplir, en n'ouvrant la modale
+  // qu'une fois la requête acceptée.
+  function sendDiagnostic(/* data */) {
+    return Promise.resolve();
+  }
+
+  // Le champ site est un <input type="url"> : le navigateur refuse
+  // « izybiz.fr » tant qu'il n'y a pas de schéma. Or c'est exactement ce qu'un
+  // visiteur tape. On complète donc en https:// à sa place, plutôt que de lui
+  // opposer un « saisissez une URL valide » sur une adresse qui l'est.
+  var HAS_SCHEME = /^[a-z][a-z0-9+.-]*:\/\//i;
+
+  function normalizeWebsite(input) {
+    if (!input) return;
+    var value = input.value.trim();
+    if (!value || HAS_SCHEME.test(value)) {
+      input.value = value;
+      return;
+    }
+    input.value = "https://" + value;
+  }
+
   function initForms() {
     var forms = Array.prototype.slice.call(
       document.querySelectorAll("[data-diagnostic-form]"),
     );
+    if (!forms.length) return;
+
+    var modal = document.getElementById("hv2-diagnostic-modal");
+
+    if (modal) {
+      modal.addEventListener("click", function (event) {
+        // Un clic hors du panneau (donc sur le fond) referme la modale.
+        if (event.target === modal) modal.close();
+      });
+
+      var closeBtn = modal.querySelector("[data-modal-close]");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function () {
+          modal.close();
+        });
+      }
+    }
 
     forms.forEach(function (form) {
+      var website = form.querySelector('input[name="website"]');
+
+      // Dès que le visiteur quitte le champ, il voit l'adresse complétée : pas
+      // de correction invisible au moment de l'envoi.
+      if (website) {
+        website.addEventListener("blur", function () {
+          normalizeWebsite(website);
+        });
+      }
+
       form.addEventListener("submit", function (event) {
         event.preventDefault();
+        normalizeWebsite(website);
+
+        // Les formulaires portent `novalidate` : on déclenche nous-mêmes la
+        // validation native, qui affiche ses messages en français.
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        var data = new FormData(form);
+
+        sendDiagnostic(data).then(function () {
+          if (modal && typeof modal.showModal === "function") {
+            modal.showModal();
+          }
+        });
       });
     });
   }

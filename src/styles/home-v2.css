@@ -1715,3 +1715,110 @@
     min-height: 0;
   }
 }
+
+/* ==========================================================================
+   Modale de confirmation du diagnostic
+   Affichée après l'envoi de l'un des trois formulaires (voir home-v2.js).
+   <dialog> natif : le navigateur gère le focus, Échap et l'arrière-plan inerte.
+   ========================================================================== */
+
+.hv2-modal {
+  /* Reset des styles par défaut de <dialog> : bordure, fond et padding du UA. */
+  margin: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  max-width: min(520px, calc(100vw - 40px));
+  width: 100%;
+  overflow: visible;
+}
+
+.hv2-modal::backdrop {
+  background: rgba(17, 21, 16, 0.55);
+}
+
+.hv2-modal__panel {
+  background: var(--surface);
+  border-radius: 24px;
+  padding: clamp(28px, 4vw, 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  text-align: left;
+}
+
+.hv2-modal__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.hv2-modal__blink {
+  width: 8px;
+  height: 14px;
+  background: var(--orange);
+  display: inline-block;
+  animation: hv2ModalBlink 1.2s steps(1) infinite;
+}
+
+@keyframes hv2ModalBlink {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.hv2-modal__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(26px, 3.2vw, 34px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.hv2-modal__text {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink2);
+}
+
+.hv2-modal__close {
+  margin-top: 6px;
+}
+
+/* L'ouverture est animée en fondu ; @starting-style permet de partir de
+   l'état initial sans JavaScript supplémentaire. */
+.hv2-modal[open] {
+  animation: hv2ModalIn 0.22s ease both;
+}
+
+@keyframes hv2ModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hv2-modal[open] {
+    animation: none;
+  }
+
+  .hv2-modal__blink {
+    animation: none;
+    opacity: 1;
+  }
+}

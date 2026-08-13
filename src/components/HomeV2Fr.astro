@@ -952,6 +952,26 @@ const timeline = [
       </div>
     </div>
   </section>
+
+  <!-- Confirmation affichée après l'envoi d'un des trois formulaires de
+       diagnostic. <dialog> natif : la gestion du focus, la touche Échap et
+       l'inertie de l'arrière-plan sont assurées par le navigateur. -->
+  <dialog class="hv2-modal" id="hv2-diagnostic-modal" aria-labelledby="hv2-modal-title">
+    <div class="hv2-modal__panel">
+      <p class="hv2-modal__eyebrow">
+        <span class="hv2-modal__blink" aria-hidden="true"></span>
+        DIAGNOSTIC EN COURS
+      </p>
+      <h2 class="hv2-modal__title" id="hv2-modal-title">Votre diagnostic démarre.</h2>
+      <p class="hv2-modal__text">
+        Nous vous envoyons un mail dès qu'il est terminé, à l'adresse que vous venez
+        d'indiquer.
+      </p>
+      <button class="hv2-btn hv2-modal__close" type="button" data-modal-close>
+        Fermer
+      </button>
+    </div>
+  </dialog>
 </div>
 
 <script is:inline src="/home-v2.js" defer></script>

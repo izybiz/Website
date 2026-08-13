@@ -168,9 +168,28 @@ const subjects = [
   // rechargement de la page, exactement comme les trois formulaires de la home
   // (voir public/home-v2.js, initForms). Aucun message de confirmation n'est
   // affiché — il serait mensonger tant que rien n'est envoyé.
+  //
+  // Le champ site est un <input type="url"> : sans schéma, le navigateur
+  // refuse « izybiz.fr ». On complète en https:// comme sur la home.
+  var HAS_SCHEME = /^[a-z][a-z0-9+.-]*:\/\//i;
+
+  function normalizeWebsite(input) {
+    if (!input) return;
+    var value = input.value.trim();
+    input.value = !value || HAS_SCHEME.test(value) ? value : "https://" + value;
+  }
+
   document.querySelectorAll("[data-diagnostic-form]").forEach(function (form) {
+    var website = form.querySelector('input[name="website"]');
+    if (website) {
+      website.addEventListener("blur", function () {
+        normalizeWebsite(website);
+      });
+    }
+
     form.addEventListener("submit", function (event) {
       event.preventDefault();
+      normalizeWebsite(website);
     });
   });
 </script>
