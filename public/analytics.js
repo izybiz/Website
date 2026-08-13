@@ -63,33 +63,11 @@ document.addEventListener(
   true,
 );
 
-// Service section visibility
-(function initServiceSectionTracking() {
-  var tracked = new Set();
-  var serviceSections = document.querySelectorAll("[data-service-section]");
-  if (!serviceSections.length || typeof IntersectionObserver !== "function") return;
-
-  var observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting || entry.intersectionRatio < 0.5) return;
-        var el = entry.target;
-        var sectionName = el.getAttribute("data-service-section");
-        if (!sectionName || tracked.has(sectionName)) return;
-        tracked.add(sectionName);
-        trackEvent("service_section_viewed", {
-          section_name: sectionName,
-        });
-        observer.unobserve(el);
-      });
-    },
-    { threshold: 0.5 },
-  );
-
-  serviceSections.forEach(function (el) {
-    observer.observe(el);
-  });
-})();
+// Note : un observateur mesurait autrefois la visibilité des sections via
+// [data-service-section]. Cet attribut a disparu avec la page services, et
+// l'événement service_section_viewed n'était donc plus jamais émis. Retiré le
+// 2026-08-13. Les sections portent maintenant [data-section] : rebrancher une
+// mesure de visibilité dessus est possible, mais reste à décider.
 
 // Scroll depth tracking
 (function initScrollDepthTracking() {

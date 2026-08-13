@@ -50,7 +50,7 @@ const currentPath = `/blog/${currentSlug}/`;
         )}
       </nav>
     </div>
-    <article class="article-page">
+    <article class="article-page" data-section="blog-article">
       <h1 class="article-page__title">{post.data.title}</h1>
       <p class="article-page__description">{post.data.description}</p>
       <time class="article-page__date" datetime={post.data.pubDate.toISOString()}>{pubDate}</time>
