@@ -59,6 +59,13 @@ une fois de ce que la home affirmait (il annonçait un « accès sur invitation 
 alors que le diagnostic est gratuit et ouvert). **À relire à chaque changement de
 positionnement.**
 
+**`/llms.txt` et `/llms-full.txt` sont générés au build**, par
+`src/pages/llms*.txt.ts`, depuis `src/data/site-summary.ts` et la collection
+`blog-fr`. Un nouvel article y apparaît sans intervention. **Ne jamais les figer
+en fichiers statiques dans `public/`** : ils dériveraient à la première
+publication. Le texte de `site-summary.ts` décrit l'offre — à relire avec le
+JSON-LD à chaque changement de positionnement.
+
 **Le sitemap ne pose pas de `lastmod`,** et c'est volontaire : la configuration
 précédente le remplissait avec la date du build, donc toutes les pages se
 déclaraient modifiées à chaque déploiement. Ne pas le réintroduire sans une
