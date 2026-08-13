@@ -46,4 +46,4 @@ Regardez ce qui sort. Dites-nous si vous nous trouvez — ou si vous voulez y ê
 
 Nous construisons IZYBIZ pour être là où les managers cherchent vraiment — dans les réponses IA, avant la première page Google. Vous donnez une mission. Vos agents l'exécutent. Beta privée, accès sur invitation.
 
-Écrivez-nous → info@izybiz.fr
+Écrivez-nous → contact.me@izybiz.fr

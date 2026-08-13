@@ -44,20 +44,18 @@ const lang = langProp as Lang;
 
 const t = useTranslations(lang);
 const cleanPath = canonicalPath.endsWith("/") ? canonicalPath.slice(0, -1) || "/" : canonicalPath;
-const legalPages = new Set(["/politique-de-confidentialite", "/mentions-legales"]);
-const isLegalPage = legalPages.has(cleanPath);
-
 // Auto-detect nav type
 const homePathnames = new Set(["/"]);
 const navType = navTypeProp ?? (homePathnames.has(Astro.url.pathname) ? "home" : "page");
 const isBlogArticlePage = /^\/blog\/[^/]+\/?$/.test(Astro.url.pathname);
 const rawPath = canonicalPath || "/";
 const canonicalUrl = `https://izybiz.fr${rawPath.endsWith("/") ? rawPath : rawPath + "/"}`;
-const contactSectionHref = `${getLocalizedPath("home", lang)}#prendre-contact`;
 // La home v2 remplace la section #prendre-contact par le formulaire de
-// diagnostic : le CTA du header et le lien Contact du footer pointent dessus,
-// depuis n'importe quelle page.
+// diagnostic : le CTA du header pointe dessus, depuis n'importe quelle page.
 const diagnosticHref = `${getLocalizedPath("home", lang)}#diagnostic`;
+// La page /contact/ n'existe qu'en FR : les pages EN et ES (le blog) renvoient
+// au formulaire de diagnostic de leur home, faute de mieux.
+const contactHref = lang === "fr" ? "/contact/" : diagnosticHref;
 const localizedAlt = {
   fr: alternates?.fr ?? mapPathToLang(cleanPath, "fr"),
 };
@@ -130,7 +128,7 @@ const localizedAlt = {
           "url": "https://izybiz.fr/assets/Logo%20Izybiz.png"
         },                                                                            
         "description": "Izybiz, plateforme SaaS d'agents IA pour managers en France. Confiez une mission, une équipe l'exécute sous votre pilotage. Accès sur invitation.",   
-        "email": "info@izybiz.fr",                                                    
+        "email": "contact.me@izybiz.fr",                                                    
         "foundingDate": "2025",   
         "areaServed": {                                                               
           "@type": "Country",                                                         
@@ -251,7 +249,7 @@ const localizedAlt = {
         <span class="site-chrome__menu-link site-chrome__link--inactive">Connexion</span>
       </div>
     </header>
-    <div class:list={["layout-content-slot", isLegalPage && "layout-content-slot--privacy"]}>
+    <div class="layout-content-slot">
       <slot />
     </div>
     <footer class="site-chrome-footer" aria-label="Footer" data-section="footer">
@@ -282,7 +280,7 @@ const localizedAlt = {
         >
           LinkedIn
         </a>
-        <a class="site-chrome-footer__link" href={diagnosticHref}>Contact</a>
+        <a class="site-chrome-footer__link" href={contactHref}>Contact</a>
         <div class="site-chrome-footer__copyright">{t("footer.copyright")}</div>
       </div>
     </footer>

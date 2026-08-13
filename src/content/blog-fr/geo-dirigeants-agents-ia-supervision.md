@@ -56,4 +56,4 @@ Vous avez déjà tapé le nom de votre entreprise dans ChatGPT pour voir si vous
 
 Nous construisons IZYBIZ pour que les dirigeants pilotent ces trois missions sans en faire un projet de six mois. Vous décrivez l'objectif. Vos agents exécutent. Vous validez ce qui compte. Beta privée, accès sur invitation.
 
-Écrivez-nous → info@izybiz.fr
+Écrivez-nous → contact.me@izybiz.fr

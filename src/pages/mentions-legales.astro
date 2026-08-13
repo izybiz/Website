@@ -1,0 +1,120 @@
+---
+// Mentions légales — portage de la maquette Claude Design (août 2026).
+// Remplace l'ancien mentions-legales.md, dont le texte décrivait encore une
+// plateforme « en préparation » avec liste d'attente.
+import Layout from "../layouts/Layout.astro";
+import "../styles/legal.css";
+---
+
+<Layout
+  title="Mentions légales — IZYBIZ"
+  description="Mentions légales d'IZYBIZ : éditeur du site, hébergement, propriété intellectuelle, responsabilité et médiation."
+  canonicalPath="/mentions-legales/"
+>
+  <main class="legal-page">
+    <h1 class="legal-page__title">Mentions légales</h1>
+    <p class="legal-page__updated">DERNIÈRE MISE À JOUR : 13-08-2026</p>
+    <p class="legal-page__intro">
+      Informations légales relatives à l'éditeur de ce site et au logiciel Izy,
+      conformément aux articles 6-III et 19 de la loi pour la confiance dans
+      l'économie numérique.
+    </p>
+
+    <div class="legal-page__body">
+      <section>
+        <h2 class="legal-page__heading">1. Éditeur du site</h2>
+        <div class="legal-page__cards">
+          <div class="legal-page__card">
+            <div class="legal-page__card-title">Société</div>
+            <p class="legal-page__card-text">
+              IZYBIZ, SASU (société par actions simplifiée unipersonnelle) au capital
+              de 1 000 €, immatriculée au RCS de Paris sous le numéro 903 392 892.
+              SIRET du siège : 903 392 892 00019. TVA intracommunautaire :
+              FR46903392892.
+            </p>
+          </div>
+          <div class="legal-page__card">
+            <div class="legal-page__card-title">Siège et contact</div>
+            <p class="legal-page__card-text">
+              361 rue Lecourbe, 75015 Paris. Email :
+              <a href="mailto:contact.me@izybiz.fr">contact.me@izybiz.fr</a>.
+            </p>
+          </div>
+          <div class="legal-page__card">
+            <div class="legal-page__card-title">Direction de la publication</div>
+            <p class="legal-page__card-text">Stéphane Dine, dirigeant.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="legal-page__heading">2. Hébergement</h2>
+        <p class="legal-page__text">
+          Le site est hébergé par Netlify, Inc., 512 2nd Street, Suite 200,
+          San Francisco, CA 94107, États-Unis (netlify.com).
+        </p>
+      </section>
+
+      <section>
+        <h2 class="legal-page__heading">3. Propriété intellectuelle</h2>
+        <p class="legal-page__text">
+          La structure du site, le logiciel Izy, sa marque, ses textes, ses
+          interfaces et ses éléments graphiques sont protégés et demeurent la
+          propriété exclusive d'IZYBIZ. Toute reproduction, représentation ou
+          adaptation, totale ou partielle, sans autorisation écrite préalable est
+          interdite.
+        </p>
+        <p class="legal-page__text">
+          Les contenus produits pour un client dans le cadre de sa mission lui
+          appartiennent, dans les conditions prévues au contrat de souscription.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="legal-page__heading">4. Responsabilité</h2>
+        <ul class="legal-page__list">
+          <li>
+            Les informations publiées sur ce site sont fournies à titre indicatif et
+            peuvent être modifiées à tout moment.
+          </li>
+          <li>
+            Les chiffres présentés à titre d'exemple de mission ne constituent pas un
+            engagement de résultat.
+          </li>
+          <li>
+            Les liens vers des sites tiers n'engagent pas la responsabilité de
+            l'éditeur quant à leur contenu.
+          </li>
+          <li>
+            L'éditeur ne saurait être tenu responsable d'une indisponibilité
+            temporaire du service ou d'un dommage résultant d'un usage non conforme.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="legal-page__heading">5. Données personnelles et cookies</h2>
+        <p class="legal-page__text">
+          Les traitements de données personnelles et l'usage des cookies sont décrits
+          dans la
+          <a href="/politique-de-confidentialite/">politique de confidentialité</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="legal-page__heading">6. Médiation et droit applicable</h2>
+        <p class="legal-page__text">
+          Le présent site est soumis au droit français. En cas de litige, une solution
+          amiable sera recherchée avant toute action judiciaire ; à défaut, les
+          tribunaux de Paris seront compétents.
+        </p>
+      </section>
+    </div>
+
+    <div class="legal-page__links">
+      <a href="/">Retour à l'accueil</a>
+      <a href="/politique-de-confidentialite/">Politique de confidentialité</a>
+      <a href="mailto:contact.me@izybiz.fr">Nous écrire</a>
+    </div>
+  </main>
+</Layout>
