@@ -375,10 +375,15 @@
   max-width: 32em;
 }
 
+/* Toutes les grilles auto-fit de ce fichier utilisent minmax(min(Xpx, 100%), 1fr)
+   et non minmax(Xpx, 1fr). Une piste figée à X px ne rétrécit jamais : dès que
+   le conteneur est plus étroit que X, elle déborde et la page défile
+   horizontalement. Le min() la laisse passer sous le seuil. Sur écran large,
+   min(X, 100%) vaut X : le rendu est strictement identique. */
 .hv2-path__grid {
   margin-top: 40px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
   gap: 18px;
 }
 
@@ -472,7 +477,7 @@
 .hv2-stats__grid {
   margin-top: clamp(32px, 4vw, 52px);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
   gap: clamp(24px, 3vw, 40px);
 }
 
@@ -939,7 +944,7 @@
 .hv2-quotes__grid {
   margin-top: clamp(32px, 4vw, 52px);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: clamp(24px, 3vw, 36px);
 }
 
@@ -1004,7 +1009,7 @@
   border-radius: 28px;
   padding: clamp(24px, 2.6vw, 36px);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
   gap: clamp(28px, 3.4vw, 48px);
   align-items: center;
 }
@@ -1193,7 +1198,7 @@
 .hv2-roster__grid {
   margin-top: clamp(22px, 2.4vw, 30px);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
   gap: 16px;
   align-items: stretch;
 }
@@ -1520,7 +1525,7 @@
 
 .hv2-final__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
   gap: clamp(28px, 4vw, 56px);
   align-items: center;
 }
@@ -1820,5 +1825,77 @@
   .hv2-modal__blink {
     animation: none;
     opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Tableau comparatif — version empilée sur téléphone
+   Les trois colonnes demandent environ 390 px de contenu minimum : sous cette
+   largeur, la colonne sombre sortait de la carte bleue. On passe donc à une
+   pile par critère — nom du critère, valeur agence, bloc Izy — plutôt que de
+   comprimer trois colonnes jusqu'à l'illisible.
+   Aucun changement de balisage : la grille passe à une colonne et les libellés
+   de colonnes, désormais inutiles en tête, sont réinjectés devant chaque valeur.
+   ========================================================================== */
+
+@media (max-width: 620px) {
+  .hv2-table__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* La cellule vide et les deux en-têtes de colonnes n'ont plus de sens. */
+  .hv2-table__grid > span:first-child,
+  .hv2-table__head-them,
+  .hv2-table__head-izy {
+    display: none;
+  }
+
+  .hv2-table__criteria {
+    padding: 22px 0 12px;
+    font-size: 19px;
+  }
+
+  /* Le premier critère ouvre la pile : pas de filet au-dessus. Il suit
+     toujours l'en-tête « L'APP Izy » — le sélecteur d'adjacence est donc
+     stable, contrairement à un :nth-of-type qui compte les balises. */
+  .hv2-table__head-izy + .hv2-table__criteria {
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .hv2-table__them {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 0 0 14px;
+    border-top: none;
+  }
+
+  .hv2-table__them::before {
+    content: "AGENCE";
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.13em;
+    color: #3f6480;
+  }
+
+  .hv2-table__izy,
+  .hv2-table__izy--last {
+    flex-wrap: wrap;
+    border-radius: 14px;
+    border-top: none;
+  }
+
+  /* flex-basis 100 % : le libellé prend sa ligne, la coche et la valeur
+     restent côte à côte en dessous. L'espacement vient du `gap: 10px` déjà
+     posé sur .hv2-table__izy — inutile d'ajouter une marge. */
+  .hv2-table__izy::before {
+    content: "L'APP IZY";
+    flex-basis: 100%;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.13em;
+    font-weight: 700;
+    color: var(--blue);
   }
 }

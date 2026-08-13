@@ -154,3 +154,13 @@
   align-items: center;
   font-size: 16px;
 }
+
+/* --------------------------------------------------------------- Mobile */
+
+/* Même seuil et mêmes marges que la home (voir home-v2.css, .hv2-wrap). */
+@media (max-width: 560px) {
+  .legal-page {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
