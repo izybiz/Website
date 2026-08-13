@@ -1,26 +1,16 @@
 ---
 import "../styles/global.css";
 import "../styles/site-chrome.css";
-import {
-  defaultLang,
-  getLocalizedPath,
-  mapPathToLang,
-  type Lang,
-  useTranslations,
-} from "../i18n/translations";
+import { t } from "../data/ui-strings";
 import CookieConsent from "../components/CookieConsent.astro";
 
 interface Props {
   title: string;
   description: string;
-  lang: Lang;
   canonicalPath?: string;
-  includeGlobalScript?: boolean;
   ogType?: string;
   ogImage?: string;
   pubDate?: string;
-  navType?: "home" | "page";
-  alternates?: { fr?: string; en?: string; es?: string };
   noindex?: boolean;
 }
 
@@ -29,40 +19,23 @@ const frontmatter = (Astro.props as { frontmatter?: Partial<Props> }).frontmatte
 const {
   title = frontmatter.title ?? "Izybiz",
   description = frontmatter.description ?? "",
-  lang: langProp = frontmatter.lang ?? defaultLang,
   canonicalPath = frontmatter.canonicalPath ?? Astro.url.pathname,
-  includeGlobalScript = frontmatter.includeGlobalScript ?? false,
   ogType = frontmatter.ogType ?? "website",
   ogImage = frontmatter.ogImage ?? "https://izybiz.fr/assets/og-default.jpg",
   pubDate = frontmatter.pubDate,
-  navType: navTypeProp = frontmatter.navType,
-  alternates = frontmatter.alternates,
   noindex = frontmatter.noindex ?? false,
 } = Astro.props as Partial<Props>;
 
-const lang = langProp as Lang;
-
-const t = useTranslations(lang);
-const cleanPath = canonicalPath.endsWith("/") ? canonicalPath.slice(0, -1) || "/" : canonicalPath;
-// Auto-detect nav type
-const homePathnames = new Set(["/"]);
-const navType = navTypeProp ?? (homePathnames.has(Astro.url.pathname) ? "home" : "page");
 const isBlogArticlePage = /^\/blog\/[^/]+\/?$/.test(Astro.url.pathname);
 const rawPath = canonicalPath || "/";
 const canonicalUrl = `https://izybiz.fr${rawPath.endsWith("/") ? rawPath : rawPath + "/"}`;
 // La home v2 remplace la section #prendre-contact par le formulaire de
 // diagnostic : le CTA du header pointe dessus, depuis n'importe quelle page.
-const diagnosticHref = `${getLocalizedPath("home", lang)}#diagnostic`;
-// La page /contact/ n'existe qu'en FR : les pages EN et ES (le blog) renvoient
-// au formulaire de diagnostic de leur home, faute de mieux.
-const contactHref = lang === "fr" ? "/contact/" : diagnosticHref;
-const localizedAlt = {
-  fr: alternates?.fr ?? mapPathToLang(cleanPath, "fr"),
-};
+const diagnosticHref = "/#diagnostic";
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang="fr">
   <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TS3MZTN79V"></script>
@@ -111,8 +84,8 @@ const localizedAlt = {
     <link rel="icon" href="/assets/fav-icon.png" type="image/png" />
 
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang="fr" href={`https://izybiz.fr${localizedAlt.fr}`} />
-    <link rel="alternate" hreflang="x-default" href={`https://izybiz.fr${localizedAlt.fr}`} />
+    <link rel="alternate" hreflang="fr" href={canonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
 
     <!-- Structured data: Organization + SoftwareApplication (all pages) -->
   <script type="application/ld+json" set:html={JSON.stringify({                       
@@ -197,7 +170,7 @@ const localizedAlt = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:locale" content={lang === "fr" ? "fr_FR" : lang === "es" ? "es_ES" : "en_US"} />
+    <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="Izybiz" />
 
     <!-- Twitter Card -->
@@ -209,10 +182,9 @@ const localizedAlt = {
     <slot name="head" />
   </head>
   <body id="top" class:list={[isBlogArticlePage && "page-blog-article"]}>
-    <script>document.body.classList.add('intro-stage-1')</script>
     <header class="site-chrome" aria-label="Site header">
       <div class="site-chrome__inner">
-        <a class="site-chrome__brand" href={getLocalizedPath("home", lang)} aria-label="Accueil Izybiz">
+        <a class="site-chrome__brand" href="/" aria-label="Accueil Izybiz">
           <img
             class="site-chrome__logo"
             src="/assets/logo-izybiz.svg"
@@ -225,7 +197,7 @@ const localizedAlt = {
         <div class="site-chrome__spacer"></div>
 
         <nav class="site-chrome__nav" aria-label="Primary">
-          <a class="site-chrome__link" href={getLocalizedPath("blog", lang)}>{t("nav.blog")}</a>
+          <a class="site-chrome__link" href="/blog/">{t("nav.blog")}</a>
           {/* Sans destination tant que l'app n'a pas d'URL publique — rendu en
               <span> pour éviter un lien mort qui renverrait en haut de page. */}
           <span class="site-chrome__link site-chrome__link--inactive">Connexion</span>
@@ -245,7 +217,7 @@ const localizedAlt = {
       </div>
 
       <div class="site-chrome__menu" id="site-chrome-menu" hidden data-chrome-menu>
-        <a class="site-chrome__menu-link" href={getLocalizedPath("blog", lang)}>{t("nav.blog")}</a>
+        <a class="site-chrome__menu-link" href="/blog/">{t("nav.blog")}</a>
         <span class="site-chrome__menu-link site-chrome__link--inactive">Connexion</span>
       </div>
     </header>
@@ -254,7 +226,7 @@ const localizedAlt = {
     </div>
     <footer class="site-chrome-footer" aria-label="Footer" data-section="footer">
       <div class="site-chrome-footer__inner">
-        <a href={getLocalizedPath("home", lang)} aria-label="Accueil Izybiz">
+        <a href="/" aria-label="Accueil Izybiz">
           <img
             class="site-chrome-footer__logo"
             src="/assets/logo-izybiz.svg"
@@ -263,14 +235,10 @@ const localizedAlt = {
             height="198"
           />
         </a>
-        {lang === "fr" && (
-          <a class="site-chrome-footer__link" href="/mentions-legales/">{t("footer.legal")}</a>
-        )}
-        {lang === "fr" && (
-          <a class="site-chrome-footer__link" href="/politique-de-confidentialite/">
-            {t("footer.privacy")}
-          </a>
-        )}
+        <a class="site-chrome-footer__link" href="/mentions-legales/">{t("footer.legal")}</a>
+        <a class="site-chrome-footer__link" href="/politique-de-confidentialite/">
+          {t("footer.privacy")}
+        </a>
         <a
           class="site-chrome-footer__link"
           href="https://www.linkedin.com/company/izybiz/"
@@ -280,13 +248,13 @@ const localizedAlt = {
         >
           LinkedIn
         </a>
-        <a class="site-chrome-footer__link" href={contactHref}>Contact</a>
+        <a class="site-chrome-footer__link" href="/contact/">Contact</a>
         <div class="site-chrome-footer__copyright">{t("footer.copyright")}</div>
       </div>
     </footer>
     <script is:inline>
-      // Menu mobile du header. Volontairement autonome (et non dans script.js,
-      // qui n'est chargé que sur certaines pages) pour fonctionner partout.
+      // Menu mobile du header. Volontairement inline plutôt que dans un fichier
+      // de /public : le chrome est sur toutes les pages, le script aussi.
       (function () {
         var toggle = document.querySelector("[data-chrome-toggle]");
         var menu = document.querySelector("[data-chrome-menu]");
@@ -320,12 +288,7 @@ const localizedAlt = {
         });
       })();
     </script>
-    <script is:inline>
-      window.__IZYBIZ_LANG = "{lang}";
-      window.__IZYBIZ_DEFAULT_LANG = "{defaultLang}";
-    </script>
-    {includeGlobalScript ? <script is:inline src="/script.js"></script> : null}
     <script is:inline src="/analytics.js"></script>
-    <CookieConsent lang={lang} />
+    <CookieConsent />
   </body>
 </html>

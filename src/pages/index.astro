@@ -3,8 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import HomeV2Fr from "../components/HomeV2Fr.astro";
 import { homeFaq } from "../data/home-faq";
 
-const lang = "fr";
-
 // Le schéma FAQPage est dérivé de la même source que la section FAQ rendue :
 // impossible que les deux divergent.
 const faqSchema = {
@@ -22,10 +20,8 @@ const faqSchema = {
 ---
 
 <Layout
-  lang={lang}
   title="Izy : attirez vos nouveaux prospects grâce à l'IA"
   description="Izy est un logiciel qui fait venir les clients aux PME B2B : audits, optimisation, articles, posts et veille exécutés par une équipe d'agents. Diagnostic de visibilité gratuit en cinq minutes."
-  includeGlobalScript={true}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

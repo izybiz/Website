@@ -2,8 +2,6 @@
 title: "GEO pour dirigeants : pourquoi 40 % des projets agents IA vont échouer (et comment l'éviter)"
 description: "40 % des projets GEO confiés à des agents IA vont échouer d'ici 2027 — pas à cause de l'IA, mais faute de validation humaine. Ce que ça change pour un dirigeant."
 pubDate: 2026-05-04
-lang: "fr"
-translationKey: "2026-05-08"
 ---
 
 Vous entendez parler de GEO depuis quelques mois. Peut-être avez-vous demandé à votre équipe marketing de regarder ça. Peut-être avez-vous testé un outil. Le résultat est probablement le même que pour les autres projets IA que vous avez lancés.

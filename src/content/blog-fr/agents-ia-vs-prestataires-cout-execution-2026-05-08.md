@@ -2,8 +2,6 @@
 title: "Agents IA vs prestataires : ce que ça change vraiment pour votre budget exécution"
 description: "Pour les missions d'exécution récurrentes, agents IA ou prestataires ? Coûts réels, délais et contrôle : la comparaison que personne ne fait encore."
 pubDate: 2026-05-08
-lang: "fr"
-translationKey: "2026-05-08"
 ---
 
 **600 €/jour pour un consultant IA freelance. Quelques euros pour la même mission confiée à des agents IA.**
