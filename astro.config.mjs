@@ -44,10 +44,13 @@ export default defineConfig({
     remarkPlugins: [normalizeMarkdownInternalLinks],
   },
   integrations: [
-    sitemap({
-      serialize(item) {
-        return { ...item, lastmod: new Date().toISOString() };
-      },
-    }),
+    // Pas de `serialize` posant lastmod: new Date() — c'est ce que faisait la
+    // configuration précédente, et elle datait donc les huit pages de l'instant
+    // du build. Toutes les pages se déclaraient modifiées à chaque déploiement,
+    // y compris des mentions légales inchangées depuis des mois. Un lastmod qui
+    // ment est un signal que Google finit par ignorer.
+    // Mieux vaut aucune date qu'une fausse : pour les articles, la vraie date
+    // reste exposée par <time datetime> et par datePublished du schéma Article.
+    sitemap(),
   ],
 });

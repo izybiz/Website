@@ -1,5 +1,5 @@
 ---
-import "../styles/global.css";
+import "../styles/blog.css";
 import "../styles/site-chrome.css";
 import { t } from "../data/ui-strings";
 import CookieConsent from "../components/CookieConsent.astro";
@@ -87,55 +87,78 @@ const diagnosticHref = "/#diagnostic";
     <link rel="alternate" hreflang="fr" href={canonicalUrl} />
     <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
 
-    <!-- Structured data: Organization + SoftwareApplication (all pages) -->
-  <script type="application/ld+json" set:html={JSON.stringify({                       
-    "@context": "https://schema.org",                          
-    "@graph": [                                                                       
-      {        
-        "@type": "Organization",                                                      
-        "@id": "https://izybiz.fr/#organization",
-        "name": "Izybiz",                        
-        "url": "https://izybiz.fr/",                                                  
-        "logo": {                   
-          "@type": "ImageObject",                                                     
-          "url": "https://izybiz.fr/assets/Logo%20Izybiz.png"
-        },                                                                            
-        "description": "Izybiz, plateforme SaaS d'agents IA pour managers en France. Confiez une mission, une équipe l'exécute sous votre pilotage. Accès sur invitation.",   
-        "email": "contact.me@izybiz.fr",                                                    
-        "foundingDate": "2025",   
-        "areaServed": {                                                               
-          "@type": "Country",                                                         
-          "name": "France"   
-        },                                                                            
-        "sameAs": [
-          "https://www.linkedin.com/company/izybiz/"
-        ],                                          
-        "contactPoint": {                                                             
-          "@type": "ContactPoint",
-          "contactType": "sales",                                                     
-          "url": "https://www.linkedin.com/company/izybiz/",
-          "availableLanguage": ["French", "English", "Spanish"]
-        }                                                                             
-      }, 
-      {                                                                               
-        "@type": "SoftwareApplication",
-        "@id": "https://izybiz.fr/#software",
-        "name": "Izybiz",                    
-        "applicationCategory": "BusinessApplication",                                 
-        "operatingSystem": "Web",                    
-        "url": "https://izybiz.fr/",                                                  
-        "description": "Plateforme SaaS d'agents IA pour déléguer des missions opérationnelles. Destinée aux managers de PME et ETI français.",                  
-        "offers": {                                                                   
-          "@type": "Offer",
-          "priceCurrency": "EUR",                                                     
-          "availability": "https://schema.org/InvitationOnly"
-        },                                                   
-        "provider": {                                                                 
-          "@id": "https://izybiz.fr/#organization"
-        }                                                                             
-      }                                                                               
-    ]
-  })} />                                                                              
+    <!--
+      Données structurées : Organization + SoftwareApplication, sur toutes les
+      pages. C'est ce que Google et les moteurs de réponse IA lisent en priorité
+      pour décrire l'offre — chaque affirmation doit donc correspondre à ce que
+      la home dit vraiment. Vérifié le 2026-08-13 :
+      le diagnostic est gratuit et ouvert à tous (l'ancien « accès sur
+      invitation » était devenu faux), et le site est monolingue.
+    -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://izybiz.fr/#organization",
+          "name": "Izybiz",
+          "url": "https://izybiz.fr/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://izybiz.fr/assets/Logo%20Izybiz.png"
+          },
+          "description": "Izybiz édite Izy, un logiciel d'agents IA qui exécute la visibilité en ligne des PME et ETI B2B en France : diagnostic, audit et optimisation du site, calendrier éditorial, articles et posts, veille de marché, bilan mensuel.",
+          "email": "contact.me@izybiz.fr",
+          "foundingDate": "2025",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "361 rue Lecourbe",
+            "postalCode": "75015",
+            "addressLocality": "Paris",
+            "addressCountry": "FR"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "France"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/company/izybiz/"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "sales",
+            "email": "contact.me@izybiz.fr",
+            "url": "https://izybiz.fr/contact/",
+            "availableLanguage": ["French"]
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://izybiz.fr/#software",
+          "name": "Izy",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "url": "https://izybiz.fr/",
+          "description": "Izy fait venir les clients aux PME et ETI B2B : il audite et corrige le site, construit la stratégie et le calendrier éditorial, rédige articles et posts, surveille le marché et mesure la visibilité chaque mois.",
+          // Seule offre chiffrable publiquement : le diagnostic, gratuit. Le
+          // cadrage et l'abonnement mensuel sont établis après le diagnostic,
+          // selon la mission — aucun montant n'est annoncé sur le site, on n'en
+          // invente donc pas ici.
+          "offers": {
+            "@type": "Offer",
+            "name": "Diagnostic de visibilité",
+            "description": "Diagnostic automatisé de votre visibilité en ligne, en cinq minutes, sans engagement.",
+            "price": "0",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock",
+            "url": "https://izybiz.fr/#diagnostic"
+          },
+          "provider": {
+            "@id": "https://izybiz.fr/#organization"
+          }
+        }
+      ]
+    })} />
 
     {ogType === "article" && (
       <script type="application/ld+json" set:html={JSON.stringify({

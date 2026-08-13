@@ -1,7 +1,7 @@
 /* ==========================================================================
    Home v2 — refonte issue de la maquette Claude Design (août 2026)
    Portée : uniquement la home FR. Tout est scopé sous .home-v2 pour ne pas
-   interférer avec global.css (blog, pages légales, header/footer partagés).
+   interférer avec blog.css (blog, pages légales, header/footer partagés).
    ========================================================================== */
 
 .home-v2 {
@@ -12,11 +12,11 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 
   max-width: 100%;
-  /* global.css ne pose aucune police sur body : la home doit la déclarer,
+  /* blog.css ne pose aucune police sur body : la home doit la déclarer,
      sinon le navigateur retombe sur son serif par défaut. */
   font-family: "Didact Gothic", Verdana, sans-serif;
   /* La maquette utilise Bricolage Grotesque en largeur normale ; body est figé
-     à 75 % pour le reste du site (voir global.css). */
+     à 75 % pour le reste du site (voir blog.css). */
   font-stretch: 100%;
   font-size: 18px;
   line-height: 1.6;

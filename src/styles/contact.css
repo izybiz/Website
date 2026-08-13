@@ -8,10 +8,10 @@
 .contact-v2 {
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* global.css ne pose aucune police sur body : à déclarer ici, sinon le
+  /* blog.css ne pose aucune police sur body : à déclarer ici, sinon le
      navigateur retombe sur son serif par défaut. */
   font-family: var(--font-body);
-  /* body est figé à font-stretch 75 % pour le reste du site (voir global.css) ;
+  /* body est figé à font-stretch 75 % pour le reste du site (voir blog.css) ;
      la maquette utilise Bricolage Grotesque en largeur normale. */
   font-stretch: 100%;
   font-size: 18px;

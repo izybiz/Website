@@ -6,7 +6,7 @@
 
 /* Tokens de la maquette, promus au niveau document : le header et le footer
    vivent hors de .home-v2 et en ont besoin. Aucun de ces noms n'existait dans
-   global.css, donc pas de collision avec l'existant. */
+   blog.css, donc pas de collision avec l'existant. */
 :root {
   --bg: #fbf2e6;
   --surface: #ffffff;

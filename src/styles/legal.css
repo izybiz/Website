@@ -12,10 +12,10 @@
   max-width: 820px;
   margin: 0 auto;
   padding: clamp(40px, 5vw, 72px) 28px clamp(56px, 6vw, 88px);
-  /* global.css ne pose aucune police sur body : à déclarer ici, sinon le
+  /* blog.css ne pose aucune police sur body : à déclarer ici, sinon le
      navigateur retombe sur son serif par défaut. */
   font-family: var(--font-body);
-  /* body est figé à font-stretch 75 % pour le reste du site (voir global.css) ;
+  /* body est figé à font-stretch 75 % pour le reste du site (voir blog.css) ;
      la maquette utilise Bricolage Grotesque en largeur normale. */
   font-stretch: 100%;
   font-size: 18px;

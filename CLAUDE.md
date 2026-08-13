@@ -33,6 +33,11 @@ autres :
 | Accueil | `src/components/HomeV2Fr.astro` | `styles/home-v2.css` | `.home-v2` |
 | Contact | `src/pages/contact.astro` | `styles/contact.css` | `.contact-v2` |
 | Légales ×2 | `src/pages/*.astro` | `styles/legal.css` | `.legal-page` |
+| Blog | `src/pages/blog/` | `styles/blog.css` | — |
+
+`blog.css` porte aussi le socle du site (base `html`/`body`, helper `.sr-only`) :
+il est chargé par `Layout.astro` sur **toutes** les pages. Il remplace l'ancien
+`global.css`, 5 229 lignes dont 19 classes servaient encore.
 
 Le header et le footer sont dans `Layout.astro` + `styles/site-chrome.css`, et
 s'appliquent à **tout** le site, blog compris. Les tokens de marque (`--bg`,
@@ -48,11 +53,16 @@ formulaires). `public/analytics.js` équipe les CTA sur toutes les pages.
 rétrécit jamais : sous ce seuil elle déborde et la page défile horizontalement.
 Le bug était présent sur sept grilles, corrigé le 2026-08-13.
 
-**`src/styles/global.css` est un cimetière.** 5 229 lignes, mais seules ~19 de
-ses classes apparaissent encore dans le HTML rendu — celles du blog, plus
-`sr-only`. Le reste style des pages supprimées (about, services, ancienne page
-contact, ancien header/footer, modale démo). **Ne pas s'en inspirer pour du
-nouveau code.** Dégraissage prévu, pas encore fait.
+**Données structurées.** Le JSON-LD de `Layout.astro` est ce que Google et les
+moteurs de réponse IA lisent en priorité pour décrire l'offre. Il a déjà divergé
+une fois de ce que la home affirmait (il annonçait un « accès sur invitation »
+alors que le diagnostic est gratuit et ouvert). **À relire à chaque changement de
+positionnement.**
+
+**Le sitemap ne pose pas de `lastmod`,** et c'est volontaire : la configuration
+précédente le remplissait avec la date du build, donc toutes les pages se
+déclaraient modifiées à chaque déploiement. Ne pas le réintroduire sans une
+vraie date par page.
 
 **Aucun appel à Supabase.** Consigne de Lucie : rien sur le site ne doit
 appeler Supabase. L'ancien `public/script.js`, qui exposait une clé, a été
