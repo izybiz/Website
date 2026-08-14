@@ -103,7 +103,8 @@ body.intro-stage-1 .hero-metrics {
 .blog-index__title {
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: clamp(28px, 4vw, 46px);
-  font-weight: 800;
+  /* 700, comme le H1 de la home : les deux titres doivent peser pareil. */
+  font-weight: 700;
   line-height: 1.1;
   color: #0f172a;
   margin: 0 0 12px;
@@ -291,7 +292,8 @@ body.intro-stage-1 .hero-metrics {
 .article-page__title {
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: clamp(28px, 4vw, 46px);
-  font-weight: 800;
+  /* 700, comme le H1 de la home : les deux titres doivent peser pareil. */
+  font-weight: 700;
   line-height: 1.1;
   color: #0f172a;
   margin: 0 0 16px;
