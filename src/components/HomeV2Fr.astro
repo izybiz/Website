@@ -205,7 +205,24 @@ const timeline = [
         êtes placé, qui vous devance, et ce qu'il faut faire pour remonter.
       </p>
       <div class="hv2-hero__eyebrow">DIAGNOSTIC DE VISIBILITÉ GRATUIT</div>
-      <form class="hv2-form hv2-hero__form" id="diagnostic" data-diagnostic-form novalidate>
+      <form
+        class="hv2-form hv2-hero__form"
+        id="diagnostic"
+        data-diagnostic-form
+        data-form-location="hero"
+        novalidate
+      >
+        <!-- Piège à robots : un humain ne voit pas ce champ et ne le remplit
+             donc jamais. S'il arrive rempli, Web3Forms rejette l'envoi. -->
+        <input
+          class="hv2-botcheck"
+          type="checkbox"
+          name="botcheck"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+        />
+        <input type="hidden" name="origine" value="Home — bandeau d'accueil" />
         <label class="sr-only" for="hv2-hero-email">Votre email</label>
         <input
           class="hv2-field"
@@ -227,6 +244,7 @@ const timeline = [
           required
         />
         <button class="hv2-btn hv2-hero__submit" type="submit">Analyser mon site</button>
+        <p class="hv2-form__message" role="alert" data-form-message></p>
       </form>
       <p class="hv2-note hv2-hero__note">
         Diagnostic en 2 min · Gratuit · Sans engagement
@@ -822,7 +840,21 @@ const timeline = [
             travail livré chaque semaine, et des demandes qui finissent par venir à vous.
             Ça commence par voir où vous en êtes : le diagnostic gratuit, en cinq minutes.
           </p>
-          <form class="hv2-form hv2-timeline__form" data-diagnostic-form novalidate>
+          <form
+            class="hv2-form hv2-timeline__form"
+            data-diagnostic-form
+            data-form-location="frise"
+            novalidate
+          >
+            <input
+              class="hv2-botcheck"
+              type="checkbox"
+              name="botcheck"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
+            <input type="hidden" name="origine" value="Home — frise" />
             <label class="sr-only" for="hv2-s9-email">Votre email</label>
             <input
               class="hv2-field"
@@ -844,6 +876,7 @@ const timeline = [
               required
             />
             <button class="hv2-btn" type="submit">Analyser mon site</button>
+            <p class="hv2-form__message" role="alert" data-form-message></p>
           </form>
           <p class="hv2-note hv2-timeline__note">
             Exemple de mission. Vos chiffres à vous sont mesurés chaque mois, dès le
@@ -923,7 +956,21 @@ const timeline = [
           Voyez où vous en êtes, puis laissez Izy travailler.
         </h2>
         <div>
-          <form class="hv2-form hv2-final__form" data-diagnostic-form novalidate>
+          <form
+            class="hv2-form hv2-final__form"
+            data-diagnostic-form
+            data-form-location="final"
+            novalidate
+          >
+            <input
+              class="hv2-botcheck"
+              type="checkbox"
+              name="botcheck"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
+            <input type="hidden" name="origine" value="Home — bloc final" />
             <label class="sr-only" for="hv2-final-email">Votre email</label>
             <input
               class="hv2-field"
@@ -945,6 +992,7 @@ const timeline = [
               required
             />
             <button class="hv2-btn" type="submit">Lancer le diagnostic</button>
+            <p class="hv2-form__message" role="alert" data-form-message></p>
           </form>
           <p class="hv2-note hv2-final__note">Sans engagement · Sans carte bancaire</p>
           <a class="hv2-final__link" href="#diagnostic">Ou prenez rendez-vous</a>

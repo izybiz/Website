@@ -3,7 +3,7 @@
  * Remplace la logique React de la maquette Claude Design par du JS natif :
  *   1. onglets Attirer / Convertir / Vendre
  *   2. frise S9 qui se pose au scroll + compteurs de points
- *   3. neutralisation de l'envoi des formulaires (pas encore de destination)
+ *   3. envoi des formulaires de diagnostic vers Web3Forms
  *
  * Ce fichier est chargé uniquement par la home (voir HomeV2Fr.astro).
  */
@@ -185,14 +185,44 @@
    * ------------------------------------------------------------------ */
 
   // Les trois formulaires de diagnostic partagent le même comportement :
-  // on valide les deux champs, puis on affiche la modale de confirmation.
+  // on valide les deux champs, on envoie, puis on affiche la modale — dans cet
+  // ordre. La modale ne s'ouvre jamais sans accusé de réception du service.
+
+  // Web3Forms transforme la soumission en mail. Le destinataire n'est pas ici :
+  // il est attaché à la clé, côté tableau de bord (app.web3forms.com). Changer
+  // l'adresse de réception ne demande donc aucune modification du site.
   //
-  // ATTENTION : rien n'est encore envoyé nulle part. La modale annonce un mail
-  // que personne n'envoie. Quand une destination existera, c'est sendDiagnostic()
-  // ci-dessous — et elle seule — qu'il faudra remplir, en n'ouvrant la modale
-  // qu'une fois la requête acceptée.
-  function sendDiagnostic(/* data */) {
-    return Promise.resolve();
+  // Cette clé est publique par conception — elle voyage dans le HTML de toutes
+  // les pages qui portent un formulaire. Ce n'est pas un secret échappé.
+  var WEB3FORMS_KEY = "ae024e50-5c9a-418c-9a35-0572c0dea506";
+  var WEB3FORMS_URL = "https://api.web3forms.com/submit";
+
+  function sendDiagnostic(data) {
+    var payload = { access_key: WEB3FORMS_KEY };
+
+    data.forEach(function (value, key) {
+      // Le honeypot ne part que s'il a été coché, donc par un robot :
+      // Web3Forms rejette alors la soumission de lui-même.
+      payload[key] = value;
+    });
+
+    return fetch(WEB3FORMS_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(payload),
+    }).then(function (response) {
+      // Un 4xx renvoie un corps JSON explicite, sans lever d'exception : c'est
+      // `success` qui fait foi, pas le seul fait que la requête ait abouti.
+      return response.json().then(function (result) {
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || "Envoi refusé");
+        }
+        return result;
+      });
+    });
   }
 
   // Le champ site est un <input type="url"> : le navigateur refuse
@@ -244,6 +274,24 @@
         });
       }
 
+      var submit = form.querySelector('button[type="submit"]');
+      var message = form.querySelector("[data-form-message]");
+      var submitLabel = submit ? submit.textContent : "";
+
+      // `role="alert"` sur un élément déjà présent mais vide : le lecteur
+      // d'écran annonce le texte au moment où on l'insère.
+      function say(text, isError) {
+        if (!message) return;
+        message.textContent = text;
+        message.classList.toggle("hv2-form__message--error", isError === true);
+      }
+
+      function release() {
+        if (!submit) return;
+        submit.disabled = false;
+        submit.textContent = submitLabel;
+      }
+
       form.addEventListener("submit", function (event) {
         event.preventDefault();
         normalizeWebsite(website);
@@ -255,13 +303,44 @@
           return;
         }
 
-        var data = new FormData(form);
+        // Un message précédent n'a plus lieu d'être affiché pendant qu'on
+        // retente, et le bouton verrouillé évite les doubles envois sur une
+        // connexion lente.
+        say("");
+        if (submit) {
+          submit.disabled = true;
+          submit.textContent = "Envoi…";
+        }
 
-        sendDiagnostic(data).then(function () {
-          if (modal && typeof modal.showModal === "function") {
-            modal.showModal();
-          }
-        });
+        sendDiagnostic(new FormData(form)).then(
+          function () {
+            if (typeof window.izybizTrackEvent === "function") {
+              window.izybizTrackEvent("form_submitted", {
+                location: form.dataset.formLocation || "home",
+              });
+            }
+
+            form.reset();
+            release();
+
+            if (modal && typeof modal.showModal === "function") {
+              modal.showModal();
+            } else {
+              // Navigateur sans <dialog> : sans ce repli, un envoi réussi ne
+              // produirait aucun retour visible.
+              say("Votre demande est bien partie. Merci !");
+            }
+          },
+          function () {
+            // Le visiteur a saisi son adresse : lui laisser une porte de sortie
+            // vaut mieux qu'un simple « réessayez ».
+            say(
+              "L'envoi n'a pas abouti. Réessayez, ou écrivez-nous directement à contact.me@izybiz.fr.",
+              true,
+            );
+            release();
+          },
+        );
       });
     });
   }

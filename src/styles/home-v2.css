@@ -150,6 +150,39 @@
   gap: 14px;
 }
 
+/* Le piège à robots doit être invisible et hors du parcours clavier, sans être
+   retiré du DOM : un robot qui lit le HTML doit pouvoir tomber dedans. */
+.hv2-botcheck {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Retour d'envoi. L'élément reste dans le DOM même vide — c'est ce qui permet à
+   `role="alert"` d'annoncer le texte au moment où le script l'insère —, mais il
+   ne doit alors occuper aucune place dans la grille du formulaire. */
+.hv2-form__message {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.hv2-form__message:empty {
+  display: none;
+}
+
+/* Pas `--orange` ici : #ff6a3d sur le fond crème ne donne que 2,6:1, sous le
+   4,5:1 exigé pour du texte. Cette teinte plus sombre reste dans la famille de
+   la marque et monte à 5,6:1 — un message d'erreur doit se lire. */
+.hv2-form__message--error {
+  color: #b3301a;
+  font-weight: 700;
+}
+
 .hv2-note {
   font-size: 15px;
   color: var(--muted);

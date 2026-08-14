@@ -75,19 +75,37 @@ vraie date par page.
 appeler Supabase. L'ancien `public/script.js`, qui exposait une clé, a été
 supprimé.
 
-## Chantier en cours — formulaires sans destination
+## Formulaires
 
-Les **quatre** formulaires (trois sur la home, un sur contact) **n'envoient rien
-nulle part**. C'est volontaire, faute de destination choisie : ne pas « corriger »
-sans demander.
+Les **trois formulaires de la home** partent vers **Web3Forms**, qui les
+transforme en mail. Tout passe par `sendDiagnostic()` dans `public/home-v2.js` —
+point unique, ne pas dupliquer l'appel ailleurs.
 
-Sur la home, la soumission ouvre une modale « Votre diagnostic démarre » qui
-**annonce un mail que personne n'envoie**. Lucie l'a demandée en connaissance de
-cause.
+**Le destinataire n'est pas dans le code.** Il est attaché à la clé, côté
+`app.web3forms.com` (compte `sdine@izybiz.fr`, formulaire `izybiz-form`).
+Aujourd'hui `contact.me@izybiz.fr`. Changer l'adresse de réception ne demande
+donc **aucune** modification du site — ne pas chercher un `to` à modifier, il
+n'existe pas.
 
-Point de branchement unique : `sendDiagnostic()` dans `public/home-v2.js`. Elle
-reçoit déjà le `FormData`. La modale ne devra s'ouvrir qu'une fois la requête
-acceptée.
+La clé `ae024e50-…` est **publique par conception** : Web3Forms l'affiche comme
+telle et elle voyage dans le JS livré. Ce n'est pas un secret échappé.
+
+La modale « Votre diagnostic démarre » ne s'ouvre **que** si l'envoi est accepté.
+En cas d'échec, le formulaire affiche un message et propose l'adresse mail
+directe : `.hv2-form__message`, alimenté par le script.
+
+Il n'y a **pas de diagnostic automatique** derrière : Lucie reçoit la demande et
+répond à la main. Le champ caché `origine` indique lequel des trois formulaires
+a servi.
+
+**Reste à faire :**
+- Le formulaire de `/contact` (6 champs) **n'envoie toujours rien**. La page est
+  par ailleurs inatteignable : `netlify.toml` redirige `/contact` vers
+  `/#diagnostic`. Décider du sort de la page avant de la brancher.
+- Aucun repli sans JavaScript : si le script ne charge pas, les formulaires de
+  la home ne fonctionnent pas. Un `action`/`method` natif et une page `/merci`
+  le couvriraient. Le champ *Redirect URL* du tableau de bord ne sert que dans
+  ce cas — il est vide, c'est voulu.
 
 ## Vérifier une modification
 
