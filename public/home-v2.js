@@ -197,14 +197,51 @@
   var WEB3FORMS_KEY = "ae024e50-5c9a-418c-9a35-0572c0dea506";
   var WEB3FORMS_URL = "https://api.web3forms.com/submit";
 
-  function sendDiagnostic(data) {
-    var payload = { access_key: WEB3FORMS_KEY };
+  // « https://www.boulangerie-dupont.fr/contact » → « boulangerie-dupont.fr ».
+  // L'adresse complète reste dans le corps du mail ; l'objet, lui, doit tenir
+  // sur une ligne de boîte de réception.
+  function hostOf(url) {
+    try {
+      return new URL(url).hostname.replace(/^www\./, "");
+    } catch (error) {
+      // Adresse que le navigateur a laissé passer mais que URL refuse : mieux
+      // vaut un objet sans domaine qu'un envoi qui échoue.
+      return url || "site non précisé";
+    }
+  }
 
-    data.forEach(function (value, key) {
-      // Le honeypot ne part que s'il a été coché, donc par un robot :
-      // Web3Forms rejette alors la soumission de lui-même.
-      payload[key] = value;
-    });
+  // Le mail reçu par l'opérateur reprend les champs dans l'ordre où on les
+  // envoie, et affiche leur **nom** en titre. Ces noms sont donc rédigés pour
+  // être lus dans une boîte de réception, pas pour ressembler à du code.
+  //
+  // Seule la phrase d'introduction (« Hello, A new form has been submitted… »)
+  // échappe à ce contrôle : Web3Forms la réserve à ses offres payantes.
+  function sendDiagnostic(data) {
+    var email = data.get("email") || "";
+    var website = data.get("website") || "";
+
+    var payload = {
+      access_key: WEB3FORMS_KEY,
+
+      // L'objet porte le nom de domaine : l'opérateur sait de quel site il
+      // s'agit sans ouvrir le mail, et deux demandes ne se confondent pas.
+      subject: "Nouvelle demande de diagnostic — " + hostOf(website),
+      from_name: "Site izybiz",
+
+      // Le nom du champ « email » servait de réponse par défaut. On le renomme
+      // pour la lisibilité du mail, donc on désigne explicitement le visiteur
+      // comme destinataire de la réponse — sinon « Répondre » ne mène nulle part.
+      replyto: email,
+
+      "À faire": "Démarrer le diagnostic, puis en envoyer le résultat au visiteur.",
+      "Site à analyser": website,
+      "Répondre au visiteur": email,
+      "Demande envoyée depuis": data.get("origine") || "Home",
+    };
+
+    // Le honeypot n'est transmis que si un robot l'a coché — une case décochée
+    // ne part jamais. Web3Forms rejette alors la soumission de lui-même.
+    if (data.get("botcheck")) payload.botcheck = data.get("botcheck");
 
     return fetch(WEB3FORMS_URL, {
       method: "POST",

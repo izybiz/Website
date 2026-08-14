@@ -98,6 +98,15 @@ Il n'y a **pas de diagnostic automatique** derrière : Lucie reçoit la demande 
 répond à la main. Le champ caché `origine` indique lequel des trois formulaires
 a servi.
 
+**Le texte du mail reçu se règle dans `sendDiagnostic()`.** Web3Forms affiche le
+**nom** de chaque champ en titre, dans l'ordre d'envoi : les clés du payload sont
+donc rédigées pour être lues (« Site à analyser », « À faire »), pas pour
+ressembler à du code. L'objet reprend le domaine du visiteur, l'expéditeur est
+« Site izybiz ». Seule la phrase d'introduction (« Hello, A new form has been
+submitted… ») est hors de portée : Web3Forms la réserve à ses offres payantes.
+Comme le champ n'est plus nommé `email`, `replyto` est posé explicitement — sans
+lui, « Répondre » ne mènerait nulle part.
+
 **Reste à faire :**
 - Le formulaire de `/contact` (6 champs) **n'envoie toujours rien**. La page est
   par ailleurs inatteignable : `netlify.toml` redirige `/contact` vers
