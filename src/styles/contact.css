@@ -271,6 +271,39 @@
   color: var(--muted);
 }
 
+/* Le piège à robots doit être invisible et hors du parcours clavier, sans être
+   retiré du DOM : un robot qui lit le HTML doit pouvoir tomber dedans. */
+.cv2-botcheck {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Retour d'envoi. Cette page n'a pas de modale : c'est ici que s'affiche aussi
+   bien la confirmation que l'échec. L'élément reste dans le DOM même vide —
+   c'est ce qui permet à `role="alert"` d'annoncer le texte au moment où le
+   script l'insère —, mais il ne doit alors occuper aucune place. */
+.cv2-form__message {
+  margin: 16px 0 0;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--ink2);
+  font-weight: 700;
+}
+
+.cv2-form__message:empty {
+  display: none;
+}
+
+/* Pas `--orange` : #ff6a3d sur le fond crème ne donne que 2,6:1, sous le 4,5:1
+   exigé pour du texte. Cette teinte plus sombre reste dans la famille de la
+   marque et monte à 5,6:1 — un message d'erreur doit se lire. */
+.cv2-form__message.is-error {
+  color: #b3301a;
+}
+
 /* ------------------------------------------------------------ Cartes côté */
 
 .cv2-cards {

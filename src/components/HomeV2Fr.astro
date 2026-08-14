@@ -208,7 +208,8 @@ const timeline = [
       <form
         class="hv2-form hv2-hero__form"
         id="diagnostic"
-        data-diagnostic-form
+        data-site-form
+        data-form-kind="diagnostic"
         data-form-location="hero"
         novalidate
       >
@@ -842,7 +843,8 @@ const timeline = [
           </p>
           <form
             class="hv2-form hv2-timeline__form"
-            data-diagnostic-form
+            data-site-form
+            data-form-kind="diagnostic"
             data-form-location="frise"
             novalidate
           >
@@ -958,7 +960,8 @@ const timeline = [
         <div>
           <form
             class="hv2-form hv2-final__form"
-            data-diagnostic-form
+            data-site-form
+            data-form-kind="diagnostic"
             data-form-location="final"
             novalidate
           >
@@ -1022,4 +1025,5 @@ const timeline = [
   </dialog>
 </div>
 
+<script is:inline src="/forms.js" defer></script>
 <script is:inline src="/home-v2.js" defer></script>

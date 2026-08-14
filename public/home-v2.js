@@ -3,7 +3,10 @@
  * Remplace la logique React de la maquette Claude Design par du JS natif :
  *   1. onglets Attirer / Convertir / Vendre
  *   2. frise S9 qui se pose au scroll + compteurs de points
- *   3. envoi des formulaires de diagnostic vers Web3Forms
+ *   3. arrivée sur l'ancre #diagnostic
+ *
+ * L'envoi des formulaires n'est pas ici : il est partagé avec la page contact,
+ * dans public/forms.js.
  *
  * Ce fichier est chargé uniquement par la home (voir HomeV2Fr.astro).
  */
@@ -181,209 +184,7 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * 3. Formulaires de diagnostic
-   * ------------------------------------------------------------------ */
-
-  // Les trois formulaires de diagnostic partagent le même comportement :
-  // on valide les deux champs, on envoie, puis on affiche la modale — dans cet
-  // ordre. La modale ne s'ouvre jamais sans accusé de réception du service.
-
-  // Web3Forms transforme la soumission en mail. Le destinataire n'est pas ici :
-  // il est attaché à la clé, côté tableau de bord (app.web3forms.com). Changer
-  // l'adresse de réception ne demande donc aucune modification du site.
-  //
-  // Cette clé est publique par conception — elle voyage dans le HTML de toutes
-  // les pages qui portent un formulaire. Ce n'est pas un secret échappé.
-  var WEB3FORMS_KEY = "ae024e50-5c9a-418c-9a35-0572c0dea506";
-  var WEB3FORMS_URL = "https://api.web3forms.com/submit";
-
-  // « https://www.boulangerie-dupont.fr/contact » → « boulangerie-dupont.fr ».
-  // L'adresse complète reste dans le corps du mail ; l'objet, lui, doit tenir
-  // sur une ligne de boîte de réception.
-  function hostOf(url) {
-    try {
-      return new URL(url).hostname.replace(/^www\./, "");
-    } catch (error) {
-      // Adresse que le navigateur a laissé passer mais que URL refuse : mieux
-      // vaut un objet sans domaine qu'un envoi qui échoue.
-      return url || "site non précisé";
-    }
-  }
-
-  // Le mail reçu par l'opérateur reprend les champs dans l'ordre où on les
-  // envoie, et affiche leur **nom** en titre. Ces noms sont donc rédigés pour
-  // être lus dans une boîte de réception, pas pour ressembler à du code.
-  //
-  // Seule la phrase d'introduction (« Hello, A new form has been submitted… »)
-  // échappe à ce contrôle : Web3Forms la réserve à ses offres payantes.
-  function sendDiagnostic(data) {
-    var email = data.get("email") || "";
-    var website = data.get("website") || "";
-
-    var payload = {
-      access_key: WEB3FORMS_KEY,
-
-      // L'objet porte le nom de domaine : l'opérateur sait de quel site il
-      // s'agit sans ouvrir le mail, et deux demandes ne se confondent pas.
-      subject: "Nouvelle demande de diagnostic — " + hostOf(website),
-      from_name: "Site izybiz",
-
-      // Le nom du champ « email » servait de réponse par défaut. On le renomme
-      // pour la lisibilité du mail, donc on désigne explicitement le visiteur
-      // comme destinataire de la réponse — sinon « Répondre » ne mène nulle part.
-      replyto: email,
-
-      "À faire": "Démarrer le diagnostic, puis en envoyer le résultat au visiteur.",
-      "Site à analyser": website,
-      "Répondre au visiteur": email,
-      "Demande envoyée depuis": data.get("origine") || "Home",
-    };
-
-    // Le honeypot n'est transmis que si un robot l'a coché — une case décochée
-    // ne part jamais. Web3Forms rejette alors la soumission de lui-même.
-    if (data.get("botcheck")) payload.botcheck = data.get("botcheck");
-
-    return fetch(WEB3FORMS_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(payload),
-    }).then(function (response) {
-      // Un 4xx renvoie un corps JSON explicite, sans lever d'exception : c'est
-      // `success` qui fait foi, pas le seul fait que la requête ait abouti.
-      return response.json().then(function (result) {
-        if (!response.ok || !result.success) {
-          throw new Error(result.message || "Envoi refusé");
-        }
-        return result;
-      });
-    });
-  }
-
-  // Le champ site est un <input type="url"> : le navigateur refuse
-  // « izybiz.fr » tant qu'il n'y a pas de schéma. Or c'est exactement ce qu'un
-  // visiteur tape. On complète donc en https:// à sa place, plutôt que de lui
-  // opposer un « saisissez une URL valide » sur une adresse qui l'est.
-  var HAS_SCHEME = /^[a-z][a-z0-9+.-]*:\/\//i;
-
-  function normalizeWebsite(input) {
-    if (!input) return;
-    var value = input.value.trim();
-    if (!value || HAS_SCHEME.test(value)) {
-      input.value = value;
-      return;
-    }
-    input.value = "https://" + value;
-  }
-
-  function initForms() {
-    var forms = Array.prototype.slice.call(
-      document.querySelectorAll("[data-diagnostic-form]"),
-    );
-    if (!forms.length) return;
-
-    var modal = document.getElementById("hv2-diagnostic-modal");
-
-    if (modal) {
-      modal.addEventListener("click", function (event) {
-        // Un clic hors du panneau (donc sur le fond) referme la modale.
-        if (event.target === modal) modal.close();
-      });
-
-      var closeBtn = modal.querySelector("[data-modal-close]");
-      if (closeBtn) {
-        closeBtn.addEventListener("click", function () {
-          modal.close();
-        });
-      }
-    }
-
-    forms.forEach(function (form) {
-      var website = form.querySelector('input[name="website"]');
-
-      // Dès que le visiteur quitte le champ, il voit l'adresse complétée : pas
-      // de correction invisible au moment de l'envoi.
-      if (website) {
-        website.addEventListener("blur", function () {
-          normalizeWebsite(website);
-        });
-      }
-
-      var submit = form.querySelector('button[type="submit"]');
-      var message = form.querySelector("[data-form-message]");
-      var submitLabel = submit ? submit.textContent : "";
-
-      // `role="alert"` sur un élément déjà présent mais vide : le lecteur
-      // d'écran annonce le texte au moment où on l'insère.
-      function say(text, isError) {
-        if (!message) return;
-        message.textContent = text;
-        message.classList.toggle("hv2-form__message--error", isError === true);
-      }
-
-      function release() {
-        if (!submit) return;
-        submit.disabled = false;
-        submit.textContent = submitLabel;
-      }
-
-      form.addEventListener("submit", function (event) {
-        event.preventDefault();
-        normalizeWebsite(website);
-
-        // Les formulaires portent `novalidate` : on déclenche nous-mêmes la
-        // validation native, qui affiche ses messages en français.
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
-        }
-
-        // Un message précédent n'a plus lieu d'être affiché pendant qu'on
-        // retente, et le bouton verrouillé évite les doubles envois sur une
-        // connexion lente.
-        say("");
-        if (submit) {
-          submit.disabled = true;
-          submit.textContent = "Envoi…";
-        }
-
-        sendDiagnostic(new FormData(form)).then(
-          function () {
-            if (typeof window.izybizTrackEvent === "function") {
-              window.izybizTrackEvent("form_submitted", {
-                location: form.dataset.formLocation || "home",
-              });
-            }
-
-            form.reset();
-            release();
-
-            if (modal && typeof modal.showModal === "function") {
-              modal.showModal();
-            } else {
-              // Navigateur sans <dialog> : sans ce repli, un envoi réussi ne
-              // produirait aucun retour visible.
-              say("Votre demande est bien partie. Merci !");
-            }
-          },
-          function () {
-            // Le visiteur a saisi son adresse : lui laisser une porte de sortie
-            // vaut mieux qu'un simple « réessayez ».
-            say(
-              "L'envoi n'a pas abouti. Réessayez, ou écrivez-nous directement à contact.me@izybiz.fr.",
-              true,
-            );
-            release();
-          },
-        );
-      });
-    });
-  }
-
-  /* ------------------------------------------------------------------ *
-   * 4. Arrivée sur #diagnostic
+   * 3. Arrivée sur #diagnostic
    * ------------------------------------------------------------------ */
 
   function focusDiagnostic() {
@@ -433,7 +234,6 @@
   function init() {
     initTabs();
     initTimeline();
-    initForms();
     initAnchor();
   }
 

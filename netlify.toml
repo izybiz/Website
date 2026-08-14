@@ -10,12 +10,5 @@
   to = "/sitemap-index.xml"
   status = 301
 
-[[redirects]]
-  from = "/contact"
-  to = "/#diagnostic"
-  status = 301
-
-[[redirects]]
-  from = "/contact/"
-  to = "/#diagnostic"
-  status = 301
+# /contact renvoyait vers /#diagnostic, faute de formulaire qui fonctionne.
+# La page a maintenant le sien : elle redevient une destination.

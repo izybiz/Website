@@ -178,7 +178,7 @@
 /* Pas `--orange` ici : #ff6a3d sur le fond crème ne donne que 2,6:1, sous le
    4,5:1 exigé pour du texte. Cette teinte plus sombre reste dans la famille de
    la marque et monte à 5,6:1 — un message d'erreur doit se lire. */
-.hv2-form__message--error {
+.hv2-form__message.is-error {
   color: #b3301a;
   font-weight: 700;
 }

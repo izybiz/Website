@@ -43,8 +43,10 @@ Le header et le footer sont dans `Layout.astro` + `styles/site-chrome.css`, et
 s'appliquent à **tout** le site, blog compris. Les tokens de marque (`--bg`,
 `--orange`, `--font-display`…) sont définis en `:root` dans `site-chrome.css`.
 
-Le seul JavaScript de la home est `public/home-v2.js` (onglets, frise animée,
-formulaires). `public/analytics.js` équipe les CTA sur toutes les pages.
+`public/home-v2.js` porte les comportements propres à la home (onglets, frise
+animée, ancre `#diagnostic`). `public/forms.js` porte l'envoi des formulaires,
+partagé avec `/contact`. `public/analytics.js` équipe les CTA sur toutes les
+pages.
 
 ## Pièges à connaître
 
@@ -77,9 +79,27 @@ supprimé.
 
 ## Formulaires
 
-Les **trois formulaires de la home** partent vers **Web3Forms**, qui les
-transforme en mail. Tout passe par `sendDiagnostic()` dans `public/home-v2.js` —
-point unique, ne pas dupliquer l'appel ailleurs.
+Les **quatre formulaires** partent vers **Web3Forms**, qui les transforme en
+mail. Tout passe par **`public/forms.js`**, partagé par la home et la page
+contact — point unique, ne pas dupliquer l'appel ailleurs.
+
+Deux familles, distinguées par `data-form-kind` sur le `<form>` :
+
+| | `diagnostic` | `contact` |
+|---|---|---|
+| Où | 3 formulaires de la home | `/contact` |
+| Champs | email, site | nom, entreprise, email, site, demande, message |
+| Confirmation | modale « Votre diagnostic démarre » | message sous le bouton |
+
+Un formulaire se déclare avec `data-site-form`, `data-form-kind` et
+`data-form-location` (ce dernier alimente l'événement GA4). Le contenu du mail
+de chaque famille est décrit dans la table `KINDS` de `forms.js`.
+
+**Noms réservés par Web3Forms** — `access_key`, `subject`, `from_name`,
+`replyto`, `redirect`, `botcheck`, `ccemail`. Un champ visible qui porterait
+l'un d'eux serait pris pour un réglage et n'apparaîtrait pas dans le mail :
+c'est pourquoi le choix « votre demande » de la page contact s'appelle
+`demande`.
 
 **Le destinataire n'est pas dans le code.** Il est attaché à la clé, côté
 `app.web3forms.com` (compte `sdine@izybiz.fr`, formulaire `izybiz-form`).
@@ -98,7 +118,7 @@ Il n'y a **pas de diagnostic automatique** derrière : Lucie reçoit la demande 
 répond à la main. Le champ caché `origine` indique lequel des trois formulaires
 a servi.
 
-**Le texte du mail reçu se règle dans `sendDiagnostic()`.** Web3Forms affiche le
+**Le texte du mail reçu se règle dans la table `KINDS` de `forms.js`.** Web3Forms affiche le
 **nom** de chaque champ en titre, dans l'ordre d'envoi : les clés du payload sont
 donc rédigées pour être lues (« Site à analyser », « À faire »), pas pour
 ressembler à du code. L'objet reprend le domaine du visiteur, l'expéditeur est
@@ -107,14 +127,22 @@ submitted… ») est hors de portée : Web3Forms la réserve à ses offres payan
 Comme le champ n'est plus nommé `email`, `replyto` est posé explicitement — sans
 lui, « Répondre » ne mènerait nulle part.
 
+`/contact` **redevient une destination** : la redirection vers `/#diagnostic`
+qui la masquait est retirée de `netlify.toml`, la page ayant désormais un
+formulaire qui fonctionne.
+
 **Reste à faire :**
-- Le formulaire de `/contact` (6 champs) **n'envoie toujours rien**. La page est
-  par ailleurs inatteignable : `netlify.toml` redirige `/contact` vers
-  `/#diagnostic`. Décider du sort de la page avant de la brancher.
-- Aucun repli sans JavaScript : si le script ne charge pas, les formulaires de
-  la home ne fonctionnent pas. Un `action`/`method` natif et une page `/merci`
-  le couvriraient. Le champ *Redirect URL* du tableau de bord ne sert que dans
-  ce cas — il est vide, c'est voulu.
+- Aucune mention RGPD à côté des formulaires. Le lien vers la politique de
+  confidentialité n'existe que dans le pied de page, alors qu'une adresse mail
+  est collectée.
+- Aucun repli sans JavaScript : si le script ne charge pas, aucun formulaire ne
+  fonctionne. Un `action`/`method` natif et une page `/merci` le couvriraient.
+  Le champ *Redirect URL* du tableau de bord ne sert que dans ce cas — il est
+  vide, c'est voulu.
+- `public/forms.js` et `public/home-v2.js` portent des noms fixes, sans
+  empreinte : après un déploiement, un visiteur déjà venu peut garder l'ancienne
+  version en cache quelques temps. Première piste si une modification semble ne
+  pas prendre effet en ligne.
 
 ## Vérifier une modification
 

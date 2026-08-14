@@ -37,8 +37,25 @@ const subjects = [
 
     <section class="cv2-main" data-section="contact-main">
       <div class="cv2-grid">
-        <form class="cv2-form" data-diagnostic-form novalidate>
+        <form
+          class="cv2-form"
+          data-site-form
+          data-form-kind="contact"
+          data-form-location="contact"
+          novalidate
+        >
           <h2 class="cv2-form__title">Écrivez-nous</h2>
+
+          <!-- Piège à robots : un humain ne voit pas ce champ et ne le remplit
+               donc jamais. S'il arrive rempli, Web3Forms rejette l'envoi. -->
+          <input
+            class="cv2-botcheck"
+            type="checkbox"
+            name="botcheck"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
 
           <div class="cv2-form__row">
             <label class="sr-only" for="cv2-name">Votre nom</label>
@@ -46,7 +63,7 @@ const subjects = [
               class="cv2-field"
               id="cv2-name"
               type="text"
-              name="name"
+              name="nom"
               placeholder="Votre nom"
               autocomplete="name"
             />
@@ -55,7 +72,7 @@ const subjects = [
               class="cv2-field"
               id="cv2-company"
               type="text"
-              name="company"
+              name="entreprise"
               placeholder="Votre entreprise"
               autocomplete="organization"
             />
@@ -89,11 +106,13 @@ const subjects = [
               {
                 subjects.map((label, i) => (
                   <>
+                    {/* `demande` et non `subject` : Web3Forms réserve ce nom à
+                        l'objet du mail et n'afficherait pas le choix. */}
                     <input
                       class="sr-only"
                       id={`cv2-subject-${i}`}
                       type="radio"
-                      name="subject"
+                      name="demande"
                       value={label}
                       checked={i === 0}
                     />
@@ -119,6 +138,8 @@ const subjects = [
             <button class="cv2-submit" type="submit">Envoyer</button>
             <span class="cv2-form__note">Sans engagement · Aucune donnée revendue</span>
           </div>
+
+          <p class="cv2-form__message" role="alert" data-form-message></p>
         </form>
 
         <div class="cv2-cards">
@@ -163,33 +184,6 @@ const subjects = [
   </div>
 </Layout>
 
-<script is:inline>
-  // Le formulaire n'a pas encore de destination : on empêche seulement le
-  // rechargement de la page, exactement comme les trois formulaires de la home
-  // (voir public/home-v2.js, initForms). Aucun message de confirmation n'est
-  // affiché — il serait mensonger tant que rien n'est envoyé.
-  //
-  // Le champ site est un <input type="url"> : sans schéma, le navigateur
-  // refuse « izybiz.fr ». On complète en https:// comme sur la home.
-  var HAS_SCHEME = /^[a-z][a-z0-9+.-]*:\/\//i;
-
-  function normalizeWebsite(input) {
-    if (!input) return;
-    var value = input.value.trim();
-    input.value = !value || HAS_SCHEME.test(value) ? value : "https://" + value;
-  }
-
-  document.querySelectorAll("[data-diagnostic-form]").forEach(function (form) {
-    var website = form.querySelector('input[name="website"]');
-    if (website) {
-      website.addEventListener("blur", function () {
-        normalizeWebsite(website);
-      });
-    }
-
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      normalizeWebsite(website);
-    });
-  });
-</script>
+<!-- L'envoi est partagé avec les trois formulaires de la home : voir
+     public/forms.js, qui distingue les deux familles par data-form-kind. -->
+<script is:inline src="/forms.js" defer></script>
