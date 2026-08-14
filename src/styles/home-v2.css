@@ -1,0 +1,1947 @@
+/* ==========================================================================
+   Home v2 — refonte issue de la maquette Claude Design (août 2026)
+   Portée : uniquement la home FR. Tout est scopé sous .home-v2 pour ne pas
+   interférer avec blog.css (blog, pages légales, header/footer partagés).
+   ========================================================================== */
+
+.home-v2 {
+  /* Les tokens communs (couleurs de marque, --font-display) sont définis en
+     :root dans site-chrome.css, partagés avec le header et le footer.
+     Seuls ceux propres à la home restent ici. */
+  --dark-ink: #cfc7b9;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  max-width: 100%;
+  /* blog.css ne pose aucune police sur body : la home doit la déclarer,
+     sinon le navigateur retombe sur son serif par défaut. */
+  font-family: "Didact Gothic", Verdana, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.home-v2 * {
+  box-sizing: border-box;
+}
+
+/* Socle typographique des titres. Enveloppé dans :where() pour une
+   spécificité nulle : les classes .hv2-* définies plus bas (font-weight 700,
+   letter-spacing serrés) l'emportent toujours, sans avoir à surenchérir. */
+:where(.home-v2) :where(h1, h2, h3) {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* Reprise de la base de la maquette : sans elle, les <a> stylés en bouton
+   (.hv2-btn, .hv2-split__cta) gardent le soulignement par défaut. */
+:where(.home-v2) :where(a) {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+:where(.home-v2) :where(a):hover {
+  color: var(--orange);
+}
+
+/* Même précaution que pour les titres : spécificité nulle, sinon `margin: 0`
+   écrase les marges des classes .hv2-* (qui ne valent que 0,1,0). */
+:where(.home-v2) :where(p) {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+:where(.home-v2) :where(summary) {
+  cursor: pointer;
+  list-style: none;
+}
+
+.home-v2 summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Conteneurs partagés ---------------------------------------------------- */
+
+.hv2-wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.hv2-wrap--wide {
+  max-width: 1440px;
+}
+
+.hv2-wrap--narrow {
+  max-width: 1100px;
+}
+
+/* Boutons / champs partagés ---------------------------------------------- */
+
+.hv2-btn {
+  display: inline-block;
+  padding: 15px 30px;
+  background: var(--orange);
+  color: var(--onOrange);
+  border: none;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.hv2-btn:hover {
+  color: var(--onOrange);
+  filter: brightness(1.07);
+}
+
+.hv2-btn--ghost {
+  background: transparent;
+  color: var(--ink2);
+  border: 1px solid var(--border2);
+  font-family: inherit;
+  font-size: 16px;
+  padding: 12px 20px;
+}
+
+.hv2-btn--ghost:hover {
+  filter: none;
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.hv2-btn--sm {
+  padding: 12px 20px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.hv2-field {
+  flex: 1 1 240px;
+  min-width: 0;
+  padding: 20px 26px;
+  font-family: inherit;
+  font-size: 18px;
+  color: var(--ink);
+  background: var(--surface);
+  border: none;
+  border-radius: 999px;
+}
+
+.hv2-field:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.hv2-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Le piège à robots doit être invisible et hors du parcours clavier, sans être
+   retiré du DOM : un robot qui lit le HTML doit pouvoir tomber dedans. */
+.hv2-botcheck {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Retour d'envoi. L'élément reste dans le DOM même vide — c'est ce qui permet à
+   `role="alert"` d'annoncer le texte au moment où le script l'insère —, mais il
+   ne doit alors occuper aucune place dans la grille du formulaire. */
+.hv2-form__message {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.hv2-form__message:empty {
+  display: none;
+}
+
+/* Pas `--orange` ici : #ff6a3d sur le fond crème ne donne que 2,6:1, sous le
+   4,5:1 exigé pour du texte. Cette teinte plus sombre reste dans la famille de
+   la marque et monte à 5,6:1 — un message d'erreur doit se lire. */
+.hv2-form__message.is-error {
+  color: #b3301a;
+  font-weight: 700;
+}
+
+/* Mention RGPD. Le visiteur doit savoir ce que devient son adresse à l'endroit
+   où il la donne — le lien du pied de page ne suffit pas. Discrète mais
+   lisible : --muted sur le fond crème donne 5,2:1. */
+.hv2-form__privacy {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.hv2-form__privacy a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.hv2-note {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   S2 — Hero
+   ========================================================================== */
+
+.hv2-hero__head {
+  padding: clamp(56px, 7vw, 104px) 28px clamp(40px, 4vw, 56px);
+  text-align: center;
+}
+
+.hv2-hero__title {
+  font-size: clamp(40px, 5.6vw, 76px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+  max-width: 15em;
+  margin: 0 auto;
+}
+
+.hv2-hero__sub {
+  margin: 26px auto 0;
+  font-size: clamp(19px, 1.6vw, 23px);
+  line-height: 1.55;
+  color: var(--ink2);
+  max-width: 31em;
+}
+
+.hv2-hero__eyebrow {
+  margin-top: 38px;
+  display: flex;
+  justify-content: center;
+  color: var(--orange);
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  font-family: var(--font-display);
+}
+
+.hv2-hero__form {
+  margin: 22px auto 0;
+  justify-content: center;
+  max-width: 880px;
+}
+
+/* Cible du CTA « Analyser mon site » (header, section Comparaison, /blog/).
+   Sans marge de défilement, le header sticky de 81 px recouvre le formulaire.
+   La valeur dégage aussi le sur-titre « DIAGNOSTIC DE VISIBILITÉ GRATUIT »,
+   pour que la destination reste lisible. */
+.home-v2 #diagnostic {
+  scroll-margin-top: 148px;
+}
+
+.hv2-hero__submit {
+  padding: 20px 34px;
+  font-size: 19px;
+}
+
+.hv2-hero__note {
+  margin: 14px 0 0;
+}
+
+/* Fenêtre « diagnostic en cours » */
+
+.hv2-hero__demo {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 28px clamp(52px, 6vw, 88px);
+}
+
+.hv2-window {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 1px 0 var(--border), 0 24px 48px -32px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.hv2-window__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+
+.hv2-window__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--border2);
+}
+
+.hv2-window__spacer {
+  flex: 1;
+}
+
+.hv2-window__label {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  font-family: var(--font-mono);
+}
+
+.hv2-window__body {
+  padding: 22px 24px 26px;
+}
+
+.hv2-scan {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px dashed var(--border2);
+  font-size: 16px;
+  color: var(--ink2);
+}
+
+.hv2-scan__line {
+  opacity: 0;
+  animation: hv2In 0.5s ease forwards;
+}
+
+.hv2-scan__line--muted {
+  color: var(--muted);
+}
+
+.hv2-scan__check {
+  color: #3f7fae;
+}
+
+.hv2-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  font-size: 16px;
+}
+
+.hv2-steps__item {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  opacity: 0;
+  animation: hv2In 0.45s ease forwards;
+}
+
+.hv2-steps__box {
+  flex: none;
+  width: 19px;
+  height: 19px;
+  margin-top: 2px;
+  border-radius: 5px;
+  border: 1px solid var(--border2);
+  background: var(--surface2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #5b58a6;
+}
+
+.hv2-steps__label {
+  color: var(--ink2);
+}
+
+.hv2-pending {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+}
+
+.hv2-pending__spinner {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid var(--border2);
+  border-top-color: var(--yellow);
+  animation: hv2Spin 1s linear infinite;
+  display: inline-block;
+}
+
+/* ==========================================================================
+   S3 — Trajectoire (fond sombre)
+   ========================================================================== */
+
+.hv2-path {
+  background: var(--dark);
+  box-shadow: 0 1px 0 0 var(--dark);
+}
+
+.hv2-path__inner {
+  padding-top: clamp(48px, 6vw, 84px);
+  padding-bottom: clamp(48px, 6vw, 84px);
+}
+
+.hv2-path__head {
+  text-align: center;
+}
+
+.hv2-path__title {
+  font-size: clamp(38px, 4.6vw, 60px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+  color: var(--bg);
+  max-width: 18em;
+  margin: 0 auto;
+}
+
+.hv2-path__sub {
+  margin: 20px auto 0;
+  font-size: 19px;
+  color: var(--dark-ink);
+  max-width: 32em;
+}
+
+/* Toutes les grilles auto-fit de ce fichier utilisent minmax(min(Xpx, 100%), 1fr)
+   et non minmax(Xpx, 1fr). Une piste figée à X px ne rétrécit jamais : dès que
+   le conteneur est plus étroit que X, elle déborde et la page défile
+   horizontalement. Le min() la laisse passer sous le seuil. Sur écran large,
+   min(X, 100%) vaut X : le rendu est strictement identique. */
+.hv2-path__grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 18px;
+}
+
+.hv2-step {
+  border-radius: 12px;
+  padding: 26px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: hv2Step 6s ease-in-out infinite;
+}
+
+.hv2-step__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.hv2-step__num {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  animation: hv2Num 6s ease-in-out infinite;
+}
+
+.hv2-step__title {
+  font-size: 26px;
+  line-height: 1.15;
+  color: var(--dark);
+}
+
+.hv2-step--1 {
+  background: var(--yellow);
+  border: 1px solid #dcae14;
+}
+
+.hv2-step--2 {
+  background: var(--blue);
+  border: 1px solid #a3cdf2;
+  animation-delay: 2s;
+}
+
+.hv2-step--2 .hv2-step__num {
+  animation-delay: 2s;
+}
+
+.hv2-step--3 {
+  background: var(--lavender);
+  border: 1px solid #c7c6f2;
+  animation-delay: 4s;
+}
+
+.hv2-step--3 .hv2-step__num {
+  animation-delay: 4s;
+}
+
+/* ==========================================================================
+   S4b — Chiffres (fond sombre)
+   ========================================================================== */
+
+.hv2-stats {
+  background: var(--dark);
+}
+
+.hv2-stats__inner {
+  padding-top: clamp(28px, 3.2vw, 46px);
+  padding-bottom: clamp(40px, 5vw, 72px);
+}
+
+.hv2-stats__title {
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--bg);
+  max-width: 20em;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.hv2-stats__grid {
+  margin-top: clamp(32px, 4vw, 52px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: clamp(24px, 3vw, 40px);
+}
+
+.hv2-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.hv2-stat__value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(38px, 4.4vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--bg);
+}
+
+.hv2-stat__label {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--dark-ink);
+  max-width: 15em;
+}
+
+.hv2-stats__footnotes {
+  margin-top: clamp(28px, 3vw, 40px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 32px;
+  font-size: 14px;
+  color: rgba(251, 242, 230, 0.66);
+}
+
+/* ==========================================================================
+   S5 — Équipe / onglets (Attirer · Convertir · Vendre)
+   ========================================================================== */
+
+.hv2-app {
+  background: var(--bg);
+  transition: background 0.45s ease;
+}
+
+.hv2-app__inner {
+  padding-top: clamp(48px, 6vw, 84px);
+  padding-bottom: clamp(48px, 6vw, 84px);
+}
+
+.hv2-app__box {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.hv2-app__title {
+  font-size: clamp(30px, 3.4vw, 44px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.hv2-app__sub {
+  margin-top: 18px;
+  font-size: 19px;
+  color: var(--ink2);
+  max-width: 34em;
+}
+
+.hv2-tabs {
+  margin-top: 36px;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.hv2-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.hv2-tab {
+  flex: 1 1 0;
+  min-width: max-content;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  background: var(--surface);
+  color: var(--ink2);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.hv2-tab[aria-selected="true"] {
+  color: var(--dark);
+}
+
+.hv2-tab--attirer[aria-selected="true"] {
+  background: var(--yellow);
+  color: #171510;
+}
+
+.hv2-tab--convertir[aria-selected="true"] {
+  background: var(--blue);
+  color: #12232e;
+}
+
+.hv2-tab--vendre[aria-selected="true"] {
+  background: var(--lavender);
+  color: #1e1c33;
+}
+
+.hv2-app__screen {
+  margin-top: 22px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 28px 56px -40px rgba(0, 0, 0, 0.4);
+  min-height: min(62vh, 600px);
+}
+
+.hv2-panel[hidden] {
+  display: none;
+}
+
+.hv2-panel__layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  min-height: inherit;
+}
+
+/* Colonne « plan de mission » */
+
+.hv2-plan {
+  flex: 1 1 250px;
+  max-width: 330px;
+  border-right: 1px solid var(--border);
+  padding: 24px 22px;
+  background: var(--surface2);
+}
+
+.hv2-plan__logo {
+  display: block;
+  height: 30px;
+  width: auto;
+  margin-bottom: 30px;
+}
+
+.hv2-plan__label {
+  font-size: 13px;
+  letter-spacing: 0.09em;
+  font-family: var(--font-mono);
+  color: var(--muted);
+}
+
+.hv2-plan__list {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hv2-plan__item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 16px;
+  color: var(--ink2);
+}
+
+.hv2-plan__box {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border-radius: 5px;
+  border: 1px solid var(--border2);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #5b58a6;
+}
+
+/* Colonne conversation */
+
+.hv2-conv {
+  flex: 2 1 420px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.hv2-conv__thread {
+  flex: 1;
+  padding: 26px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hv2-conv__stamp {
+  align-self: flex-end;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.hv2-msg {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.hv2-msg__avatar {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--orange);
+  color: var(--onOrange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.hv2-msg__avatar--yellow {
+  background: var(--yellow);
+  color: var(--dark);
+}
+
+.hv2-msg__bubble {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  border-top-left-radius: 4px;
+  padding: 16px 18px;
+  font-size: 18px;
+  line-height: 1.45;
+  max-width: 34em;
+}
+
+.hv2-msg__bubble--plain {
+  border-color: transparent;
+}
+
+.hv2-reply {
+  align-self: flex-end;
+  background: var(--blue);
+  color: #12181f;
+  border-radius: 14px;
+  border-top-right-radius: 4px;
+  padding: 14px 18px;
+  font-size: 17px;
+  line-height: 1.45;
+  max-width: 26em;
+}
+
+.hv2-card {
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  overflow: hidden;
+  max-width: 38em;
+}
+
+.hv2-card--indent {
+  margin-left: 46px;
+  max-width: 34em;
+}
+
+.hv2-card__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+.hv2-card__tag {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+}
+
+.hv2-card__meta {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.hv2-card__flag {
+  margin-left: auto;
+  color: var(--orange);
+}
+
+.hv2-card__body {
+  padding: 18px 18px 20px;
+}
+
+.hv2-card__title {
+  font-size: 21px;
+  line-height: 1.25;
+}
+
+.hv2-card__sub {
+  margin-top: 10px;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.hv2-card__actions {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hv2-card__row {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hv2-card__row + .hv2-card__row {
+  border-top: 1px solid var(--border);
+}
+
+.hv2-card__mono {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.hv2-card__mono--dim {
+  color: var(--ink2);
+  line-height: 1.5;
+}
+
+.hv2-card__foot {
+  padding: 14px 18px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hv2-card__read {
+  padding: 14px 18px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hv2-card__read-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.hv2-card__read-row {
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.hv2-card__read-time {
+  color: var(--muted);
+}
+
+.hv2-card__draft {
+  padding: 16px 18px;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.hv2-card__facts {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.hv2-card__source {
+  padding: 14px 18px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--ink2);
+}
+
+.hv2-conv__composer {
+  border-top: 1px solid var(--border);
+  padding: 16px 28px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: var(--surface2);
+}
+
+.hv2-conv__input {
+  flex: 1;
+  padding: 13px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 999px;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.hv2-conv__caret {
+  width: 9px;
+  height: 16px;
+  background: var(--orange);
+  animation: hv2Blink 1.2s steps(1) infinite;
+}
+
+/* ==========================================================================
+   S4b2 — Témoignages
+   ========================================================================== */
+
+.hv2-quotes {
+  background: var(--surface);
+}
+
+.hv2-quotes__inner {
+  padding-top: clamp(40px, 5vw, 72px);
+  padding-bottom: clamp(40px, 5vw, 72px);
+}
+
+.hv2-quotes__title {
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  max-width: 20em;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.hv2-quotes__grid {
+  margin-top: clamp(32px, 4vw, 52px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: clamp(24px, 3vw, 36px);
+}
+
+.hv2-quote {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.hv2-quote__photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.hv2-quote__text {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 20em;
+}
+
+.hv2-quote__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hv2-quote__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 19px;
+  color: var(--ink);
+}
+
+.hv2-quote__role {
+  font-size: 16px;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   S4c — Comparaison
+   ========================================================================== */
+
+.hv2-compare {
+  background: var(--bg);
+}
+
+.hv2-compare__inner {
+  padding-top: clamp(32px, 4vw, 56px);
+  padding-bottom: clamp(32px, 4vw, 56px);
+}
+
+.hv2-split {
+  background: var(--surface);
+  border-radius: 28px;
+  padding: clamp(24px, 2.6vw, 36px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+  gap: clamp(28px, 3.4vw, 48px);
+  align-items: center;
+}
+
+.hv2-split__text {
+  align-self: center;
+  padding: clamp(4px, 0.8vw, 14px) clamp(8px, 1.6vw, 24px);
+}
+
+.hv2-split__title {
+  font-size: clamp(30px, 3.4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  max-width: 15em;
+}
+
+.hv2-split__body {
+  margin-top: 22px;
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--ink2);
+  max-width: 30em;
+}
+
+.hv2-split__cta {
+  margin-top: 26px;
+}
+
+.hv2-table {
+  background: var(--blue);
+  border-radius: 22px;
+  padding: clamp(22px, 2.6vw, 32px);
+}
+
+.hv2-table__grid {
+  display: grid;
+  grid-template-columns: minmax(84px, auto) 1fr 1fr;
+  column-gap: 12px;
+  align-items: stretch;
+}
+
+.hv2-table__head-them {
+  padding: 12px 14px;
+  font-size: 12px;
+  letter-spacing: 0.13em;
+  font-family: var(--font-mono);
+  color: #3f6480;
+}
+
+.hv2-table__head-izy {
+  padding: 12px 16px;
+  border-radius: 14px 14px 0 0;
+  background: #16232e;
+  color: var(--blue);
+  font-size: 12px;
+  letter-spacing: 0.13em;
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.hv2-table__criteria {
+  display: flex;
+  align-items: center;
+  padding: 16px 0;
+  border-top: 1px solid rgba(22, 35, 46, 0.2);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #16232e;
+}
+
+.hv2-table__them {
+  display: flex;
+  align-items: center;
+  padding: 16px 14px;
+  border-top: 1px solid rgba(22, 35, 46, 0.2);
+  font-size: 16px;
+  line-height: 1.4;
+  color: #4d6a80;
+}
+
+.hv2-table__izy {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  background: #16232e;
+  border-top: 1px solid rgba(185, 221, 253, 0.18);
+}
+
+.hv2-table__izy--last {
+  border-radius: 0 0 14px 14px;
+}
+
+.hv2-table__check {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.hv2-table__value {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--bg);
+}
+
+/* ==========================================================================
+   S6 — Équipe d'agents
+   ========================================================================== */
+
+.hv2-roster {
+  background: var(--surface);
+}
+
+.hv2-roster__inner {
+  padding-top: clamp(40px, 5vw, 72px);
+  padding-bottom: clamp(40px, 5vw, 72px);
+}
+
+.hv2-roster__head {
+  max-width: 44em;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hv2-roster__title {
+  font-size: clamp(30px, 3.4vw, 46px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+.hv2-roster__sub {
+  margin-top: 16px;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink2);
+}
+
+.hv2-roster__window {
+  margin-top: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.hv2-roster__bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--orange);
+}
+
+.hv2-roster__body {
+  padding: clamp(22px, 2.4vw, 32px);
+}
+
+.hv2-roster__lead {
+  font-family: var(--font-display);
+  font-size: clamp(21px, 2.2vw, 28px);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.hv2-roster__lead strong {
+  font-weight: 700;
+}
+
+.hv2-roster__grid {
+  margin-top: clamp(22px, 2.4vw, 30px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+
+.hv2-agent {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: translate 0.3s ease;
+}
+
+.hv2-agent:hover {
+  translate: 0 -4px;
+}
+
+.hv2-agent__head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 14px;
+}
+
+.hv2-agent__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.hv2-agent__spacer {
+  flex: 1;
+}
+
+.hv2-agent__body {
+  flex: 1;
+  padding: 18px 18px 20px;
+}
+
+.hv2-agent__role {
+  font-family: "Didact Gothic", Verdana, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   S9 — Diagnostic / frise animée
+   ========================================================================== */
+
+.hv2-timeline__inner {
+  padding-top: clamp(32px, 4vw, 56px);
+  padding-bottom: clamp(32px, 4vw, 56px);
+}
+
+.hv2-timeline__text {
+  padding: clamp(8px, 2vw, 40px) clamp(8px, 1.6vw, 24px);
+}
+
+.hv2-timeline__form {
+  margin-top: 28px;
+  gap: 10px;
+  max-width: 540px;
+}
+
+.hv2-timeline__form .hv2-field {
+  flex: 1 1 200px;
+  padding: 15px 22px;
+  font-size: 17px;
+  background: var(--bg);
+}
+
+.hv2-timeline__form .hv2-btn {
+  padding: 15px 24px;
+  font-size: 17px;
+}
+
+.hv2-timeline__note {
+  margin-top: 18px;
+  max-width: 28em;
+}
+
+.hv2-timeline__stage {
+  background: var(--lavender);
+  border-radius: 22px;
+  padding: clamp(20px, 2.4vw, 34px);
+}
+
+.hv2-timeline__list {
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.hv2-tl {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  opacity: 0;
+  rotate: 5deg;
+  translate: 0 -18px;
+  transition: opacity 0.45s ease, rotate 0.7s cubic-bezier(0.34, 1.5, 0.64, 1),
+    translate 0.7s cubic-bezier(0.34, 1.5, 0.64, 1);
+}
+
+.hv2-tl.is-landed {
+  opacity: 1;
+  rotate: var(--tl-angle, 0deg);
+  translate: 0 0;
+}
+
+.hv2-tl__avatar {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--yellow);
+  color: var(--dark);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.hv2-tl--avatar .hv2-tl__avatar {
+  display: flex;
+}
+
+.hv2-tl__card {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid transparent;
+  border-radius: 14px;
+  padding: 15px 18px 16px;
+}
+
+.hv2-tl--key .hv2-tl__card {
+  border-color: #dcae14;
+  padding: 18px 20px 20px;
+}
+
+.hv2-tl__stamps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: center;
+}
+
+.hv2-tl__stamp {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  font-family: var(--font-mono);
+  color: var(--muted);
+}
+
+.hv2-tl--key .hv2-tl__stamp {
+  color: var(--dark);
+}
+
+.hv2-tl__badge {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.hv2-tl__text {
+  margin-top: 8px;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.hv2-tl--key .hv2-tl__text {
+  font-size: 19px;
+}
+
+.hv2-tl__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 10px;
+  vertical-align: middle;
+  background: var(--yellow);
+  color: var(--dark);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  scale: 0;
+  transition: scale 0.35s cubic-bezier(0.34, 1.6, 0.64, 1), background 0.3s ease;
+}
+
+.hv2-tl__chip--big {
+  font-size: 18px;
+}
+
+.hv2-tl__chip.is-flash {
+  background: #f8d661;
+}
+
+.hv2-tl__arrow {
+  transition: translate 0.3s ease;
+}
+
+.hv2-tl__chip.is-up .hv2-tl__arrow {
+  translate: 0 -3px;
+}
+
+/* ==========================================================================
+   S10 — FAQ
+   ========================================================================== */
+
+.hv2-faq {
+  background: var(--orange);
+}
+
+.hv2-faq__inner {
+  padding-top: clamp(48px, 6vw, 84px);
+  padding-bottom: clamp(48px, 6vw, 84px);
+}
+
+.hv2-faq__badge {
+  display: inline-block;
+  background: var(--surface);
+  color: var(--orange);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 38px;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  padding: 14px 20px 16px;
+  transform: rotate(-4deg);
+}
+
+.hv2-faq__title {
+  margin-top: 32px;
+  font-size: clamp(34px, 4.2vw, 54px);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+  color: var(--surface);
+  max-width: 14em;
+}
+
+.hv2-faq__list {
+  margin-top: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.hv2-faq__item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.hv2-faq__item:last-child {
+  border-bottom: none;
+}
+
+.hv2-faq__q {
+  padding: 26px 30px;
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: clamp(19px, 1.7vw, 23px);
+  font-weight: 600;
+  color: var(--surface);
+  transition: opacity 0.2s ease;
+}
+
+.hv2-faq__q:hover {
+  opacity: 0.82;
+}
+
+.hv2-faq__q-text {
+  flex: 1;
+}
+
+.hv2-faq__chevron {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 8px;
+  color: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transition: rotate 0.25s ease;
+}
+
+.hv2-faq__item[open] .hv2-faq__chevron {
+  rotate: 180deg;
+}
+
+.hv2-faq__a {
+  padding: 0 86px 28px 30px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 52em;
+}
+
+/* ==========================================================================
+   S11 — CTA final
+   ========================================================================== */
+
+.hv2-final__inner {
+  padding-top: clamp(52px, 6vw, 86px);
+  padding-bottom: clamp(52px, 6vw, 86px);
+}
+
+.hv2-final__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+}
+
+.hv2-final__title {
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.12;
+  max-width: 18em;
+}
+
+.hv2-final__form {
+  gap: 10px;
+  max-width: 580px;
+}
+
+.hv2-final__form .hv2-field {
+  flex: 1 1 210px;
+  padding: 16px 24px;
+  font-size: 17px;
+  border: 1px solid var(--border2);
+}
+
+.hv2-final__form .hv2-btn {
+  padding: 16px 24px;
+  font-size: 17px;
+}
+
+.hv2-final__note {
+  margin-top: 12px;
+}
+
+.hv2-final__link {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 16px;
+  color: var(--orange);
+  border-bottom: 1px solid var(--orange);
+  padding-bottom: 2px;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+@keyframes hv2In {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hv2Blink {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes hv2Spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hv2Step {
+  0%,
+  100% {
+    translate: 0 0;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  6% {
+    translate: 0 -16px;
+    box-shadow: 0 20px 34px -22px rgba(0, 0, 0, 0.42);
+  }
+  30% {
+    translate: 0 -16px;
+    box-shadow: 0 20px 34px -22px rgba(0, 0, 0, 0.42);
+  }
+  36% {
+    translate: 0 0;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes hv2Num {
+  0%,
+  100% {
+    scale: 1;
+    box-shadow: 0 0 0 0 rgba(23, 21, 16, 0);
+  }
+  6% {
+    scale: 1.18;
+    box-shadow: 0 0 0 10px rgba(23, 21, 16, 0.12);
+  }
+  30% {
+    scale: 1.18;
+    box-shadow: 0 0 0 10px rgba(23, 21, 16, 0.12);
+  }
+  36% {
+    scale: 1;
+    box-shadow: 0 0 0 0 rgba(23, 21, 16, 0);
+  }
+}
+
+/* Respect des préférences système : on coupe les boucles décoratives */
+@media (prefers-reduced-motion: reduce) {
+  .home-v2 .hv2-step,
+  .home-v2 .hv2-step__num,
+  .home-v2 .hv2-conv__caret,
+  .home-v2 .hv2-pending__spinner {
+    animation: none;
+  }
+
+  .home-v2 .hv2-scan__line,
+  .home-v2 .hv2-steps__item {
+    opacity: 1;
+    animation: none;
+  }
+
+  .home-v2 .hv2-tl {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 860px) {
+  .hv2-plan {
+    max-width: none;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hv2-app__screen {
+    min-height: 0;
+  }
+
+  .hv2-conv__thread {
+    padding: 20px 18px;
+  }
+
+  .hv2-conv__composer {
+    padding: 14px 18px;
+  }
+
+  .hv2-card--indent {
+    margin-left: 0;
+  }
+
+  .hv2-faq__a {
+    padding-right: 30px;
+  }
+
+  .hv2-faq__q {
+    padding: 20px 22px;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hv2-wrap {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .hv2-hero__head {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .hv2-hero__demo {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .hv2-tl {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .hv2-timeline__list {
+    min-height: 0;
+  }
+}
+
+/* ==========================================================================
+   Modale de confirmation du diagnostic
+   Affichée après l'envoi de l'un des trois formulaires (voir home-v2.js).
+   <dialog> natif : le navigateur gère le focus, Échap et l'arrière-plan inerte.
+   ========================================================================== */
+
+.hv2-modal {
+  /* Reset des styles par défaut de <dialog> : bordure, fond et padding du UA. */
+  margin: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  max-width: min(520px, calc(100vw - 40px));
+  width: 100%;
+  overflow: visible;
+}
+
+.hv2-modal::backdrop {
+  background: rgba(17, 21, 16, 0.55);
+}
+
+.hv2-modal__panel {
+  background: var(--surface);
+  border-radius: 24px;
+  padding: clamp(28px, 4vw, 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  text-align: left;
+}
+
+.hv2-modal__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.hv2-modal__blink {
+  width: 8px;
+  height: 14px;
+  background: var(--orange);
+  display: inline-block;
+  animation: hv2ModalBlink 1.2s steps(1) infinite;
+}
+
+@keyframes hv2ModalBlink {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.hv2-modal__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(26px, 3.2vw, 34px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.hv2-modal__text {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink2);
+}
+
+.hv2-modal__close {
+  margin-top: 6px;
+}
+
+/* L'ouverture est animée en fondu ; @starting-style permet de partir de
+   l'état initial sans JavaScript supplémentaire. */
+.hv2-modal[open] {
+  animation: hv2ModalIn 0.22s ease both;
+}
+
+@keyframes hv2ModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hv2-modal[open] {
+    animation: none;
+  }
+
+  .hv2-modal__blink {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Tableau comparatif — version empilée sur téléphone
+   Les trois colonnes demandent environ 390 px de contenu minimum : sous cette
+   largeur, la colonne sombre sortait de la carte bleue. On passe donc à une
+   pile par critère — nom du critère, valeur agence, bloc Izy — plutôt que de
+   comprimer trois colonnes jusqu'à l'illisible.
+   Aucun changement de balisage : la grille passe à une colonne et les libellés
+   de colonnes, désormais inutiles en tête, sont réinjectés devant chaque valeur.
+   ========================================================================== */
+
+@media (max-width: 620px) {
+  .hv2-table__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* La cellule vide et les deux en-têtes de colonnes n'ont plus de sens. */
+  .hv2-table__grid > span:first-child,
+  .hv2-table__head-them,
+  .hv2-table__head-izy {
+    display: none;
+  }
+
+  .hv2-table__criteria {
+    padding: 22px 0 12px;
+    font-size: 19px;
+  }
+
+  /* Le premier critère ouvre la pile : pas de filet au-dessus. Il suit
+     toujours l'en-tête « L'APP Izy » — le sélecteur d'adjacence est donc
+     stable, contrairement à un :nth-of-type qui compte les balises. */
+  .hv2-table__head-izy + .hv2-table__criteria {
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .hv2-table__them {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 0 0 14px;
+    border-top: none;
+  }
+
+  .hv2-table__them::before {
+    content: "AGENCE";
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.13em;
+    color: #3f6480;
+  }
+
+  .hv2-table__izy,
+  .hv2-table__izy--last {
+    flex-wrap: wrap;
+    border-radius: 14px;
+    border-top: none;
+  }
+
+  /* flex-basis 100 % : le libellé prend sa ligne, la coche et la valeur
+     restent côte à côte en dessous. L'espacement vient du `gap: 10px` déjà
+     posé sur .hv2-table__izy — inutile d'ajouter une marge. */
+  .hv2-table__izy::before {
+    content: "L'APP IZY";
+    flex-basis: 100%;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.13em;
+    font-weight: 700;
+    color: var(--blue);
+  }
+}

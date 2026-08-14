@@ -1,3 +1,13 @@
 User-agent: *
 Allow: /
+
+# Les robots d'IA (GPTBot, ClaudeBot, PerplexityBot, Google-Extended…) sont
+# couverts par la règle ci-dessus : ils sont autorisés, délibérément.
+
 Sitemap: https://izybiz.fr/sitemap-index.xml
+
+# Résumé du site à l'intention des modèles de langage (convention llmstxt.org,
+# non standardisée — les lignes ci-dessous sont des commentaires, ignorés par
+# les analyseurs robots.txt) :
+# https://izybiz.fr/llms.txt
+# https://izybiz.fr/llms-full.txt

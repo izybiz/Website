@@ -1,0 +1,204 @@
+---
+// Page contact — portage de la maquette Claude Design (août 2026).
+// Le mini-pied de page de la maquette est volontairement omis : le footer
+// partagé de Layout.astro le remplace, comme sur la home.
+import Layout from "../layouts/Layout.astro";
+import "../styles/contact.css";
+
+const subjects = [
+  "Diagnostic gratuit",
+  "Cadrer une mission",
+  "Une question",
+  "Partenariat",
+];
+---
+
+<Layout
+  title="Contact — IZYBIZ"
+  description="Écrire à IZYBIZ : diagnostic de visibilité gratuit, rendez-vous de cadrage, ou question directe. Réponse sous un jour ouvré."
+  canonicalPath="/contact/"
+>
+  <div class="contact-v2">
+    <section class="cv2-hero" data-section="contact-hero">
+      <div class="cv2-hero__inner">
+        <div>
+          <h1 class="cv2-hero__title">Parlons de votre visibilité.</h1>
+          <p class="cv2-hero__sub">
+            Trois façons d'entrer en contact. La plus rapide reste le diagnostic :
+            cinq minutes, et vous savez où vous en êtes avant même de nous parler.
+          </p>
+        </div>
+        <p class="cv2-hero__status">
+          <span class="cv2-hero__blink" aria-hidden="true"></span>
+          RÉPONSE SOUS UN JOUR OUVRÉ
+        </p>
+      </div>
+    </section>
+
+    <section class="cv2-main" data-section="contact-main">
+      <div class="cv2-grid">
+        <form
+          class="cv2-form"
+          data-site-form
+          data-form-kind="contact"
+          data-form-location="contact"
+          novalidate
+        >
+          <h2 class="cv2-form__title">Écrivez-nous</h2>
+          <!-- Les champs n'ont que des indications grisées, aucune ne signale
+               qu'ils sont requis : le dire avant vaut mieux que quatre refus
+               successifs au moment d'envoyer. -->
+          <p class="cv2-form__required">Tous les champs sont obligatoires.</p>
+
+          <!-- Piège à robots : un humain ne voit pas ce champ et ne le remplit
+               donc jamais. S'il arrive rempli, Web3Forms rejette l'envoi. -->
+          <input
+            class="cv2-botcheck"
+            type="checkbox"
+            name="botcheck"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+
+          <div class="cv2-form__row">
+            <label class="sr-only" for="cv2-name">Votre nom</label>
+            <input
+              class="cv2-field"
+              id="cv2-name"
+              type="text"
+              name="nom"
+              placeholder="Votre nom"
+              autocomplete="name"
+              required
+            />
+            <label class="sr-only" for="cv2-company">Votre entreprise</label>
+            <input
+              class="cv2-field"
+              id="cv2-company"
+              type="text"
+              name="entreprise"
+              placeholder="Votre entreprise"
+              autocomplete="organization"
+              required
+            />
+          </div>
+
+          <div class="cv2-form__row">
+            <label class="sr-only" for="cv2-email">Votre email</label>
+            <input
+              class="cv2-field"
+              id="cv2-email"
+              type="email"
+              name="email"
+              placeholder="votre@email.fr"
+              autocomplete="email"
+              required
+            />
+            <label class="sr-only" for="cv2-site">L'adresse de votre site</label>
+            <input
+              class="cv2-field"
+              id="cv2-site"
+              type="url"
+              name="website"
+              placeholder="https://votre-site.fr"
+              autocomplete="url"
+              required
+            />
+          </div>
+
+          <fieldset class="cv2-subjects">
+            <legend class="cv2-subjects__legend">VOTRE DEMANDE</legend>
+            <div class="cv2-subjects__list">
+              {
+                subjects.map((label, i) => (
+                  <>
+                    {/* `demande` et non `subject` : Web3Forms réserve ce nom à
+                        l'objet du mail et n'afficherait pas le choix. */}
+                    <input
+                      class="sr-only"
+                      id={`cv2-subject-${i}`}
+                      type="radio"
+                      name="demande"
+                      value={label}
+                      checked={i === 0}
+                    />
+                    <label class="cv2-subject" for={`cv2-subject-${i}`}>
+                      {label}
+                    </label>
+                  </>
+                ))
+              }
+            </div>
+          </fieldset>
+
+          <label class="sr-only" for="cv2-message">Votre message</label>
+          <textarea
+            class="cv2-message"
+            id="cv2-message"
+            name="message"
+            rows="5"
+            required
+            placeholder="Votre métier, votre zone d'intervention, ce que vous cherchez à obtenir…"
+          ></textarea>
+
+          <div class="cv2-form__actions">
+            <button class="cv2-submit" type="submit">Envoyer</button>
+            <span class="cv2-form__note">Sans engagement · Aucune donnée revendue</span>
+          </div>
+
+          <p class="cv2-form__message" role="alert" data-form-message></p>
+
+          <p class="cv2-form__privacy">
+            Vos informations ne servent qu'à traiter votre demande.
+            <a href="/politique-de-confidentialite/">
+              Comment vos données sont traitées
+            </a>
+          </p>
+        </form>
+
+        <div class="cv2-cards">
+          <a class="cv2-card cv2-card--diag" href="/#diagnostic">
+            <span class="cv2-card__eyebrow">LE PLUS RAPIDE</span>
+            <h2 class="cv2-card__title">Le diagnostic de visibilité</h2>
+            <p class="cv2-card__text">
+              Gratuit, cinq minutes. Vous voyez votre score, celui du leader, et une
+              première action à mener.
+            </p>
+            <span class="cv2-card__arrow">Lancer le diagnostic →</span>
+          </a>
+
+          <div class="cv2-card cv2-card--rdv">
+            <span class="cv2-card__eyebrow">POUR CADRER UNE MISSION</span>
+            <h2 class="cv2-card__title">Prendre rendez-vous</h2>
+            <p class="cv2-card__text">
+              Trente minutes pour définir votre mission, son plan d'action et les
+              indicateurs suivis.
+            </p>
+            <a
+              class="cv2-card__cta"
+              href="mailto:contact.me@izybiz.fr?subject=Rendez-vous%20de%20cadrage"
+            >
+              Choisir un créneau
+            </a>
+          </div>
+
+          <div class="cv2-card cv2-card--mail">
+            <span class="cv2-card__eyebrow">EN DIRECT</span>
+            <h2 class="cv2-card__title">Nous écrire</h2>
+            <div class="cv2-card__lines">
+              <a class="cv2-card__mail" href="mailto:contact.me@izybiz.fr">
+                contact.me@izybiz.fr
+              </a>
+              <span class="cv2-card__hours">Du lundi au vendredi, 9 h – 18 h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<!-- L'envoi est partagé avec les trois formulaires de la home : voir
+     public/forms.js, qui distingue les deux familles par data-form-kind. -->
+<script is:inline src="/forms.js" defer></script>

@@ -1,91 +1,30 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import HomeContentFr from "../components/HomeContentFr.astro";
-const lang = "fr";
+import HomeV2Fr from "../components/HomeV2Fr.astro";
+import { homeFaq } from "../data/home-faq";
 
+// Le schéma FAQPage est dérivé de la même source que la section FAQ rendue :
+// impossible que les deux divergent.
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Qu'est-ce qu'une mission Izybiz ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Une mission Izybiz est une demande formulée en langage naturel par un manager. La plateforme compose une équipe d'agents IA spécialisés pour exécuter la mission sous votre pilotage et vous restituer un livrable structuré."
-      }
+  mainEntity: homeFaq.map((entry) => ({
+    "@type": "Question",
+    name: entry.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: entry.a,
     },
-    {
-      "@type": "Question",
-      "name": "Comment fonctionne la bêta privée ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "L'accès se fait sur invitation. Vous laissez vos coordonnées via le formulaire de la page, puis l'équipe Izybiz vous recontacte pour valider votre éligibilité et vous ouvrir l'accès."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Quelle différence avec un assistant IA classique ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Un assistant IA répond à une question à la fois. Izybiz orchestre plusieurs agents spécialisés qui se répartissent les sous-tâches d'une mission et produisent un résultat opérationnel cohérent."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Dois-je construire des workflows techniques ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Non. Izybiz est conçu pour des managers qui veulent déléguer une mission sans créer de workflow complexe. Vous décrivez l'objectif et la plateforme gère l'orchestration des agents."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Est-ce que je garde le contrôle humain ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Oui. Izybiz est une plateforme de pilotage assisté, pas d'autonomie opaque. Vous validez les points clés et gardez la décision finale sur les actions et les livrables."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Pour quels profils d'entreprise Izybiz est conçu ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Izybiz cible les managers d'ETI, de PME et de scale-ups qui veulent accélérer l'exécution de missions opérationnelles avec l'IA tout en conservant un cadre de gouvernance clair."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Quels types de missions peut-on confier à Izybiz ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "La plateforme couvre des missions de cadrage, production de livrables, recherche structurée et préparation de décision. L'objectif est de passer d'une intention métier à une exécution pilotable."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Izybiz est-il un cabinet de conseil ou un logiciel ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Izybiz est un logiciel SaaS, pas un cabinet de conseil. Depuis votre navigateur, vous décrivez une mission en langage naturel et une équipe d'agents spécialisés l'exécute sous votre pilotage. Aucun consultant n'intervient, aucun projet de déploiement n'est requis. Izybiz édite une plateforme en ligne accessible sur invitation."
-      }
-    }
-  ]
+  })),
 };
 ---
 
 <Layout
-  lang={lang}
-  title="Izybiz - Plateforme d'agents IA pour managers."
-  description="Izybiz, plateforme SaaS d'agents IA pour managers en France. Confiez une mission, une équipe l'exécute sous votre pilotage. Accès sur invitation."
-  includeGlobalScript={true}
+  title="Izy : attirez vos nouveaux prospects grâce à l'IA"
+  description="Izy est un logiciel qui fait venir les clients aux PME B2B : audits, optimisation, articles, posts et veille exécutés par une équipe d'agents. Diagnostic de visibilité gratuit en cinq minutes."
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-    <link rel="preload" as="image" href="/assets/illustration--dna.svg" />
-    <link rel="preload" as="image" href="/assets/illustration--agent.svg" />
-    <link rel="preload" as="image" href="/assets/illustration--output.svg" />
   </Fragment>
-  <HomeContentFr />
+  <HomeV2Fr />
 </Layout>

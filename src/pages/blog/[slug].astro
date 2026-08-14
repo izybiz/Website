@@ -12,7 +12,6 @@ export async function getStaticPaths() {
 
 const { post, posts } = Astro.props;
 const { Content } = await render(post);
-const lang = "fr";
 const pubDate = post.data.pubDate.toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" });
 const currentSlug = post.id.replace(/\.md$/, "");
 const sortedPosts = [...posts].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -30,14 +29,11 @@ const currentPath = `/blog/${currentSlug}/`;
 ---
 
 <Layout
-  lang={lang}
   title={post.data.title}
   description={post.data.description}
   ogType="article"
   pubDate={post.data.pubDate.toISOString()}
-  includeGlobalScript={true}
   canonicalPath={currentPath}
-  alternates={{ fr: currentPath }}
 >
   <main>
     <div class="article-page-shell">
@@ -54,7 +50,7 @@ const currentPath = `/blog/${currentSlug}/`;
         )}
       </nav>
     </div>
-    <article class="article-page">
+    <article class="article-page" data-section="blog-article">
       <h1 class="article-page__title">{post.data.title}</h1>
       <p class="article-page__description">{post.data.description}</p>
       <time class="article-page__date" datetime={post.data.pubDate.toISOString()}>{pubDate}</time>

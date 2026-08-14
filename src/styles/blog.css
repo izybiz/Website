@@ -1,0 +1,453 @@
+/* ==========================================================================
+   Socle du site + blog.
+
+   Extrait de global.css le 2026-08-13. L'ancien fichier faisait 5 229 lignes
+   pour 367 classes, dont 19 seulement apparaissaient encore dans le HTML
+   rendu : le reste stylait des pages supprimées (about, services, ancienne
+   page contact, ancien header/footer, modale démo).
+
+   Ce qui reste ici : la base html/body, le helper .sr-only, et les styles du
+   blog — index, mise en page des articles, typographie du corps de texte.
+
+   La home, la page contact et les pages légales ont leurs propres feuilles
+   (home-v2.css, contact.css, legal.css), scopées sous une classe racine.
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  /* Largeur normale, celle de la maquette. Le socle a longtemps été figé à
+     75 % — la seule valeur chargée à l'époque — et les cinq autres feuilles de
+     style le remettaient chacune à 100 % : le blog restait seul en condensé. */
+  font-stretch: 100%;
+}
+
+/* A11y helper */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Blog
+   ========================================================================== */
+
+/* ─── Blog index ─────────────────────────────────────────────────────────── */
+
+.blog-page {
+  background: var(--surface);
+}
+
+.blog-index {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 40px) clamp(60px, 8vw, 120px);
+}
+
+.blog-index__header {
+  margin-bottom: clamp(40px, 5vw, 56px);
+}
+
+.blog-index__title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: clamp(28px, 4vw, 46px);
+  /* Recette du H1 de la home : même graisse, même resserrement, pour que
+     deux titres de même rang appartiennent visiblement à la même famille. */
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+
+.blog-index__subtitle {
+  font-family: "Didact Gothic", sans-serif;
+  font-size: clamp(15px, 1.6vw, 17px);
+  color: rgba(15, 23, 42, 0.55);
+  margin: 0;
+}
+
+.blog-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.blog-card {
+  min-height: 420px;
+}
+
+.blog-card__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  text-decoration: none;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.blog-card__link:hover {
+  background: var(--bg);
+  border: none;
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+.blog-card__link:hover .blog-card__cta {
+  transform: translateY(-1px);
+  background: var(--surface2);
+}
+
+.blog-card__content {
+  flex: 1;
+}
+
+.blog-card__date {
+  display: block;
+  font-family: "Didact Gothic", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  /* Rust sombre : --orange sur le fond crème ne donne que 2,6:1, sous le
+     4,5:1 exigé pour du texte. Cette variante monte à 5,2:1. */
+  color: #b33e10;
+  margin-bottom: 8px;
+}
+
+.blog-card__title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 8px;
+  line-height: 1.25;
+}
+
+.blog-card__description {
+  font-family: "Didact Gothic", sans-serif;
+  font-size: clamp(14px, 1.4vw, 15px);
+  line-height: 1.6;
+  color: rgba(15, 23, 42, 0.6);
+  margin: 0;
+  display: -webkit-box;
+  line-clamp: 4;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-card__cta {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-top: 24px;
+  border: 0;
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: "Didact Gothic", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 12px 20px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease;
+}
+
+.blog-card__link:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.blog-card__link:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 1024px) {
+  .blog-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .blog-list {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-card {
+    min-height: 360px;
+  }
+}
+
+/* ─── Blog article layout ─────────────────────────────────────────────────── */
+
+.article-page {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 40px) clamp(60px, 8vw, 120px);
+}
+
+@media (max-width: 1024px) {
+  .article-page {
+    max-width: 780px;
+    padding-inline: clamp(20px, 5vw, 32px);
+  }
+}
+
+@media (max-width: 768px) {
+  .article-page {
+    max-width: 100%;
+    padding-inline: clamp(16px, 6vw, 24px);
+  }
+}
+
+.article-page__title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: clamp(28px, 4vw, 46px);
+  /* Recette du H1 de la home : même graisse, même resserrement, pour que
+     deux titres de même rang appartiennent visiblement à la même famille. */
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0 0 16px;
+  text-align: left;
+}
+
+.article-page__date {
+  display: block;
+  font-family: "Didact Gothic", sans-serif;
+  font-size: 13px;
+  color: rgba(15, 23, 42, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: -36px 0 48px;
+}
+
+.article-page__description {
+  font-family: "Didact Gothic", sans-serif;
+  font-size: clamp(16px, 1.8vw, 19px);
+  line-height: 1.6;
+  color: rgba(15, 23, 42, 0.6);
+  margin: 0 0 48px;
+  text-align: left;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+  padding-bottom: 32px;
+}
+
+/* Article body typography */
+.article-page__body {
+  font-family: "Didact Gothic", sans-serif;
+  font-size: clamp(15px, 1.6vw, 17px);
+  line-height: 1.75;
+  color: var(--ink);
+  text-align: left;
+}
+
+.article-page__body h2 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 2.5em 0 0.75em;
+}
+
+.article-page__body h3 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: clamp(17px, 1.9vw, 21px);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 2em 0 0.6em;
+}
+
+.article-page__body p {
+  margin: 0 0 1.4em;
+}
+
+.article-page__body strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.article-page__body a {
+  color: var(--orange);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.article-page__body a:hover {
+  color: #e0522a; /* --orange assombri, état survolé */
+}
+
+.article-page__body a[href="/contact"],
+.article-page__body a[href="/contact/"],
+.article-page__body a[href="/contacto"],
+.article-page__body a[href="/contacto/"],
+.article-page__body a[href="/en/contact"],
+.article-page__body a[href="/en/contact/"],
+.article-page__body a[href="/es/contacto"],
+.article-page__body a[href="/es/contacto/"],
+.article-page__body a[href="https://izybiz.fr/contact"],
+.article-page__body a[href="https://izybiz.fr/contact/"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 400px;
+  padding: 16px 32px;
+  background: var(--lavender);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: "Didact Gothic", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0;
+  cursor: pointer;
+  transition:
+    background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .article-page__body a[href="/contact"]:hover,
+  .article-page__body a[href="/contact/"]:hover,
+  .article-page__body a[href="/contacto"]:hover,
+  .article-page__body a[href="/contacto/"]:hover,
+  .article-page__body a[href="/en/contact"]:hover,
+  .article-page__body a[href="/en/contact/"]:hover,
+  .article-page__body a[href="/es/contacto"]:hover,
+  .article-page__body a[href="/es/contacto/"]:hover,
+  .article-page__body a[href="https://izybiz.fr/contact"]:hover,
+  .article-page__body a[href="https://izybiz.fr/contact/"]:hover {
+    background: #cdcbff; /* --lavender assombri, état survolé */
+    color: var(--ink);
+    transform: translateY(-2px) scale(1.04);
+  }
+}
+
+.article-page__body a[href="/contact"]:focus-visible,
+.article-page__body a[href="/contact/"]:focus-visible,
+.article-page__body a[href="/contacto"]:focus-visible,
+.article-page__body a[href="/contacto/"]:focus-visible,
+.article-page__body a[href="/en/contact"]:focus-visible,
+.article-page__body a[href="/en/contact/"]:focus-visible,
+.article-page__body a[href="/es/contacto"]:focus-visible,
+.article-page__body a[href="/es/contacto/"]:focus-visible,
+.article-page__body a[href="https://izybiz.fr/contact"]:focus-visible,
+.article-page__body a[href="https://izybiz.fr/contact/"]:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.article-page__body a[href="/contact"]:active,
+.article-page__body a[href="/contact/"]:active,
+.article-page__body a[href="/contacto"]:active,
+.article-page__body a[href="/contacto/"]:active,
+.article-page__body a[href="/en/contact"]:active,
+.article-page__body a[href="/en/contact/"]:active,
+.article-page__body a[href="/es/contacto"]:active,
+.article-page__body a[href="/es/contacto/"]:active,
+.article-page__body a[href="https://izybiz.fr/contact"]:active,
+.article-page__body a[href="https://izybiz.fr/contact/"]:active {
+  transform: translateY(0) scale(1.01);
+}
+
+.article-page__body ul,
+.article-page__body ol {
+  padding-left: 1.5em;
+  margin: 0 0 1.4em;
+}
+
+.article-page__body li {
+  margin-bottom: 0.5em;
+}
+
+.article-page__body blockquote {
+  border-left: 3px solid var(--orange);
+  margin: 1.5em 0;
+  padding: 0.5em 0 0.5em 1.25em;
+  color: rgba(15, 23, 42, 0.7);
+  font-style: italic;
+}
+
+.article-page__body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-size: 0.9em;
+}
+
+.article-page__body th {
+  background: rgba(15, 23, 42, 0.05);
+  font-weight: 700;
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 2px solid rgba(15, 23, 42, 0.15);
+}
+
+.article-page__body td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  vertical-align: top;
+}
+
+.article-page__body hr {
+  border: none;
+  border-top: 1px solid rgba(15, 23, 42, 0.1);
+  margin: 2.5em 0;
+}
+
+.article-page__body code {
+  font-family: monospace;
+  font-size: 0.875em;
+  background: rgba(15, 23, 42, 0.06);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .article-page__body table {
+    display: block;
+    overflow-x: auto;
+  }
+}

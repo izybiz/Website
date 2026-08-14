@@ -2,8 +2,6 @@
 title: "ChatGPT avant Google : le nouveau réflexe des managers pour évaluer une plateforme IA"
 description: "50 % des managers débutent maintenant leur recherche d'outils dans ChatGPT, pas sur Google. Voici ce que ça change pour évaluer une plateforme agents IA."
 pubDate: 2026-04-29
-lang: "fr"
-translationKey: "2026-04-29"
 ---
 
 Vous utilisez probablement encore Google pour chercher une plateforme agents IA. C'est normal. Mais la première impression se forme maintenant ailleurs — avant même que la recherche Google commence.
@@ -46,4 +44,4 @@ Regardez ce qui sort. Dites-nous si vous nous trouvez — ou si vous voulez y ê
 
 Nous construisons IZYBIZ pour être là où les managers cherchent vraiment — dans les réponses IA, avant la première page Google. Vous donnez une mission. Vos agents l'exécutent. Beta privée, accès sur invitation.
 
-Écrivez-nous → info@izybiz.fr
+Écrivez-nous → contact.me@izybiz.fr

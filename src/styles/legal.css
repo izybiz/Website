@@ -1,0 +1,163 @@
+/* ==========================================================================
+   Pages légales — portage de la maquette Claude Design (août 2026).
+   Portée : mentions-legales.astro et politique-de-confidentialite.astro.
+   Tout est scopé sous .legal-page pour ne pas toucher au blog ni à la home.
+   Les tokens (--bg, --ink, --font-display…) viennent de :root dans
+   site-chrome.css, partagés avec le header et le footer.
+   ========================================================================== */
+
+.legal-page {
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  max-width: 820px;
+  margin: 0 auto;
+  padding: clamp(40px, 5vw, 72px) 28px clamp(56px, 6vw, 88px);
+  /* blog.css ne pose aucune police sur body : à déclarer ici, sinon le
+     navigateur retombe sur son serif par défaut. */
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.legal-page * {
+  box-sizing: border-box;
+}
+
+/* Socle typographique. :where() pour une spécificité nulle : les classes
+   .legal-* définies plus bas l'emportent toujours sans surenchérir. */
+:where(.legal-page) :where(h1, h2, h3) {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+:where(.legal-page) :where(p, li) {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+:where(.legal-page) :where(a) {
+  color: var(--orange);
+  text-decoration: none;
+}
+
+:where(.legal-page) :where(a):hover {
+  color: #e0552b;
+}
+
+/* ------------------------------------------------------------------ En-tête */
+
+.legal-page__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(34px, 4.2vw, 52px);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+
+.legal-page__updated {
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.legal-page__intro {
+  margin-top: 24px;
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--ink2);
+}
+
+/* ------------------------------------------------------------------ Corps */
+
+.legal-page__body {
+  margin-top: clamp(32px, 4vw, 48px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 3vw, 40px);
+}
+
+.legal-page__heading {
+  font-size: clamp(22px, 2.2vw, 27px);
+}
+
+.legal-page__text {
+  margin-top: 12px;
+  color: var(--ink2);
+}
+
+/* Noms de cookies cités dans la section 8 de la politique. */
+.legal-page__text code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 1px 6px;
+}
+
+.legal-page__list {
+  margin: 16px 0 0;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--ink2);
+}
+
+/* Cartes de la maquette (« Société », « Siège et contact »…). */
+
+.legal-page__cards {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.legal-page__card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+
+.legal-page__card-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 19px;
+}
+
+.legal-page__card-text {
+  margin-top: 6px;
+  color: var(--ink2);
+}
+
+/* ------------------------------------------------------------------ Pied */
+
+.legal-page__links {
+  margin-top: clamp(36px, 4vw, 56px);
+  padding-top: 24px;
+  border-top: 1px solid var(--border2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  align-items: center;
+  font-size: 16px;
+}
+
+/* --------------------------------------------------------------- Mobile */
+
+/* Même seuil et mêmes marges que la home (voir home-v2.css, .hv2-wrap). */
+@media (max-width: 560px) {
+  .legal-page {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
