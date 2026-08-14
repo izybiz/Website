@@ -33,35 +33,6 @@ body {
   font-stretch: 75%;
 }
 
-body.intro-stage-1 .we-deliver,
-body.intro-stage-1 .home-ai,
-body.intro-stage-1 .hero-video,
-body.intro-stage-1 .section-two,
-body.intro-stage-1 .section-faq,
-body.intro-stage-1 .section-contact {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-body.intro-stage-1 .hero-metrics {
-  opacity: 0;
-  pointer-events: none;
-}
-
-:root {
-  /* Keep fixed hierarchy: H1 = 1.3x H2 across responsive sizes */
-  --we-deliver-h2-size: clamp(56px, 6vw, 112px);
-  --hero-h1-size: clamp(62.4px, 6.9vw, 124.8px);
-  --section-stack-gap: clamp(56px, 8vw, 96px);
-  /* Extra air only between hero-metrics and .we-deliver (inside section-one) */
-  --hero-metrics-we-deliver-extra-gap: clamp(72px, 12vw, 160px);
-  /* Space below section-style h2s (excludes .we-deliver__title via :not rule below) */
-  --h2-below-spacing: clamp(36px, 4.5vw, 56px);
-  /* Extra space below "Book a call" before hero-metrics (inside .hero-izybiz padding) */
-  --hero-cta-to-metrics-extra: clamp(40px, 6vw, 96px);
-}
-
 /* A11y helper */
 .sr-only {
   position: absolute !important;
@@ -171,10 +142,6 @@ body.intro-stage-1 .hero-metrics {
   margin-bottom: 8px;
 }
 
-.home-transition .blog-card__date {
-  color: #000000;
-}
-
 .blog-card__title {
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: clamp(22px, 2.6vw, 30px);
@@ -251,26 +218,10 @@ body.intro-stage-1 .hero-metrics {
   padding: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 40px) clamp(60px, 8vw, 120px);
 }
 
-.article-page--contact {
-  max-width: 1240px;
-}
-
-.article-page--wide {
-  max-width: 1240px;
-}
-
 @media (max-width: 1024px) {
   .article-page {
     max-width: 780px;
     padding-inline: clamp(20px, 5vw, 32px);
-  }
-
-  .article-page--contact {
-    max-width: 1240px;
-  }
-
-  .article-page--wide {
-    max-width: 1240px;
   }
 }
 
@@ -278,14 +229,6 @@ body.intro-stage-1 .hero-metrics {
   .article-page {
     max-width: 100%;
     padding-inline: clamp(16px, 6vw, 24px);
-  }
-
-  .article-page--contact {
-    max-width: 1240px;
-  }
-
-  .article-page--wide {
-    max-width: 1240px;
   }
 }
 
@@ -459,67 +402,6 @@ body.intro-stage-1 .hero-metrics {
   padding: 0.5em 0 0.5em 1.25em;
   color: rgba(15, 23, 42, 0.7);
   font-style: italic;
-}
-
-.article-services-cta {
-  width: 100%;
-  max-width: 860px;
-  margin: clamp(24px, 4vw, 40px) auto clamp(64px, 9vw, 120px);
-  padding: clamp(24px, 3vw, 32px);
-  border: 1px solid rgba(15, 23, 42, 0.1);
-  border-radius: 20px;
-  background: #ffffff;
-}
-
-.article-services-cta__title {
-  margin: 0 0 14px;
-  font-family: "Bricolage Grotesque", sans-serif;
-  font-size: clamp(20px, 2.4vw, 28px);
-  font-weight: 700;
-  line-height: 1.2;
-  color: #0f172a;
-}
-
-.article-services-cta__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.article-services-cta__list li {
-  margin: 0;
-  font-family: "Didact Gothic", sans-serif;
-  font-size: clamp(15px, 1.6vw, 17px);
-  line-height: 1.65;
-  color: rgba(15, 23, 42, 0.78);
-}
-
-.article-services-cta__list a {
-  color: #0f172a;
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color 160ms ease, opacity 160ms ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .article-services-cta__list a:hover {
-    color: #ff6a3d;
-    opacity: 1;
-  }
-}
-
-.article-services-cta__list a:focus-visible {
-  outline: 2px solid #0f172a;
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-.article-services-cta__list a:active {
-  opacity: 0.75;
 }
 
 .article-page__body table {
