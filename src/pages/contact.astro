@@ -45,6 +45,10 @@ const subjects = [
           novalidate
         >
           <h2 class="cv2-form__title">Écrivez-nous</h2>
+          <!-- Les champs n'ont que des indications grisées, aucune ne signale
+               qu'ils sont requis : le dire avant vaut mieux que quatre refus
+               successifs au moment d'envoyer. -->
+          <p class="cv2-form__required">Tous les champs sont obligatoires.</p>
 
           <!-- Piège à robots : un humain ne voit pas ce champ et ne le remplit
                donc jamais. S'il arrive rempli, Web3Forms rejette l'envoi. -->
@@ -66,6 +70,7 @@ const subjects = [
               name="nom"
               placeholder="Votre nom"
               autocomplete="name"
+              required
             />
             <label class="sr-only" for="cv2-company">Votre entreprise</label>
             <input
@@ -75,6 +80,7 @@ const subjects = [
               name="entreprise"
               placeholder="Votre entreprise"
               autocomplete="organization"
+              required
             />
           </div>
 
@@ -97,6 +103,7 @@ const subjects = [
               name="website"
               placeholder="https://votre-site.fr"
               autocomplete="url"
+              required
             />
           </div>
 
@@ -131,6 +138,7 @@ const subjects = [
             id="cv2-message"
             name="message"
             rows="5"
+            required
             placeholder="Votre métier, votre zone d'intervention, ce que vous cherchez à obtenir…"
           ></textarea>
 

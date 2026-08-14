@@ -154,6 +154,12 @@
   font-size: clamp(22px, 2.2vw, 27px);
 }
 
+.cv2-form__required {
+  margin: 6px 0 0;
+  font-size: 15px;
+  color: var(--muted);
+}
+
 .cv2-form__row {
   display: flex;
   flex-wrap: wrap;
