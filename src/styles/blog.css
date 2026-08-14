@@ -24,8 +24,8 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: #fbf2e6;
-  color: #0f172a;
+  background: var(--bg);
+  color: var(--ink);
   /* L'axe de largeur de Bricolage Grotesque est désormais chargé sur la plage
      75..100 (voir Layout.astro) pour que la home v2 puisse utiliser la largeur
      normale. On fige ici 75 % — la valeur unique disponible auparavant — afin
@@ -57,7 +57,7 @@ body {
 /* ─── Blog index ─────────────────────────────────────────────────────────── */
 
 .blog-page {
-  background: #ffffff;
+  background: var(--surface);
 }
 
 .blog-index {
@@ -74,10 +74,12 @@ body {
 .blog-index__title {
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: clamp(28px, 4vw, 46px);
-  /* 700, comme le H1 de la home : les deux titres doivent peser pareil. */
+  /* Recette du H1 de la home : même graisse, même resserrement, pour que
+     deux titres de même rang appartiennent visiblement à la même famille. */
   font-weight: 700;
+  letter-spacing: -0.035em;
   line-height: 1.1;
-  color: #0f172a;
+  color: var(--ink);
   margin: 0 0 12px;
 }
 
@@ -106,9 +108,9 @@ body {
   flex-direction: column;
   height: 100%;
   padding: 24px;
-  border: 1px solid #000000;
+  border: 1px solid var(--border);
   border-radius: 12px;
-  background: #ffffff;
+  background: var(--surface);
   text-decoration: none;
   transition:
     transform 160ms ease,
@@ -117,7 +119,7 @@ body {
 }
 
 .blog-card__link:hover {
-  background: #fbf2e6;
+  background: var(--bg);
   border: none;
   transform: translateY(-2px);
   box-shadow: none;
@@ -125,7 +127,7 @@ body {
 
 .blog-card__link:hover .blog-card__cta {
   transform: translateY(-1px);
-  background: #fafafa;
+  background: var(--surface2);
 }
 
 .blog-card__content {
@@ -138,6 +140,8 @@ body {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  /* Rust sombre : --orange sur le fond crème ne donne que 2,6:1, sous le
+     4,5:1 exigé pour du texte. Cette variante monte à 5,2:1. */
   color: #b33e10;
   margin-bottom: 8px;
 }
@@ -146,7 +150,8 @@ body {
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: clamp(22px, 2.6vw, 30px);
   font-weight: 700;
-  color: #0f172a;
+  letter-spacing: -0.02em;
+  color: var(--ink);
   margin: 0 0 8px;
   line-height: 1.25;
 }
@@ -169,8 +174,8 @@ body {
   align-self: flex-start;
   margin-top: 24px;
   border: 0;
-  background: #ffffff;
-  color: #000000;
+  background: var(--surface);
+  color: var(--ink);
   text-decoration: none;
   font-family: "Didact Gothic", sans-serif;
   font-size: 16px;
@@ -185,7 +190,7 @@ body {
 }
 
 .blog-card__link:focus-visible {
-  outline: 2px solid #000000;
+  outline: 2px solid var(--ink);
   outline-offset: 4px;
 }
 
@@ -235,10 +240,12 @@ body {
 .article-page__title {
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: clamp(28px, 4vw, 46px);
-  /* 700, comme le H1 de la home : les deux titres doivent peser pareil. */
+  /* Recette du H1 de la home : même graisse, même resserrement, pour que
+     deux titres de même rang appartiennent visiblement à la même famille. */
   font-weight: 700;
+  letter-spacing: -0.035em;
   line-height: 1.1;
-  color: #0f172a;
+  color: var(--ink);
   margin: 0 0 16px;
   text-align: left;
 }
@@ -269,7 +276,7 @@ body {
   font-family: "Didact Gothic", sans-serif;
   font-size: clamp(15px, 1.6vw, 17px);
   line-height: 1.75;
-  color: #0f172a;
+  color: var(--ink);
   text-align: left;
 }
 
@@ -278,7 +285,7 @@ body {
   font-size: clamp(20px, 2.4vw, 28px);
   font-weight: 700;
   line-height: 1.2;
-  color: #0f172a;
+  color: var(--ink);
   margin: 2.5em 0 0.75em;
 }
 
@@ -287,7 +294,7 @@ body {
   font-size: clamp(17px, 1.9vw, 21px);
   font-weight: 600;
   line-height: 1.25;
-  color: #0f172a;
+  color: var(--ink);
   margin: 2em 0 0.6em;
 }
 
@@ -297,17 +304,17 @@ body {
 
 .article-page__body strong {
   font-weight: 700;
-  color: #0f172a;
+  color: var(--ink);
 }
 
 .article-page__body a {
-  color: #ff6a3d;
+  color: var(--orange);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 .article-page__body a:hover {
-  color: #e0522a;
+  color: #e0522a; /* --orange assombri, état survolé */
 }
 
 .article-page__body a[href="/contact"],
@@ -326,8 +333,8 @@ body {
   border: 0;
   border-radius: 400px;
   padding: 16px 32px;
-  background: #d9d8ff;
-  color: #000000;
+  background: var(--lavender);
+  color: var(--ink);
   text-decoration: none;
   font-family: "Didact Gothic", sans-serif;
   font-size: 16px;
@@ -353,8 +360,8 @@ body {
   .article-page__body a[href="/es/contacto/"]:hover,
   .article-page__body a[href="https://izybiz.fr/contact"]:hover,
   .article-page__body a[href="https://izybiz.fr/contact/"]:hover {
-    background: #cdcbff;
-    color: #000000;
+    background: #cdcbff; /* --lavender assombri, état survolé */
+    color: var(--ink);
     transform: translateY(-2px) scale(1.04);
   }
 }
@@ -369,7 +376,7 @@ body {
 .article-page__body a[href="/es/contacto/"]:focus-visible,
 .article-page__body a[href="https://izybiz.fr/contact"]:focus-visible,
 .article-page__body a[href="https://izybiz.fr/contact/"]:focus-visible {
-  outline: 2px solid #000000;
+  outline: 2px solid var(--ink);
   outline-offset: 4px;
 }
 
@@ -397,7 +404,7 @@ body {
 }
 
 .article-page__body blockquote {
-  border-left: 3px solid #ff6a3d;
+  border-left: 3px solid var(--orange);
   margin: 1.5em 0;
   padding: 0.5em 0 0.5em 1.25em;
   color: rgba(15, 23, 42, 0.7);
