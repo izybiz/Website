@@ -183,6 +183,22 @@
   font-weight: 700;
 }
 
+/* Mention RGPD. Le visiteur doit savoir ce que devient son adresse à l'endroit
+   où il la donne — le lien du pied de page ne suffit pas. Discrète mais
+   lisible : --muted sur le fond crème donne 5,2:1. */
+.hv2-form__privacy {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.hv2-form__privacy a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 .hv2-note {
   font-size: 15px;
   color: var(--muted);

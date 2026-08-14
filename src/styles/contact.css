@@ -303,6 +303,20 @@
   display: none;
 }
 
+/* Mention RGPD. Le visiteur doit savoir ce que deviennent ses informations à
+   l'endroit où il les donne — le lien du pied de page ne suffit pas. */
+.cv2-form__privacy {
+  margin: 14px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.cv2-form__privacy a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 /* Pas `--orange` : #ff6a3d sur le fond crème ne donne que 2,6:1, sous le 4,5:1
    exigé pour du texte. Cette teinte plus sombre reste dans la famille de la
    marque et monte à 5,6:1 — un message d'erreur doit se lire. */
