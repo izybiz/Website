@@ -43,9 +43,6 @@
   z-index: 50;
   background: var(--surface);
   border-bottom: 1px solid var(--ink);
-  /* Le logo de la maquette est en largeur normale, alors que body est figé à
-     75 % pour le rendu historique du blog. */
-  font-stretch: 100%;
   font-family: var(--font-body);
 }
 
@@ -212,7 +209,6 @@
 .site-chrome-footer {
   background: var(--surface);
   border-top: 1px solid var(--border);
-  font-stretch: 100%;
   font-family: var(--font-body);
 }
 

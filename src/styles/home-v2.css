@@ -15,9 +15,6 @@
   /* blog.css ne pose aucune police sur body : la home doit la déclarer,
      sinon le navigateur retombe sur son serif par défaut. */
   font-family: "Didact Gothic", Verdana, sans-serif;
-  /* La maquette utilise Bricolage Grotesque en largeur normale ; body est figé
-     à 75 % pour le reste du site (voir blog.css). */
-  font-stretch: 100%;
   font-size: 18px;
   line-height: 1.6;
   color: var(--ink);

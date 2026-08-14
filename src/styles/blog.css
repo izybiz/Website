@@ -26,11 +26,10 @@ body {
   min-height: 100vh;
   background: var(--bg);
   color: var(--ink);
-  /* L'axe de largeur de Bricolage Grotesque est désormais chargé sur la plage
-     75..100 (voir Layout.astro) pour que la home v2 puisse utiliser la largeur
-     normale. On fige ici 75 % — la valeur unique disponible auparavant — afin
-     que le blog, les pages légales, le header et le footer soient inchangés. */
-  font-stretch: 75%;
+  /* Largeur normale, celle de la maquette. Le socle a longtemps été figé à
+     75 % — la seule valeur chargée à l'époque — et les cinq autres feuilles de
+     style le remettaient chacune à 100 % : le blog restait seul en condensé. */
+  font-stretch: 100%;
 }
 
 /* A11y helper */
