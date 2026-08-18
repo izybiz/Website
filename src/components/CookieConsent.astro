@@ -1,24 +1,46 @@
 ---
-const t = {
-  message:
-    "Ce site utilise Google Analytics pour mesurer l'audience. Ces cookies ne sont déposés qu'avec votre accord.",
-  accept: "Accepter",
-  decline: "Refuser",
-  manage: "Paramètres cookies",
-  link: "/politique-de-confidentialite/",
-};
+interface Props {
+  lang?: "fr" | "en";
+}
+
+const { lang = "fr" } = Astro.props as Props;
+
+const copy = {
+  fr: {
+    message:
+      "Ce site utilise Google Analytics pour mesurer l'audience. Ces cookies ne sont déposés qu'avec votre accord.",
+    learnMore: "En savoir plus",
+    accept: "Accepter",
+    decline: "Refuser",
+    manage: "Paramètres cookies",
+    region: "Consentement cookies",
+    link: "/politique-de-confidentialite/",
+  },
+  en: {
+    message:
+      "This site uses Google Analytics to measure traffic. These cookies are only set with your consent.",
+    learnMore: "Learn more",
+    accept: "Accept",
+    decline: "Decline",
+    manage: "Cookie settings",
+    region: "Cookie consent",
+    link: "/en/privacy-policy/",
+  },
+} as const;
+
+const t = copy[lang];
 ---
 
 <div
   id="cookie-banner"
   class="cookie-banner"
   role="region"
-  aria-label="Consentement cookies"
+  aria-label={t.region}
   hidden
 >
   <p class="cookie-banner__text">
     {t.message}
-    <a href={t.link} class="cookie-banner__link">En savoir plus</a>
+    <a href={t.link} class="cookie-banner__link">{t.learnMore}</a>
   </p>
   <div class="cookie-banner__actions">
     <button id="cookie-accept" class="cookie-banner__btn cookie-banner__btn--accept">
