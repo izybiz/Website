@@ -1,0 +1,42 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import { t } from "../../../data/ui-strings";
+
+const posts = (await getCollection("blog-en"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<Layout
+  lang="en"
+  title="AI Agents Blog for Managers — SMEs and Mid-Sized Companies | Izybiz"
+  description="Field articles on AI agent execution, task delegation and operational transformation for managers of French SMEs and mid-sized companies."
+>
+  <main class="blog-page" data-section="blog-index">
+    <div class="blog-index">
+      <header class="blog-index__header">
+        <h1 class="blog-index__title">AI for managers. Field-tested. Not theory.</h1>
+        <p class="blog-index__subtitle">{t("blog.subtitle", "en")}</p>
+      </header>
+      <ul class="blog-list">
+        {posts.map((post) => {
+          const slug = post.id.replace(/\.md$/, "");
+          const date = post.data.pubDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+          return (
+            <li class="blog-card">
+              <a class="blog-card__link" href={`/en/blog/${slug}/`}>
+                <time class="blog-card__date" datetime={post.data.pubDate.toISOString()}>{date}</time>
+                <div class="blog-card__content">
+                  <h2 class="blog-card__title">{post.data.title}</h2>
+                  <p class="blog-card__description">{post.data.description}</p>
+                </div>
+                <span class="blog-card__cta">{t("blog.readmore", "en")}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </main>
+</Layout>
