@@ -1,0 +1,1043 @@
+---
+// Home EN v2 — traduction de HomeV2Fr.astro (même maquette, même CSS scopé
+// .home-v2, même home-v2.js). Les ids "attirer"/"convertir"/"vendre" sont
+// conservés tels quels : home-v2.css les utilise comme sélecteurs
+// (.hv2-tab--attirer[aria-selected="true"] etc.), seul le `label` affiché
+// change de langue.
+import "../styles/home-v2.css";
+import { homeFaqEn as faq } from "../data/home-faq";
+
+const heroSteps = [
+  "Reading your site to understand your business",
+  "Checking who AI cites on your topics",
+  "Finding a company comparable to yours",
+  "Measuring whether AI cites you",
+  "Reviewing your search rankings",
+  "Reviewing the most-cited site",
+  "Reviewing the comparable site",
+  "Pulling it all into your report",
+].map((label, i) => ({
+  label,
+  mark: i < 6 ? "✓" : "",
+  delay: `${(2.4 + i * 0.55).toFixed(2)}s`,
+}));
+
+const pathSteps = [
+  { n: "1", title: "Go from invisible to found" },
+  { n: "2", title: "Prove your expertise" },
+  { n: "3", title: "Stay present until they sign" },
+];
+
+const stats = [
+  { value: "+ 52%", label: "Average visibility score increase over 6 months*" },
+  { value: "+ 85%", label: "Increase in your citation rate by generative AI**" },
+  { value: "98%", label: "Relevance rate of content validated by our experts" },
+];
+
+const tabs = [
+  { id: "attirer", label: "Attract" },
+  { id: "convertir", label: "Convert" },
+  { id: "vendre", label: "Sell" },
+];
+
+const missions = {
+  attirer: [
+    { mark: "✓", label: "Audits your site" },
+    { mark: "✓", label: "Fixes your site" },
+    { mark: "✓", label: "Runs market monitoring" },
+    { mark: "✓", label: "Builds an editorial strategy" },
+    { mark: "✓", label: "Creates an editorial calendar" },
+    { mark: "", label: "Monitors your competitors and industry" },
+    { mark: "", label: "Writes your content" },
+    { mark: "", label: "Re-measures your visibility" },
+  ],
+  convertir: [
+    { mark: "✓", label: "Showcases your references on the site" },
+    { mark: "✓", label: "Sets up one-click quote requests" },
+    { mark: "", label: "Receives every incoming request" },
+    { mark: "", label: "Passes on the visitor's context" },
+  ],
+  vendre: [
+    { mark: "✓", label: "Keeps your quote register" },
+    { mark: "✓", label: "Spots when a prospect comes back" },
+    { mark: "", label: "Prepares the follow-up with something new" },
+    { mark: "", label: "Wakes up dormant quotes" },
+    { mark: "", label: "Tracks your signings every month" },
+  ],
+};
+
+// Onglet « Attirer » — conversation pilotée par les données
+const chatAttirer = {
+  izy: "This month's report is ready. Two pieces are waiting for your approval.",
+  you: "Show me the article.",
+  tag: "TO APPROVE",
+  meta: "article · 1,240 words",
+  title: "Replacing a boiler in 2026: what changes for commercial premises",
+  sub: "Target search: commercial boiler replacement",
+  cta: "Approve",
+  alt: "Request a revision",
+};
+
+const quotes = [
+  {
+    name: "Olivier",
+    role: "Chairman, Kirei SA",
+    src: "/assets/temoin-olivier.jpg",
+    text: "Izy transformed our digital visibility. We're finally signing quotes through the web.",
+  },
+  {
+    name: "Pascal",
+    role: "CEO, Clean Power",
+    src: "/assets/temoin-pascal.jpg",
+    text: "The real upside? Not hiring. Izy delivers, I approve, and the results come in.",
+  },
+  {
+    name: "Ophélie",
+    role: "Freelance SEO, Mood.be",
+    src: "/assets/temoin-ophelie.jpg",
+    text: "As an SEO expert, I was blown away by how relevant the content Izy generates is.",
+  },
+];
+
+const compare = [
+  { criteria: "Availability", them: "Office hours (9am-6pm)", izy: "24/7" },
+  { criteria: "Visibility", them: "Complex monthly reports", izy: "Real time, in the chat" },
+  { criteria: "Production", them: "Writing turnaround: 1 week", izy: "Instant + approval" },
+  { criteria: "Cost", them: "High fixed fees", izy: "Flexible subscription" },
+];
+
+const roster = [
+  {
+    name: "Brenda",
+    role: "Keeper of your brand image: tone, message, visual consistency across all your content",
+    d: "M12 3l2.4 5.6L20 11l-5.6 2.4L12 19l-2.4-5.6L4 11l5.6-2.4z",
+    d2: "",
+  },
+  {
+    name: "Sophie",
+    role: "Gets you higher in Google: she audits your site and optimizes your SEO",
+    d: "M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14",
+    d2: "M16.2 16.2L21 21",
+  },
+  {
+    name: "Marc",
+    role: "Your market watch: he monitors your competitors and spots trends worth acting on",
+    d: "M12 21a9 9 0 1 1 9-9",
+    d2: "M12 16.5a4.5 4.5 0 1 1 4.5-4.5M12 12l8-8",
+  },
+  {
+    name: "Victor",
+    role: "Your writer: he drafts your articles, your LinkedIn posts, and prepares your visuals",
+    d: "M4 20c1.5-9 7-14.5 16-16-1.5 9-7 14.5-16 16z",
+    d2: "M9.5 15.5L15 10",
+  },
+  {
+    name: "Greg",
+    role: "Your acquisition engine: he improves your conversion rate and manages your paid campaigns",
+    d: "M4 18l5.5-5.5 3.5 3.5L20 8",
+    d2: "M15 8h5v5",
+  },
+  {
+    name: "Emma",
+    role: "Your customer relations: she syncs your contacts and manages your emails and newsletters",
+    d: "M3.5 6h17v12h-17z",
+    d2: "M3.5 7.2l8.5 6 8.5-6",
+  },
+].map((a, i) => ({
+  ...a,
+  tint: ["#f5c21b", "#b9ddfd", "#d9d8ff"][i % 3],
+  deep: ["#7a5c02", "#2f5570", "#3a3770"][i % 3],
+}));
+
+// Frise S9 — `chip` est la valeur comptée à l'arrivée de la carte
+const timeline = [
+  {
+    stamp: "WEEK 3",
+    text: "New page live · ≈ 210 searches/month",
+    angle: "-1.5deg",
+    shift: 24,
+    avatar: true,
+    chip: null,
+  },
+  {
+    stamp: "MONTH 1",
+    text: "5 pages optimized, 4 articles published · score 34",
+    angle: "-1.2deg",
+    shift: 28,
+    chip: 3,
+  },
+  {
+    stamp: "MONTH 3",
+    text: "Cited by AI on 2 queries · score 41",
+    angle: "1.5deg",
+    shift: -20,
+    chip: 7,
+  },
+  {
+    stamp: "MONTH 5",
+    text: "Quote request received · forwarded to your inbox",
+    angle: "2deg",
+    shift: 14,
+    key: true,
+    chip: null,
+  },
+  {
+    stamp: "MONTH 6",
+    text: "2 new quote requests · score 52",
+    angle: "0deg",
+    shift: 0,
+    flat: true,
+    chip: 21,
+    big: true,
+  },
+];
+
+---
+
+<div class="home-v2">
+  {/* ================= S2 — Hero ================= */}
+  <section aria-labelledby="hv2-hero-title" data-section="hero">
+    <div class="hv2-hero__head hv2-wrap--narrow" style="margin:0 auto">
+      <h1 class="hv2-hero__title" id="hv2-hero-title">
+        Attract new prospects with AI
+      </h1>
+      <p class="hv2-hero__sub">
+        Google and AI decide who your customers see first. Find out where you
+        stand, who's ahead of you, and what it takes to move up.
+      </p>
+      <div class="hv2-hero__eyebrow">FREE VISIBILITY DIAGNOSIS</div>
+      <form
+        class="hv2-form hv2-hero__form"
+        id="diagnostic"
+        data-site-form
+        data-form-kind="diagnostic"
+        data-form-location="hero"
+        novalidate
+      >
+        <!-- Piège à robots : un humain ne voit pas ce champ et ne le remplit
+             donc jamais. S'il arrive rempli, Web3Forms rejette l'envoi. -->
+        <input
+          class="hv2-botcheck"
+          type="checkbox"
+          name="botcheck"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+        />
+        <input type="hidden" name="origine" value="Home EN — bandeau d'accueil" />
+        <label class="sr-only" for="hv2-hero-email">Your email</label>
+        <input
+          class="hv2-field"
+          id="hv2-hero-email"
+          type="email"
+          name="email"
+          placeholder="you@email.com"
+          autocomplete="email"
+          required
+        />
+        <label class="sr-only" for="hv2-hero-site">Your website address</label>
+        <input
+          class="hv2-field"
+          id="hv2-hero-site"
+          type="url"
+          name="website"
+          placeholder="https://your-site.com"
+          autocomplete="url"
+          required
+        />
+        <button class="hv2-btn hv2-hero__submit" type="submit">Analyze my site</button>
+        <p class="hv2-form__message" role="alert" data-form-message></p>
+        <p class="hv2-form__privacy">
+          Your address is only used to send you this diagnosis, and is never
+          resold. <a href="/en/privacy-policy/">How your data is handled</a>
+        </p>
+      </form>
+      <p class="hv2-note hv2-hero__note">
+        2-min diagnosis · Free · No commitment
+      </p>
+    </div>
+
+    <div class="hv2-hero__demo">
+      <div class="hv2-window">
+        <div class="hv2-window__bar">
+          <span class="hv2-window__dot"></span>
+          <span class="hv2-window__dot"></span>
+          <span class="hv2-window__spacer"></span>
+          <span class="hv2-window__label">DIAGNOSIS IN PROGRESS</span>
+        </div>
+        <div class="hv2-window__body">
+          <div class="hv2-scan">
+            <div class="hv2-scan__line" style="animation-delay:.2s">
+              <span class="hv2-scan__check">✓</span> your site responds
+            </div>
+            <div class="hv2-scan__line" style="animation-delay:1s">
+              <span class="hv2-scan__check">✓</span> you have a blog
+            </div>
+            <div class="hv2-scan__line hv2-scan__line--muted" style="animation-delay:1.8s">
+              last article on May 8
+            </div>
+          </div>
+          <div class="hv2-steps">
+            {
+              heroSteps.map((step) => (
+                <div class="hv2-steps__item" style={`animation-delay:${step.delay}`}>
+                  <span class="hv2-steps__box">{step.mark}</span>
+                  <span class="hv2-steps__label">{step.label}</span>
+                </div>
+              ))
+            }
+          </div>
+          <div class="hv2-pending">
+            <span class="hv2-pending__spinner"></span>
+            preparing report
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S3 — Trajectoire ================= */}
+  <section class="hv2-path" aria-labelledby="hv2-path-title" data-section="path">
+    <div class="hv2-wrap hv2-path__inner">
+      <div class="hv2-path__head">
+        <h2 class="hv2-path__title" id="hv2-path-title">
+          Grow your business, step by step
+        </h2>
+        <p class="hv2-path__sub">
+          A customer finds you, believes you, then signs: always in that order.
+          So we start with visibility, and Izy does the work from start to finish.
+        </p>
+      </div>
+      <div class="hv2-path__grid">
+        {
+          pathSteps.map((step) => (
+            <div class={`hv2-step hv2-step--${step.n}`}>
+              <div class="hv2-step__head">
+                <span class="hv2-step__num">{step.n}</span>
+                <h3 class="hv2-step__title">{step.title}</h3>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S4b — Chiffres ================= */}
+  <section class="hv2-stats" aria-labelledby="hv2-stats-title" data-section="stats">
+    <div class="hv2-wrap hv2-stats__inner">
+      <h2 class="hv2-stats__title" id="hv2-stats-title">
+        Measured growth, visibility driven by data
+      </h2>
+      <div class="hv2-stats__grid">
+        {
+          stats.map((stat) => (
+            <div class="hv2-stat">
+              <div class="hv2-stat__value">{stat.value}</div>
+              <p class="hv2-stat__label">{stat.label}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="hv2-stats__footnotes">
+        <span>*Based on the typical progression from our diagnosis</span>
+        <span>**Measure of AI authority</span>
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S5 — L'app (onglets) ================= */}
+  <section class="hv2-app" aria-labelledby="hv2-app-title" data-app data-section="app">
+    <div class="hv2-wrap hv2-wrap--wide hv2-app__inner">
+      <div class="hv2-app__box">
+        <h2 class="hv2-app__title" id="hv2-app-title">
+          No one to hire: Izy does the work, right in front of you.
+        </h2>
+        <p class="hv2-app__sub">
+          It all starts with the free five-minute diagnosis. A call then
+          scopes your mission and its action plan. Then Izy executes, month
+          after month: all you have to do is approve.
+        </p>
+
+        <div class="hv2-tabs" role="tablist" aria-label="Journey steps">
+          {
+            tabs.map((tab, i) => (
+              <button
+                class={`hv2-tab hv2-tab--${tab.id}`}
+                type="button"
+                role="tab"
+                id={`hv2-tab-${tab.id}`}
+                aria-controls={`hv2-panel-${tab.id}`}
+                aria-selected={i === 0 ? "true" : "false"}
+                tabindex={i === 0 ? 0 : -1}
+              >
+                {tab.label}
+              </button>
+            ))
+          }
+        </div>
+
+        <div class="hv2-app__screen">
+          {/* --- Panneau Attirer --- */}
+          <div
+            class="hv2-panel"
+            id="hv2-panel-attirer"
+            role="tabpanel"
+            aria-labelledby="hv2-tab-attirer"
+            tabindex="0"
+          >
+            <div class="hv2-panel__layout">
+              <div class="hv2-plan">
+                <img
+                  class="hv2-plan__logo"
+                  src="/assets/logo-izybiz.svg"
+                  alt="IZYBIZ"
+                  width="710"
+                  height="198"
+                />
+                <div class="hv2-plan__label">MISSION PLAN</div>
+                <div class="hv2-plan__list">
+                  {
+                    missions.attirer.map((m) => (
+                      <div class="hv2-plan__item">
+                        <span class="hv2-plan__box">{m.mark}</span>
+                        <span>{m.label}</span>
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+              <div class="hv2-conv">
+                <div class="hv2-conv__thread">
+                  <div class="hv2-msg">
+                    <span class="hv2-msg__avatar">Izy</span>
+                    <div class="hv2-msg__bubble">{chatAttirer.izy}</div>
+                  </div>
+                  <div class="hv2-reply">{chatAttirer.you}</div>
+                  <div class="hv2-card">
+                    <div class="hv2-card__head">
+                      <span class="hv2-card__tag">{chatAttirer.tag}</span>
+                      <span class="hv2-card__meta">{chatAttirer.meta}</span>
+                    </div>
+                    <div class="hv2-card__body">
+                      <h3 class="hv2-card__title">{chatAttirer.title}</h3>
+                      <p class="hv2-card__sub">{chatAttirer.sub}</p>
+                      <div class="hv2-card__actions">
+                        <button class="hv2-btn hv2-btn--sm" type="button">
+                          {chatAttirer.cta}
+                        </button>
+                        <button class="hv2-btn hv2-btn--ghost" type="button">
+                          {chatAttirer.alt}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="hv2-conv__composer">
+                  <div class="hv2-conv__input">Write to Izy…</div>
+                  <span class="hv2-conv__caret"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* --- Panneau Convertir --- */}
+          <div
+            class="hv2-panel"
+            id="hv2-panel-convertir"
+            role="tabpanel"
+            aria-labelledby="hv2-tab-convertir"
+            tabindex="0"
+            hidden
+          >
+            <div class="hv2-panel__layout">
+              <div class="hv2-plan">
+                <img
+                  class="hv2-plan__logo"
+                  src="/assets/logo-izybiz.svg"
+                  alt="IZYBIZ"
+                  width="710"
+                  height="198"
+                />
+                <div class="hv2-plan__label">MISSION PLAN</div>
+                <div class="hv2-plan__list">
+                  {
+                    missions.convertir.map((m) => (
+                      <div class="hv2-plan__item">
+                        <span class="hv2-plan__box">{m.mark}</span>
+                        <span>{m.label}</span>
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+              <div class="hv2-conv">
+                <div class="hv2-conv__thread">
+                  <div class="hv2-conv__stamp">2 min ago</div>
+                  <div class="hv2-msg">
+                    <span class="hv2-msg__avatar hv2-msg__avatar--yellow">Izy</span>
+                    <div class="hv2-msg__bubble hv2-msg__bubble--plain">
+                      New quote request received.<br />It came from your maintenance page.
+                    </div>
+                  </div>
+                  <div class="hv2-card hv2-card--indent">
+                    <div class="hv2-card__head">
+                      <span class="hv2-card__tag">NEW REQUEST</span>
+                      <span class="hv2-card__flag">● TO HANDLE</span>
+                    </div>
+                    <div class="hv2-card__facts">
+                      <span>Rivalet Group · 3 sites</span>
+                      <span>Annual maintenance, 3 boiler rooms</span>
+                      <span>Your area, 20 km</span>
+                    </div>
+                    <div class="hv2-card__read">
+                      <div class="hv2-card__read-label">BEFORE WRITING, HE READ</div>
+                      <div class="hv2-card__read-row">
+                        <span>Your maintenance page</span>
+                        <span class="hv2-card__read-time">4 min</span>
+                      </div>
+                      <div class="hv2-card__read-row">
+                        <span>Your article on the HVAC regulation</span>
+                        <span class="hv2-card__read-time">6 min</span>
+                      </div>
+                      <div class="hv2-card__read-row">
+                        <span>Your references</span>
+                        <span class="hv2-card__read-time">2 min</span>
+                      </div>
+                    </div>
+                    <div class="hv2-card__source">
+                      Arrived via Google<br />"boiler maintenance + your region"
+                    </div>
+                  </div>
+                  <div class="hv2-reply">Great! Draft a reply</div>
+                  <div class="hv2-msg">
+                    <span class="hv2-msg__avatar hv2-msg__avatar--yellow">Izy</span>
+                    <div class="hv2-msg__bubble hv2-msg__bubble--plain">
+                      It's ready. I used the three sites and your Beaulieu
+                      reference, which is similar to them.
+                    </div>
+                  </div>
+                  <div class="hv2-card hv2-card--indent">
+                    <div class="hv2-card__head">
+                      <span class="hv2-card__tag">REPLY TO RIVALET GROUP</span>
+                      <span class="hv2-card__flag">● TO APPROVE</span>
+                    </div>
+                    <div class="hv2-card__draft">
+                      Hello,<br />You're looking to cover maintenance for three
+                      boiler rooms. We've already been running a comparable
+                      site since 2023 (Beaulieu, 3 boiler rooms, 3-year
+                      contract).<br />I'd like to propose a site visit…
+                    </div>
+                    <div class="hv2-card__foot">
+                      <button class="hv2-btn hv2-btn--sm" type="button">Send</button>
+                      <button class="hv2-btn hv2-btn--ghost" type="button">
+                        Request a revision
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="hv2-conv__composer">
+                  <div class="hv2-conv__input">Write to Izy…</div>
+                  <span class="hv2-conv__caret"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* --- Panneau Vendre --- */}
+          <div
+            class="hv2-panel"
+            id="hv2-panel-vendre"
+            role="tabpanel"
+            aria-labelledby="hv2-tab-vendre"
+            tabindex="0"
+            hidden
+          >
+            <div class="hv2-panel__layout">
+              <div class="hv2-plan">
+                <img
+                  class="hv2-plan__logo"
+                  src="/assets/logo-izybiz.svg"
+                  alt="IZYBIZ"
+                  width="710"
+                  height="198"
+                />
+                <div class="hv2-plan__label">MISSION PLAN</div>
+                <div class="hv2-plan__list">
+                  {
+                    missions.vendre.map((m) => (
+                      <div class="hv2-plan__item">
+                        <span class="hv2-plan__box">{m.mark}</span>
+                        <span>{m.label}</span>
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+              <div class="hv2-conv">
+                <div class="hv2-conv__thread">
+                  <div class="hv2-conv__stamp">Monday</div>
+                  <div class="hv2-msg">
+                    <span class="hv2-msg__avatar hv2-msg__avatar--yellow">Izy</span>
+                    <div class="hv2-msg__bubble hv2-msg__bubble--plain">
+                      I went through your winter quotes. Six went unanswered:
+                      €84,300 total.<br />Three are worth waking up.
+                    </div>
+                  </div>
+                  <div class="hv2-reply">Wake up the three.</div>
+                  <div class="hv2-msg">
+                    <span class="hv2-msg__avatar hv2-msg__avatar--yellow">Izy</span>
+                    <div class="hv2-msg__bubble hv2-msg__bubble--plain">
+                      Three different messages, one per situation. No batch
+                      send: they know each other around here.
+                    </div>
+                  </div>
+                  <div class="hv2-card hv2-card--indent">
+                    <div class="hv2-card__head">
+                      <span class="hv2-card__tag">3 MESSAGES</span>
+                      <span class="hv2-card__flag">● TO APPROVE</span>
+                    </div>
+                    <div class="hv2-card__row">
+                      <div class="hv2-card__mono">Résidence Aube</div>
+                      <div class="hv2-card__mono hv2-card__mono--dim">
+                        "Your October renovation changes the scope. Should I
+                        update the proposal?"
+                      </div>
+                    </div>
+                    <div class="hv2-card__row">
+                      <div class="hv2-card__mono">Clinique Nord</div>
+                      <div class="hv2-card__mono hv2-card__mono--dim">
+                        "The September 15 regulation affects your premises.
+                        Here's what it changes."
+                      </div>
+                    </div>
+                    <div class="hv2-card__row">
+                      <div class="hv2-card__mono">Marbaix Co.</div>
+                      <div class="hv2-card__mono hv2-card__mono--dim">
+                        "Our proposal holds until the 30th. A 15-minute call?"
+                      </div>
+                    </div>
+                    <div class="hv2-card__foot">
+                      <button class="hv2-btn hv2-btn--sm" type="button">
+                        Send all
+                      </button>
+                      <button class="hv2-btn hv2-btn--ghost" type="button">
+                        Review one by one
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="hv2-conv__composer">
+                  <div class="hv2-conv__input">Write to Izy…</div>
+                  <span class="hv2-conv__caret"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S4b2 — Témoignages (masqué temporairement, à réafficher plus tard) ================= */}
+  <section class="hv2-quotes" aria-labelledby="hv2-quotes-title" data-section="quotes" style="display:none;">
+    <div class="hv2-wrap hv2-quotes__inner">
+      <h2 class="hv2-quotes__title" id="hv2-quotes-title">
+        What our customers say about the Izy experience
+      </h2>
+      <div class="hv2-quotes__grid">
+        {
+          quotes.map((q) => (
+            <figure class="hv2-quote">
+              <img
+                class="hv2-quote__photo"
+                src={q.src}
+                alt={q.name}
+                width="192"
+                height="192"
+                loading="lazy"
+                decoding="async"
+              />
+              <blockquote class="hv2-quote__text">"{q.text}"</blockquote>
+              <figcaption class="hv2-quote__caption">
+                <span class="hv2-quote__name">{q.name}</span>
+                <span class="hv2-quote__role">{q.role}</span>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S4c — Comparaison ================= */}
+  <section class="hv2-compare" aria-labelledby="hv2-compare-title" data-section="compare">
+    <div class="hv2-wrap hv2-compare__inner">
+      <div class="hv2-split">
+        <div class="hv2-split__text">
+          <h2 class="hv2-split__title" id="hv2-compare-title">
+            Why Izy<br />changes the game.
+          </h2>
+          <p class="hv2-split__body">
+            Compared to an agency or a freelancer, the difference isn't
+            talent: it's pace, visibility into the work, and cost.
+          </p>
+          <a class="hv2-btn hv2-split__cta" href="#diagnostic">Analyze my site</a>
+        </div>
+        <div class="hv2-table">
+          <div class="hv2-table__grid">
+            <span></span>
+            <span class="hv2-table__head-them">AGENCY</span>
+            <span class="hv2-table__head-izy">THE Izy APP</span>
+            {
+              compare.map((c, i) => (
+                <>
+                  <span class="hv2-table__criteria">{c.criteria}</span>
+                  <span class="hv2-table__them">{c.them}</span>
+                  <span
+                    class={`hv2-table__izy${i === compare.length - 1 ? " hv2-table__izy--last" : ""}`}
+                  >
+                    <span class="hv2-table__check">✓</span>
+                    <span class="hv2-table__value">{c.izy}</span>
+                  </span>
+                </>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S6 — Équipe d'agents ================= */}
+  <section class="hv2-roster" aria-labelledby="hv2-roster-title" data-section="roster">
+    <div class="hv2-wrap hv2-roster__inner">
+      <div class="hv2-roster__head">
+        <h2 class="hv2-roster__title" id="hv2-roster-title">
+          Izy has its team, you have yours. Let them work together
+        </h2>
+        <p class="hv2-roster__sub">
+          We replace no one. You know your trade, your customers and your job
+          sites. Izy's team does the work your team doesn't have time for, so
+          you can focus on what only you know how to do.
+        </p>
+      </div>
+
+      <div class="hv2-roster__window">
+        <div class="hv2-roster__bar">
+          <svg
+            viewBox="0 0 24 24"
+            width="17"
+            height="17"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M6 3h8l4 4v14H6z"></path>
+            <path d="M14 3v4h4"></path>
+          </svg>
+          <span style="flex:1"></span>
+          <svg
+            viewBox="0 0 24 24"
+            width="15"
+            height="15"
+            fill="none"
+            stroke="rgba(255,255,255,.8)"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path d="M20 4l-6 6M14 4h6v6M4 20l6-6M10 20H4v-6"></path>
+          </svg>
+          <svg
+            viewBox="0 0 24 24"
+            width="15"
+            height="15"
+            fill="none"
+            stroke="rgba(255,255,255,.8)"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path d="M5 5l14 14M19 5L5 19"></path>
+          </svg>
+        </div>
+
+        <div class="hv2-roster__body">
+          <p class="hv2-roster__lead">
+            <strong>Izy</strong> is your main point of contact. She runs the
+            team for you, understands your request, and orchestrates
+            everyone else's work. Nothing goes out without your approval.
+          </p>
+
+          <div class="hv2-roster__grid">
+            {
+              roster.map((a) => (
+                <div class="hv2-agent">
+                  <div class="hv2-agent__head" style={`background:${a.tint}`}>
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke={a.deep}
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d={a.d}></path>
+                      {a.d2 && <path d={a.d2}></path>}
+                    </svg>
+                    <span class="hv2-agent__name" style={`color:${a.deep}`}>
+                      {a.name}
+                    </span>
+                    <span class="hv2-agent__spacer"></span>
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="14"
+                      height="14"
+                      fill="none"
+                      stroke={a.deep}
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M20 4l-6 6M14 4h6v6M4 20l6-6M10 20H4v-6"></path>
+                    </svg>
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="14"
+                      height="14"
+                      fill="none"
+                      stroke={a.deep}
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 5l14 14M19 5L5 19"></path>
+                    </svg>
+                  </div>
+                  <div class="hv2-agent__body">
+                    <p class="hv2-agent__role">{a.role}</p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S9 — Diagnostic / frise ================= */}
+  <section aria-labelledby="hv2-timeline-title" data-section="timeline">
+    <div class="hv2-wrap hv2-timeline__inner" id="izy-s9" data-timeline>
+      <div class="hv2-split">
+        <div class="hv2-timeline__text">
+          <h2 class="hv2-split__title" id="hv2-timeline-title">
+            From diagnosis<br /><span>to your first quote.</span>
+          </h2>
+          <p class="hv2-split__body">
+            Six months of a typical mission: a score that climbs, measured
+            and never promised, work delivered every week, and requests that
+            end up coming to you. It starts with seeing where you stand: the
+            free five-minute diagnosis.
+          </p>
+          <form
+            class="hv2-form hv2-timeline__form"
+            data-site-form
+            data-form-kind="diagnostic"
+            data-form-location="frise"
+            novalidate
+          >
+            <input
+              class="hv2-botcheck"
+              type="checkbox"
+              name="botcheck"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
+            <input type="hidden" name="origine" value="Home EN — frise" />
+            <label class="sr-only" for="hv2-s9-email">Your email</label>
+            <input
+              class="hv2-field"
+              id="hv2-s9-email"
+              type="email"
+              name="email"
+              placeholder="you@email.com"
+              autocomplete="email"
+              required
+            />
+            <label class="sr-only" for="hv2-s9-site">Your website address</label>
+            <input
+              class="hv2-field"
+              id="hv2-s9-site"
+              type="url"
+              name="website"
+              placeholder="https://your-site.com"
+              autocomplete="url"
+              required
+            />
+            <button class="hv2-btn" type="submit">Analyze my site</button>
+            <p class="hv2-form__message" role="alert" data-form-message></p>
+        <p class="hv2-form__privacy">
+          Your address is only used to send you this diagnosis, and is never
+          resold. <a href="/en/privacy-policy/">How your data is handled</a>
+        </p>
+          </form>
+          <p class="hv2-note hv2-timeline__note">
+            Example mission. Your own numbers are measured every month,
+            starting with the diagnosis.
+          </p>
+        </div>
+
+        <div class="hv2-timeline__stage">
+          <div class="hv2-timeline__list">
+            {
+              timeline.map((t, i) => (
+                <div
+                  class={`hv2-tl${t.avatar ? " hv2-tl--avatar" : ""}${t.key ? " hv2-tl--key" : ""}`}
+                  style={`--tl-angle:${t.angle};width:${t.flat ? "100%" : "85%"};margin-left:${t.shift > 0 ? t.shift + "px" : "0"};margin-right:${t.shift < 0 ? -t.shift + "px" : "0"}`}
+                  data-tl-index={i}
+                >
+                  <span class="hv2-tl__avatar">Izy</span>
+                  <div class="hv2-tl__card">
+                    <div class="hv2-tl__stamps">
+                      <span class="hv2-tl__stamp">{t.stamp}</span>
+                      {t.key && <span class="hv2-tl__badge">FIRST QUOTE</span>}
+                    </div>
+                    <p class="hv2-tl__text">
+                      {t.text}
+                      {t.chip && (
+                        <span
+                          class={`hv2-tl__chip${t.big ? " hv2-tl__chip--big" : ""}`}
+                          data-chip={t.chip}
+                          data-chip-big={t.big ? "true" : "false"}
+                          aria-label={`plus ${t.chip} points`}
+                        >
+                          <span class="hv2-tl__arrow" aria-hidden="true">
+                            ↗
+                          </span>
+                          +<span data-chip-value>0</span>
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S10 — FAQ ================= */}
+  <section class="hv2-faq" aria-labelledby="hv2-faq-title" data-section="faq">
+    <div class="hv2-wrap hv2-faq__inner">
+      <span class="hv2-faq__badge">FAQ</span>
+      <h2 class="hv2-faq__title" id="hv2-faq-title">Questions we're asked</h2>
+      <div class="hv2-faq__list">
+        {
+          faq.map((f) => (
+            <details class="hv2-faq__item">
+              <summary class="hv2-faq__q">
+                <span class="hv2-faq__q-text">{f.q}</span>
+                <span class="hv2-faq__chevron" aria-hidden="true">
+                  ▾
+                </span>
+              </summary>
+              <p class="hv2-faq__a">{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ================= S11 — CTA final ================= */}
+  <section aria-labelledby="hv2-final-title" data-section="final">
+    <div class="hv2-wrap hv2-final__inner">
+      <div class="hv2-final__grid">
+        <h2 class="hv2-final__title" id="hv2-final-title">
+          See where you stand, then let Izy get to work.
+        </h2>
+        <div>
+          <form
+            class="hv2-form hv2-final__form"
+            data-site-form
+            data-form-kind="diagnostic"
+            data-form-location="final"
+            novalidate
+          >
+            <input
+              class="hv2-botcheck"
+              type="checkbox"
+              name="botcheck"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
+            <input type="hidden" name="origine" value="Home EN — bloc final" />
+            <label class="sr-only" for="hv2-final-email">Your email</label>
+            <input
+              class="hv2-field"
+              id="hv2-final-email"
+              type="email"
+              name="email"
+              placeholder="you@email.com"
+              autocomplete="email"
+              required
+            />
+            <label class="sr-only" for="hv2-final-site">Your website address</label>
+            <input
+              class="hv2-field"
+              id="hv2-final-site"
+              type="url"
+              name="website"
+              placeholder="https://your-site.com"
+              autocomplete="url"
+              required
+            />
+            <button class="hv2-btn" type="submit">Start the diagnosis</button>
+            <p class="hv2-form__message" role="alert" data-form-message></p>
+        <p class="hv2-form__privacy">
+          Your address is only used to send you this diagnosis, and is never
+          resold. <a href="/en/privacy-policy/">How your data is handled</a>
+        </p>
+          </form>
+          <p class="hv2-note hv2-final__note">No commitment · No credit card</p>
+          <a class="hv2-final__link" href="#diagnostic">Or book a call</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Confirmation affichée après l'envoi d'un des trois formulaires de
+       diagnostic. <dialog> natif : la gestion du focus, la touche Échap et
+       l'inertie de l'arrière-plan sont assurées par le navigateur. -->
+  <dialog class="hv2-modal" id="hv2-diagnostic-modal" aria-labelledby="hv2-modal-title">
+    <div class="hv2-modal__panel">
+      <p class="hv2-modal__eyebrow">
+        <span class="hv2-modal__blink" aria-hidden="true"></span>
+        DIAGNOSIS IN PROGRESS
+      </p>
+      <h2 class="hv2-modal__title" id="hv2-modal-title">Your diagnosis is starting.</h2>
+      <p class="hv2-modal__text">
+        We'll email you as soon as it's ready, at the address you just
+        entered.
+      </p>
+      <button class="hv2-btn hv2-modal__close" type="button" data-modal-close>
+        Close
+      </button>
+    </div>
+  </dialog>
+</div>
+
+<script is:inline src="/forms.js" defer></script>
+<script is:inline src="/home-v2.js" defer></script>

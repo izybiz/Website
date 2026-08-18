@@ -1,0 +1,209 @@
+---
+// Page contact anglaise — traduction de src/pages/contact.astro.
+// Le mini-pied de page de la maquette est volontairement omis : le footer
+// partagé de Layout.astro le remplace, comme sur la home.
+import Layout from "../../layouts/Layout.astro";
+import "../../styles/contact.css";
+
+// `value` reste en français : c'est ce que Web3Forms envoie dans le champ
+// « Objet de la demande » du mail, et forms.js compare cette valeur exacte
+// (`demande === "Diagnostic gratuit"`) pour choisir le texte « À faire ».
+// Seul `label`, affiché au visiteur, change de langue.
+const subjects = [
+  { label: "Free diagnosis", value: "Diagnostic gratuit" },
+  { label: "Scope a mission", value: "Cadrer une mission" },
+  { label: "A question", value: "Une question" },
+  { label: "Partnership", value: "Partenariat" },
+];
+---
+
+<Layout
+  lang="en"
+  title="Contact — IZYBIZ"
+  description="Write to IZYBIZ: free visibility diagnosis, scoping call, or a direct question. Reply within one business day."
+  canonicalPath="/en/contact/"
+>
+  <div class="contact-v2">
+    <section class="cv2-hero" data-section="contact-hero">
+      <div class="cv2-hero__inner">
+        <div>
+          <h1 class="cv2-hero__title">Let's talk about your visibility.</h1>
+          <p class="cv2-hero__sub">
+            Three ways to get in touch. The fastest remains the diagnosis:
+            five minutes, and you know where you stand before we even talk.
+          </p>
+        </div>
+        <p class="cv2-hero__status">
+          <span class="cv2-hero__blink" aria-hidden="true"></span>
+          REPLY WITHIN ONE BUSINESS DAY
+        </p>
+      </div>
+    </section>
+
+    <section class="cv2-main" data-section="contact-main">
+      <div class="cv2-grid">
+        <form
+          class="cv2-form"
+          data-site-form
+          data-form-kind="contact"
+          data-form-location="contact-en"
+          novalidate
+        >
+          <h2 class="cv2-form__title">Write to us</h2>
+          <!-- Les champs n'ont que des indications grisées, aucune ne signale
+               qu'ils sont requis : le dire avant vaut mieux que quatre refus
+               successifs au moment d'envoyer. -->
+          <p class="cv2-form__required">All fields are required.</p>
+
+          <!-- Piège à robots : un humain ne voit pas ce champ et ne le remplit
+               donc jamais. S'il arrive rempli, Web3Forms rejette l'envoi. -->
+          <input
+            class="cv2-botcheck"
+            type="checkbox"
+            name="botcheck"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+
+          <div class="cv2-form__row">
+            <label class="sr-only" for="cv2-name">Your name</label>
+            <input
+              class="cv2-field"
+              id="cv2-name"
+              type="text"
+              name="nom"
+              placeholder="Your name"
+              autocomplete="name"
+              required
+            />
+            <label class="sr-only" for="cv2-company">Your company</label>
+            <input
+              class="cv2-field"
+              id="cv2-company"
+              type="text"
+              name="entreprise"
+              placeholder="Your company"
+              autocomplete="organization"
+              required
+            />
+          </div>
+
+          <div class="cv2-form__row">
+            <label class="sr-only" for="cv2-email">Your email</label>
+            <input
+              class="cv2-field"
+              id="cv2-email"
+              type="email"
+              name="email"
+              placeholder="you@email.com"
+              autocomplete="email"
+              required
+            />
+            <label class="sr-only" for="cv2-site">Your website address</label>
+            <input
+              class="cv2-field"
+              id="cv2-site"
+              type="url"
+              name="website"
+              placeholder="https://your-site.com"
+              autocomplete="url"
+              required
+            />
+          </div>
+
+          <fieldset class="cv2-subjects">
+            <legend class="cv2-subjects__legend">YOUR REQUEST</legend>
+            <div class="cv2-subjects__list">
+              {
+                subjects.map((s, i) => (
+                  <>
+                    {/* `demande` et non `subject` : Web3Forms réserve ce nom à
+                        l'objet du mail et n'afficherait pas le choix. */}
+                    <input
+                      class="sr-only"
+                      id={`cv2-subject-${i}`}
+                      type="radio"
+                      name="demande"
+                      value={s.value}
+                      checked={i === 0}
+                    />
+                    <label class="cv2-subject" for={`cv2-subject-${i}`}>
+                      {s.label}
+                    </label>
+                  </>
+                ))
+              }
+            </div>
+          </fieldset>
+
+          <label class="sr-only" for="cv2-message">Your message</label>
+          <textarea
+            class="cv2-message"
+            id="cv2-message"
+            name="message"
+            rows="5"
+            required
+            placeholder="Your trade, your service area, what you're looking to get…"
+          ></textarea>
+
+          <div class="cv2-form__actions">
+            <button class="cv2-submit" type="submit">Send</button>
+            <span class="cv2-form__note">No commitment · No data resold</span>
+          </div>
+
+          <p class="cv2-form__message" role="alert" data-form-message></p>
+
+          <p class="cv2-form__privacy">
+            Your information is only used to handle your request.
+            <a href="/en/privacy-policy/">
+              How your data is handled
+            </a>
+          </p>
+        </form>
+
+        <div class="cv2-cards">
+          <a class="cv2-card cv2-card--diag" href="/en/#diagnostic">
+            <span class="cv2-card__eyebrow">THE FASTEST</span>
+            <h2 class="cv2-card__title">The visibility diagnosis</h2>
+            <p class="cv2-card__text">
+              Free, five minutes. You see your score, your market leader's
+              score, and one first action to take.
+            </p>
+            <span class="cv2-card__arrow">Start the diagnosis →</span>
+          </a>
+
+          <div class="cv2-card cv2-card--rdv">
+            <span class="cv2-card__eyebrow">TO SCOPE A MISSION</span>
+            <h2 class="cv2-card__title">Book a call</h2>
+            <p class="cv2-card__text">
+              Thirty minutes to define your mission, its action plan, and the
+              indicators tracked.
+            </p>
+            <a
+              class="cv2-card__cta"
+              href="mailto:contact.me@izybiz.fr?subject=Scoping%20call"
+            >
+              Pick a time slot
+            </a>
+          </div>
+
+          <div class="cv2-card cv2-card--mail">
+            <span class="cv2-card__eyebrow">DIRECT CONTACT</span>
+            <h2 class="cv2-card__title">Email us</h2>
+            <div class="cv2-card__lines">
+              <a class="cv2-card__mail" href="mailto:contact.me@izybiz.fr">
+                contact.me@izybiz.fr
+              </a>
+              <span class="cv2-card__hours">Monday to Friday, 9am – 6pm</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<!-- L'envoi est partagé avec les trois formulaires de la home : voir
+     public/forms.js, qui distingue les deux familles par data-form-kind. -->
+<script is:inline src="/forms.js" defer></script>

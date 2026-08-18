@@ -15,11 +15,11 @@ Node **>= 22.12.0** (voir `package.json` et `netlify.toml`).
 
 ## Conventions
 
-- **Site monolingue (FR)** depuis août 2026. Les routes `/en/` et `/es/` et tout
-  l'échafaudage i18n ont été retirés — ne pas les réintroduire sans demande
-  explicite. Les textes d'interface sont dans `src/data/ui-strings.ts`.
+- **Site bilingue FR/EN** depuis fin août 2026 (branche `feature/site-en`). Le
+  français reste la langue par défaut (`/`) ; l'anglais vit sous `/en/`. Voir
+  la section i18n ci-dessous avant de toucher au chrome ou d'ajouter une page.
 - **Trailing slash** : toujours sur les liens internes (`trailingSlash: "always"`)
-- **Blog FR** : `src/content/blog-fr/*.md`
+- **Blog FR** : `src/content/blog-fr/*.md` · **Blog EN** : `src/content/blog-en/*.md`
 - Commits en français, cohérents avec l'historique ; PRs vers `main`
 
 ## Architecture
@@ -47,6 +47,47 @@ s'appliquent à **tout** le site, blog compris. Les tokens de marque (`--bg`,
 animée, ancre `#diagnostic`). `public/forms.js` porte l'envoi des formulaires,
 partagé avec `/contact`. `public/analytics.js` équipe les CTA sur toutes les
 pages.
+
+## i18n (FR/EN)
+
+Routing manuel, pas la config i18n native d'Astro : chaque page anglaise est
+un fichier sous `src/pages/en/`, sibling de son équivalent FR.
+
+- **`src/data/i18n-routes.ts`** est la source unique du mapping FR↔EN. Toute
+  nouvelle page traduite doit y être ajoutée, sinon le bouton EN/FR de
+  `Layout.astro` retombe sur la home de la langue cible et les balises
+  hreflang ne se génèrent pas pour cette page.
+- **Slugs** : pages légales traduites (`/en/legal-notice/`,
+  `/en/privacy-policy/`, meilleur pour le SEO anglophone). Articles de blog :
+  **même nom de fichier** FR/EN (`src/content/blog-en/<même-slug>.md`) —
+  mapping trivial, mais un article FR sans fichier `blog-en` homonyme n'aura
+  jamais de version anglaise.
+- **`Layout.astro`** porte la prop `lang` (`"fr"` par défaut). Elle pilote
+  `<html lang>`, les hreflang fr/en/x-default, `og:locale`, le JSON-LD
+  Organization/SoftwareApplication (description et `availableLanguage`
+  traduits), et les hrefs du header/footer (legal, privacy, contact, blog,
+  home). Une page qui oublie de passer `lang="en"` affichera un chrome en
+  français sur une URL `/en/`.
+- **`src/data/ui-strings.ts`** est un dictionnaire `{fr, en}` — `t(key, lang)`.
+  Les deux dictionnaires doivent garder les mêmes clés.
+- **`public/forms.js`** détecte la langue via `document.documentElement.lang`
+  (pas de prop à faire voyager jusqu'au script). Les messages de succès/erreur
+  affichés au visiteur sont bilingues ; le contenu du mail reçu par Lucie
+  reste toujours en français (email interne), seul son objet gagne un
+  préfixe `[EN]` pour signaler dans quelle langue répondre.
+- **`HomeV2En.astro`** traduit `HomeV2Fr.astro` texte par texte. Les ids
+  internes `attirer`/`convertir`/`vendre` ne sont **pas** traduits : ce sont
+  des sélecteurs utilisés par `home-v2.css`
+  (`.hv2-tab--attirer[aria-selected="true"]` etc.) — seul le `label` affiché
+  change de langue.
+- **Connu et non corrigé** : les 3 articles de `blog-fr` se terminent par
+  « Beta privée, accès sur invitation », une formule obsolète depuis que le
+  diagnostic est gratuit et ouvert (cf. le piège JSON-LD ci-dessous). Les
+  versions `blog-en` ont été traduites avec la formule actuelle plutôt que ce
+  texte périmé — les originaux FR n'ont pas été touchés (hors périmètre de la
+  tâche qui a ajouté l'anglais). À corriger si Lucie le souhaite.
+- Hors périmètre pour l'instant : `llms.txt`/`llms-full.txt` restent FR
+  uniquement (dérivés de `site-summary.ts`), et `404.astro` reste FR.
 
 ## Pièges à connaître
 
@@ -150,7 +191,7 @@ Pas de navigateur dans les sessions Claude Code — le contrôle visuel revient 
 Lucie. Ce qui est vérifiable en ligne de commande :
 
 ```sh
-npm run build                      # doit sortir 9 pages
+npm run build                      # doit sortir 17 pages (9 FR + 8 EN)
 cp -R dist /tmp/avant              # avant une refactorisation
 diff -r /tmp/avant dist            # après : toute différence non voulue est un bug
 ```

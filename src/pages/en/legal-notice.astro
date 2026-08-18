@@ -1,0 +1,123 @@
+---
+// Legal Notice — traduction de src/pages/mentions-legales.astro.
+// Slug traduit (/en/legal-notice/, cf. src/data/i18n-routes.ts) : les
+// dénominations légales françaises (SASU, RCS, SIRET) restent inchangées,
+// seule la prose autour est traduite.
+import Layout from "../../layouts/Layout.astro";
+import "../../styles/legal.css";
+---
+
+<Layout
+  lang="en"
+  title="Legal Notice — IZYBIZ"
+  description="Legal notice for IZYBIZ: site publisher, hosting, intellectual property, liability and mediation."
+  canonicalPath="/en/legal-notice/"
+>
+  <main class="legal-page" data-section="legal">
+    <h1 class="legal-page__title">Legal Notice</h1>
+    <p class="legal-page__updated">LAST UPDATED: 13-08-2026</p>
+    <p class="legal-page__intro">
+      Legal information about the publisher of this site and the Izy
+      software, in accordance with articles 6-III and 19 of the French law
+      on confidence in the digital economy (LCEN).
+    </p>
+
+    <div class="legal-page__body">
+      <section>
+        <h2 class="legal-page__heading">1. Site publisher</h2>
+        <div class="legal-page__cards">
+          <div class="legal-page__card">
+            <div class="legal-page__card-title">Company</div>
+            <p class="legal-page__card-text">
+              IZYBIZ, a SASU (French simplified single-shareholder
+              joint-stock company) with capital of €1,000, registered with
+              the Paris Trade and Companies Register (RCS) under number
+              903 392 892. Registered office SIRET: 903 392 892 00019.
+              Intra-EU VAT number: FR46903392892.
+            </p>
+          </div>
+          <div class="legal-page__card">
+            <div class="legal-page__card-title">Registered office and contact</div>
+            <p class="legal-page__card-text">
+              361 rue Lecourbe, 75015 Paris, France. Email:
+              <a href="mailto:contact.me@izybiz.fr">contact.me@izybiz.fr</a>.
+            </p>
+          </div>
+          <div class="legal-page__card">
+            <div class="legal-page__card-title">Publication director</div>
+            <p class="legal-page__card-text">Stéphane Dine, CEO.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="legal-page__heading">2. Hosting</h2>
+        <p class="legal-page__text">
+          This site is hosted by Netlify, Inc., 512 2nd Street, Suite 200,
+          San Francisco, CA 94107, United States (netlify.com).
+        </p>
+      </section>
+
+      <section>
+        <h2 class="legal-page__heading">3. Intellectual property</h2>
+        <p class="legal-page__text">
+          The structure of the site, the Izy software, its brand, texts,
+          interfaces and graphic elements are protected and remain the
+          exclusive property of IZYBIZ. Any reproduction, representation or
+          adaptation, in whole or in part, without prior written
+          authorization is prohibited.
+        </p>
+        <p class="legal-page__text">
+          Content produced for a client as part of their mission belongs to
+          them, under the terms set out in the subscription agreement.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="legal-page__heading">4. Liability</h2>
+        <ul class="legal-page__list">
+          <li>
+            Information published on this site is provided for guidance
+            only and may be changed at any time.
+          </li>
+          <li>
+            Figures presented as mission examples do not constitute a
+            commitment to results.
+          </li>
+          <li>
+            Links to third-party sites do not make the publisher liable for
+            their content.
+          </li>
+          <li>
+            The publisher cannot be held liable for temporary unavailability
+            of the service or for damage resulting from improper use.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="legal-page__heading">5. Personal data and cookies</h2>
+        <p class="legal-page__text">
+          The processing of personal data and the use of cookies are
+          described in the
+          <a href="/en/privacy-policy/">privacy policy</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="legal-page__heading">6. Mediation and applicable law</h2>
+        <p class="legal-page__text">
+          This site is governed by French law. In the event of a dispute, an
+          amicable solution will be sought before any legal action; failing
+          that, the courts of Paris shall have jurisdiction.
+        </p>
+      </section>
+    </div>
+
+    <div class="legal-page__links">
+      <a href="/en/">Back to home</a>
+      <a href="/en/privacy-policy/">Privacy Policy</a>
+      <a href="mailto:contact.me@izybiz.fr">Email us</a>
+    </div>
+  </main>
+</Layout>

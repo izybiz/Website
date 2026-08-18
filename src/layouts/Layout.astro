@@ -1,7 +1,8 @@
 ---
 import "../styles/blog.css";
 import "../styles/site-chrome.css";
-import { t } from "../data/ui-strings";
+import { t, type Lang } from "../data/ui-strings";
+import { counterpartPath } from "../data/i18n-routes";
 import CookieConsent from "../components/CookieConsent.astro";
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
   ogImage?: string;
   pubDate?: string;
   noindex?: boolean;
+  lang?: Lang;
 }
 
 const frontmatter = (Astro.props as { frontmatter?: Partial<Props> }).frontmatter ?? {};
@@ -24,18 +26,60 @@ const {
   ogImage = frontmatter.ogImage ?? "https://izybiz.fr/assets/og-default.jpg",
   pubDate = frontmatter.pubDate,
   noindex = frontmatter.noindex ?? false,
+  lang = frontmatter.lang ?? "fr",
 } = Astro.props as Partial<Props>;
 
-const isBlogArticlePage = /^\/blog\/[^/]+\/?$/.test(Astro.url.pathname);
+const isBlogArticlePage = /^\/(en\/)?blog\/[^/]+\/?$/.test(Astro.url.pathname);
 const rawPath = canonicalPath || "/";
 const canonicalUrl = `https://izybiz.fr${rawPath.endsWith("/") ? rawPath : rawPath + "/"}`;
+
+// Paire FR/EN de la page courante, pour les balises hreflang et le bouton du
+// header : voir src/data/i18n-routes.ts, source unique du mapping.
+const counterpart = counterpartPath(rawPath);
+const frHref = lang === "fr" ? canonicalUrl : counterpart ? `https://izybiz.fr${counterpart.fr}` : null;
+const enHref = lang === "en" ? canonicalUrl : counterpart ? `https://izybiz.fr${counterpart.en}` : null;
+// Le français reste la langue par défaut du site.
+const xDefaultHref = frHref ?? canonicalUrl;
+const otherLangPath = lang === "fr" ? (counterpart ? counterpart.en : "/en/") : (counterpart ? counterpart.fr : "/");
+
 // La home v2 remplace la section #prendre-contact par le formulaire de
 // diagnostic : le CTA du header pointe dessus, depuis n'importe quelle page.
-const diagnosticHref = "/#diagnostic";
+const diagnosticHref = lang === "en" ? "/en/#diagnostic" : "/#diagnostic";
+const legalHref = lang === "en" ? "/en/legal-notice/" : "/mentions-legales/";
+const privacyHref = lang === "en" ? "/en/privacy-policy/" : "/politique-de-confidentialite/";
+const contactHref = lang === "en" ? "/en/contact/" : "/contact/";
+const blogHref = lang === "en" ? "/en/blog/" : "/blog/";
+const homeHref = lang === "en" ? "/en/" : "/";
+
+// Textes traduits du JSON-LD Organization/SoftwareApplication : voir le
+// piège « données structurées » dans CLAUDE.md — à relire à chaque
+// changement de positionnement, dans les deux langues.
+const jsonLdCopy = {
+  fr: {
+    orgDescription:
+      "Izybiz édite Izy, un logiciel d'agents IA qui exécute la visibilité en ligne des PME et ETI B2B en France : diagnostic, audit et optimisation du site, calendrier éditorial, articles et posts, veille de marché, bilan mensuel.",
+    appDescription:
+      "Izy fait venir les clients aux PME et ETI B2B : il audite et corrige le site, construit la stratégie et le calendrier éditorial, rédige articles et posts, surveille le marché et mesure la visibilité chaque mois.",
+    offerName: "Diagnostic de visibilité",
+    offerDescription:
+      "Diagnostic automatisé de votre visibilité en ligne, en cinq minutes, sans engagement.",
+  },
+  en: {
+    orgDescription:
+      "Izybiz publishes Izy, an AI agent software that runs online visibility for French B2B SMEs and mid-sized companies: diagnosis, site audit and optimisation, editorial calendar, articles and posts, market monitoring, monthly reporting.",
+    appDescription:
+      "Izy brings customers to B2B SMEs and mid-sized companies: it audits and fixes the site, builds the strategy and editorial calendar, writes articles and posts, monitors the market and measures visibility every month.",
+    offerName: "Visibility diagnosis",
+    offerDescription:
+      "Automated diagnosis of your online visibility, in five minutes, no commitment.",
+  },
+} as const;
+const ld = jsonLdCopy[lang];
+const siteRoot = lang === "en" ? "https://izybiz.fr/en" : "https://izybiz.fr";
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang={lang}>
   <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TS3MZTN79V"></script>
@@ -84,8 +128,9 @@ const diagnosticHref = "/#diagnostic";
     <link rel="icon" href="/assets/fav-icon.png" type="image/png" />
 
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang="fr" href={canonicalUrl} />
-    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+    {frHref && <link rel="alternate" hreflang="fr" href={frHref} />}
+    {enHref && <link rel="alternate" hreflang="en" href={enHref} />}
+    <link rel="alternate" hreflang="x-default" href={xDefaultHref} />
 
     <!--
       Données structurées : Organization + SoftwareApplication, sur toutes les
@@ -107,7 +152,7 @@ const diagnosticHref = "/#diagnostic";
             "@type": "ImageObject",
             "url": "https://izybiz.fr/assets/Logo%20Izybiz.png"
           },
-          "description": "Izybiz édite Izy, un logiciel d'agents IA qui exécute la visibilité en ligne des PME et ETI B2B en France : diagnostic, audit et optimisation du site, calendrier éditorial, articles et posts, veille de marché, bilan mensuel.",
+          "description": ld.orgDescription,
           "email": "contact.me@izybiz.fr",
           "foundingDate": "2025",
           "address": {
@@ -128,8 +173,8 @@ const diagnosticHref = "/#diagnostic";
             "@type": "ContactPoint",
             "contactType": "sales",
             "email": "contact.me@izybiz.fr",
-            "url": "https://izybiz.fr/contact/",
-            "availableLanguage": ["French"]
+            "url": `${siteRoot}/contact/`,
+            "availableLanguage": ["French", "English"]
           }
         },
         {
@@ -139,19 +184,19 @@ const diagnosticHref = "/#diagnostic";
           "applicationCategory": "BusinessApplication",
           "operatingSystem": "Web",
           "url": "https://izybiz.fr/",
-          "description": "Izy fait venir les clients aux PME et ETI B2B : il audite et corrige le site, construit la stratégie et le calendrier éditorial, rédige articles et posts, surveille le marché et mesure la visibilité chaque mois.",
+          "description": ld.appDescription,
           // Seule offre chiffrable publiquement : le diagnostic, gratuit. Le
           // cadrage et l'abonnement mensuel sont établis après le diagnostic,
           // selon la mission — aucun montant n'est annoncé sur le site, on n'en
           // invente donc pas ici.
           "offers": {
             "@type": "Offer",
-            "name": "Diagnostic de visibilité",
-            "description": "Diagnostic automatisé de votre visibilité en ligne, en cinq minutes, sans engagement.",
+            "name": ld.offerName,
+            "description": ld.offerDescription,
             "price": "0",
             "priceCurrency": "EUR",
             "availability": "https://schema.org/InStock",
-            "url": "https://izybiz.fr/#diagnostic"
+            "url": `${siteRoot}/#diagnostic`
           },
           "provider": {
             "@id": "https://izybiz.fr/#organization"
@@ -193,7 +238,9 @@ const diagnosticHref = "/#diagnostic";
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale" content={lang === "en" ? "en_US" : "fr_FR"} />
+    {lang === "fr" && enHref && <meta property="og:locale:alternate" content="en_US" />}
+    {lang === "en" && frHref && <meta property="og:locale:alternate" content="fr_FR" />}
     <meta property="og:site_name" content="Izybiz" />
 
     <!-- Twitter Card -->
@@ -207,7 +254,7 @@ const diagnosticHref = "/#diagnostic";
   <body id="top" class:list={[isBlogArticlePage && "page-blog-article"]}>
     <header class="site-chrome" aria-label="Site header">
       <div class="site-chrome__inner">
-        <a class="site-chrome__brand" href="/" aria-label="Accueil Izybiz">
+        <a class="site-chrome__brand" href={homeHref} aria-label={lang === "en" ? "Izybiz home" : "Accueil Izybiz"}>
           <img
             class="site-chrome__logo"
             src="/assets/logo-izybiz.svg"
@@ -220,28 +267,46 @@ const diagnosticHref = "/#diagnostic";
         <div class="site-chrome__spacer"></div>
 
         <nav class="site-chrome__nav" aria-label="Primary">
-          <a class="site-chrome__link" href="/blog/">{t("nav.blog")}</a>
+          <a class="site-chrome__link" href={blogHref}>{t("nav.blog", lang)}</a>
           {/* Sans destination tant que l'app n'a pas d'URL publique — rendu en
               <span> pour éviter un lien mort qui renverrait en haut de page. */}
-          <span class="site-chrome__link site-chrome__link--inactive">Connexion</span>
-          <a class="site-chrome__cta" href={diagnosticHref} data-cta="header">Analyser mon site</a>
+          <span class="site-chrome__link site-chrome__link--inactive">{t("nav.login", lang)}</span>
+          <a
+            class="site-chrome__link site-chrome__lang"
+            href={otherLangPath}
+            aria-label={lang === "fr" ? "Switch to English" : "Passer en français"}
+            hreflang={lang === "fr" ? "en" : "fr"}
+          >
+            {lang === "fr" ? "EN" : "FR"}
+          </a>
+          <a class="site-chrome__cta" href={diagnosticHref} data-cta="header">{t("nav.cta", lang)}</a>
         </nav>
 
         <button
           class="site-chrome__toggle"
           type="button"
-          aria-label="Ouvrir le menu"
+          aria-label={lang === "en" ? "Open menu" : "Ouvrir le menu"}
           aria-controls="site-chrome-menu"
           aria-expanded="false"
           data-chrome-toggle
+          data-open-label={lang === "en" ? "Open menu" : "Ouvrir le menu"}
+          data-close-label={lang === "en" ? "Close menu" : "Fermer le menu"}
         >
           <span class="site-chrome__toggle-bar" aria-hidden="true"></span>
         </button>
       </div>
 
       <div class="site-chrome__menu" id="site-chrome-menu" hidden data-chrome-menu>
-        <a class="site-chrome__menu-link" href="/blog/">{t("nav.blog")}</a>
-        <span class="site-chrome__menu-link site-chrome__link--inactive">Connexion</span>
+        <a class="site-chrome__menu-link" href={blogHref}>{t("nav.blog", lang)}</a>
+        <span class="site-chrome__menu-link site-chrome__link--inactive">{t("nav.login", lang)}</span>
+        <a
+          class="site-chrome__menu-link"
+          href={otherLangPath}
+          aria-label={lang === "fr" ? "Switch to English" : "Passer en français"}
+          hreflang={lang === "fr" ? "en" : "fr"}
+        >
+          {lang === "fr" ? "EN" : "FR"}
+        </a>
       </div>
     </header>
     <div class="layout-content-slot">
@@ -249,7 +314,7 @@ const diagnosticHref = "/#diagnostic";
     </div>
     <footer class="site-chrome-footer" aria-label="Footer" data-section="footer">
       <div class="site-chrome-footer__inner">
-        <a href="/" aria-label="Accueil Izybiz">
+        <a href={homeHref} aria-label={lang === "en" ? "Izybiz home" : "Accueil Izybiz"}>
           <img
             class="site-chrome-footer__logo"
             src="/assets/logo-izybiz.svg"
@@ -258,9 +323,9 @@ const diagnosticHref = "/#diagnostic";
             height="198"
           />
         </a>
-        <a class="site-chrome-footer__link" href="/mentions-legales/">{t("footer.legal")}</a>
-        <a class="site-chrome-footer__link" href="/politique-de-confidentialite/">
-          {t("footer.privacy")}
+        <a class="site-chrome-footer__link" href={legalHref}>{t("footer.legal", lang)}</a>
+        <a class="site-chrome-footer__link" href={privacyHref}>
+          {t("footer.privacy", lang)}
         </a>
         <a
           class="site-chrome-footer__link"
@@ -271,8 +336,8 @@ const diagnosticHref = "/#diagnostic";
         >
           LinkedIn
         </a>
-        <a class="site-chrome-footer__link" href="/contact/">Contact</a>
-        <div class="site-chrome-footer__copyright">{t("footer.copyright")}</div>
+        <a class="site-chrome-footer__link" href={contactHref}>{t("footer.contact", lang)}</a>
+        <div class="site-chrome-footer__copyright">{t("footer.copyright", lang)}</div>
       </div>
     </footer>
     <script is:inline>
@@ -285,7 +350,10 @@ const diagnosticHref = "/#diagnostic";
 
         function setOpen(open) {
           toggle.setAttribute("aria-expanded", open ? "true" : "false");
-          toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+          toggle.setAttribute(
+            "aria-label",
+            open ? toggle.dataset.closeLabel : toggle.dataset.openLabel,
+          );
           menu.hidden = !open;
         }
 
@@ -312,6 +380,6 @@ const diagnosticHref = "/#diagnostic";
       })();
     </script>
     <script is:inline src="/analytics.js"></script>
-    <CookieConsent />
+    <CookieConsent lang={lang} />
   </body>
 </html>

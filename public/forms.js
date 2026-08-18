@@ -18,6 +18,25 @@
   var WEB3FORMS_KEY = "ae024e50-5c9a-418c-9a35-0572c0dea506";
   var WEB3FORMS_URL = "https://api.web3forms.com/submit";
 
+  // Langue de la page, lue une fois au chargement : <html lang> est posé par
+  // Layout.astro selon la route (/ vs /en/...). Détermine les messages
+  // affichés au visiteur, pas le contenu du mail reçu par Lucie (toujours en
+  // français, cf. KINDS ci-dessous) — seul son objet gagne un préfixe [EN].
+  var LANG = document.documentElement.lang === "en" ? "en" : "fr";
+
+  var STRINGS = {
+    fr: {
+      sending: "Envoi…",
+      error:
+        "L'envoi n'a pas abouti. Réessayez, ou écrivez-nous directement à contact.me@izybiz.fr.",
+    },
+    en: {
+      sending: "Sending…",
+      error:
+        "Sending failed. Please try again, or write to us directly at contact.me@izybiz.fr.",
+    },
+  };
+
   // Noms réservés par Web3Forms : un champ visible qui porterait l'un d'eux
   // serait interprété comme un réglage et n'apparaîtrait pas dans le mail.
   // C'est pourquoi le choix « votre demande » de la page contact s'appelle
@@ -52,7 +71,10 @@
     diagnostic: {
       // La home a sa modale de confirmation ; ce texte ne sert que si le
       // navigateur ne gère pas <dialog>.
-      success: "Votre demande est bien partie. Merci !",
+      success: {
+        fr: "Votre demande est bien partie. Merci !",
+        en: "Your request is on its way. Thank you!",
+      },
 
       build: function (get) {
         var site = get("website");
@@ -72,7 +94,10 @@
     },
 
     contact: {
-      success: "Message envoyé. Nous vous répondons sous un jour ouvré.",
+      success: {
+        fr: "Message envoyé. Nous vous répondons sous un jour ouvré.",
+        en: "Message sent. We'll reply within one business day.",
+      },
 
       build: function (get) {
         var demande = get("demande") || "Une question";
@@ -120,7 +145,9 @@
 
     var payload = {
       access_key: WEB3FORMS_KEY,
-      subject: built.subject,
+      // Préfixe visible dans la boîte de réception : le mail lui-même reste
+      // en français, mais Lucie doit savoir dans quelle langue répondre.
+      subject: (LANG === "en" ? "[EN] " : "") + built.subject,
       from_name: "Site izybiz",
 
       // Aucun champ ne s'appelle `email`, donc Web3Forms ne peut pas deviner
@@ -241,7 +268,7 @@
         say("");
         if (submit) {
           submit.disabled = true;
-          submit.textContent = "Envoi…";
+          submit.textContent = STRINGS[LANG].sending;
         }
 
         send(form, new FormData(form)).then(
@@ -264,16 +291,13 @@
             ) {
               modal.showModal();
             } else {
-              say(kind.success);
+              say(kind.success[LANG]);
             }
           },
           function () {
             // Le visiteur a saisi son adresse : lui laisser une porte de sortie
             // vaut mieux qu'un simple « réessayez ».
-            say(
-              "L'envoi n'a pas abouti. Réessayez, ou écrivez-nous directement à contact.me@izybiz.fr.",
-              true,
-            );
+            say(STRINGS[LANG].error, true);
             release();
           },
         );
