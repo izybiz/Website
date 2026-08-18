@@ -1,0 +1,32 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import HomeV2En from "../../components/HomeV2En.astro";
+import { homeFaqEn } from "../../data/home-faq";
+
+// Le schéma FAQPage est dérivé de la même source que la section FAQ rendue :
+// impossible que les deux divergent.
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: homeFaqEn.map((entry) => ({
+    "@type": "Question",
+    name: entry.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: entry.a,
+    },
+  })),
+};
+---
+
+<Layout
+  lang="en"
+  title="Izy: attract new prospects with AI"
+  description="Izy is software that brings customers to B2B SMEs: audits, optimization, articles, posts and monitoring executed by a team of agents. Free visibility diagnosis in five minutes."
+  canonicalPath="/en/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
+  <HomeV2En />
+</Layout>
