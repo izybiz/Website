@@ -274,8 +274,14 @@
         send(form, new FormData(form)).then(
           function () {
             if (typeof window.izybizTrackEvent === "function") {
+              var formKind = form.dataset.formKind || "inconnu";
               window.izybizTrackEvent("form_submitted", {
                 location: form.dataset.formLocation || "inconnu",
+                form_kind: formKind,
+                request_type:
+                  formKind === "contact"
+                    ? new FormData(form).get("demande") || "inconnu"
+                    : undefined,
               });
             }
 
