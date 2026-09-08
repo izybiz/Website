@@ -271,18 +271,22 @@
           submit.textContent = STRINGS[LANG].sending;
         }
 
-        send(form, new FormData(form)).then(
+        var formData = new FormData(form);
+        send(form, formData).then(
           function () {
             if (typeof window.izybizTrackEvent === "function") {
-              var formKind = form.dataset.formKind || "inconnu";
-              window.izybizTrackEvent("form_submitted", {
-                location: form.dataset.formLocation || "inconnu",
-                form_kind: formKind,
-                request_type:
-                  formKind === "contact"
-                    ? new FormData(form).get("demande") || "inconnu"
-                    : undefined,
-              });
+              var demande = formData.get("demande");
+              var isDiagnostic =
+                form.dataset.formKind === "diagnostic" ||
+                demande === "Diagnostic gratuit";
+
+              window.izybizTrackEvent(
+                isDiagnostic ? "diagnostic_requested" : "contact_submitted",
+                {
+                  form_location: form.dataset.formLocation || "inconnu",
+                  request_type: demande || undefined,
+                },
+              );
             }
 
             form.reset();
