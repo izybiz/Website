@@ -7,7 +7,9 @@
  * home de la langue cible.
  *
  * Slugs des pages légales traduits (meilleur pour le SEO anglophone).
- * Slugs des articles de blog identiques FR/EN (mapping trivial).
+ * Articles de blog : chaque paire est déclarée ici, les slugs FR et EN sont
+ * libres (identiques pour les 3 premiers articles, traduits depuis
+ * septembre 2026).
  */
 export interface RoutePair {
   fr: string;
@@ -31,6 +33,10 @@ export const routePairs: RoutePair[] = [
   {
     fr: "/blog/geo-dirigeants-agents-ia-supervision/",
     en: "/en/blog/geo-dirigeants-agents-ia-supervision/",
+  },
+  {
+    fr: "/blog/apercus-ia-en-france-pourquoi-etre-1er-sur-google-ne-suffit-plus/",
+    en: "/en/blog/google-ai-overviews-france-ranking-not-enough/",
   },
 ];
 

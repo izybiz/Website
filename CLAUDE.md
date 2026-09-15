@@ -20,6 +20,9 @@ Node **>= 22.12.0** (voir `package.json` et `netlify.toml`).
   la section i18n ci-dessous avant de toucher au chrome ou d'ajouter une page.
 - **Trailing slash** : toujours sur les liens internes (`trailingSlash: "always"`)
 - **Blog FR** : `src/content/blog-fr/*.md` · **Blog EN** : `src/content/blog-en/*.md`
+  — en-tête `title`, `description`, `pubDate`, `author` (clé de
+  `src/data/authors.ts`, optionnel) ; publier un article = ces deux fichiers
+  + la paire de chemins dans `src/data/i18n-routes.ts`
 - Commits en français, cohérents avec l'historique ; PRs vers `main`
 
 ## Architecture
@@ -59,9 +62,11 @@ un fichier sous `src/pages/en/`, sibling de son équivalent FR.
   hreflang ne se génèrent pas pour cette page.
 - **Slugs** : pages légales traduites (`/en/legal-notice/`,
   `/en/privacy-policy/`, meilleur pour le SEO anglophone). Articles de blog :
-  **même nom de fichier** FR/EN (`src/content/blog-en/<même-slug>.md`) —
-  mapping trivial, mais un article FR sans fichier `blog-en` homonyme n'aura
-  jamais de version anglaise.
+  le nom de fichier de chaque langue fait l'URL, et la paire FR↔EN est
+  déclarée explicitement dans `i18n-routes.ts` — les slugs peuvent donc
+  différer (les 3 premiers articles ont le même slug FR/EN, ceux publiés
+  depuis septembre 2026 ont un slug traduit). Un article sans paire déclarée
+  n'a ni bouton EN/FR ni hreflang.
 - **`Layout.astro`** porte la prop `lang` (`"fr"` par défaut). Elle pilote
   `<html lang>`, les hreflang fr/en/x-default, `og:locale`, le JSON-LD
   Organization/SoftwareApplication (description et `availableLanguage`
