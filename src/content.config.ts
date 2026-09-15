@@ -1,5 +1,6 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
+import { authorIds } from "./data/authors";
 
 // blog-en réintroduit en août 2026 pour la version anglaise du site (voir
 // src/data/i18n-routes.ts). Contrairement à l'ancienne collection retirée le
@@ -9,6 +10,9 @@ const blogSchema = z.object({
   title: z.string(),
   description: z.string(),
   pubDate: z.date(),
+  // Clé du registre src/data/authors.ts. Optionnel : les articles antérieurs à
+  // septembre 2026 n'en ont pas, et le build refuse une clé inconnue.
+  author: z.enum(authorIds).optional(),
 });
 
 export const collections = {

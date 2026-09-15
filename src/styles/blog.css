@@ -451,3 +451,46 @@ body {
     overflow-x: auto;
   }
 }
+
+/* Bloc auteur en fin d'article (champ `author` de l'en-tête, registre dans
+   src/data/authors.ts). Même ligne de séparation que la description en tête. */
+.article-page__author {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(15, 23, 42, 0.1);
+  font-family: "Didact Gothic", sans-serif;
+  text-align: left;
+}
+
+.article-page__author-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.article-page__author-label {
+  margin: 0 0 4px;
+  font-size: 12px;
+  color: rgba(15, 23, 42, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.article-page__author-name {
+  margin: 0;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.article-page__author-role {
+  margin: 0;
+  font-size: 15px;
+  color: rgba(15, 23, 42, 0.6);
+}

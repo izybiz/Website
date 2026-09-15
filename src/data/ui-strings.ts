@@ -14,6 +14,7 @@ export const ui = {
     "footer.contact": "Contact",
     "footer.copyright": "© 2026 Izybiz — Tous droits réservés",
     "blog.readmore": "Lire l'article",
+    "blog.author": "À propos de l'auteur",
     "blog.subtitle":
       "95 % des projets IA en entreprise échouent. Pas par manque de technologie — par manque de méthode de pilotage. Ce blog documente ce qui fonctionne, pour les managers d'ETI et PME en France.",
   },
@@ -26,6 +27,7 @@ export const ui = {
     "footer.contact": "Contact",
     "footer.copyright": "© 2026 Izybiz — All rights reserved",
     "blog.readmore": "Read the article",
+    "blog.author": "About the author",
     "blog.subtitle":
       "95% of enterprise AI projects fail. Not for lack of technology — for lack of a management method. This blog documents what works, for managers of French SMEs and mid-sized companies.",
   },

@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
+import { authors } from "../../data/authors";
+import { t } from "../../data/ui-strings";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog-fr");
@@ -24,6 +26,8 @@ const olderPost =
 const newerPath = newerPost ? `/blog/${newerPost.id.replace(/\.md$/, "")}/` : null;
 const olderPath = olderPost ? `/blog/${olderPost.id.replace(/\.md$/, "")}/` : null;
 
+const author = post.data.author ? authors[post.data.author] : null;
+
 const currentPath = `/blog/${currentSlug}/`;
 ---
 
@@ -32,6 +36,7 @@ const currentPath = `/blog/${currentSlug}/`;
   description={post.data.description}
   ogType="article"
   pubDate={post.data.pubDate.toISOString()}
+  author={author ? { name: author.name, url: author.url } : undefined}
   canonicalPath={currentPath}
 >
   <main>
@@ -56,6 +61,16 @@ const currentPath = `/blog/${currentSlug}/`;
       <div class="article-page__body">
         <Content />
       </div>
+      {author && (
+        <aside class="article-page__author" aria-label={t("blog.author", "fr")}>
+          <img class="article-page__author-photo" src={author.photo} alt="" width="72" height="72" loading="lazy" />
+          <div>
+            <p class="article-page__author-label">{t("blog.author", "fr")}</p>
+            <p class="article-page__author-name">{author.name}</p>
+            <p class="article-page__author-role">{author.role.fr}</p>
+          </div>
+        </aside>
+      )}
     </article>
   </main>
 </Layout>

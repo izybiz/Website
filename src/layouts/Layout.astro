@@ -12,6 +12,8 @@ interface Props {
   ogType?: string;
   ogImage?: string;
   pubDate?: string;
+  /** Auteur de l'article (JSON-LD). Sans valeur, fallback historique ci-dessous. */
+  author?: { name: string; url?: string };
   noindex?: boolean;
   lang?: Lang;
 }
@@ -25,6 +27,7 @@ const {
   ogType = frontmatter.ogType ?? "website",
   ogImage = frontmatter.ogImage ?? "https://izybiz.fr/assets/og-default.jpg",
   pubDate = frontmatter.pubDate,
+  author,
   noindex = frontmatter.noindex ?? false,
   lang = frontmatter.lang ?? "fr",
 } = Astro.props as Partial<Props>;
@@ -216,8 +219,8 @@ const siteRoot = lang === "en" ? "https://izybiz.fr/en" : "https://izybiz.fr";
         "image": ogImage,
         "author": {
           "@type": "Person",
-          "name": "Stéphane Dine",
-          "url": "https://www.linkedin.com/company/izybiz/"
+          "name": author?.name ?? "Stéphane Dine",
+          "url": author?.url ?? "https://www.linkedin.com/company/izybiz/"
         },
         "publisher": {
           "@type": "Organization",
