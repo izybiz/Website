@@ -4,8 +4,7 @@ import { getCollection } from "astro:content";
 import { t } from "../../data/ui-strings";
 
 const posts = (await getCollection("blog-fr"))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <Layout title="Blog agents IA pour managers — ETI et PME | Izybiz" description="Articles terrain sur l'exécution par agents IA, la délégation de missions et la transformation opérationnelle pour managers d'ETI et PME en France.">
