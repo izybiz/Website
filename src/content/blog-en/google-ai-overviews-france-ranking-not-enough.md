@@ -1,5 +1,6 @@
 ---
 title: "Google's AI Overviews in France: Why Ranking First Isn't Enough Anymore?"
+seoTitle: "Google AI Overviews in France: Ranking First Isn't Enough"
 description: "Google's AI Overviews are live in France: 61% of organic clicks lost for sites left uncited. What it changes for SME visibility, and how to measure yours."
 pubDate: 2026-09-15
 author: lucie-dine

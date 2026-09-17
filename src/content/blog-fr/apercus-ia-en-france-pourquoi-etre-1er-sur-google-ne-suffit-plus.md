@@ -1,5 +1,6 @@
 ---
 title: "Aperçus IA en France : pourquoi être 1er sur Google ne suffit plus ?"
+seoTitle: "Aperçus IA en France : visibilité PME, ce qui change"
 description: "Les Aperçus IA sont arrivés en France : 61% de clic organique perdu hors citation. Ce que ça change pour la visibilité PME et comment mesurer la vôtre."
 pubDate: 2026-09-15
 author: lucie-dine
