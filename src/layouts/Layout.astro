@@ -102,7 +102,18 @@ const siteRoot = lang === "en" ? "https://izybiz.fr/en" : "https://izybiz.fr";
           gtag('consent', 'update', { analytics_storage: 'granted' });
         }
       } catch (e) {}
-      gtag('config', 'G-TS3MZTN79V');
+      // Trafic interne (équipe izybiz) : ouvrir une fois /?interne=1 marque ce
+      // navigateur, /?interne=0 retire la marque. Les visites marquées partent
+      // avec traffic_type=internal et sont exclues des rapports par le filtre
+      // « Internal Traffic » de GA4 (à activer dans Admin → Filtres de données).
+      var interne = false;
+      try {
+        var flag = new URLSearchParams(location.search).get('interne');
+        if (flag === '1') localStorage.setItem('izybiz_interne', '1');
+        else if (flag === '0') localStorage.removeItem('izybiz_interne');
+        interne = localStorage.getItem('izybiz_interne') === '1';
+      } catch (e) {}
+      gtag('config', 'G-TS3MZTN79V', interne ? { traffic_type: 'internal' } : {});
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
