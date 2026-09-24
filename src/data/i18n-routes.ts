@@ -38,6 +38,10 @@ export const routePairs: RoutePair[] = [
     fr: "/blog/apercus-ia-en-france-pourquoi-etre-1er-sur-google-ne-suffit-plus/",
     en: "/en/blog/google-ai-overviews-france-ranking-not-enough/",
   },
+  {
+    fr: "/blog/score-de-visibilite-ia-pourquoi-un-bon-score-seo-ne-suffit-plus/",
+    en: "/en/blog/ai-visibility-score-why-seo-isnt-enough/",
+  },
 ];
 
 export function counterpartPath(pathname: string): RoutePair | null {
