@@ -87,31 +87,6 @@
   color: var(--orange);
 }
 
-/* « Connexion » : visible mais sans destination tant que l'app n'a pas d'URL.
-   Rendu en <span> plutôt qu'en <a href="#"> pour ne pas créer un lien mort
-   qui renverrait en haut de page. */
-.site-chrome__link--inactive {
-  cursor: default;
-}
-
-.site-chrome__cta {
-  background: var(--orange);
-  color: var(--onOrange);
-  padding: 15px 30px;
-  border-radius: 999px;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 18px;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: filter 0.2s ease;
-}
-
-.site-chrome__cta:hover {
-  color: var(--onOrange);
-  filter: brightness(1.07);
-}
-
 /* Bouton burger — masqué au-dessus du point de rupture */
 .site-chrome__toggle {
   display: none;
@@ -259,11 +234,6 @@
 
   .site-chrome__toggle {
     display: flex;
-  }
-
-  .site-chrome__cta {
-    padding: 12px 20px;
-    font-size: 16px;
   }
 
   .site-chrome-footer__inner {

@@ -229,12 +229,71 @@
     });
   }
 
+  /* ------------------------------------------------------------------ *
+   * 4. Carrousel "Nos dernières missions" (onglets + flèches).
+   * Recodé from scratch : l'ancien script.js pilotait ce carrousel mais
+   * appelait aussi Supabase, ce qui est banni sur ce site (voir CLAUDE.md).
+   * ------------------------------------------------------------------ */
+
+  function initCaseStudies() {
+    var tablist = document.querySelector("[data-case-tablist]");
+    var grid = document.querySelector("[data-case-grid]");
+    if (!tablist || !grid) return;
+
+    var tabs = Array.prototype.slice.call(tablist.querySelectorAll("[data-case-tab]"));
+    var cases = Array.prototype.slice.call(grid.querySelectorAll(".section-two__case"));
+    var counter = document.querySelector("[data-case-counter]");
+    var prevBtn = document.querySelector("[data-case-prev]");
+    var nextBtn = document.querySelector("[data-case-next]");
+    if (!tabs.length || !cases.length) return;
+
+    var activeIndex = 0;
+
+    function show(index) {
+      activeIndex = index;
+
+      tabs.forEach(function (tab, i) {
+        var selected = i === index;
+        tab.classList.toggle("is-active", selected);
+        tab.setAttribute("aria-selected", selected ? "true" : "false");
+      });
+
+      cases.forEach(function (item, i) {
+        item.classList.toggle("is-active", i === index);
+      });
+
+      if (counter) counter.textContent = (index + 1) + "/" + cases.length;
+      if (prevBtn) prevBtn.disabled = index === 0;
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener("click", function () {
+        show(i);
+      });
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        if (activeIndex > 0) show(activeIndex - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        show(activeIndex + 1 < cases.length ? activeIndex + 1 : 0);
+      });
+    }
+
+    show(0);
+  }
+
   /* ------------------------------------------------------------------ */
 
   function init() {
     initTabs();
     initTimeline();
     initAnchor();
+    initCaseStudies();
   }
 
   if (document.readyState === "loading") {

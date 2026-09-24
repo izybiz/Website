@@ -45,14 +45,13 @@ const enHref = lang === "en" ? canonicalUrl : counterpart ? `https://izybiz.fr${
 const xDefaultHref = frHref ?? canonicalUrl;
 const otherLangPath = lang === "fr" ? (counterpart ? counterpart.en : "/en/") : (counterpart ? counterpart.fr : "/");
 
-// La home v2 remplace la section #prendre-contact par le formulaire de
-// diagnostic : le CTA du header pointe dessus, depuis n'importe quelle page.
-const diagnosticHref = lang === "en" ? "/en/#diagnostic" : "/#diagnostic";
 const legalHref = lang === "en" ? "/en/legal-notice/" : "/mentions-legales/";
 const privacyHref = lang === "en" ? "/en/privacy-policy/" : "/politique-de-confidentialite/";
 const contactHref = lang === "en" ? "/en/contact/" : "/contact/";
 const blogHref = lang === "en" ? "/en/blog/" : "/blog/";
 const homeHref = lang === "en" ? "/en/" : "/";
+const aboutHref = lang === "en" ? "/en/about/" : "/a-propos/";
+const servicesHref = lang === "en" ? "/en/services/" : "/services/";
 
 // Textes traduits du JSON-LD Organization/SoftwareApplication : voir le
 // piège « données structurées » dans CLAUDE.md — à relire à chaque
@@ -281,10 +280,9 @@ const siteRoot = lang === "en" ? "https://izybiz.fr/en" : "https://izybiz.fr";
         <div class="site-chrome__spacer"></div>
 
         <nav class="site-chrome__nav" aria-label="Primary">
+          <a class="site-chrome__link" href={aboutHref}>{t("nav.about", lang)}</a>
+          <a class="site-chrome__link" href={servicesHref}>{t("nav.services", lang)}</a>
           <a class="site-chrome__link" href={blogHref}>{t("nav.blog", lang)}</a>
-          {/* Sans destination tant que l'app n'a pas d'URL publique — rendu en
-              <span> pour éviter un lien mort qui renverrait en haut de page. */}
-          <span class="site-chrome__link site-chrome__link--inactive">{t("nav.login", lang)}</span>
           <a
             class="site-chrome__link site-chrome__lang"
             href={otherLangPath}
@@ -293,7 +291,6 @@ const siteRoot = lang === "en" ? "https://izybiz.fr/en" : "https://izybiz.fr";
           >
             {lang === "fr" ? "EN" : "FR"}
           </a>
-          <a class="site-chrome__cta" href={diagnosticHref} data-cta="header">{t("nav.cta", lang)}</a>
         </nav>
 
         <button
@@ -311,8 +308,9 @@ const siteRoot = lang === "en" ? "https://izybiz.fr/en" : "https://izybiz.fr";
       </div>
 
       <div class="site-chrome__menu" id="site-chrome-menu" hidden data-chrome-menu>
+        <a class="site-chrome__menu-link" href={aboutHref}>{t("nav.about", lang)}</a>
+        <a class="site-chrome__menu-link" href={servicesHref}>{t("nav.services", lang)}</a>
         <a class="site-chrome__menu-link" href={blogHref}>{t("nav.blog", lang)}</a>
-        <span class="site-chrome__menu-link site-chrome__link--inactive">{t("nav.login", lang)}</span>
         <a
           class="site-chrome__menu-link"
           href={otherLangPath}

@@ -19,6 +19,8 @@ export interface RoutePair {
 export const routePairs: RoutePair[] = [
   { fr: "/", en: "/en/" },
   { fr: "/contact/", en: "/en/contact/" },
+  { fr: "/a-propos/", en: "/en/about/" },
+  { fr: "/services/", en: "/en/services/" },
   { fr: "/mentions-legales/", en: "/en/legal-notice/" },
   { fr: "/politique-de-confidentialite/", en: "/en/privacy-policy/" },
   { fr: "/blog/", en: "/en/blog/" },

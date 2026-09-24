@@ -1,0 +1,106 @@
+---
+// Page recréée depuis le contenu de l'ancien site (avant la refonte d'août
+// 2026), à la demande de Lucie — le lien "Voir toutes nos missions" de la
+// section .we-deliver (home) pointe ici. Les 5 missions sont listées sans
+// lien vers une page dédiée (choix explicite : seules management-de-transition
+// et integration-ia existent aujourd'hui, les 3 autres n'ont pas de page).
+import Layout from "../layouts/Layout.astro";
+import "../styles/services-page.css";
+
+const title = "Management de transition et transformation opérationnelle";
+const description =
+  "Un dirigeant opérationnel disponible en semaines, pas en mois. Management de transition, intégration IA et transformation opérationnelle pour ETI et scale-ups.";
+
+const services = [
+  {
+    title: "Management de transition",
+    description:
+      "Un dirigeant opérationnel disponible en quelques semaines. Pas un rapport — une prise de fonction réelle, avec vos équipes, sur vos enjeux. Résultats mesurables dès J30.",
+    tags: ["DG / DGA / COO par intérim", "Transformation qui dérive", "Direction vacante", "Série B & scale-up"],
+    color: "yellow",
+  },
+  {
+    title: "Intégration IA en entreprise",
+    description:
+      "De POC à production. Framing des use cases, sélection des vendors, design des workflows, déploiement. L'organisation sort autonome — pas dépendante d'un consultant.",
+    tags: ["Framing use cases", "Gouvernance IA", "Workflows opérationnels", "Indépendance à la sortie"],
+    color: "orange",
+  },
+  {
+    title: "Pilotage de la performance",
+    description:
+      "Mise en place des KPIs structurants, des boucles de feedback et des rituels de management qui permettent à une organisation de piloter par les résultats — pas par l'intuition.",
+    tags: ["KPIs structurants", "Tableaux de bord opérationnels", "Rituels de management", "Culture data"],
+    color: "blue",
+  },
+  {
+    title: "Redressement & Restructuration",
+    description:
+      "Quand une BU dérive — churn accéléré, marges qui s'effondrent, cash qui se tend. Diagnostic rapide, plan d'action priorisé, exécution sous pression. Pas de warming-up.",
+    tags: ["BU en difficulté", "Redressement opérationnel", "Cash & marges", "Plan d'action J15"],
+    color: "dark",
+  },
+  {
+    title: "Scale-up & Industrialisation",
+    description:
+      "Les process qui tiennent à 10 personnes ne tiennent pas à 80. Structuration du delivery, des équipes et des opérations avant que la croissance ne devienne un problème.",
+    tags: ["Structuration pré-Série B", "Delivery & opérations", "Process scalables", "Organisation cible"],
+    color: "lavender",
+  },
+];
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Services de management de transition et consulting opérationnel — Izybiz",
+  url: "https://izybiz.fr/services/",
+  itemListElement: services.map((s, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "Service",
+      name: s.title,
+      description: s.description,
+      provider: { "@type": "Organization", name: "Izybiz", url: "https://izybiz.fr" },
+    },
+  })),
+};
+---
+
+<Layout title={title} description={description} canonicalPath="/services/">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  </Fragment>
+
+  <main class="services-page">
+    <header class="services-page__header">
+      <h1 class="services-page__title">{title}</h1>
+      <p class="services-page__intro">
+        Cinq types de mission. Toutes opérationnelles. Toutes avec un objectif
+        unique : que votre organisation sorte autonome à la fin — pas dépendante
+        d'un cabinet.
+      </p>
+    </header>
+
+    <ul class="services-list">
+      {
+        services.map((service) => (
+          <li class={`services-card services-card--${service.color}`}>
+            <h2 class="services-card__title">{service.title}</h2>
+            <p class="services-card__description">{service.description}</p>
+            <ul class="services-card__tags">
+              {service.tags.map((tag) => (
+                <li class="services-card__tag">{tag}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="services-page__cta">
+      <p>Votre situation ne rentre pas exactement dans une case ?</p>
+      <a class="services-page__cta-link" href="/contact/">Parlons-en !</a>
+    </div>
+  </main>
+</Layout>

@@ -6,9 +6,9 @@
 // de `t()`.
 export const ui = {
   fr: {
+    "nav.about": "À propos",
+    "nav.services": "Services",
     "nav.blog": "Blog",
-    "nav.login": "Connexion",
-    "nav.cta": "Analyser mon site",
     "footer.privacy": "Politique de confidentialité",
     "footer.legal": "Mentions légales",
     "footer.contact": "Contact",
@@ -19,9 +19,9 @@ export const ui = {
       "95 % des projets IA en entreprise échouent. Pas par manque de technologie — par manque de méthode de pilotage. Ce blog documente ce qui fonctionne, pour les managers d'ETI et PME en France.",
   },
   en: {
+    "nav.about": "About",
+    "nav.services": "Services",
     "nav.blog": "Blog",
-    "nav.login": "Login",
-    "nav.cta": "Analyze my site",
     "footer.privacy": "Privacy Policy",
     "footer.legal": "Legal Notice",
     "footer.contact": "Contact",

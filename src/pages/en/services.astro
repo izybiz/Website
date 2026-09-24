@@ -1,0 +1,102 @@
+---
+// Traduction anglaise de /services/ — même traitement (5 cartes colorées,
+// non cliquables : voir services.astro pour le contexte de cette décision).
+import Layout from "../../layouts/Layout.astro";
+import "../../styles/services-page.css";
+
+const title = "Interim management and operational transformation";
+const description =
+  "An operational executive available within weeks, not months. Interim management, AI integration and operational transformation for mid-market companies and scale-ups.";
+
+const services = [
+  {
+    title: "Interim Management",
+    description:
+      "An operational executive available within weeks. Not a report — a real role, with your teams, on your actual challenges. Measurable results from day 30.",
+    tags: ["Interim CEO / COO / CDO", "Derailing transformation", "Vacant leadership", "Pre-Series B scale-up"],
+    color: "yellow",
+  },
+  {
+    title: "AI Integration",
+    description:
+      "From POC to production. Use case framing, vendor selection, workflow design, deployment. Your organisation exits fully autonomous — no consultant dependency.",
+    tags: ["Use case framing", "AI governance", "Operational workflows", "Independent exit"],
+    color: "orange",
+  },
+  {
+    title: "Performance Management",
+    description:
+      "Structuring KPIs, feedback loops and management rituals that let an organisation run on results — not intuition.",
+    tags: ["Structural KPIs", "Operational dashboards", "Management rituals", "Data culture"],
+    color: "blue",
+  },
+  {
+    title: "Operational Turnaround",
+    description:
+      "When a business unit is drifting — accelerating churn, collapsing margins, tightening cash. Fast diagnosis, prioritised action plan, execution under pressure.",
+    tags: ["Distressed BU", "Operational turnaround", "Cash & margins", "Action plan Day 15"],
+    color: "dark",
+  },
+  {
+    title: "Scale-up & Industrialisation",
+    description:
+      "The processes that work at 10 people break at 80. Structuring delivery, teams and operations before growth becomes the problem.",
+    tags: ["Pre-Series B structuring", "Delivery & operations", "Scalable processes", "Target org design"],
+    color: "lavender",
+  },
+];
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Interim management and operational transformation services — Izybiz",
+  url: "https://izybiz.fr/en/services/",
+  itemListElement: services.map((s, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "Service",
+      name: s.title,
+      description: s.description,
+      provider: { "@type": "Organization", name: "Izybiz", url: "https://izybiz.fr" },
+    },
+  })),
+};
+---
+
+<Layout lang="en" title={title} description={description} canonicalPath="/en/services/">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  </Fragment>
+
+  <main class="services-page">
+    <header class="services-page__header">
+      <h1 class="services-page__title">{title}</h1>
+      <p class="services-page__intro">
+        Five types of engagement. All operational. All with one objective: your
+        organisation exits fully autonomous — no consultant dependency.
+      </p>
+    </header>
+
+    <ul class="services-list">
+      {
+        services.map((service) => (
+          <li class={`services-card services-card--${service.color}`}>
+            <h2 class="services-card__title">{service.title}</h2>
+            <p class="services-card__description">{service.description}</p>
+            <ul class="services-card__tags">
+              {service.tags.map((tag) => (
+                <li class="services-card__tag">{tag}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="services-page__cta">
+      <p>Your situation doesn't fit neatly into one category?</p>
+      <a class="services-page__cta-link" href="/en/contact/">Let's talk!</a>
+    </div>
+  </main>
+</Layout>

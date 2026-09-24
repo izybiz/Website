@@ -1,0 +1,164 @@
+/* ==========================================================================
+   Pages de service recréées depuis le contenu de l'ancien site (avant la
+   refonte d'août 2026) : /management-de-transition/, /integration-ia/.
+   Scopées sous .legacy-article.
+   ========================================================================== */
+
+.legacy-article {
+  /* blog.css ne pose aucune police sur body : à déclarer ici, sinon le
+     navigateur retombe sur son serif par défaut. */
+  font-family: var(--font-body);
+  padding: clamp(96px, 10vw, 140px) 28px clamp(64px, 8vw, 96px);
+}
+
+.legacy-article__article {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.legacy-article__back {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.legacy-article__back:hover {
+  color: var(--orange);
+}
+
+.legacy-article__title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 20px;
+}
+
+.legacy-article__lede {
+  font-size: clamp(18px, 1.8vw, 21px);
+  line-height: 1.5;
+  color: var(--ink2);
+  margin: 0 0 40px;
+}
+
+.legacy-article__body {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink2);
+}
+
+.legacy-article__body a {
+  color: var(--orange);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.legacy-article__body p,
+.legacy-article__body ul,
+.legacy-article__body ol {
+  margin: 0 0 22px;
+}
+
+.legacy-article__body h2 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.6vw, 32px);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 48px 0 20px;
+}
+
+.legacy-article__body h3 {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2vw, 22px);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 32px 0 14px;
+}
+
+.legacy-article__body ul,
+.legacy-article__body ol {
+  padding-left: 22px;
+}
+
+.legacy-article__body li {
+  margin-bottom: 10px;
+}
+
+.legacy-article__body strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.legacy-article__body hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+.legacy-article__cta-line {
+  margin: 28px 0;
+}
+
+.legacy-article__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  background: var(--orange);
+  color: var(--onOrange);
+  border-radius: 999px;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  transition: filter 0.2s ease;
+}
+
+.legacy-article__cta:hover {
+  filter: brightness(1.07);
+}
+
+.legacy-article__footnote {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.legacy-article__table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 28px;
+  font-size: 15px;
+}
+
+.legacy-article__table th,
+.legacy-article__table td {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.legacy-article__table thead th {
+  background: var(--surface2);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.legacy-article__table tbody th {
+  background: var(--surface2);
+  color: var(--ink);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .legacy-article__table {
+    display: block;
+    overflow-x: auto;
+  }
+}

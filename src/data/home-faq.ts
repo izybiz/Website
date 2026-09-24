@@ -10,42 +10,40 @@ export interface FaqEntry {
   a: string;
 }
 
+// Questions reprises de l'ancien site izybiz.fr (avant la refonte d'août
+// 2026) — même apparence .hv2-faq que la refonte, contenu de l'ancien site.
 export const homeFaq: FaqEntry[] = [
   {
-    q: "C'est un logiciel ou une prestation ?",
-    a: "Un logiciel, Izy, qui s'occupe de tout : une équipe d'agents fait le travail, Izy pilote la mission et vous rend compte. Vous n'installez rien, vous ne coordonnez personne. Au démarrage, un rendez-vous de cadrage définit votre mission ; ensuite, Izy tourne tous les mois.",
-  },
-  {
-    q: "C'est pour qui ?",
-    a: "Des sociétés B2B de prestations humaines (nettoyage, chauffage, transport, maintenance, second œuvre, bureaux d'études) dont la vente est peu digitalisée, et qu'on ne trouve pas quand on cherche leur métier dans leur région. Aucune compétence technique n'est demandée.",
-  },
-  {
-    q: "Qu'est-ce que ça me demande, à moi ?",
-    a: "Pour le diagnostic : une adresse de site et cinq minutes. Ensuite un rendez-vous de cadrage, puis une validation par mois dans la conversation.",
-  },
-  {
-    q: "Qu'est-ce que je reçois, concrètement ?",
-    a: "Dès le diagnostic : votre position comparée au leader de votre marché, et une première action détaillée. Le plan complet s'ouvre avec l'abonnement : plan de mission, optimisation du site page par page, calendrier éditorial, articles et posts produits, bilan chaque mois.",
-  },
-  {
-    q: "En quoi c'est différent d'une agence ou d'un outil SEO ?",
-    a: "Un outil vous laisse le travail. Une agence vous vend des heures. Izy exécute : une seule mission cadrée, la même méthode tous les mois, la rigueur d'un consultant à une cadence qu'un consultant ne tient pas.",
-  },
-  {
-    q: "Pourquoi le diagnostic est gratuit ?",
-    a: "Parce qu'il est automatisé, et qu'il dit s'il y a une mission à cadrer. Si ce n'est pas le cas, on vous le dit.",
-  },
-  {
-    q: "Au bout de combien de temps ça marche ?",
-    a: "Le plan et les premières optimisations arrivent le premier mois. Sur les recherches, comptez plusieurs mois : Izy suit les indicateurs fixés au cadrage plutôt que de promettre une date.",
+    q: "Comment on transforme l'IA en résultats business ?",
+    a: "Izybiz repose sur une idée simple : les projets d'IA n'échouent pas à cause de la technologie, mais parce que personne ne porte à la fois l'intention business et la livraison. Forts de 20 ans de management, nous faisons en sorte que les solutions IA soient déployées, adoptées et produisent des résultats business concrets.",
   },
   {
     q: "Combien ça coûte ?",
-    a: "Le diagnostic ne coûte rien. Le cadrage et l'abonnement mensuel sont chiffrés après le diagnostic, selon la mission retenue.",
+    a: "Nous estimons en fonction de votre périmètre. Prenez rendez-vous : nous vous donnerons des chiffres dès le départ. La transparence avant tout.",
   },
   {
-    q: "Vous vous occupez aussi de mes devis et de mes contacts ?",
-    a: "C'est la suite du chemin : Convertir, puis Vendre, en préparation. Les clients de la première étape seront les premiers servis.",
+    q: "Quel délai pour les premiers résultats ?",
+    a: "Vous voyez des automatisations en marche en 2 à 3 semaines. Le déploiement complet dépend de vos systèmes. La plupart des équipes sont productives en 6 à 8 semaines.",
+  },
+  {
+    q: "Dois-je changer mon équipe ou mes processus ?",
+    a: "Non. Nous nous adaptons à votre façon de travailler aujourd'hui. Si votre process est cassé, nous vous le dirons. Mais nous n'imposons pas de réorganisation.",
+  },
+  {
+    q: "Comment mesurez-vous le succès ?",
+    a: "Heures gagnées par semaine. Affaires conclues. Fonctionnalités livrées. Erreurs réduites. Nous choisissons 2 à 3 métriques qui comptent pour vous et nous les suivons.",
+  },
+  {
+    q: "Que faire si nous devons pivoter en cours de projet ?",
+    a: "Nous anticipons les changements. Les workflows sont faciles à modifier. Pivoter coûte du temps, pas d'argent supplémentaire.",
+  },
+  {
+    q: "Est-ce personnalisé ou basé sur des templates ?",
+    a: "Les deux. Nous partons de vos processus concrets, pas de gabarits génériques. Mais nous réutilisons des patterns qui ont fait leurs preuves.",
+  },
+  {
+    q: "Faut-il s'y connaître en IA pour travailler avec vous ?",
+    a: "Pas du tout. Nos interlocuteurs sont des dirigeants, pas des ingénieurs. Toute la partie technique de l'IA est prise en charge de bout en bout, et vos équipes sont formées aux outils une fois en place.",
   },
 ];
 
