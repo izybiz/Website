@@ -2,6 +2,7 @@
 title: "AI agents vs. service providers: what it really changes for your execution budget"
 description: "For recurring execution tasks, AI agents or service providers? Real costs, timelines and control: the comparison no one's made yet."
 pubDate: 2026-05-08
+author: stephane-dine
 ---
 
 **€600/day for a freelance AI consultant. A few euros for the same mission handled by AI agents.**

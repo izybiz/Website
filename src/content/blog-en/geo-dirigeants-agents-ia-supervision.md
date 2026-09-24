@@ -2,6 +2,7 @@
 title: "GEO for executives: why 40% of AI agent projects will fail (and how to avoid it)"
 description: "40% of GEO projects handed to AI agents will fail by 2027 — not because of the AI, but for lack of human validation. What that means for an executive."
 pubDate: 2026-05-04
+author: stephane-dine
 ---
 
 You've been hearing about GEO for a few months now. Maybe you asked your marketing team to look into it. Maybe you tried a tool. The result is probably the same as your other AI projects.

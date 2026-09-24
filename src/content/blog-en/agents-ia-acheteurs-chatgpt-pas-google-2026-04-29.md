@@ -2,6 +2,7 @@
 title: "ChatGPT before Google: managers' new reflex for evaluating an AI platform"
 description: "50% of managers now start their tool search in ChatGPT, not Google. Here's what that changes for evaluating an AI agent platform."
 pubDate: 2026-04-29
+author: stephane-dine
 ---
 
 You probably still use Google to search for an AI agent platform. That's normal. But the first impression is now formed somewhere else — before the Google search even begins.

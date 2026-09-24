@@ -19,6 +19,11 @@ export const authors = {
     role: { fr: "Product Manager / Product Owner", en: "Product Manager / Product Owner" },
     photo: "/assets/lucie-dine.jpg",
   },
+  "stephane-dine": {
+    name: "Stéphane Dine",
+    role: { fr: "Fondateur, izybiz", en: "Founder, izybiz" },
+    photo: "/assets/stephane-dine.jpg",
+  },
 } as const satisfies Record<string, Author>;
 
 export type AuthorId = keyof typeof authors;
