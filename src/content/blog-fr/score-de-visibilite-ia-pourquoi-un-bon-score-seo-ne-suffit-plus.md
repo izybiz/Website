@@ -1,7 +1,7 @@
 ---
 title: "Score de visibilité IA : pourquoi un bon score SEO ne suffit plus"
 seoTitle: "Score de visibilité IA : le score SEO ne suffit plus"
-description: "Score de visibilité IA : 38 sur 100 en moyenne, 91% restent sous 60/100, selon une étude Surfeo. Comment savoir si les IA vous citent, et par où commencer"
+description: "Score de visibilité IA : 38/100 en moyenne, 91% des PME sous la barre des 60. Comment savoir si les IA vous citent déjà, et par où commencer ?"
 pubDate: 2026-09-24
 author: stephane-dine
 ---
