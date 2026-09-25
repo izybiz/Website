@@ -51,6 +51,12 @@ export default defineConfig({
     // ment est un signal que Google finit par ignorer.
     // Mieux vaut aucune date qu'une fausse : pour les articles, la vraie date
     // reste exposée par <time datetime> et par datePublished du schéma Article.
-    sitemap(),
+    sitemap({
+      // Pages en noindex (pas encore prêtes à être mises en avant) : Google
+      // déconseille de les lister dans le sitemap en plus du noindex.
+      filter: (page) =>
+        !page.includes("/diagnostic-visibilite/") &&
+        !page.includes("/en/visibility-diagnostic/"),
+    }),
   ],
 });

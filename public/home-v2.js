@@ -269,6 +269,12 @@
     tabs.forEach(function (tab, i) {
       tab.addEventListener("click", function () {
         show(i);
+
+        if (typeof window.izybizTrackEvent === "function") {
+          window.izybizTrackEvent("mission_tab_clicked", {
+            mission_title: tab.textContent.trim(),
+          });
+        }
       });
     });
 
@@ -287,6 +293,42 @@
     show(0);
   }
 
+  /* ------------------------------------------------------------------ *
+   * 5. Tracking GA4 : clic sur la vidéo (section IA) et ouverture d'une
+   * question de FAQ. Événements distincts de ceux de analytics.js car
+   * spécifiques à des éléments qui n'existent que sur la home.
+   * ------------------------------------------------------------------ */
+
+  function initVideoTracking() {
+    var video = document.querySelector(".hv2-ai__video-media");
+    if (!video) return;
+
+    video.addEventListener("click", function () {
+      if (typeof window.izybizTrackEvent === "function") {
+        window.izybizTrackEvent("video_clicked", { video_location: "home_ai" });
+      }
+    });
+  }
+
+  function initFaqTracking() {
+    var items = Array.prototype.slice.call(document.querySelectorAll(".hv2-faq__item"));
+    if (!items.length) return;
+
+    items.forEach(function (item) {
+      item.addEventListener("toggle", function () {
+        // Ne compte que l'ouverture : refermer une question n'est pas un
+        // signal d'intérêt à mesurer.
+        if (!item.open) return;
+        if (typeof window.izybizTrackEvent !== "function") return;
+
+        var questionEl = item.querySelector(".hv2-faq__q-text");
+        window.izybizTrackEvent("faq_question_opened", {
+          question: questionEl ? questionEl.textContent.trim() : "",
+        });
+      });
+    });
+  }
+
   /* ------------------------------------------------------------------ */
 
   function init() {
@@ -294,6 +336,8 @@
     initTimeline();
     initAnchor();
     initCaseStudies();
+    initVideoTracking();
+    initFaqTracking();
   }
 
   if (document.readyState === "loading") {
