@@ -50,7 +50,7 @@ Le décalage entre les deux dirigeants tient à une seule habitude : l'un ouvre 
 - **Repérez les requêtes où vos concurrents apparaissent déjà cités**, pour prioriser les pages à retravailler en premier. Une requête où l'Aperçu cite systématiquement le même concurrent mérite d'être traitée avant les autres : c'est là que le manque à gagner est déjà mesurable.
 - **Structurez vos contenus pour répondre directement à la question posée**, le format que l'Aperçu reprend le plus facilement. Une réponse en une ou deux phrases, en tête de section, avant le développement. Le reste de l'article garde sa place, pour le lecteur qui veut creuser.
 
-[Le diagnostic de visibilité d'Izy](https://izybiz.fr/) inclut désormais cet indicateur, pas seulement le classement. Parce qu'un score de position stable ne dit plus rien sur ce qui arrive vraiment au trafic.
+[Le diagnostic de visibilité d'Izy](/diagnostic-visibilite/) inclut désormais cet indicateur, pas seulement le classement. Parce qu'un score de position stable ne dit plus rien sur ce qui arrive vraiment au trafic.
 
 Une vérification mensuelle suffit pour l'instant. Le rythme s'accélérera à mesure que Google étend la couverture des Aperçus à plus de requêtes, mais rien n'indique aujourd'hui qu'il faille surveiller ça chaque semaine. Mieux vaut un suivi régulier et tenu qu'un contrôle ponctuel oublié dès le mois suivant.
 

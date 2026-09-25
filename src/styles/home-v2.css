@@ -38,7 +38,7 @@
 }
 
 /* Reprise de la base de la maquette : sans elle, les <a> stylés en bouton
-   (.hv2-btn, .hv2-split__cta) gardent le soulignement par défaut. */
+   (.hv2-btn, .hv2-ai__more) gardent le soulignement par défaut. */
 :where(.home-v2) :where(a) {
   color: var(--ink);
   text-decoration: none;
@@ -73,10 +73,6 @@
   padding-right: 28px;
 }
 
-.hv2-wrap--wide {
-  max-width: 1440px;
-}
-
 .hv2-wrap--narrow {
   max-width: 1100px;
 }
@@ -91,8 +87,8 @@
   border: none;
   border-radius: 999px;
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: 400;
+  font-size: 17px;
   cursor: pointer;
   transition: filter 0.2s ease;
 }
@@ -100,105 +96,6 @@
 .hv2-btn:hover {
   color: var(--onOrange);
   filter: brightness(1.07);
-}
-
-.hv2-btn--ghost {
-  background: transparent;
-  color: var(--ink2);
-  border: 1px solid var(--border2);
-  font-family: inherit;
-  font-size: 16px;
-  padding: 12px 20px;
-}
-
-.hv2-btn--ghost:hover {
-  filter: none;
-  border-color: var(--orange);
-  color: var(--orange);
-}
-
-.hv2-btn--sm {
-  padding: 12px 20px;
-  font-family: inherit;
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.hv2-field {
-  flex: 1 1 240px;
-  min-width: 0;
-  padding: 20px 26px;
-  font-family: inherit;
-  font-size: 18px;
-  color: var(--ink);
-  background: var(--surface);
-  border: none;
-  border-radius: 999px;
-}
-
-.hv2-field:focus-visible {
-  outline: 2px solid var(--orange);
-  outline-offset: 2px;
-}
-
-.hv2-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-
-/* Le piège à robots doit être invisible et hors du parcours clavier, sans être
-   retiré du DOM : un robot qui lit le HTML doit pouvoir tomber dedans. */
-.hv2-botcheck {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Retour d'envoi. L'élément reste dans le DOM même vide — c'est ce qui permet à
-   `role="alert"` d'annoncer le texte au moment où le script l'insère —, mais il
-   ne doit alors occuper aucune place dans la grille du formulaire. */
-.hv2-form__message {
-  flex-basis: 100%;
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.4;
-  color: var(--muted);
-}
-
-.hv2-form__message:empty {
-  display: none;
-}
-
-/* Pas `--orange` ici : #ff6a3d sur le fond crème ne donne que 2,6:1, sous le
-   4,5:1 exigé pour du texte. Cette teinte plus sombre reste dans la famille de
-   la marque et monte à 5,6:1 — un message d'erreur doit se lire. */
-.hv2-form__message.is-error {
-  color: #b3301a;
-  font-weight: 700;
-}
-
-/* Mention RGPD. Le visiteur doit savoir ce que devient son adresse à l'endroit
-   où il la donne — le lien du pied de page ne suffit pas. Discrète mais
-   lisible : --muted sur le fond crème donne 5,2:1. */
-.hv2-form__privacy {
-  flex-basis: 100%;
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.4;
-  color: var(--muted);
-}
-
-.hv2-form__privacy a {
-  color: inherit;
-  text-decoration: underline;
-}
-
-.hv2-note {
-  font-size: 15px;
-  color: var(--muted);
 }
 
 /* ==========================================================================
@@ -250,9 +147,9 @@
   background: var(--lavender);
   color: var(--ink);
   text-decoration: none;
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 400;
   line-height: 1;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
@@ -379,9 +276,9 @@
   background: var(--yellow);
   color: var(--ink);
   text-decoration: none;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 16px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 17px;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -398,165 +295,6 @@
   .hv2-transition__posts {
     grid-template-columns: 1fr;
   }
-}
-
-.hv2-hero__eyebrow {
-  margin-top: 38px;
-  display: flex;
-  justify-content: center;
-  color: var(--orange);
-  font-size: 14px;
-  letter-spacing: 0.14em;
-  font-weight: 600;
-  font-family: var(--font-display);
-}
-
-.hv2-hero__form {
-  margin: 22px auto 0;
-  justify-content: center;
-  max-width: 880px;
-}
-
-/* Cible du CTA « Analyser mon site » (header, section Comparaison, /blog/).
-   Sans marge de défilement, le header sticky de 81 px recouvre le formulaire.
-   La valeur dégage aussi le sur-titre « DIAGNOSTIC DE VISIBILITÉ GRATUIT »,
-   pour que la destination reste lisible. */
-.home-v2 #diagnostic {
-  scroll-margin-top: 148px;
-}
-
-.hv2-hero__submit {
-  padding: 20px 34px;
-  font-size: 19px;
-}
-
-.hv2-hero__note {
-  margin: 14px 0 0;
-}
-
-/* Fenêtre « diagnostic en cours » */
-
-.hv2-hero__demo {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 28px clamp(52px, 6vw, 88px);
-}
-
-.hv2-window {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  box-shadow: 0 1px 0 var(--border), 0 24px 48px -32px rgba(0, 0, 0, 0.35);
-  overflow: hidden;
-}
-
-.hv2-window__bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface2);
-}
-
-.hv2-window__dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--border2);
-}
-
-.hv2-window__spacer {
-  flex: 1;
-}
-
-.hv2-window__label {
-  font-size: 13px;
-  color: var(--muted);
-  letter-spacing: 0.06em;
-  font-family: var(--font-mono);
-}
-
-.hv2-window__body {
-  padding: 22px 24px 26px;
-}
-
-.hv2-scan {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  padding-bottom: 18px;
-  margin-bottom: 18px;
-  border-bottom: 1px dashed var(--border2);
-  font-size: 16px;
-  color: var(--ink2);
-}
-
-.hv2-scan__line {
-  opacity: 0;
-  animation: hv2In 0.5s ease forwards;
-}
-
-.hv2-scan__line--muted {
-  color: var(--muted);
-}
-
-.hv2-scan__check {
-  color: #3f7fae;
-}
-
-.hv2-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
-  font-size: 16px;
-}
-
-.hv2-steps__item {
-  display: flex;
-  gap: 11px;
-  align-items: flex-start;
-  opacity: 0;
-  animation: hv2In 0.45s ease forwards;
-}
-
-.hv2-steps__box {
-  flex: none;
-  width: 19px;
-  height: 19px;
-  margin-top: 2px;
-  border-radius: 5px;
-  border: 1px solid var(--border2);
-  background: var(--surface2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  color: #5b58a6;
-}
-
-.hv2-steps__label {
-  color: var(--ink2);
-}
-
-.hv2-pending {
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  color: var(--muted);
-  font-family: var(--font-mono);
-}
-
-.hv2-pending__spinner {
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  border: 2px solid var(--border2);
-  border-top-color: var(--yellow);
-  animation: hv2Spin 1s linear infinite;
-  display: inline-block;
 }
 
 /* ==========================================================================
@@ -605,9 +343,9 @@
   background: var(--blue);
   color: var(--ink);
   text-decoration: none;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 16px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 17px;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -834,9 +572,9 @@
   background: var(--lavender);
   color: var(--ink);
   text-decoration: none;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 16px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 17px;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -1148,306 +886,12 @@
   color: var(--onOrange);
 }
 
-.hv2-split {
-  background: var(--surface);
-  border-radius: 28px;
-  padding: clamp(24px, 2.6vw, 36px);
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
-  gap: clamp(28px, 3.4vw, 48px);
-  align-items: center;
-}
-
-.hv2-split__text {
-  align-self: center;
-  padding: clamp(4px, 0.8vw, 14px) clamp(8px, 1.6vw, 24px);
-}
-
-.hv2-split__title {
-  font-size: clamp(30px, 3.4vw, 44px);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  max-width: 15em;
-}
-
-.hv2-split__body {
-  margin-top: 22px;
-  font-size: 19px;
-  line-height: 1.6;
-  color: var(--ink2);
-  max-width: 30em;
-}
-
-.hv2-split__cta {
-  margin-top: 26px;
-}
-
-.hv2-table {
-  background: var(--blue);
-  border-radius: 22px;
-  padding: clamp(22px, 2.6vw, 32px);
-}
-
-.hv2-table__grid {
-  display: grid;
-  grid-template-columns: minmax(84px, auto) 1fr 1fr;
-  column-gap: 12px;
-  align-items: stretch;
-}
-
-.hv2-table__head-them {
-  padding: 12px 14px;
-  font-size: 12px;
-  letter-spacing: 0.13em;
-  font-family: var(--font-mono);
-  color: #3f6480;
-}
-
-.hv2-table__head-izy {
-  padding: 12px 16px;
-  border-radius: 14px 14px 0 0;
-  background: #16232e;
-  color: var(--blue);
-  font-size: 12px;
-  letter-spacing: 0.13em;
-  font-family: var(--font-mono);
-  font-weight: 700;
-}
-
-.hv2-table__criteria {
-  display: flex;
-  align-items: center;
-  padding: 16px 0;
-  border-top: 1px solid rgba(22, 35, 46, 0.2);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 17px;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  color: #16232e;
-}
-
-.hv2-table__them {
-  display: flex;
-  align-items: center;
-  padding: 16px 14px;
-  border-top: 1px solid rgba(22, 35, 46, 0.2);
-  font-size: 16px;
-  line-height: 1.4;
-  color: #4d6a80;
-}
-
-.hv2-table__izy {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px;
-  background: #16232e;
-  border-top: 1px solid rgba(185, 221, 253, 0.18);
-}
-
-.hv2-table__izy--last {
-  border-radius: 0 0 14px 14px;
-}
-
-.hv2-table__check {
-  flex: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--yellow);
-  color: var(--dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  line-height: 1;
-}
-
-.hv2-table__value {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 17px;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-  color: var(--bg);
-}
-
-/* ==========================================================================
-   S9 — Diagnostic / frise animée
-   ========================================================================== */
-
-.hv2-timeline__inner {
-  padding-top: clamp(32px, 4vw, 56px);
-  padding-bottom: clamp(32px, 4vw, 56px);
-}
-
-.hv2-timeline__text {
-  padding: clamp(8px, 2vw, 40px) clamp(8px, 1.6vw, 24px);
-}
-
-.hv2-timeline__form {
-  margin-top: 28px;
-  gap: 10px;
-  max-width: 540px;
-}
-
-.hv2-timeline__form .hv2-field {
-  flex: 1 1 200px;
-  padding: 15px 22px;
-  font-size: 17px;
-  background: var(--bg);
-}
-
-.hv2-timeline__form .hv2-btn {
-  padding: 15px 24px;
-  font-size: 17px;
-}
-
-.hv2-timeline__note {
-  margin-top: 18px;
-  max-width: 28em;
-}
-
-.hv2-timeline__stage {
-  background: var(--lavender);
-  border-radius: 22px;
-  padding: clamp(20px, 2.4vw, 34px);
-}
-
-.hv2-timeline__list {
-  min-height: 520px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 12px;
-}
-
-.hv2-tl {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  opacity: 0;
-  rotate: 5deg;
-  translate: 0 -18px;
-  transition: opacity 0.45s ease, rotate 0.7s cubic-bezier(0.34, 1.5, 0.64, 1),
-    translate 0.7s cubic-bezier(0.34, 1.5, 0.64, 1);
-}
-
-.hv2-tl.is-landed {
-  opacity: 1;
-  rotate: var(--tl-angle, 0deg);
-  translate: 0 0;
-}
-
-.hv2-tl__avatar {
-  flex: none;
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-  background: var(--yellow);
-  color: var(--dark);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.hv2-tl--avatar .hv2-tl__avatar {
-  display: flex;
-}
-
-.hv2-tl__card {
-  flex: 1;
-  background: var(--surface);
-  border: 1px solid transparent;
-  border-radius: 14px;
-  padding: 15px 18px 16px;
-}
-
-.hv2-tl--key .hv2-tl__card {
-  border-color: #dcae14;
-  padding: 18px 20px 20px;
-}
-
-.hv2-tl__stamps {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  align-items: center;
-}
-
-.hv2-tl__stamp {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  font-family: var(--font-mono);
-  color: var(--muted);
-}
-
-.hv2-tl--key .hv2-tl__stamp {
-  color: var(--dark);
-}
-
-.hv2-tl__badge {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  color: var(--dark);
-}
-
-.hv2-tl__text {
-  margin-top: 8px;
-  font-size: 17px;
-  line-height: 1.5;
-  color: var(--ink);
-}
-
-.hv2-tl--key .hv2-tl__text {
-  font-size: 19px;
-}
-
-.hv2-tl__chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  margin-left: 10px;
-  vertical-align: middle;
-  background: var(--yellow);
-  color: var(--dark);
-  border-radius: 999px;
-  padding: 4px 10px;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 14px;
-  scale: 0;
-  transition: scale 0.35s cubic-bezier(0.34, 1.6, 0.64, 1), background 0.3s ease;
-}
-
-.hv2-tl__chip--big {
-  font-size: 18px;
-}
-
-.hv2-tl__chip.is-flash {
-  background: #f8d661;
-}
-
-.hv2-tl__arrow {
-  transition: translate 0.3s ease;
-}
-
-.hv2-tl__chip.is-up .hv2-tl__arrow {
-  translate: 0 -3px;
-}
-
 /* ==========================================================================
    S10 — FAQ
    ========================================================================== */
 
 .hv2-faq {
-  background: var(--orange);
+  background: var(--bg);
 }
 
 .hv2-faq__inner {
@@ -1457,8 +901,8 @@
 
 .hv2-faq__badge {
   display: inline-block;
-  background: var(--surface);
-  color: var(--orange);
+  background: var(--lavender);
+  color: var(--ink);
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 38px;
@@ -1474,20 +918,20 @@
   line-height: 1.06;
   letter-spacing: -0.035em;
   font-weight: 700;
-  color: var(--surface);
+  color: var(--ink);
   max-width: 14em;
 }
 
 .hv2-faq__list {
   margin-top: 44px;
-  border: 1px solid rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(17, 16, 16, 0.18);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--lavender);
   overflow: hidden;
 }
 
 .hv2-faq__item {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+  border-bottom: 1px solid rgba(17, 16, 16, 0.14);
 }
 
 .hv2-faq__item:last-child {
@@ -1502,12 +946,12 @@
   font-family: var(--font-display);
   font-size: clamp(19px, 1.7vw, 23px);
   font-weight: 600;
-  color: var(--surface);
+  color: var(--ink);
   transition: opacity 0.2s ease;
 }
 
 .hv2-faq__q:hover {
-  opacity: 0.82;
+  opacity: 0.7;
 }
 
 .hv2-faq__q-text {
@@ -1518,9 +962,9 @@
   flex: none;
   width: 34px;
   height: 34px;
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(17, 16, 16, 0.3);
   border-radius: 8px;
-  color: var(--surface);
+  color: var(--ink);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1536,7 +980,7 @@
   padding: 0 86px 28px 30px;
   font-size: 18px;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(17, 16, 16, 0.82);
   max-width: 52em;
 }
 
@@ -1550,16 +994,27 @@
 }
 
 .hv2-final__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-  gap: clamp(28px, 4vw, 56px);
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: clamp(28px, 4vw, 40px);
+  text-align: center;
 }
 
 .hv2-final__title {
   font-size: clamp(28px, 3.2vw, 40px);
   line-height: 1.12;
   max-width: 18em;
+}
+
+.hv2-final__title-break {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .hv2-final__title-break {
+    display: block;
+  }
 }
 
 .hv2-final__cta {
@@ -1571,78 +1026,11 @@
    Animations
    ========================================================================== */
 
-@keyframes hv2In {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes hv2Blink {
-  0%,
-  100% {
-    opacity: 0.25;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes hv2Spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Respect des préférences système : on coupe les boucles décoratives */
-@media (prefers-reduced-motion: reduce) {
-  .home-v2 .hv2-conv__caret,
-  .home-v2 .hv2-pending__spinner {
-    animation: none;
-  }
-
-  .home-v2 .hv2-scan__line,
-  .home-v2 .hv2-steps__item {
-    opacity: 1;
-    animation: none;
-  }
-
-  .home-v2 .hv2-tl {
-    transition: none;
-  }
-}
-
 /* ==========================================================================
    Responsive
    ========================================================================== */
 
 @media (max-width: 860px) {
-  .hv2-plan {
-    max-width: none;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .hv2-app__screen {
-    min-height: 0;
-  }
-
-  .hv2-conv__thread {
-    padding: 20px 18px;
-  }
-
-  .hv2-conv__composer {
-    padding: 14px 18px;
-  }
-
-  .hv2-card--indent {
-    margin-left: 0;
-  }
-
   .hv2-faq__a {
     padding-right: 30px;
   }
@@ -1662,199 +1050,5 @@
   .hv2-hero__head {
     padding-left: 20px;
     padding-right: 20px;
-  }
-
-  .hv2-hero__demo {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .hv2-tl {
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-
-  .hv2-timeline__list {
-    min-height: 0;
-  }
-}
-
-/* ==========================================================================
-   Modale de confirmation du diagnostic
-   Affichée après l'envoi de l'un des trois formulaires (voir home-v2.js).
-   <dialog> natif : le navigateur gère le focus, Échap et l'arrière-plan inerte.
-   ========================================================================== */
-
-.hv2-modal {
-  /* Reset des styles par défaut de <dialog> : bordure, fond et padding du UA. */
-  margin: auto;
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: var(--ink);
-  max-width: min(520px, calc(100vw - 40px));
-  width: 100%;
-  overflow: visible;
-}
-
-.hv2-modal::backdrop {
-  background: rgba(17, 21, 16, 0.55);
-}
-
-.hv2-modal__panel {
-  background: var(--surface);
-  border-radius: 24px;
-  padding: clamp(28px, 4vw, 40px);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 14px;
-  text-align: left;
-}
-
-.hv2-modal__eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-}
-
-.hv2-modal__blink {
-  width: 8px;
-  height: 14px;
-  background: var(--orange);
-  display: inline-block;
-  animation: hv2ModalBlink 1.2s steps(1) infinite;
-}
-
-@keyframes hv2ModalBlink {
-  0%,
-  100% {
-    opacity: 0.25;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-.hv2-modal__title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(26px, 3.2vw, 34px);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-}
-
-.hv2-modal__text {
-  font-size: 18px;
-  line-height: 1.55;
-  color: var(--ink2);
-}
-
-.hv2-modal__close {
-  margin-top: 6px;
-}
-
-/* L'ouverture est animée en fondu ; @starting-style permet de partir de
-   l'état initial sans JavaScript supplémentaire. */
-.hv2-modal[open] {
-  animation: hv2ModalIn 0.22s ease both;
-}
-
-@keyframes hv2ModalIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hv2-modal[open] {
-    animation: none;
-  }
-
-  .hv2-modal__blink {
-    animation: none;
-    opacity: 1;
-  }
-}
-
-/* ==========================================================================
-   Tableau comparatif — version empilée sur téléphone
-   Les trois colonnes demandent environ 390 px de contenu minimum : sous cette
-   largeur, la colonne sombre sortait de la carte bleue. On passe donc à une
-   pile par critère — nom du critère, valeur agence, bloc Izy — plutôt que de
-   comprimer trois colonnes jusqu'à l'illisible.
-   Aucun changement de balisage : la grille passe à une colonne et les libellés
-   de colonnes, désormais inutiles en tête, sont réinjectés devant chaque valeur.
-   ========================================================================== */
-
-@media (max-width: 620px) {
-  .hv2-table__grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* La cellule vide et les deux en-têtes de colonnes n'ont plus de sens. */
-  .hv2-table__grid > span:first-child,
-  .hv2-table__head-them,
-  .hv2-table__head-izy {
-    display: none;
-  }
-
-  .hv2-table__criteria {
-    padding: 22px 0 12px;
-    font-size: 19px;
-  }
-
-  /* Le premier critère ouvre la pile : pas de filet au-dessus. Il suit
-     toujours l'en-tête « L'APP Izy » — le sélecteur d'adjacence est donc
-     stable, contrairement à un :nth-of-type qui compte les balises. */
-  .hv2-table__head-izy + .hv2-table__criteria {
-    padding-top: 0;
-    border-top: none;
-  }
-
-  .hv2-table__them {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    padding: 0 0 14px;
-    border-top: none;
-  }
-
-  .hv2-table__them::before {
-    content: "AGENCE";
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.13em;
-    color: #3f6480;
-  }
-
-  .hv2-table__izy,
-  .hv2-table__izy--last {
-    flex-wrap: wrap;
-    border-radius: 14px;
-    border-top: none;
-  }
-
-  /* flex-basis 100 % : le libellé prend sa ligne, la coche et la valeur
-     restent côte à côte en dessous. L'espacement vient du `gap: 10px` déjà
-     posé sur .hv2-table__izy — inutile d'ajouter une marge. */
-  .hv2-table__izy::before {
-    content: "L'APP IZY";
-    flex-basis: 100%;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.13em;
-    font-weight: 700;
-    color: var(--blue);
   }
 }

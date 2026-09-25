@@ -59,7 +59,7 @@ This type of mission — recurring, structurable, with no human added value in t
 
 ---
 
-*Izybiz lets you describe a mission — the agents execute it, you evaluate. Built by a manager who ran execution at Bouygues, SFR, Canal+ and SNCF. [Try the free diagnosis →](/en/#diagnostic)*
+*Izybiz lets you describe a mission — the agents execute it, you evaluate. Built by a manager who ran execution at Bouygues, SFR, Canal+ and SNCF. [Try the free diagnosis →](/en/visibility-diagnostic/)*
 
 ---
 

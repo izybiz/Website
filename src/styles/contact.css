@@ -18,6 +18,12 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* Variante de contact.astro / en/contact.astro uniquement : fond blanc au
+   lieu du beige — diagnostic-visibilite.astro garde .contact-v2 tel quel. */
+.contact-v2--white {
+  background: var(--surface);
+}
+
 .contact-v2 * {
   box-sizing: border-box;
 }
@@ -260,8 +266,8 @@
   border: none;
   border-radius: 999px;
   font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 400;
   cursor: pointer;
 }
 
@@ -363,7 +369,8 @@
   line-height: 1.5;
 }
 
-/* Carte 1 — diagnostic (jaune, cliquable en entier). */
+/* Carte diagnostic (jaune, cliquable en entier) — utilisée uniquement par
+   diagnostic-visibilite.astro / en/visibility-diagnostic.astro. */
 
 .cv2-card--diag {
   display: block;
@@ -392,7 +399,7 @@
   color: var(--dark);
 }
 
-/* Carte 2 — rendez-vous (lavande). */
+/* Carte rendez-vous (lavande). */
 
 .cv2-card--rdv {
   background: var(--lavender);
@@ -419,8 +426,8 @@
   color: var(--bg);
   border-radius: 999px;
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 400;
+  font-size: 17px;
 }
 
 .cv2-card__cta:hover {
@@ -428,7 +435,7 @@
   filter: brightness(1.25);
 }
 
-/* Carte 3 — coordonnées (bleue). */
+/* Carte coordonnées (bleue). */
 
 .cv2-card--mail {
   background: var(--blue);
@@ -467,13 +474,147 @@
   color: #2f5570;
 }
 
+/* ==========================================================================
+   Page /contact/ (septembre 2026) — deux colonnes, formulaire dans une carte
+   sur fond dégradé. diagnostic-visibilite.astro garde l'ancienne structure
+   (cv2-hero/cv2-main/cv2-grid/cv2-cards) ci-dessus, inchangée : les classes
+   ci-dessous ne sont utilisées que par contact.astro / en/contact.astro.
+   ========================================================================== */
+
+.cv2-layout-section {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(40px, 5vw, 76px) 28px clamp(52px, 6vw, 90px);
+}
+
+.cv2-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(32px, 4vw, 48px);
+}
+
+/* ----------------------------------------------------------------- Intro */
+
+.cv2-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  max-width: 44em;
+}
+
+.cv2-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(38px, 5vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.cv2-lede {
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--ink2);
+  max-width: 30em;
+}
+
+.cv2-side {
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.cv2-side__link {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* ------------------------------------------------------------ Panneau/carte */
+
+.cv2-panel {
+  width: 100%;
+  max-width: 820px;
+  border-radius: 28px;
+  padding: 10px clamp(16px, 2.4vw, 26px);
+  background: transparent;
+  border: 2px solid var(--ink);
+}
+
+.cv2-panel__card {
+  background: transparent;
+  border-radius: 20px;
+  padding: clamp(24px, 3vw, 36px);
+}
+
+/* .cv2-form garde son fond blanc par défaut pour diagnostic-visibilite.astro,
+   où le formulaire est lui-même la carte. Ici, il est déjà dans
+   .cv2-panel__card : transparent pour laisser voir le dégradé. */
+.cv2-panel__card .cv2-form {
+  background: transparent;
+}
+
+/* Fond du panneau redevenu beige simple (plus de dégradé) : les champs
+   prennent une couleur de la palette pour se détacher, et les textes
+   reprennent leurs teintes sombres habituelles, lisibles sur du beige. */
+.cv2-panel__card .cv2-field,
+.cv2-panel__card .cv2-message {
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+}
+
+.cv2-panel__card .cv2-form__note {
+  color: var(--muted);
+}
+
+.cv2-panel__card .cv2-form__privacy {
+  color: var(--muted);
+}
+
+.cv2-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.cv2-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cv2-field-group .cv2-field,
+.cv2-field-group .cv2-message {
+  /* Reset de .cv2-field/.cv2-message : pensés pour une rangée flex
+     horizontale (flex-basis = largeur), ils gonflaient en hauteur ici, dans
+     un conteneur flex en colonne (flex-basis = hauteur). Champs classiques,
+     rectangulaires, pour cette page — la page diagnostic garde les siens
+     en pilule, inchangés. */
+  flex: none;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.cv2-form__actions--split {
+  width: 100%;
+  justify-content: space-between;
+}
+
+@media (max-width: 560px) {
+  .cv2-form__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* --------------------------------------------------------------- Mobile */
 
 /* Même seuil et mêmes marges que la home (voir home-v2.css, .hv2-wrap) :
    les pages doivent respirer pareil quand on passe de l'une à l'autre. */
 @media (max-width: 560px) {
   .cv2-hero,
-  .cv2-main {
+  .cv2-main,
+  .cv2-layout-section {
     padding-left: 20px;
     padding-right: 20px;
   }

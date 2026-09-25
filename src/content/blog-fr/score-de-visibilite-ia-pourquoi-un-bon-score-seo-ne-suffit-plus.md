@@ -36,7 +36,7 @@ Le test prend dix minutes : poser à ChatGPT, Gemini et Perplexity les cinq ques
 
 Imaginons une entreprise de maintenance industrielle, bien classée sur Google depuis deux ans dans sa région. Son dirigeant pose la question à ChatGPT. La réponse cite trois concurrents, dont deux plus petits que lui. **Aucun outil de suivi de position ne l'aurait alerté.**
 
-[Le diagnostic gratuit d'Izy](https://izybiz.fr/) fait ce test à la place du dirigeant, en cinq minutes : il mesure le référencement classique et la visibilité dans les réponses des IA, sans attendre de tomber sur le problème par hasard.
+[Le diagnostic gratuit d'Izy](/diagnostic-visibilite/) fait ce test à la place du dirigeant, en cinq minutes : il mesure le référencement classique et la visibilité dans les réponses des IA, sans attendre de tomber sur le problème par hasard.
 
 ## Que faire pour améliorer son score de visibilité IA ?
 

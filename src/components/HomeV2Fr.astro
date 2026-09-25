@@ -123,49 +123,6 @@ const caseStudies = [
   },
 ];
 
-// Frise S9 — `chip` est la valeur comptée à l'arrivée de la carte
-const timeline = [
-  {
-    stamp: "SEMAINE 3",
-    text: "Nouvelle page en ligne · ≈ 210 recherches/mois",
-    angle: "-1.5deg",
-    shift: 24,
-    avatar: true,
-    chip: null,
-  },
-  {
-    stamp: "MOIS 1",
-    text: "5 pages optimisées, 4 articles publiés · score 34",
-    angle: "-1.2deg",
-    shift: 28,
-    chip: 3,
-  },
-  {
-    stamp: "MOIS 3",
-    text: "Cité par les IA sur 2 requêtes · score 41",
-    angle: "1.5deg",
-    shift: -20,
-    chip: 7,
-  },
-  {
-    stamp: "MOIS 5",
-    text: "Demande de devis reçue · transférée dans votre boîte",
-    angle: "2deg",
-    shift: 14,
-    key: true,
-    chip: null,
-  },
-  {
-    stamp: "MOIS 6",
-    text: "2 nouvelles demandes de devis · score 52",
-    angle: "0deg",
-    shift: 0,
-    flat: true,
-    chip: 21,
-    big: true,
-  },
-];
-
 ---
 
 <div class="home-v2">
@@ -446,110 +403,6 @@ const timeline = [
     </div>
   </section>
 
-  {/* ================= S9 — Diagnostic / frise ================= */}
-  <section aria-labelledby="hv2-timeline-title" data-section="timeline">
-    <div class="hv2-wrap hv2-timeline__inner" id="izy-s9" data-timeline>
-      <div class="hv2-split">
-        <div class="hv2-timeline__text">
-          <h2 class="hv2-split__title" id="hv2-timeline-title">
-            Du diagnostic<br /><span>au premier devis.</span>
-          </h2>
-          <p class="hv2-split__body">
-            Six mois d'une mission type : le score qui monte, mesuré et jamais promis, le
-            travail livré chaque semaine, et des demandes qui finissent par venir à vous.
-            Ça commence par voir où vous en êtes : le diagnostic gratuit, en cinq minutes.
-          </p>
-          <form
-            class="hv2-form hv2-timeline__form"
-            data-site-form
-            data-form-kind="diagnostic"
-            data-form-location="frise"
-            novalidate
-          >
-            <input
-              class="hv2-botcheck"
-              type="checkbox"
-              name="botcheck"
-              tabindex="-1"
-              autocomplete="off"
-              aria-hidden="true"
-            />
-            <input type="hidden" name="origine" value="Home — frise" />
-            <label class="sr-only" for="hv2-s9-email">Votre email</label>
-            <input
-              class="hv2-field"
-              id="hv2-s9-email"
-              type="email"
-              name="email"
-              placeholder="votre@email.fr"
-              autocomplete="email"
-              required
-            />
-            <label class="sr-only" for="hv2-s9-site">L'adresse de votre site</label>
-            <input
-              class="hv2-field"
-              id="hv2-s9-site"
-              type="url"
-              name="website"
-              placeholder="https://votre-site.fr"
-              autocomplete="url"
-              required
-            />
-            <button class="hv2-btn" type="submit">Analyser mon site</button>
-            <p class="hv2-form__message" role="alert" data-form-message></p>
-        <p class="hv2-form__privacy">
-          Votre adresse ne sert qu'à vous envoyer ce diagnostic, et n'est jamais
-          revendue. <a href="/politique-de-confidentialite/">Comment vos données
-          sont traitées</a>
-        </p>
-          </form>
-          <p class="hv2-note hv2-timeline__note">
-            Exemple de mission. Vos chiffres à vous sont mesurés chaque mois, dès le
-            diagnostic.
-          </p>
-        </div>
-
-        <div class="hv2-timeline__stage">
-          <div class="hv2-timeline__list">
-            {
-              timeline.map((t, i) => (
-                <div
-                  class={`hv2-tl${t.avatar ? " hv2-tl--avatar" : ""}${t.key ? " hv2-tl--key" : ""}`}
-                  style={`--tl-angle:${t.angle};width:${t.flat ? "100%" : "85%"};margin-left:${t.shift > 0 ? t.shift + "px" : "0"};margin-right:${t.shift < 0 ? -t.shift + "px" : "0"}`}
-                  data-tl-index={i}
-                >
-                  <span class="hv2-tl__avatar">Izy</span>
-                  <div class="hv2-tl__card">
-                    <div class="hv2-tl__stamps">
-                      <span class="hv2-tl__stamp">{t.stamp}</span>
-                      {t.key && <span class="hv2-tl__badge">PREMIER DEVIS</span>}
-                    </div>
-                    <p class="hv2-tl__text">
-                      {t.text}
-                      {t.chip && (
-                        <span
-                          class={`hv2-tl__chip${t.big ? " hv2-tl__chip--big" : ""}`}
-                          data-chip={t.chip}
-                          data-chip-big={t.big ? "true" : "false"}
-                          aria-label={`plus ${t.chip} points`}
-                        >
-                          <span class="hv2-tl__arrow" aria-hidden="true">
-                            ↗
-                          </span>
-                          +<span data-chip-value>0</span>
-                        </span>
-                      )}
-                    </p>
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   {/* ================= S10 — FAQ ================= */}
   <section class="hv2-faq" aria-labelledby="hv2-faq-title" data-section="faq">
     <div class="hv2-wrap hv2-faq__inner">
@@ -578,7 +431,7 @@ const timeline = [
     <div class="hv2-wrap hv2-final__inner">
       <div class="hv2-final__grid">
         <h2 class="hv2-final__title" id="hv2-final-title">
-          Dites-nous votre besoin, on s'occupe du reste.
+          Parlez-nous de votre besoin,<br class="hv2-final__title-break" /> on s'occupe du reste.
         </h2>
         <div>
           <a class="hv2-btn hv2-final__cta" href="/contact/">Nous contacter</a>
@@ -586,26 +439,6 @@ const timeline = [
       </div>
     </div>
   </section>
-
-  <!-- Confirmation affichée après l'envoi d'un des trois formulaires de
-       diagnostic. <dialog> natif : la gestion du focus, la touche Échap et
-       l'inertie de l'arrière-plan sont assurées par le navigateur. -->
-  <dialog class="hv2-modal" id="hv2-diagnostic-modal" aria-labelledby="hv2-modal-title">
-    <div class="hv2-modal__panel">
-      <p class="hv2-modal__eyebrow">
-        <span class="hv2-modal__blink" aria-hidden="true"></span>
-        DIAGNOSTIC EN COURS
-      </p>
-      <h2 class="hv2-modal__title" id="hv2-modal-title">Votre diagnostic démarre.</h2>
-      <p class="hv2-modal__text">
-        Nous vous envoyons un mail dès qu'il est terminé, à l'adresse que vous venez
-        d'indiquer.
-      </p>
-      <button class="hv2-btn hv2-modal__close" type="button" data-modal-close>
-        Fermer
-      </button>
-    </div>
-  </dialog>
 </div>
 
 <script is:inline src="/forms.js" defer></script>

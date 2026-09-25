@@ -1,0 +1,317 @@
+---
+// Traduction anglaise de /integration-ia/ le lien "Notre approche
+// intégration IA en entreprise" de la home EN pointe ici.
+import Layout from "../../layouts/Layout.astro";
+import "../../styles/legacy-article.css";
+
+const title = "AI Integration in Business: From POC to Production";
+const description =
+  "AI integration in business: from POC to real production. Governance, operational workflows, independent teams on exit. For mid-market companies. Get in touch.";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "AI Integration in Business",
+  name: title,
+  description,
+  url: "https://izybiz.fr/en/ai-integration/",
+  areaServed: "France",
+  provider: {
+    "@type": "Organization",
+    name: "Izybiz",
+    url: "https://izybiz.fr",
+  },
+};
+---
+
+<Layout lang="en" title={title} description={description} canonicalPath="/en/ai-integration/">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  </Fragment>
+
+  <main class="legacy-article">
+    <article class="legacy-article__article">
+      <a class="legacy-article__back" href="/en/">Home</a>
+      <h1 class="legacy-article__title">{title}</h1>
+      <p class="legacy-article__lede">{description}</p>
+
+      <div class="legacy-article__body">
+        <p>
+          95% of enterprise GenAI projects fail. 84% because of management not
+          technology.
+        </p>
+        <p>
+          It's not a tooling problem. It's a governance problem, a use-case
+          framing problem, and a matter of holding execution through to
+          production. That's exactly where Izybiz steps in.
+        </p>
+        <p class="legacy-article__cta-line">
+          <a class="legacy-article__cta" href="/en/contact/">Discuss your situation</a>
+        </p>
+
+
+        <h2>The real problem with AI integration projects in business</h2>
+        <p>
+          23% of executives can connect their AI investments to a measurable
+          financial outcome. The other 77% have POCs, demos, pilot projects and
+          nothing genuinely running in production.
+        </p>
+        <p>The causes are well known:</p>
+        <p>
+          <strong>Use-case framing is wrong.</strong> Projects start from the
+          tool's capabilities rather than the operational problems to solve. The
+          result: technically successful projects that change nothing in
+          operations.
+        </p>
+        <p>
+          <strong>Governance isn't in place.</strong> Who decides when an AI
+          output is reliable? Who validates? Who handles exceptions? Without
+          defined human checkpoints, teams don't adopt or adopt haphazardly.
+        </p>
+        <p>
+          <strong>There's no operational lead.</strong> IT drives the technology.
+          The business drives the results. The two don't talk. Nobody owns the
+          integration as a whole.
+        </p>
+        <p>
+          <strong>Dependency on the vendor or integrator isn't anticipated.</strong>
+          By the end of the project, the company doesn't understand what it
+          deployed and can't evolve it alone.
+        </p>
+
+
+        <h2>AI integration in business: the Make or Buy trade-off</h2>
+        <p>
+          When an AI integration project starts, the CEO's first question is
+          almost always the same: do we build it in-house, or bring someone in?
+        </p>
+        <p>
+          Both options have their limits. Knowing them avoids making the wrong
+          choice for the wrong reasons.
+        </p>
+
+        <h3>Make Delegate to IT</h3>
+        <p>
+          IT is structurally under pressure. That's not a criticism it's the
+          result of ten years of IT cost optimisation. Headcount has been
+          rationalised, budgets trimmed, teams sized to keep the lights on. The
+          result: IT is chronically overloaded. That's not an anomaly, it's a
+          permanent, accepted state.
+        </p>
+        <p>
+          Adding an AI integration project without dedicated resources means
+          choosing between two bad options: overload teams that are already
+          stretched, or watch the project sit at low priority between two
+          critical tickets. Either way, the project doesn't land.
+        </p>
+        <p>
+          So the real question isn't "IT or not IT" that's a false dilemma. The
+          right question is: <strong>how do you bring IT in without drowning it,
+          and who holds the thread between technology and business
+          operations?</strong>
+        </p>
+        <p>
+          Izybiz isn't here to replace IT. It's here to spare IT from carrying
+          alone a project that exceeds its natural scope. Make or buy,
+          architecture, vendor selection, build/integrate/delegate trade-offs
+          these are decisions made with IT, not instead of it. Once the choices
+          are made, IT takes back what's its territory: run, maintenance,
+          security. That's its mission. It fulfils it.
+        </p>
+
+        <h3>Buy Trust an external provider</h3>
+        <p>
+          The alternative to Make is Buy. Hand the project to an external
+          provider: an AI vendor, an IT services firm, a consulting firm. The
+          problem is that all three have structural limits and often, interests
+          that don't align with yours.
+        </p>
+        <p>
+          <strong>AI vendors</strong> sell you their tool. Their business model
+          relies on adoption and dependency on their platform not on your
+          independence. Vendor selection should never be left to the vendor
+          itself.
+        </p>
+        <p>
+          <strong>IT services firms</strong> deploy technical teams developers,
+          data engineers, integrators. They execute what they're asked to build.
+          What they don't do: define what to build, frame business use cases,
+          drive change within teams, or own business results. Result: they
+          deliver a technically functional system your teams don't adopt and are
+          often the only ones who understand. The keys to the truck they don't
+          hand them over: their business model relies on continuity of service.
+        </p>
+        <p>
+          On top of that, there's a rarely disclosed conflict of interest: most
+          large IT services firms hold commercial partnerships with AI solution
+          publishers Microsoft, Google, Salesforce, ServiceNow. These
+          agreements steer recommendations, even unconsciously. Making you
+          independent from a vendor isn't in their economic interest.
+        </p>
+        <p>
+          <strong>Consulting firms</strong> produce AI strategies. Diagnostics,
+          roadmaps, architecture recommendations. What they don't do: hold
+          execution, drive operational change, or answer for results in
+          production. They tell you what to do. Not how to make it hold over
+          time.
+        </p>
+        <p>
+          <strong>Izybiz is neither.</strong> Independent from any vendor, with no
+          business model built on dependency, with a single objective: that by
+          the end of the mission, your organisation runs on its own IT
+          trained, workflows documented, teams autonomous. The keys to the
+          truck you have them.
+        </p>
+
+
+        <h2>What AI integration in business produces when it works</h2>
+        <p>When an AI integration is well executed, the client comes out with:</p>
+        <ul>
+          <li><strong>An AI system in production</strong> not a POC, not a demo. A workflow running, with real volumes.</li>
+          <li><strong>Documented workflows</strong> every step, every human checkpoint, every validation rule.</li>
+          <li><strong>A trained team</strong> that understands what it uses, can evolve it, and isn't dependent on a consultant.</li>
+          <li><strong>Clear responsibilities</strong> who does what, who validates what, how incidents are handled.</li>
+          <li><strong>Total independence</strong> Izybiz leaves. The organisation carries on.</li>
+        </ul>
+
+
+        <h2>The Izybiz method for AI integration in business</h2>
+
+        <h3>Phase 1 Use-case framing</h3>
+        <p>We don't start with the tools. We start with operations.</p>
+        <p>
+          Which processes are the most time-consuming, the most exposed to
+          errors, the most dependent on scarce resources? Among these processes,
+          which are good candidates for AI augmentation and in what order of
+          priority?
+        </p>
+        <p>
+          By the end of this phase: a clear mapping of the retained use cases,
+          with a defined success criterion for each.
+        </p>
+
+        <h3>Phase 2 Vendor selection and architecture</h3>
+        <p>Build, buy, or partner? General-purpose LLM or specialised model? Cloud or on-premise?</p>
+        <p>
+          These decisions depend on your constraints (compliance, data,
+          infrastructure) and your AI maturity level. They should never be left
+          to a single vendor whose interest is to sell you their solution.
+        </p>
+        <p>
+          Izybiz conducts this selection independently, with technical and
+          operational criteria defined upfront.
+        </p>
+
+        <h3>Phase 3 AI workflow design</h3>
+        <p>
+          An AI workflow isn't a standard workflow with an extra tool. It requires
+          redefining task sequences, human validation points, threshold rules
+          (when AI decides alone, when it proposes, when it escalates), and
+          supervision protocols.
+        </p>
+        <p>This is the most important work and the one most AI projects skip.</p>
+
+        <h3>Phase 4 Deployment and go-live</h3>
+        <p>
+          Progressive rollout by scope, adoption and quality metrics tracked,
+          adjustments made under real conditions. Not a mass rollout that fails
+          for lack of adoption.
+        </p>
+
+        <h3>Phase 5 Transfer and independence</h3>
+        <p>
+          Full documentation of systems, team training, maintenance and evolution
+          processes put in place. At this stage, the organisation can run,
+          adjust and evolve its AI workflows without Izybiz.
+        </p>
+
+
+        <h2>Frequently asked questions about AI integration in business</h2>
+
+        <h3>"AI is too early for us we're not ready."</h3>
+        <p>
+          84% of AI failures are due to management, not technology. If you wait
+          to be "technologically ready", you'll wait forever. The real question
+          is: do you have clear use cases, governance in place, and an
+          operational lead capable of holding execution? That's what being ready
+          means.
+        </p>
+
+        <h3>"Our AI projects have already failed. Why would this time work?"</h3>
+        <p>
+          Because next time will start with framing, not the tool. And because
+          there will be an operational lead holding the integration end to end
+          not an IT project with no business sponsor and no human checkpoints.
+        </p>
+
+        <h3>"How do you measure the ROI of an AI integration?"</h3>
+        <p>
+          Every retained use case has a success criterion defined during framing:
+          time saved, error rate reduced, volume processed, cost per transaction.
+          These metrics are tracked in production. ROI is traceable that's a
+          condition of the mission, not a hope.
+        </p>
+
+        <h3>"Which AI models do you use?"</h3>
+        <p>
+          Model selection depends on the use case, compliance constraints and
+          existing architecture. Izybiz isn't tied to any vendor selection is
+          conducted independently based on your stakes. This can include cloud
+          models (OpenAI, Anthropic, Google) or locally deployed models depending
+          on your requirements.
+        </p>
+
+        <h3>"Does AI integration require transforming our data?"</h3>
+        <p>
+          Often, yes partially. A data audit is part of the framing phase. But
+          "transform all the data before starting" is a false excuse. We start
+          with use cases whose data is available and clean, and address the
+          others in parallel.
+        </p>
+
+        <h3>"Will our teams resist?"</h3>
+        <p>
+          Resistance comes from fear of the unknown and from feeling excluded.
+          The Izybiz method involves business teams from the framing stage
+          onward they define the use cases, take part in workflow design, and
+          are trained before deployment. It's not done for them, it's done with
+          them.
+        </p>
+
+
+        <h2>What the mission leaves behind</h2>
+        <table class="legacy-article__table">
+          <thead>
+            <tr><th>Deliverable</th><th>What it means in practice</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>AI system in production</td><td>One or more workflows running with real volumes</td></tr>
+            <tr><td>Technical documentation</td><td>Architecture, configurations, connectors, dependencies</td></tr>
+            <tr><td>Operational documentation</td><td>Workflows, human checkpoints, threshold rules, escalations</td></tr>
+            <tr><td>Trained teams</td><td>Understand what they use and can evolve it</td></tr>
+            <tr><td>Independence</td><td>No consultant needed to maintain and adjust</td></tr>
+          </tbody>
+        </table>
+
+
+        <h2>Ready to get out of the abandoned-POC cycle?</h2>
+        <p>
+          A 30-minute call is enough to clarify whether your situation calls for
+          a structured AI integration and whether Izybiz is the right fit to
+          execute it.
+        </p>
+        <p>No pitch. No demo. A conversation between executives.</p>
+        <p class="legacy-article__cta-line">
+          <a class="legacy-article__cta" href="/en/contact/">Book a call</a>
+        </p>
+
+
+        <p class="legacy-article__footnote">
+          <em>See also: <a href="/en/interim-management/">Interim
+          management</a> for situations where AI integration is part of a
+          broader operational transformation.</em>
+        </p>
+      </div>
+    </article>
+  </main>
+</Layout>

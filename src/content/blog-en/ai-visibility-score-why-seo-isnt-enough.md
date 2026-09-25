@@ -36,7 +36,7 @@ The test takes ten minutes. Ask ChatGPT, Gemini, and Perplexity the five questio
 
 Picture an industrial maintenance company. It's ranked well on Google for two years, in its own region. The owner asks ChatGPT the same question. The answer names three rivals, two of them smaller. **No tracking tool would have caught it.**
 
-[Izy's visibility diagnostic](https://izybiz.fr/en/) runs that test for the owner, in five minutes. It checks classic SEO and AI visibility at once, instead of waiting to stumble on the problem by chance.
+[Izy's visibility diagnostic](/en/visibility-diagnostic/) runs that test for the owner, in five minutes. It checks classic SEO and AI visibility at once, instead of waiting to stumble on the problem by chance.
 
 ## What should I do to improve my AI visibility score?
 
