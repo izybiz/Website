@@ -422,8 +422,11 @@
 .we-deliver__card {
   position: relative;
   flex: 0 0 auto;
-  width: 320px;
-  height: 448px;
+  /* Volontairement plus étroite que le viewport mobile (au lieu de 320px) :
+     ça laisse dépasser un bout de la carte suivante, seul signal qu'on peut
+     glisser horizontalement tant qu'aucun JS ne pilote un compteur. */
+  width: 280px;
+  height: 392px;
   border-radius: 24px;
   overflow: hidden;
   scroll-snap-align: start;
@@ -555,6 +558,24 @@
 
   .we-deliver__card-tab {
     font-size: 20px;
+  }
+}
+
+.we-deliver__swipe-hint {
+  /* .we-deliver espace ses enfants de 48px (gap) : ces marges négatives
+     resserrent l'indice contre les cartes plutôt que de le laisser flotter
+     au milieu de l'espace vide avant le lien "Voir toutes nos missions". */
+  margin: -40px 0 -40px;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+@media (min-width: 1400px) {
+  /* Les cartes ne défilent plus au-delà de ce seuil (voir
+     .we-deliver__cards-row), l'indice n'a alors plus lieu d'être. */
+  .we-deliver__swipe-hint {
+    display: none;
   }
 }
 
