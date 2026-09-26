@@ -53,27 +53,25 @@ const homeHref = lang === "en" ? "/en/" : "/";
 const aboutHref = lang === "en" ? "/en/about/" : "/a-propos/";
 const servicesHref = lang === "en" ? "/en/services/" : "/services/";
 
-// Textes traduits du JSON-LD Organization/SoftwareApplication : voir le
+// Textes traduits du JSON-LD Organization : voir le
 // piège « données structurées » dans CLAUDE.md — à relire à chaque
 // changement de positionnement, dans les deux langues.
 const jsonLdCopy = {
   fr: {
     orgDescription:
-      "Izybiz édite Izy, un logiciel d'agents IA qui exécute la visibilité en ligne des PME et ETI B2B en France : diagnostic, audit et optimisation du site, calendrier éditorial, articles et posts, veille de marché, bilan mensuel.",
-    appDescription:
-      "Izy fait venir les clients aux PME et ETI B2B : il audite et corrige le site, construit la stratégie et le calendrier éditorial, rédige articles et posts, surveille le marché et mesure la visibilité chaque mois.",
-    offerName: "Diagnostic de visibilité",
-    offerDescription:
-      "Diagnostic automatisé de votre visibilité en ligne, en cinq minutes, sans engagement.",
+      "Izybiz accompagne les ETI et scale-ups en management de transition et en intégration IA : reprendre la main sur les opérations, fixer les priorités, tenir l'exécution et déployer l'IA jusqu'à des résultats mesurables.",
+    services: [
+      { name: "Management de transition", path: "/management-de-transition/" },
+      { name: "Intégration IA en entreprise", path: "/integration-ia/" },
+    ],
   },
   en: {
     orgDescription:
-      "Izybiz publishes Izy, an AI agent software that runs online visibility for French B2B SMEs and mid-sized companies: diagnosis, site audit and optimisation, editorial calendar, articles and posts, market monitoring, monthly reporting.",
-    appDescription:
-      "Izy brings customers to B2B SMEs and mid-sized companies: it audits and fixes the site, builds the strategy and editorial calendar, writes articles and posts, monitors the market and measures visibility every month.",
-    offerName: "Visibility diagnosis",
-    offerDescription:
-      "Automated diagnosis of your online visibility, in five minutes, no commitment.",
+      "Izybiz supports mid-market companies and scale-ups with interim management and AI integration: taking back control of operations, setting priorities, driving execution and deploying AI through to measurable results.",
+    services: [
+      { name: "Interim Management", path: "/en/interim-management/" },
+      { name: "AI Integration in Business", path: "/en/ai-integration/" },
+    ],
   },
 } as const;
 const ld = jsonLdCopy[lang];
@@ -146,12 +144,13 @@ const siteRoot = lang === "en" ? "https://izybiz.fr/en" : "https://izybiz.fr";
     <link rel="alternate" hreflang="x-default" href={xDefaultHref} />
 
     <!--
-      Données structurées : Organization + SoftwareApplication, sur toutes les
+      Données structurées : Organization, sur toutes les
       pages. C'est ce que Google et les moteurs de réponse IA lisent en priorité
       pour décrire l'offre — chaque affirmation doit donc correspondre à ce que
-      la home dit vraiment. Vérifié le 2026-08-13 :
-      le diagnostic est gratuit et ouvert à tous (l'ancien « accès sur
-      invitation » était devenu faux), et le site est monolingue.
+      la home dit vraiment. Revu le 2026-09-26 : positionnement management de
+      transition + intégration IA. Le logiciel Izy et son diagnostic gratuit
+      ne sont plus promus (page /diagnostic-visibilite/ en noindex), leur
+      bloc SoftwareApplication a donc été retiré.
     -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
@@ -188,32 +187,17 @@ const siteRoot = lang === "en" ? "https://izybiz.fr/en" : "https://izybiz.fr";
             "email": "contact.me@izybiz.fr",
             "url": `${siteRoot}/contact/`,
             "availableLanguage": ["French", "English"]
-          }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "@id": "https://izybiz.fr/#software",
-          "name": "Izy",
-          "applicationCategory": "BusinessApplication",
-          "operatingSystem": "Web",
-          "url": "https://izybiz.fr/",
-          "description": ld.appDescription,
-          // Seule offre chiffrable publiquement : le diagnostic, gratuit. Le
-          // cadrage et l'abonnement mensuel sont établis après le diagnostic,
-          // selon la mission — aucun montant n'est annoncé sur le site, on n'en
-          // invente donc pas ici.
-          "offers": {
-            "@type": "Offer",
-            "name": ld.offerName,
-            "description": ld.offerDescription,
-            "price": "0",
-            "priceCurrency": "EUR",
-            "availability": "https://schema.org/InStock",
-            "url": `${siteRoot}/#diagnostic`
           },
-          "provider": {
-            "@id": "https://izybiz.fr/#organization"
-          }
+          // Les deux offres ; le détail de chacune est dans le schéma Service
+          // de sa page dédiée.
+          "makesOffer": ld.services.map((service) => ({
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": service.name,
+              "url": `https://izybiz.fr${service.path}`
+            }
+          }))
         }
       ]
     })} />
