@@ -47,6 +47,10 @@ export const routePairs: RoutePair[] = [
     fr: "/blog/score-de-visibilite-ia-pourquoi-un-bon-score-seo-ne-suffit-plus/",
     en: "/en/blog/ai-visibility-score-why-seo-isnt-enough/",
   },
+  {
+    fr: "/blog/manager-de-transition-7-5-mois-en-moyenne-plus-de-1-300-par-jour/",
+    en: "/en/blog/interim-manager-cost-7-5-months-average-over-1300-euros-a-day/",
+  },
 ];
 
 export function counterpartPath(pathname: string): RoutePair | null {
