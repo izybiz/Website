@@ -19,6 +19,11 @@ export interface RoutePair {
 export const routePairs: RoutePair[] = [
   { fr: "/", en: "/en/" },
   { fr: "/contact/", en: "/en/contact/" },
+  { fr: "/a-propos/", en: "/en/about/" },
+  { fr: "/services/", en: "/en/services/" },
+  { fr: "/management-de-transition/", en: "/en/interim-management/" },
+  { fr: "/integration-ia/", en: "/en/ai-integration/" },
+  { fr: "/diagnostic-visibilite/", en: "/en/visibility-diagnostic/" },
   { fr: "/mentions-legales/", en: "/en/legal-notice/" },
   { fr: "/politique-de-confidentialite/", en: "/en/privacy-policy/" },
   { fr: "/blog/", en: "/en/blog/" },
@@ -37,6 +42,14 @@ export const routePairs: RoutePair[] = [
   {
     fr: "/blog/apercus-ia-en-france-pourquoi-etre-1er-sur-google-ne-suffit-plus/",
     en: "/en/blog/google-ai-overviews-france-ranking-not-enough/",
+  },
+  {
+    fr: "/blog/score-de-visibilite-ia-pourquoi-un-bon-score-seo-ne-suffit-plus/",
+    en: "/en/blog/ai-visibility-score-why-seo-isnt-enough/",
+  },
+  {
+    fr: "/blog/manager-de-transition-7-5-mois-en-moyenne-plus-de-1-300-par-jour/",
+    en: "/en/blog/interim-manager-cost-7-5-months-average-over-1300-euros-a-day/",
   },
 ];
 

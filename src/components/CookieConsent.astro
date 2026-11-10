@@ -8,7 +8,7 @@ const { lang = "fr" } = Astro.props as Props;
 const copy = {
   fr: {
     message:
-      "Ce site utilise Google Analytics pour mesurer l'audience. Ces cookies ne sont déposés qu'avec votre accord.",
+      "Ce site utilise Google Analytics pour mesurer l'audience et le tag LinkedIn Insight pour mesurer l'efficacité de nos campagnes LinkedIn. Ces cookies ne sont déposés qu'avec votre accord.",
     learnMore: "En savoir plus",
     accept: "Accepter",
     decline: "Refuser",
@@ -18,7 +18,7 @@ const copy = {
   },
   en: {
     message:
-      "This site uses Google Analytics to measure traffic. These cookies are only set with your consent.",
+      "This site uses Google Analytics to measure traffic and the LinkedIn Insight Tag to measure our LinkedIn campaigns. These cookies are only set with your consent.",
     learnMore: "Learn more",
     accept: "Accept",
     decline: "Decline",
@@ -167,6 +167,20 @@ const t = copy[lang];
       }
     }
 
+    // Tag LinkedIn Insight : chargé seulement après accord (cookies publicitaires).
+    function loadLinkedIn() {
+      if (window._linkedin_partner_id) return;
+      window._linkedin_partner_id = '10084850';
+      window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+      window._linkedin_data_partner_ids.push(window._linkedin_partner_id);
+      window.lintrk = window.lintrk || function (a, b) { window.lintrk.q.push([a, b]); };
+      window.lintrk.q = window.lintrk.q || [];
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://snap.licdn.com/li.lms-analytics/insight.min.js';
+      document.head.appendChild(s);
+    }
+
     function showBanner() {
       if (banner) banner.hidden = false;
       if (manageBtn) manageBtn.hidden = true;
@@ -182,6 +196,7 @@ const t = copy[lang];
       showBanner();
     } else {
       hideBanner();
+      if (saved === 'granted') loadLinkedIn();
     }
 
     var acceptBtn = document.getElementById('cookie-accept');
@@ -191,6 +206,7 @@ const t = copy[lang];
       acceptBtn.addEventListener('click', function () {
         localStorage.setItem('cookie_consent', 'granted');
         updateConsent('granted');
+        loadLinkedIn();
         hideBanner();
       });
     }

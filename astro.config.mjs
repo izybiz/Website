@@ -55,6 +55,11 @@ export default defineConfig({
     // page, à défaut son `pubDate`, à défaut rien. Voir scripts/lastmod.mjs pour
     // le garde-fou sur les clones tronqués.
     sitemap({
+      // Pages en noindex (pas encore prêtes à être mises en avant) : Google
+      // déconseille de les lister dans le sitemap en plus du noindex.
+      filter: (page) =>
+        !page.includes("/diagnostic-visibilite/") &&
+        !page.includes("/en/visibility-diagnostic/"),
       serialize(item) {
         const lastmod = lastmodFor(item.url);
         if (lastmod) item.lastmod = lastmod;

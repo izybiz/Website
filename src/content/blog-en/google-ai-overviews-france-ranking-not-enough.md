@@ -1,5 +1,6 @@
 ---
 title: "Google's AI Overviews in France: Why Ranking First Isn't Enough Anymore?"
+seoTitle: "Google AI Overviews in France: Ranking First Isn't Enough"
 description: "Google's AI Overviews are live in France: 61% of organic clicks lost for sites left uncited. What it changes for SME visibility, and how to measure yours."
 pubDate: 2026-09-15
 author: lucie-dine
@@ -49,7 +50,7 @@ The gap between the two business owners comes down to one habit: one of them reg
 - **Find the searches where competitors already get cited**, to prioritize which pages to rework first. A query where the Overview consistently cites the same competitor deserves attention before the others: that's where the lost opportunity is already measurable.
 - **Structure your content to answer the question directly**, the format Overviews pick up most easily. One or two sentences at the top of a section, before the detail. The rest of the piece still has its place, for readers who want to go deeper.
 
-[Izy's visibility diagnostic](https://izybiz.fr/en/) now includes this indicator, not just ranking. Because a steady ranking score no longer tells you what's actually happening to your traffic.
+[Izy's visibility diagnostic](/en/visibility-diagnostic/) now includes this indicator, not just ranking. Because a steady ranking score no longer tells you what's actually happening to your traffic.
 
 A monthly check is enough for now. The pace will pick up as Google extends Overview coverage to more searches, but nothing today suggests checking weekly. A steady, kept-up habit beats a one-off check that gets forgotten the following month.
 

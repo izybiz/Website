@@ -32,7 +32,7 @@ const currentPath = `/blog/${currentSlug}/`;
 ---
 
 <Layout
-  title={post.data.title}
+  title={post.data.seoTitle ?? post.data.title}
   description={post.data.description}
   ogType="article"
   pubDate={post.data.pubDate.toISOString()}

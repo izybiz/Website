@@ -6,7 +6,8 @@
 // mesure d'audience n'était déposé et qu'aucun consentement n'était requis.
 // C'est faux — le site charge Google Analytics (G-TS3MZTN79V) derrière le
 // bandeau CookieConsent. Les sections 5, 6 et 8 ont donc été alignées sur le
-// comportement réel du site. Si Google Analytics est un jour retiré du Layout,
+// comportement réel du site (GA + tag LinkedIn Insight, chargé par CookieConsent).
+// Si l'un des deux est un jour retiré,
 // ce sont ces trois sections qu'il faut reprendre.
 import Layout from "../layouts/Layout.astro";
 import "../styles/legal.css";
@@ -76,8 +77,8 @@ import "../styles/legal.css";
             <div class="legal-page__card-title">Mesure d'audience</div>
             <p class="legal-page__card-text">
               Si vous y consentez : pages consultées, durée de visite, source de
-              visite et données techniques associées, collectées via Google Analytics.
-              Sans votre consentement, aucune de ces données n'est collectée.
+              visite et données techniques associées, collectées via Google Analytics et le tag LinkedIn
+              Insight (mesure de nos campagnes publicitaires LinkedIn). Sans votre consentement, aucune de ces données n'est collectée.
             </p>
           </div>
         </div>
@@ -131,8 +132,8 @@ import "../styles/legal.css";
         <p class="legal-page__text">
           Vos données sont accessibles aux personnes habilitées chez IZYBIZ et aux
           prestataires techniques qui interviennent pour notre compte : hébergement
-          (Netlify), envoi d'emails (Zoho Mail), mesure d'audience (Google Analytics,
-          uniquement si vous y avez consenti) et fournisseurs de modèles
+          (Netlify), envoi d'emails (Zoho Mail), mesure d'audience (Google Analytics
+          et LinkedIn, uniquement si vous y avez consenti) et fournisseurs de modèles
           d'intelligence artificielle. Cette dernière catégorie évolue selon les
           modèles utilisés : la liste à jour des fournisseurs concernés vous est
           communiquée sur simple demande à
@@ -176,12 +177,15 @@ import "../styles/legal.css";
           d'audience de Google Analytics (<code>_ga</code>, <code>_ga_*</code>, treize
           mois) ne sont déposés qu'après votre consentement explicite, recueilli via le
           bandeau affiché à votre première visite : tant que vous n'avez pas accepté,
-          aucune mesure n'est effectuée.
+          aucune mesure n'est effectuée. Le même consentement autorise le tag
+          LinkedIn Insight, qui dépose des cookies publicitaires
+          (<code>li_sugr</code>, <code>bcookie</code>, <code>lidc</code>,
+          <code>UserMatchHistory</code>, <code>AnalyticsSyncHistory</code>, jusqu'à
+          six mois) pour mesurer les visites issues de nos campagnes LinkedIn.
         </p>
         <p class="legal-page__text">
           Vous pouvez modifier ou retirer ce choix à tout moment grâce au bouton
-          « Paramètres cookies » présent en permanence sur le site. Aucun cookie
-          publicitaire ni de traçage tiers n'est déposé.
+          « Paramètres cookies » présent en permanence sur le site.
         </p>
       </section>
 

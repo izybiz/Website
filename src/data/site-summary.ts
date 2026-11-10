@@ -11,15 +11,15 @@ export const siteSummary = {
 
   // Une phrase, reprise telle quelle en blockquote de llms.txt.
   tagline:
-    "Izybiz édite Izy, un logiciel d'agents IA qui fait venir les clients aux PME et ETI B2B en France : audit et optimisation du site, stratégie et calendrier éditorial, rédaction d'articles et de posts, veille de marché, et mesure de la visibilité chaque mois.",
+    "Izybiz accompagne les ETI et scale-ups en management de transition et en intégration IA : reprendre la main sur les opérations, fixer les priorités, tenir l'exécution et déployer l'IA jusqu'à des résultats mesurables.",
 
   // Ce qu'une IA doit pouvoir répondre correctement sur l'offre.
   facts: [
-    "Le point d'entrée est un diagnostic de visibilité gratuit et automatisé, en cinq minutes. Il donne le score de visibilité du site, celui de l'entreprise la plus citée du secteur, et une première action à mener.",
-    "Le cadrage d'une mission puis l'abonnement mensuel sont chiffrés après le diagnostic, selon la mission retenue. Aucun tarif n'est public.",
-    "Izy couvre aujourd'hui l'étape « Attirer ». Les étapes « Convertir » et « Vendre » sont annoncées comme en préparation.",
-    "Le travail est exécuté par des agents, sous validation humaine : Izybiz ne vend ni des heures de conseil, ni un outil que le client doit opérer lui-même.",
-    "Cible : PME et ETI B2B en France.",
+    "Deux offres : le management de transition (un dirigeant opérationnel disponible en quelques semaines, pas en mois) et l'intégration IA en entreprise, de la preuve de concept à la production.",
+    "Le tarif est estimé selon le périmètre de la mission, après un premier rendez-vous. Aucun tarif n'est public.",
+    "Les premières automatisations tournent en 2 à 3 semaines ; la plupart des équipes sont productives en 6 à 8 semaines.",
+    "Les interlocuteurs sont des dirigeants : il n'est pas nécessaire de s'y connaître en IA. La partie technique est prise en charge et les équipes sont formées aux outils.",
+    "Cible : ETI et scale-ups, en France.",
   ],
 
   publisher:
@@ -27,7 +27,7 @@ export const siteSummary = {
 
   contact: "contact.me@izybiz.fr",
 
-  language: "Le site est en français uniquement.",
+  language: "Le site est bilingue : français (par défaut) et anglais (sous /en/).",
 
   // Pages hors blog. Les articles sont ajoutés automatiquement depuis la
   // collection de contenu, pour que ces fichiers ne dérivent jamais.
@@ -36,19 +36,43 @@ export const siteSummary = {
       path: "/",
       title: "Accueil",
       description:
-        "L'offre, le déroulé d'une mission en trois étapes, l'équipe d'agents, les questions fréquentes, et le formulaire de diagnostic gratuit.",
+        "Le positionnement (management de transition et intégration IA), l'approche, les dernières missions, les questions fréquentes.",
+    },
+    {
+      path: "/services/",
+      title: "Services",
+      description:
+        "Management de transition, intégration IA et transformation opérationnelle pour ETI et scale-ups.",
+    },
+    {
+      path: "/management-de-transition/",
+      title: "Management de transition",
+      description:
+        "Un dirigeant opérationnel en quelques semaines, résultats dès J30, indépendance garantie.",
+    },
+    {
+      path: "/integration-ia/",
+      title: "Intégration IA en entreprise",
+      description:
+        "De la preuve de concept à la production : gouvernance, workflows opérationnels, équipes autonomes à la sortie.",
+    },
+    {
+      path: "/a-propos/",
+      title: "À propos",
+      description:
+        "Stéphane, manager de transition tech et IA : 30 ans de direction opérationnelle (Software, Retail, Telco).",
     },
     {
       path: "/contact/",
       title: "Contact",
       description:
-        "Trois façons d'entrer en contact : le diagnostic gratuit, un rendez-vous de cadrage, ou un message direct. Réponse annoncée sous un jour ouvré.",
+        "Formulaire pour décrire son besoin, les complexités de son métier et la solution attendue. Réponse sous un jour ouvré.",
     },
     {
       path: "/blog/",
       title: "Blog",
       description:
-        "Articles de fond sur l'exécution par agents IA, la visibilité dans les moteurs de réponse, et la délégation de missions opérationnelles.",
+        "Articles terrain sur l'exécution par agents IA, la délégation de missions et la transformation opérationnelle pour managers d'ETI et PME en France.",
     },
   ],
 

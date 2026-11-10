@@ -2,6 +2,7 @@
 title: "AI agents vs. service providers: what it really changes for your execution budget"
 description: "For recurring execution tasks, AI agents or service providers? Real costs, timelines and control: the comparison no one's made yet."
 pubDate: 2026-05-08
+author: stephane-dine
 ---
 
 **€600/day for a freelance AI consultant. A few euros for the same mission handled by AI agents.**
@@ -58,7 +59,7 @@ This type of mission — recurring, structurable, with no human added value in t
 
 ---
 
-*Izybiz lets you describe a mission — the agents execute it, you evaluate. Built by a manager who ran execution at Bouygues, SFR, Canal+ and SNCF. [Try the free diagnosis →](/en/#diagnostic)*
+*Izybiz lets you describe a mission — the agents execute it, you evaluate. Built by a manager who ran execution at Bouygues, SFR, Canal+ and SNCF. [Try the free diagnosis →](/en/visibility-diagnostic/)*
 
 ---
 
