@@ -1,0 +1,6 @@
+{
+  "name": "indexnow",
+  "private": true,
+  "type": "module",
+  "main": "index.mjs"
+}
