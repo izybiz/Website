@@ -25,6 +25,24 @@ Node **>= 22.12.0** (voir `package.json` et `netlify.toml`).
   + la paire de chemins dans `src/data/i18n-routes.ts`
 - Commits en français, cohérents avec l'historique ; PRs vers `main`
 
+## Sitemap et signalement aux moteurs
+
+- **`lastmod` du sitemap** : calculé par `scripts/lastmod.mjs`, jamais `new Date()`.
+  La date vient du dernier commit git touchant les sources de la page, à défaut du
+  `pubDate` de l'article, à défaut elle est omise. Une page d'index de blog prend
+  la date du plus récent de ses articles. Sur un clone tronqué (`--depth 1`), git
+  rendrait la date du checkout pour tous les fichiers : le module le détecte et
+  refuse git en bloc plutôt que de dater tout le site du même instant.
+- **IndexNow** (`scripts/indexnow.mjs`, `npm run indexnow`) : prévient Bing, Yandex,
+  Seznam, Naver qu'une page a changé. **Google n'y adhère pas.** L'intérêt tient à
+  l'index de Bing, qui alimente ChatGPT et Copilot. Déclenché automatiquement après
+  chaque déploiement réussi par le plugin Netlify `plugins/indexnow` (`onSuccess`,
+  jamais bloquant). La clé publique est le fichier `public/<clé>.txt` — le renommer
+  ou le supprimer casse le protocole.
+- **Demander l'indexation à Google n'a pas d'API.** L'API Indexing officielle est
+  réservée aux `JobPosting` et `BroadcastEvent` ; elle répond 200 pour une autre
+  page mais Google déclare l'ignorer. Le bouton de Search Console reste manuel.
+
 ## Architecture
 
 La refonte d'août 2026 (maquette Claude Design) porte quatre pages. Chacune a sa
@@ -113,11 +131,6 @@ positionnement.**
 en fichiers statiques dans `public/`** : ils dériveraient à la première
 publication. Le texte de `site-summary.ts` décrit l'offre — à relire avec le
 JSON-LD à chaque changement de positionnement.
-
-**Le sitemap ne pose pas de `lastmod`,** et c'est volontaire : la configuration
-précédente le remplissait avec la date du build, donc toutes les pages se
-déclaraient modifiées à chaque déploiement. Ne pas le réintroduire sans une
-vraie date par page.
 
 **Aucun appel à Supabase.** Consigne de Lucie : rien sur le site ne doit
 appeler Supabase. L'ancien `public/script.js`, qui exposait une clé, a été

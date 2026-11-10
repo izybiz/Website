@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import { lastmodFor } from "./scripts/lastmod.mjs";
 
 function withTrailingSlash(pathname) {
   if (pathname === "/") return "/";
@@ -45,12 +46,20 @@ export default defineConfig({
   },
   integrations: [
     // Pas de `serialize` posant lastmod: new Date() — c'est ce que faisait la
-    // configuration précédente, et elle datait donc les huit pages de l'instant
+    // configuration d'origine, et elle datait donc les huit pages de l'instant
     // du build. Toutes les pages se déclaraient modifiées à chaque déploiement,
     // y compris des mentions légales inchangées depuis des mois. Un lastmod qui
     // ment est un signal que Google finit par ignorer.
-    // Mieux vaut aucune date qu'une fausse : pour les articles, la vraie date
-    // reste exposée par <time datetime> et par datePublished du schéma Article.
-    sitemap(),
+    //
+    // `lastmodFor` rend la date du dernier commit qui touche les sources de la
+    // page, à défaut son `pubDate`, à défaut rien. Voir scripts/lastmod.mjs pour
+    // le garde-fou sur les clones tronqués.
+    sitemap({
+      serialize(item) {
+        const lastmod = lastmodFor(item.url);
+        if (lastmod) item.lastmod = lastmod;
+        return item;
+      },
+    }),
   ],
 });

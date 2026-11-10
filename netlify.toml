@@ -5,6 +5,11 @@
 [build.environment]
   NODE_VERSION = "22.12.0"
 
+# Ping IndexNow (Bing/Yandex/…) après chaque déploiement réussi.
+# Google n'adhère pas au protocole : pour lui, le levier est le lastmod du sitemap.
+[[plugins]]
+  package = "/plugins/indexnow"
+
 [[redirects]]
   from = "/sitemap.xml"
   to = "/sitemap-index.xml"
