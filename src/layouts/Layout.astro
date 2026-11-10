@@ -81,9 +81,19 @@ const siteRoot = lang === "en" ? "https://izybiz.fr/en" : "https://izybiz.fr";
 <!doctype html>
 <html lang={lang}>
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TS3MZTN79V"></script>
+    <!-- Google tag (gtag.js) : la bibliothèque n'est chargée qu'après « Accepter »
+         (izyLoadGA, appelée ici si l'accord est déjà enregistré, sinon par
+         CookieConsent.astro). Avant cela, rien ne part vers Google : les appels
+         gtag() restent en file dans dataLayer. -->
     <script is:inline>
+      window.izyLoadGA = function () {
+        if (window.izyGALoaded) return;
+        window.izyGALoaded = true;
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-TS3MZTN79V';
+        document.head.appendChild(s);
+      };
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -113,6 +123,9 @@ const siteRoot = lang === "en" ? "https://izybiz.fr/en" : "https://izybiz.fr";
         interne = localStorage.getItem('izybiz_interne') === '1';
       } catch (e) {}
       gtag('config', 'G-TS3MZTN79V', interne ? { traffic_type: 'internal' } : {});
+      try {
+        if (localStorage.getItem('cookie_consent') === 'granted') window.izyLoadGA();
+      } catch (e) {}
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

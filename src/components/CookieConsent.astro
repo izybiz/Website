@@ -208,6 +208,7 @@ const t = copy[lang];
       acceptBtn.addEventListener('click', function () {
         localStorage.setItem('cookie_consent', 'granted');
         updateConsent('granted');
+        if (typeof window.izyLoadGA === 'function') window.izyLoadGA();
         loadLinkedIn();
         hideBanner();
       });
